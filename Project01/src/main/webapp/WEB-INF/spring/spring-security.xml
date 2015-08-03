@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sec="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+<!-- 시큐리티 적용시 주석해제 
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+    	<property name="cacheSeconds" value="0" />
+	</bean>
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	<bean id="customUserDetailsService" class="org.nojo.service.CustomUserDetailsService" />
+
+	<sec:http pattern="/resources/**" security="none" />
+	<sec:http use-expressions="true">
+		<sec:intercept-url pattern="/member/**" access="isAnonymous()" />
+		<sec:intercept-url pattern="/**" access="isAuthenticated()" />
+		<sec:form-login login-page="/member/login"
+			login-processing-url="/member/login" 
+			username-parameter="name"
+			password-parameter="pw" 
+			authentication-failure-url="/member/login?error=true" />
+		<sec:logout logout-url="/member/logout" />
+		<sec:csrf disabled="true" />
+	</sec:http>
+
+	<sec:authentication-manager>
+		<sec:authentication-provider user-service-ref="customUserDetailsService">
+			<sec:password-encoder ref="passwordEncoder" />
+		</sec:authentication-provider>
+	</sec:authentication-manager>
+--> 
+</beans>
