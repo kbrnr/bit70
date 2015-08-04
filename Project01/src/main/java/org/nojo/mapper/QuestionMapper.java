@@ -62,15 +62,5 @@ public interface QuestionMapper {
 	
 	//검색 결과 개수
 	public int getSearchCnt(Search search) throws Exception;	
-	
 
-	/*
-	// ${search.searchKey} $를 사용하였을때..Injection 공격을 방지해야대...
-	// ' ' 을 제거..해야대... %를 사용하였을때 ' 를 잘 써야돼..
-	public List<BoardVO> searchPage(@Param("cri") Criteria cri,
-			@Param("search") Search search) throws Exception;
-
-	// 검색 결과 총 개수
-	public int getSearchCount(Search search) throws Exception;
-	*/
 }

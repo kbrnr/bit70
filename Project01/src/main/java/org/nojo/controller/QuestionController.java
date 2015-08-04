@@ -14,25 +14,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/{clz_domain}/QnABoard")
+@RequestMapping("/{domain}/QnABoard")
 public class QuestionController {
 
 	@Inject
 	private QuestionService service;
 
 	@RequestMapping("/listpage")
-	public String ListPage(@PathVariable String clz_domain) {
+	public String ListPage(@PathVariable("domain") String clz_domain) {
 		/*
 		 * ClassVO vo = new ClassVO(); model.addAttribute("clz_domain",
 		 * vo.getClz_domain());
 		 */
-		return "clz_domain/listpage";
+		return "QnABoard/listpage";
 	}
 
 	@RequestMapping(value = "/regist", method = RequestMethod.GET)
 	public String regist() {
 
-		return "clz_domain/regist";
+		return "QnABoard/regist";
 	}
 
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
