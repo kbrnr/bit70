@@ -11,7 +11,7 @@ public class QuestionVO {
 	private String question_title;		
 	
 	//내용
-	private String question_contetn;	
+	private String question_content;	
 	
 	//등록일
 	private Date question_reg_date;	
@@ -31,11 +31,13 @@ public class QuestionVO {
 	
 	@Override
 	public String toString() {
-		return "QuestionVO [question_no=" + question_no + ", question_title=" + question_title + ", question_contetn="
-				+ question_contetn + ", question_reg_date=" + question_reg_date + ", question_gb=" + question_gb
+		return "QuestionVO [question_no=" + question_no + ", question_title=" + question_title + ", question_content="
+				+ question_content + ", question_reg_date=" + question_reg_date + ", question_gb=" + question_gb
 				+ ", question_visible=" + question_visible + ", clz_domain=" + clz_domain + ", mem_id=" + mem_id + "]";
 	}
 
+	
+	
 	//region Getter
 	public int getQuestion_no() {
 		return question_no;
@@ -47,8 +49,8 @@ public class QuestionVO {
 	}
 
 
-	public String getQuestion_contetn() {
-		return question_contetn;
+	public String getQuestion_content() {
+		return question_content;
 	}
 
 
@@ -88,8 +90,8 @@ public class QuestionVO {
 		this.question_title = question_title;
 	}
 
-	public void setQuestion_contetn(String question_contetn) {
-		this.question_contetn = question_contetn;
+	public void setQuestion_content(String question_content) {
+		this.question_content = question_content;
 	}
 
 	public void setQuestion_reg_date(Date question_reg_date) {
