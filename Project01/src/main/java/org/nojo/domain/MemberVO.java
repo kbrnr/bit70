@@ -8,9 +8,9 @@ public class MemberVO {
 	private String mem_name;
 	private String mem_email;
 	private String mem_tel;
-	private Date reg_date;
+	private String reg_date;
 	private String mem_gb;
-	private Date mem_login_date;
+	private String mem_login_date;
 	private Byte mem_photo;
 	public String getMem_id() {
 		return mem_id;
@@ -42,10 +42,10 @@ public class MemberVO {
 	public void setMem_tel(String mem_tel) {
 		this.mem_tel = mem_tel;
 	}
-	public Date getReg_date() {
+	public String getReg_date() {
 		return reg_date;
 	}
-	public void setReg_date(Date reg_date) {
+	public void setReg_date(String reg_date) {
 		this.reg_date = reg_date;
 	}
 	public String getMem_gb() {
@@ -54,10 +54,10 @@ public class MemberVO {
 	public void setMem_gb(String mem_gb) {
 		this.mem_gb = mem_gb;
 	}
-	public Date getMem_login_date() {
+	public String getMem_login_date() {
 		return mem_login_date;
 	}
-	public void setMem_login_date(Date mem_login_date) {
+	public void setMem_login_date(String mem_login_date) {
 		this.mem_login_date = mem_login_date;
 	}
 	public Byte getMem_photo() {
