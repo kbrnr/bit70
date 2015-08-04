@@ -27,6 +27,8 @@ public interface QuestionMapper {
 	
 	public int getSearchCnt() throws Exception;	
 	
+	
+	
 	// reply
 	/*
 	 * 

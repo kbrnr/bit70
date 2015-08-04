@@ -6,9 +6,7 @@
 <mapper namespace="org.bit.mapper.QuestionMapper">
 
 
-
-
-
+<!-- 
 	<select id="searchPage" parameterType="map" resultType="org.bit.domain.BoardVO">
 		<bind name="search" value="search" />
 		<bind name="cri" value="cri" />
@@ -25,10 +23,10 @@
 		<where>
 			<foreach collection="search.searchKey" item="key" separator="or">
 				${key} like CONCAT('%',#{search.searchValue},'%')
-				<!-- <if test="search.searchKey != null"> title like CONCAT('%',#{search.searchValue},'%') 
-					OR content like CONCAT('%',#{search.searchValue},'%') </if> -->
-				<!-- <if test="search.searchKey != null"> #{search.searchKey} like CONCAT('%',#{search.searchValue},'%') 
-					</if> -->
+				<if test="search.searchKey != null"> title like CONCAT('%',#{search.searchValue},'%') 
+					OR content like CONCAT('%',#{search.searchValue},'%') </if>
+				<if test="search.searchKey != null"> #{search.searchKey} like CONCAT('%',#{search.searchValue},'%') 
+					</if>
 			</foreach>
 		</where>
 
@@ -65,4 +63,7 @@
 			order by bno desc limit #{first}, #{perPageNum}
 	]]>
 	</select>
+	
+ -->
+ 
 </mapper>

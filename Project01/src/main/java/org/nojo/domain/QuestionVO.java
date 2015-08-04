@@ -1,5 +1,7 @@
 package org.nojo.domain;
 
+import java.util.Date;
+
 public class QuestionVO {
 	
 	//질문번호
@@ -12,7 +14,7 @@ public class QuestionVO {
 	private String question_contetn;	
 	
 	//등록일
-	private String question_reg_date;	
+	private Date question_reg_date;	
 	
 	//구분
 	private String question_gb;			
@@ -50,7 +52,7 @@ public class QuestionVO {
 	}
 
 
-	public String getQuestion_reg_date() {
+	public Date getQuestion_reg_date() {
 		return question_reg_date;
 	}
 
@@ -90,7 +92,7 @@ public class QuestionVO {
 		this.question_contetn = question_contetn;
 	}
 
-	public void setQuestion_reg_date(String question_reg_date) {
+	public void setQuestion_reg_date(Date question_reg_date) {
 		this.question_reg_date = question_reg_date;
 	}
 
