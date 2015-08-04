@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.bit.mapper.QuestionMapper">
+
+
+
+
+
+	<select id="searchPage" parameterType="map" resultType="org.bit.domain.BoardVO">
+		<bind name="search" value="search" />
+		<bind name="cri" value="cri" />
+		<![CDATA[
+			select bno, title, content, writer, 
+			case 
+			when regdate < date_add(now(), interval -10 hour)
+			then date_format(regDate,"%m-%d")
+			else
+			date_format(regDate,"%H:%i")
+			end as regdate 
+			from tbl_board
+		]]>
+		<where>
+			<foreach collection="search.searchKey" item="key" separator="or">
+				${key} like CONCAT('%',#{search.searchValue},'%')
+				<!-- <if test="search.searchKey != null"> title like CONCAT('%',#{search.searchValue},'%') 
+					OR content like CONCAT('%',#{search.searchValue},'%') </if> -->
+				<!-- <if test="search.searchKey != null"> #{search.searchKey} like CONCAT('%',#{search.searchValue},'%') 
+					</if> -->
+			</foreach>
+		</where>
+
+		order by bno desc limit #{cri.first}, #{cri.perPageNum}
+
+	</select>
+
+
+
+	<select id="getSearchCount" parameterType="org.bit.domain.Search"
+		resultType="int">
+
+		select count(bno) from tbl_board 
+		
+		<where>
+			<foreach collection="searchKey" item="key" separator="or">
+		 		${key} like concat('%',#{searchValue},'%')
+			</foreach>
+		</where>
+
+	</select>
+
+
+	<select id="listPage" parameterType="org.bit.domain.Criteria" resultType="org.bit.domain.BoardVO">
+	<![CDATA[
+			select bno, title, content, writer, 
+			case 
+			when regdate < date_add(now(), interval -10 hour)
+			then date_format(regDate,"%m-%d")
+			else
+			date_format(regDate, "%H:%i")
+			end as regdate 
+			from tbl_board
+			order by bno desc limit #{first}, #{perPageNum}
+	]]>
+	</select>
+</mapper>
