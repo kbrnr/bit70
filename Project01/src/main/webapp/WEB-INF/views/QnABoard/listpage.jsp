@@ -6,6 +6,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
+
+<h>${list}</h>
+<br>
+<h>${domain }<h>
 리스트 페이지
 </body>
 </html>

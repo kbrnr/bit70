@@ -3,67 +3,74 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.bit.mapper.QuestionMapper">
+<mapper namespace="org.nojo.mapper.QuestionMapper">
 
-
-<!-- 
-	<select id="searchPage" parameterType="map" resultType="org.bit.domain.BoardVO">
+	<select id="searchPage" parameterType="map"	resultType="org.nojo.domain.QuestionVO">
 		<bind name="search" value="search" />
 		<bind name="cri" value="cri" />
 		<![CDATA[
-			select bno, title, content, writer, 
+			set @rownum=0;
+			select @rownum:=@rownum+1 as question_no, question_title, question_content, mem_id, 
 			case 
-			when regdate < date_add(now(), interval -10 hour)
-			then date_format(regDate,"%m-%d")
+			when question_reg_date < date_add(now(), interval -10 hour)
+			then date_format(question_reg_date,"%m-%d")
 			else
-			date_format(regDate,"%H:%i")
-			end as regdate 
-			from tbl_board
+			date_format(question_reg_date,"%H:%i")
+			end as question_reg_date 
+			from tbl_question
 		]]>
 		<where>
 			<foreach collection="search.searchKey" item="key" separator="or">
 				${key} like CONCAT('%',#{search.searchValue},'%')
-				<if test="search.searchKey != null"> title like CONCAT('%',#{search.searchValue},'%') 
-					OR content like CONCAT('%',#{search.searchValue},'%') </if>
-				<if test="search.searchKey != null"> #{search.searchKey} like CONCAT('%',#{search.searchValue},'%') 
-					</if>
+				<if test="search.searchKey != null"> question_title like
+					CONCAT('%',#{search.searchValue},'%')
+					OR question_content like CONCAT('%',#{search.searchValue},'%') </if>
+				<if test="search.searchKey != null"> #{search.searchKey} like
+					CONCAT('%',#{search.searchValue},'%')
+				</if>
 			</foreach>
 		</where>
 
-		order by bno desc limit #{cri.first}, #{cri.perPageNum}
+		order by question_no desc limit #{cri.first}, #{cri.perPageNum}
 
 	</select>
 
 
-
-	<select id="getSearchCount" parameterType="org.bit.domain.Search"
+	<!--도메인에서 검색 개수 다시 짜보자 -->
+	<select id="getSearchCnt" parameterType="org.nojo.util.Search"
 		resultType="int">
 
-		select count(bno) from tbl_board 
-		
+		select count(question_no) from tbl_question where clz_domain like
+		"bit70";
+
 		<where>
 			<foreach collection="searchKey" item="key" separator="or">
-		 		${key} like concat('%',#{searchValue},'%')
+				${key} like concat('%',#{searchValue},'%')
 			</foreach>
 		</where>
 
 	</select>
 
-
-	<select id="listPage" parameterType="org.bit.domain.Criteria" resultType="org.bit.domain.BoardVO">
-	<![CDATA[
-			select bno, title, content, writer, 
-			case 
-			when regdate < date_add(now(), interval -10 hour)
-			then date_format(regDate,"%m-%d")
-			else
-			date_format(regDate, "%H:%i")
-			end as regdate 
-			from tbl_board
-			order by bno desc limit #{first}, #{perPageNum}
-	]]>
-	</select>
 	
- -->
- 
+	<select id="listPage" parameterType="org.nojo.util.Criteria" resultType="org.nojo.domain.QuestionVO">
+
+	<!-- 	<![CDATA[ - set @rownum=0 select @rownum:=@rownum+1 as question_no, 
+			question_title, question_content, mem_id, question_visible case when question_reg_date 
+			< date_add(now(), interval -10 hour) then date_format(regDate,"%m-%d") else 
+			date_format(regDate, "%H:%i") end as question_reg_date from tbl_question 
+			where clz_domain like #{clz_domain} order by rownum desc limit #{first}, 
+			#{perPageNum} ]]> -->
+			<![CDATA[		
+			select @rownum:=@rownum+1 as question_no, question_title, question_content, mem_id , question_reg_date, question_visible
+			from tbl_question, (select @rownum:=0)tmp
+			]]>
+			<where>
+			clz_domain like "bit70"
+			</where>
+			order by question_no desc
+ 		
+	</select>
+
+
+
 </mapper>

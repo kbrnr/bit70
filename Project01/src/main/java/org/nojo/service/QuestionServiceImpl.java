@@ -60,7 +60,7 @@ public class QuestionServiceImpl implements QuestionService {
 	@Override
 	public List<QuestionVO> searchQuestion(Criteria cri, Search search) throws Exception {
 
-		return mapper.serachPage(cri, search);
+		return mapper.searchPage(cri, search);
 	}
 
 }
