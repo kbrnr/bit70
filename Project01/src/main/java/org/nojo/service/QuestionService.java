@@ -12,7 +12,7 @@ public interface QuestionService {
 	public void addQuestion(QuestionVO vo) throws Exception;
 	
 	//질문리스트
-	public List<QuestionVO> listQuestion(Criteria cri) throws Exception;
+	public List<QuestionVO> listQuestion(String domain, Criteria cri) throws Exception;
 	
 	//질문수정
 	public void modifyQuestion(QuestionVO vo) throws Exception;
@@ -21,7 +21,7 @@ public interface QuestionService {
 	public void removeQuestion(int question_no) throws Exception;
 
 	//리스트 개수
-	public int getList() throws Exception;
+	public int getList(String domain) throws Exception;
 	
 	//질문 글 조회
 	public QuestionVO getReadQuestion(int question_no) throws Exception;

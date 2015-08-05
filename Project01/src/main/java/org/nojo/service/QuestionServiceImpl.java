@@ -23,9 +23,8 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
-	public List<QuestionVO> listQuestion(Criteria cri) throws Exception {
-		
-		return mapper.listPage(cri) ;
+	public List<QuestionVO> listQuestion(String domain, Criteria cri) throws Exception {
+		return mapper.listPage(domain, cri) ;
 	}
 
 	@Override
@@ -41,8 +40,8 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
-	public int getList() throws Exception {
-		return mapper.getTotalCnt();
+	public int getList(String domain) throws Exception {
+		return mapper.getTotalCnt(domain);
 	}
 
 	@Override

@@ -6581,4 +6581,17 @@ button.close {
     display: none !important;
   }
 }
+
+.centerRow {
+	width: 50%; 
+	margin-right: auto; 
+	margin-left: auto;
+          
+}
+.centerDiv {
+	width: 90%;
+	margin-right: auto; 
+	margin-left: auto;
+}
+
 /*# sourceMappingURL=bootstrap.css.map */

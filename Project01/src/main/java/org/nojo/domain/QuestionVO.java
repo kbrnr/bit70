@@ -1,9 +1,12 @@
 package org.nojo.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class QuestionVO {
 	
+	private int rowNum;
+
 	//질문번호
 	private int question_no;	
 	
@@ -28,6 +31,7 @@ public class QuestionVO {
 	//아이디
 	private String mem_id;				
 	
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	@Override
 	public String toString() {
@@ -39,6 +43,11 @@ public class QuestionVO {
 	
 	
 	//region Getter
+
+	public int getRowNum() {
+		return rowNum;
+	}
+	
 	public int getQuestion_no() {
 		return question_no;
 	}
@@ -54,8 +63,8 @@ public class QuestionVO {
 	}
 
 
-	public Date getQuestion_reg_date() {
-		return question_reg_date;
+	public String getQuestion_reg_date() {
+		return sdf.format(question_reg_date);
 	}
 
 
@@ -82,6 +91,10 @@ public class QuestionVO {
 	
 	
 	//region Setter
+	public void setRowNum(int rowNum) {
+		this.rowNum = rowNum;
+	}
+	
 	public void setQuestion_no(int question_no) {
 		this.question_no = question_no;
 	}

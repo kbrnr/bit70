@@ -5,7 +5,8 @@
 
 <mapper namespace="org.nojo.mapper.QuestionMapper">
 
-	<select id="searchPage" parameterType="map"	resultType="org.nojo.domain.QuestionVO">
+	<select id="searchPage" parameterType="map"
+		resultType="org.nojo.domain.QuestionVO">
 		<bind name="search" value="search" />
 		<bind name="cri" value="cri" />
 		<![CDATA[
@@ -24,7 +25,8 @@
 				${key} like CONCAT('%',#{search.searchValue},'%')
 				<if test="search.searchKey != null"> question_title like
 					CONCAT('%',#{search.searchValue},'%')
-					OR question_content like CONCAT('%',#{search.searchValue},'%') </if>
+					OR question_content like
+					CONCAT('%',#{search.searchValue},'%') </if>
 				<if test="search.searchKey != null"> #{search.searchKey} like
 					CONCAT('%',#{search.searchValue},'%')
 				</if>
@@ -45,32 +47,60 @@
 
 		<where>
 			<foreach collection="searchKey" item="key" separator="or">
-				${key} like concat('%',#{searchValue},'%')
+				${key}
+				like concat('%',#{searchValue},'%')
 			</foreach>
 		</where>
 
 	</select>
-
 	
-	<select id="listPage" parameterType="org.nojo.util.Criteria" resultType="org.nojo.domain.QuestionVO">
+	
 
-	<!-- 	<![CDATA[ - set @rownum=0 select @rownum:=@rownum+1 as question_no, 
-			question_title, question_content, mem_id, question_visible case when question_reg_date 
-			< date_add(now(), interval -10 hour) then date_format(regDate,"%m-%d") else 
-			date_format(regDate, "%H:%i") end as question_reg_date from tbl_question 
-			where clz_domain like #{clz_domain} order by rownum desc limit #{first}, 
-			#{perPageNum} ]]> -->
-			<![CDATA[		
+
+	<select id="listPage" parameterType="map" resultType="org.nojo.domain.QuestionVO">
+		<!-- 
+		<![CDATA[
 			select @rownum:=@rownum+1 as question_no, question_title, question_content, mem_id , question_reg_date, question_visible
 			from tbl_question, (select @rownum:=0)tmp
 			]]>
 			<where>
-			clz_domain like "bit70"
+			clz_domain like concat('%',#{domain},'%')
 			</where>
 			order by question_no desc
- 		
+			 -->
+
+		<![CDATA[		
+			select @rownum:=@rownum+1 as rowNum, question_no, question_title, question_content, mem_id , question_reg_date, question_visible
+			from tbl_question, (select @rownum:=0) tmp
+			]]>
+		<where>
+			clz_domain = #{domain}
+		</where>
+			<![CDATA[
+			order by rowNum desc limit #{cri.first}, #{cri.perPageNum} 
+			]]>
+			
+			<!-- 
+			case
+			when question_reg_date < date_add(now(), interval -10 hour) 
+			then date_format(regDate,"%m-%d") 
+			else date_format(regDate, "%H:%i") 
+			end as question_reg_date 
+			 -->
+			 
 	</select>
-
-
+	
+	<select id="getTotalCnt"  resultType="int">
+	
+		select count(question_no) 
+		from tbl_question 
+		
+		<where>
+		<![CDATA[
+		clz_domain = #{domain}
+		]]>
+		
+		</where>
+	</select>
 
 </mapper>

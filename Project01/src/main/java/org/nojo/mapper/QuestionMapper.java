@@ -19,7 +19,7 @@ public interface QuestionMapper {
 	public void create(QuestionVO vo) throws Exception;
 
 	//게시글 리스트
-	public List<QuestionVO> listPage(Criteria Cri) throws Exception;
+	public List<QuestionVO> listPage(@Param("domain") String domain, @Param("cri") Criteria cri ) throws Exception;
 
 	//게시글 업데이트
 	@Update("update tbl_question "
@@ -39,11 +39,11 @@ public interface QuestionMapper {
 	public void delete(int question_no) throws Exception;
 
 	//게시글 개수
-	@Select("select count(question_no) "
+/*	@Select("select count(question_no) "
 					+ "from tbl_question "
 					+ "where clz_domain "
-					+ "like #{clz_domain}")
-	public int getTotalCnt() throws Exception;
+					+ "like #{domain}")*/
+	public int getTotalCnt(String domain) throws Exception;
 
 	//게시글 조회
 	@Select("select question_no, question_title, question_content, mem_id"

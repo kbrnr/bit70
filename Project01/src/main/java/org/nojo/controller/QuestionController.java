@@ -24,16 +24,16 @@ public class QuestionController {
 	private QuestionService service;
 
 	@RequestMapping("/listpage")
-	public String ListPage(@PathVariable("domain") String clz_domain, Criteria cri, Model model) throws Exception {
-		
-		PageMaker pagemaker = null; 
-		List<QuestionVO> list = null;		
+	public String ListPage(@PathVariable("domain") String domain, Criteria cri, Model model) throws Exception {
 
-		pagemaker = new PageMaker(cri, service.getList());
-		list = service.listQuestion(cri);
+		PageMaker pagemaker = null;
+		List<QuestionVO> list = null;
+
+		pagemaker = new PageMaker(cri, service.getList(domain));
+		list = service.listQuestion(domain, cri);
 		
 		model.addAttribute("list", list);
-		
+		model.addAttribute("pagemaker", pagemaker);
 		return "QnABoard/listpage";
 	}
 
@@ -69,7 +69,7 @@ public class QuestionController {
 	public String modifyBoard(QuestionVO vo) throws Exception {
 
 		service.modifyQuestion(vo);
-		
+
 		return "redirect:read?bno=" + vo.getQuestion_no();
 	}
 
@@ -77,7 +77,7 @@ public class QuestionController {
 	public String removeBoard(@PathVariable("no") int question_no) throws Exception {
 
 		service.removeQuestion(question_no);
-		
+
 		return "redirect:../listpage";
 	}
 
