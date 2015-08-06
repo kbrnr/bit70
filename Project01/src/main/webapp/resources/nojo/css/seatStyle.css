@@ -1,0 +1,51 @@
+ul {
+	list-style: none;	
+}
+#content {
+	width: 80%;
+	height: 400px;
+	padding: 10px;
+	padding-bottom: 30px;
+	border: 1px solid #000;
+}
+
+#seatDiv {
+	float: left;
+	width: 55%;
+	height: 100%;
+	margin-left: 10px;
+	border: 1px solid #AAA;
+	background-color: rgba(222, 222, 222, 1.0);
+}
+
+#listDiv {
+	float: left;
+	width: 40%;
+	height: 100%;
+	margin-left: 15px;
+	border: 1px solid #AAA;
+	background-color: rgba(222, 222, 222, 1.0);
+}
+#draggable {
+	margin: 5px;
+	color: #FFF;
+	cursor: move;
+	text-align: center;
+}
+.draggable {
+	background-color: rgba(254, 108, 98, 1.0);
+	border-radius: 2px;
+	border: 1px solid gray;
+	width: 64px;
+	height: 30px;
+	margin: 5px;
+	color: #FFF;
+	cursor: move;
+	text-align: center;
+}
+.resetDiv {
+	width: 80px;
+	float: left;
+	margin-left: 73%;
+	text-align: center;
+}
