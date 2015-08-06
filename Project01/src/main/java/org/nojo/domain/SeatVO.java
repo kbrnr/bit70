@@ -5,6 +5,15 @@ public class SeatVO {
 	private String clz_domain;
 	private int seat_x;
 	private int seat_y;
+	private String mem_name;
+
+	public String getMem_name() {
+		return mem_name;
+	}
+
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
+	}
 
 	public String getMem_id() {
 		return mem_id;
@@ -40,6 +49,9 @@ public class SeatVO {
 
 	@Override
 	public String toString() {
-		return "seatVO [mem_id=" + mem_id + ", clz_domain=" + clz_domain + ", seat_x=" + seat_x + ", seat_y=" + seat_y + "]";
+		return "SeatVO [mem_id=" + mem_id + ", clz_domain=" + clz_domain + ", seat_x=" + seat_x + ", seat_y=" + seat_y + ", mem_name=" + mem_name
+				+ "]";
 	}
+
+	
 }
