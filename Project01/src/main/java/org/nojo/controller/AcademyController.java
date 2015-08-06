@@ -36,8 +36,9 @@ public class AcademyController {
 	}
 	
 	//수업상세
-	@RequestMapping(value="/classview", method=RequestMethod.GET)
-	public void classview(){
+	@RequestMapping(value="/classmodify", method=RequestMethod.GET)
+	public void classmodify(){
+		
 	}
 	
 	//수업리스트

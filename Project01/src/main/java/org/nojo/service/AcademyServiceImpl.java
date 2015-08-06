@@ -18,6 +18,10 @@ public class AcademyServiceImpl implements AcademyService {
 	@Inject
 	private AcademyMapper acdmMapper;
 
+	public void updateClass(){
+		
+	}
+	
 	public void makeClass(ClassFormVO vo){
 		System.out.println("@Service:"+ vo.toString());
 		//class저장
