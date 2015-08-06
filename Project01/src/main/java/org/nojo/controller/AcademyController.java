@@ -29,9 +29,10 @@ public class AcademyController {
 
 	//수업등록
 	@RequestMapping(value="/classregister", method=RequestMethod.GET)
-	public void classregister(ClassFormVO vo){
-		System.out.println("@@Controller:"+ vo.toString());	
+	public String classregister(ClassFormVO vo){
+		System.out.println("@Controller:"+ vo.toString());	
 		acdmService.makeClass(vo);
+		return "redirect:classlist";
 	}
 	
 	//수업상세
@@ -63,7 +64,5 @@ public class AcademyController {
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", pagemaker);
 	}
-	
-	
 	
 }

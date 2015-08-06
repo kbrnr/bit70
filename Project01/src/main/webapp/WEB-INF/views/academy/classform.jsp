@@ -124,7 +124,7 @@
                           <input type="radio" name="clz_state" id="optionsRadios1" value="1">
                         </label>
                         <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                              준비중
+                              강의중
                           <input type="radio" name="clz_state" id="optionsRadios2" value="2">
                         </label>
                         <label>&nbsp;&nbsp;&nbsp;&nbsp;

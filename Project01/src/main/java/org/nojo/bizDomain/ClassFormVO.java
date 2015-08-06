@@ -7,6 +7,7 @@ public class ClassFormVO {
 	private String clz_name;
 	private String clz_domain;
 	private String[] mem_id;
+	private String[] mem_name;
 	private String clz_room;
 	private Date clz_start_date;
 	private Date clz_end_date;
@@ -34,6 +35,14 @@ public class ClassFormVO {
 
 	public void setMem_id(String[] mem_id) {
 		this.mem_id = mem_id;
+	}
+
+	public String[] getMem_name() {
+		return mem_name;
+	}
+
+	public void setMem_name(String[] mem_name) {
+		this.mem_name = mem_name;
 	}
 
 	public String getClz_room() {
@@ -70,9 +79,20 @@ public class ClassFormVO {
 
 	@Override
 	public String toString() {
-		return "ClassInputVO [clz_name=" + clz_name + ", clz_domain=" + clz_domain + ", mem_id="
-				+ Arrays.toString(mem_id) + ", clz_room=" + clz_room + ", clz_start_date=" + clz_start_date
-				+ ", clz_end_date=" + clz_end_date + ", clz_state=" + clz_state + "]";
+		final int maxLen = 10;
+		return "ClassFormVO [clz_name="
+				+ clz_name
+				+ ", clz_domain="
+				+ clz_domain
+				+ ", mem_id="
+				+ (mem_id != null ? Arrays.asList(mem_id).subList(0,
+						Math.min(mem_id.length, maxLen)) : null)
+				+ ", mem_name="
+				+ (mem_name != null ? Arrays.asList(mem_name).subList(0,
+						Math.min(mem_name.length, maxLen)) : null)
+				+ ", clz_room=" + clz_room + ", clz_start_date="
+				+ clz_start_date + ", clz_end_date=" + clz_end_date
+				+ ", clz_state=" + clz_state + "]";
 	}
 
 }
