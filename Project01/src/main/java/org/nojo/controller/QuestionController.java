@@ -1,10 +1,13 @@
 package org.nojo.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.nojo.domain.QuestionVO;
 import org.nojo.service.QuestionService;
 import org.nojo.util.Criteria;
+import org.nojo.util.PageMaker;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,11 +24,16 @@ public class QuestionController {
 	private QuestionService service;
 
 	@RequestMapping("/listpage")
-	public String ListPage(@PathVariable("domain") String clz_domain) {
-		/*
-		 * ClassVO vo = new ClassVO(); model.addAttribute("clz_domain",
-		 * vo.getClz_domain());
-		 */
+	public String ListPage(@PathVariable("domain") String clz_domain, Criteria cri, Model model) throws Exception {
+		
+		PageMaker pagemaker = null; 
+		List<QuestionVO> list = null;		
+
+		pagemaker = new PageMaker(cri, service.getList());
+		list = service.listQuestion(cri);
+		
+		model.addAttribute("list", list);
+		
 		return "QnABoard/listpage";
 	}
 

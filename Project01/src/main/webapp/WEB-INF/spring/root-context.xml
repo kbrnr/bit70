@@ -39,7 +39,6 @@
 	<context:component-scan base-package="org.nojo.service" />
 	<context:component-scan base-package="org.nojo.aop" />
 	<context:component-scan base-package="org.nojo.scheduler" />
-
 	<tx:annotation-driven />
 	<aop:aspectj-autoproxy />
 	<context:annotation-config />

@@ -19,11 +19,6 @@ public interface QuestionMapper {
 	public void create(QuestionVO vo) throws Exception;
 
 	//게시글 리스트
-	@Select("set @rownum=0;"
-			+ "select @rownum:=@rownum+1 as rownum, question_title, question_content, mem_id , question_reg_date, question_visible "
-					+ "from tbl_question "
-					+ "where clz_domain like #{clz_domain} "
-					+ "order by rownum desc")
 	public List<QuestionVO> listPage(Criteria Cri) throws Exception;
 
 	//게시글 업데이트
@@ -57,7 +52,7 @@ public interface QuestionMapper {
 	public QuestionVO readBoard(int Question_bno) throws Exception;
 	
 	//게시글 검색 조회 리스트
-	public List<QuestionVO> serachPage(@Param("cri") Criteria cri, 
+	public List<QuestionVO> searchPage(@Param("cri") Criteria cri, 
 									@Param("search") Search search) throws Exception;
 	
 	//검색 결과 개수
