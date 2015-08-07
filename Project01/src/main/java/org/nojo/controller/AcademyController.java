@@ -5,7 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.nojo.bizDomain.ClassFormVO;
-import org.nojo.domain.ClassVO;
 import org.nojo.domain.MemberVO;
 import org.nojo.service.AcademyService;
 import org.nojo.util.Criteria;
@@ -32,19 +31,19 @@ public class AcademyController {
 	public String classregister(ClassFormVO vo){
 		System.out.println("@Controller:"+ vo.toString());	
 		acdmService.makeClass(vo);
-		return "redirect:classlist";
+		return "redirect:classmodify";
 	}
 	
 	//수업상세
 	@RequestMapping(value="/classmodify", method=RequestMethod.GET)
-	public void classmodify(){
-		
+	public String classmodify(){
+		return "redirect:classmodify";
 	}
 	
 	//수업리스트
 	@RequestMapping(value="/classlist", method=RequestMethod.GET)
 	public void classlist(Criteria cri, Model model){
-		List<ClassVO> list;
+		List<ClassFormVO> list;
 		PageMaker pagemaker;
 		
 		list = acdmService.getClassList(cri);
@@ -52,6 +51,19 @@ public class AcademyController {
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", pagemaker);
 	}
+	
+	
+//	//수업리스트
+//	@RequestMapping(value="/classlist", method=RequestMethod.GET)
+//	public void classlist(Criteria cri, Model model){
+//		List<ClassVO> list;
+//		PageMaker pagemaker;
+//		
+//		list = acdmService.getClassList(cri);
+//		pagemaker = new PageMaker(cri, acdmService.getClassTotalCnt());
+//		model.addAttribute("list", list);
+//		model.addAttribute("pageMaker", pagemaker);
+//	}
 	
 	
 	//선생님리스트

@@ -142,7 +142,8 @@
                    
                   </div><!-- /.box-body -->
                   <div class="box-footer">
-                    <button type="submit" class="btn btn-default">Cancel</button>
+                  	<a href="classlist" class="btn btn-default">취소</a>
+                    
                     <button type="submit" class="btn btn-info pull-right">등록</button>
                   </div><!-- /.box-footer -->
                 </form>

@@ -32,7 +32,6 @@ public class AcademyServiceImpl implements AcademyService {
 		//clz_end_date=Thu Sep 15 00:00:00 KST 2005,
 		//clz_state=2
 		//clz_reg_date=?(now)
-	
 		
 		ClassVO classVO = new ClassVO();
 		classVO.setClz_domain(vo.getClz_domain());
@@ -63,8 +62,50 @@ public class AcademyServiceImpl implements AcademyService {
 		
 	}
 	
-	public List<ClassVO> getClassList(Criteria cri) {		
-		return acdmMapper.selectClass(cri);
+	public List<ClassFormVO> getClassList(Criteria cri) {		
+		List<ClassFormVO> classFormList;
+		classFormList = acdmMapper.selectClass(cri);
+		
+//		System.out.println("******수업갯수**********");
+//		System.out.println(classFormList.size());
+//		System.out.println("*************************************");
+		
+		List<MemberVO> memberlist =null;
+		for(int i=0 ; i<classFormList.size() ; i++ ){
+//			System.out.println("******현재수업의 도메인**********");
+//			System.out.println(classFormList.get(i).getClz_domain());
+//			System.out.println("*************************************");
+			String domain=classFormList.get(i).getClz_domain();
+			
+			memberlist=acdmMapper.selectClassTeacherInfo(domain);
+//			System.out.println("******현재수업의 맴버수 와 리스트*******************************");
+//			System.out.println(memberlist.size());
+//			System.out.println(memberlist.toString());
+			
+			
+//			System.out.println("====================================================");
+//			System.out.println("====================================================");
+//			System.out.println("====================================================");
+//			System.out.println("====================================================");
+//			System.out.println("====================================================");
+			String[] ids = new String[memberlist.size()];
+			String[] names = new String[memberlist.size()];
+			for(int j=0 ; j<memberlist.size() ; j++ ){
+				System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+				System.out.println(memberlist.get(j).getMem_id());
+				System.out.println(memberlist.get(j).getMem_name());	
+					
+				ids[j]=memberlist.get(j).getMem_id();
+				names[j]=memberlist.get(j).getMem_name();
+				System.out.println(j+"번째 아이디값"+ids[j]);
+				System.out.println(j+"번째 이름값"+names[j]);
+				System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+			}
+			
+			classFormList.get(i).setMem_id(ids);
+			classFormList.get(i).setMem_name(names);
+		}
+		return classFormList;	
 	}
 	
 	public int getClassTotalCnt() {

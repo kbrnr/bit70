@@ -29,14 +29,14 @@
                 <div class="box-header">
                   <h3 class="box-title">■수업리스트</h3>
                 </div><!-- /.box-header -->
+                
                 <div class="box-body">
                   <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                   	
                   	
                   	<div class="row">
-                  	
 	                  	<div class="col-sm-12">
-	                  
+		        		  <a href="classform" class="btn btn-primary pull-right margin-bottom">수업등록</a>
 		                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
 		                    <thead>
 		                      <tr role="row">
@@ -53,7 +53,7 @@
 		                    <tbody>
 		                      <c:forEach items="${list}" var="vo">
 			                    <tr role="row">
-			                      <td>${vo.clz_name}</td>
+			                      <td><a href="classmodify">${vo.clz_name}</a></td>
 			                      <td>강사명불러오기</td>
 			                      <td>${vo.clz_room}</td>
 			                      <td>${vo.clz_start_date}</td>
