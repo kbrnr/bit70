@@ -27,7 +27,7 @@
 		<!-- ----------------------------------------- -->
 		<div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">■선생님리스트</h3>
+                  <h3 class="box-title">■수업리스트</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
@@ -40,21 +40,26 @@
 		                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
 		                    <thead>
 		                      <tr role="row">
-		                      	  <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 109px;">아이디</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 142px;">성명</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 129px;">가입일</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 92px;">이메일</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">연락처</th>			                   
+		                      	  <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 109px;">강의명</th>
+			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 142px;">강사명</th>
+			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 129px;">강의실</th>
+			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 92px;">시작일</th>
+			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">종료일</th>			                   
+			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">상태</th>
+			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">주소</th>
 		                      </tr>
 		                    </thead>
+		                    
 		                    <tbody>
 		                      <c:forEach items="${list}" var="vo">
 			                    <tr role="row">
-			                      <td>${vo.mem_id}</td>
-			                      <td>${vo.mem_name}</td>
-			                      <td>${vo.mem_reg_date}</td>
-			                      <td>${vo.mem_email}</td>
-			                      <td>${vo.mem_tel}</td>
+			                      <td>${vo.clz_name}</td>
+			                      <td>강사명불러오기</td>
+			                      <td>${vo.clz_room}</td>
+			                      <td>${vo.clz_start_date}</td>
+			                      <td>${vo.clz_end_date}</td>
+			                      <td>${vo.clz_state}</td>
+			                      <td>${vo.clz_domain}</td>
 			                    </tr>
 		                      </c:forEach>
 		                    </tbody>
@@ -75,7 +80,7 @@
                   				  
                   				  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
                   					<li ${pageMaker.page==idx? "class='paginate_button active'":"class='paginate_button'"}> 
-									  <a href="teacherlist?page=${idx}&perPageNum=${pageMaker.perPageNum}&searchOPT=${searchOPT}&keyword=${keyword}">${idx}</a>
+									  <a href="classlist?page=${idx}&perPageNum=${pageMaker.perPageNum}&searchOPT=${searchOPT}&keyword=${keyword}">${idx}</a>
                   					</li>
                   				  </c:forEach>
 								  
