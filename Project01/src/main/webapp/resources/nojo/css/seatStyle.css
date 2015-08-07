@@ -9,7 +9,7 @@ ul {
 	border: 1px solid #000;
 }
 
-#seatDiv {
+.seatDiv {
 	float: left;
 	width: 55%;
 	height: 100%;
@@ -18,7 +18,7 @@ ul {
 	background-color: rgba(222, 222, 222, 1.0);
 }
 
-#listDiv {
+.listDiv {
 	float: left;
 	width: 40%;
 	height: 100%;
@@ -48,4 +48,9 @@ ul {
 	float: left;
 	margin-left: 73%;
 	text-align: center;
+}
+.log {
+	width: 500px;
+	height:800px;
+	background-color: lime;
 }
