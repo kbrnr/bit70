@@ -26,6 +26,14 @@
 <script src="/resources/dist/js/app.min.js" type="text/javascript"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/resources/dist/js/demo.js" type="text/javascript"></script>
+
+<!-- Ionicons -->
+<link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+<!-- bootstrap wysihtml5 - text editor -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<!-- Font Awesome Icons -->
+<link href="/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
 <body class="skin-blue layout-top-nav">

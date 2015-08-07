@@ -18,18 +18,18 @@ public interface QuestionService {
 	public void modifyQuestion(QuestionVO vo) throws Exception;
 
 	//질문삭제
-	public void removeQuestion(int question_no) throws Exception;
+	public void removeQuestion(int no) throws Exception;
 
 	//리스트 개수
-	public int getList(String domain) throws Exception;
+	public int getCnt(String domain) throws Exception;
 	
 	//질문 글 조회
-	public QuestionVO getReadQuestion(int question_no) throws Exception;
+	public QuestionVO getReadQuestion(int no) throws Exception;
 	
 	//질문 검색 결과 개수
-	public int getSearchQuestion(Search search) throws Exception;
+	public int getSearchCnt(String domain, Search search) throws Exception;
 	
 	//질문 검색 결과 리스트
-	public List<QuestionVO> searchQuestion(Criteria cri, Search search) throws Exception;
+	public List<QuestionVO> searchQuestion(String domain, Criteria cri, Search search) throws Exception;
 
 }

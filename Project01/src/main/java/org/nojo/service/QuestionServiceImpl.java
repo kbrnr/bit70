@@ -34,32 +34,32 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
-	public void removeQuestion(int question_no) throws Exception {
+	public void removeQuestion(int no) throws Exception {
 
-		mapper.delete(question_no);
+		mapper.delete(no);
 	}
 
 	@Override
-	public int getList(String domain) throws Exception {
+	public int getCnt(String domain) throws Exception {
 		return mapper.getTotalCnt(domain);
 	}
 
 	@Override
-	public QuestionVO getReadQuestion(int question_no) throws Exception {
+	public QuestionVO getReadQuestion(int no) throws Exception {
 		
-		return mapper.readBoard(question_no);
+		return mapper.readBoard(no);
 	}
 
 	@Override
-	public int getSearchQuestion(Search search) throws Exception {
+	public int getSearchCnt(String domain, Search search) throws Exception {
 		
-		return mapper.getSearchCnt(search);
+		return mapper.getSearchCnt(domain, search);
 	}
 
 	@Override
-	public List<QuestionVO> searchQuestion(Criteria cri, Search search) throws Exception {
+	public List<QuestionVO> searchQuestion(String domain, Criteria cri, Search search) throws Exception {
 
-		return mapper.searchPage(cri, search);
+		return mapper.searchPage(domain, cri, search);
 	}
 
 }

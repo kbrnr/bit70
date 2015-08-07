@@ -28,15 +28,15 @@ public interface QuestionMapper {
 					+ "question_content= #{question_content}, "
 					+ "question_reg_date= now(), "
 					+ "question_visible = #{question_visible} "
-					+ "where"
-					+ "question_no = #{question_no};")
+					+ "where "
+					+ "question_no = #{question_no}")
 	public void update(QuestionVO vo) throws Exception;
 
 	//게시글 삭제
 	@Delete("delete from tbl_question "
 					+ "where "
-					+ "question_no = #{question_no}")
-	public void delete(int question_no) throws Exception;
+					+ "question_no = #{no}")
+	public void delete(int no) throws Exception;
 
 	//게시글 개수
 /*	@Select("select count(question_no) "
@@ -46,16 +46,15 @@ public interface QuestionMapper {
 	public int getTotalCnt(String domain) throws Exception;
 
 	//게시글 조회
-	@Select("select question_no, question_title, question_content, mem_id"
+	@Select("select question_no, question_title, question_content, mem_id "
 					+ "from tbl_question "
-					+ "where question_no = #{question_no}")
-	public QuestionVO readBoard(int Question_bno) throws Exception;
+					+ "where question_no = #{no}")
+	public QuestionVO readBoard(int no) throws Exception;
 	
 	//게시글 검색 조회 리스트
-	public List<QuestionVO> searchPage(@Param("cri") Criteria cri, 
-									@Param("search") Search search) throws Exception;
+	public List<QuestionVO> searchPage(@Param("domain") String domain, @Param("cri") Criteria cri, @Param("search") Search search) throws Exception;
 	
 	//검색 결과 개수
-	public int getSearchCnt(Search search) throws Exception;	
+	public int getSearchCnt(@Param("domain") String domain, @Param("search") Search search) throws Exception;	
 
 }

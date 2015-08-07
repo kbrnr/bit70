@@ -28,11 +28,10 @@
 					</tr>
 					<c:forEach items="${list}" var="vo">
 						<tr>
-							<td>${vo.rowNum}</td>
-							<td><a
-								href='read?page=${pagemaker.page }&perPagerNum=${pagemaker.perPageNum }&no=${vo.question_no}'>${vo.question_title }</a></td>
-							<td>${vo.mem_id }</td>
-							<td class="regDate">${vo.question_reg_date }</td>
+							<td width = 50px><span>${vo.rowNum}</span></td>
+							<td><span><a href='read?page=${pagemaker.page }&perPagerNum=${pagemaker.perPageNum }&no=${vo.question_no}'>${vo.question_title }</a></span></td>
+							<td width = 120px>${vo.mem_id }</td>
+							<td width = 120px class="regDate">${vo.question_reg_date }</td>
 					</c:forEach>
 					</tr>
 				</table>
@@ -40,41 +39,40 @@
 			<!-- /.box-body -->
 			<!-- 페이징 -->
 			<div class="box-footer clearfix">
-				${pagemaker.prev }, ${pagemaker.startPage }, ${pagemaker.endPage }
 				<ul class="pagination pagination-sm no-margin pull-left">
 					<!-- 이전페이지 -->
 					<c:if test="${pagemaker.prev }">
-						<%-- <c:if test="${searchKey == null && searchValue == null }"> --%>
+						<c:if test="${searchKey == null && searchValue == null }">
 							<li><a href="listpage?page=${pagemaker.startPage - 1 }&perPageNum=${pagemaker.perPageNum}">prev</a></li>
-					<%-- 	</c:if> --%>
-						<%-- <c:if test="${searchKey != null && searchValue != null }">
+					</c:if>
+						<c:if test="${searchKey != null && searchValue != null }">
 							<li><a href="listpage?page=${pagemaker.startPage - 1 }&perPageNum=${pagemaker.perPageNum}&searchKey=${searchKey}&searchValue=${searchValue}">
 									prev</a></li>
-						</c:if> --%>
+						</c:if>
 					</c:if>
 
 					<!-- 페이징 -->
 					<c:forEach begin="${pagemaker.startPage }" end="${pagemaker.endPage }" var="idx">
 						<li <c:out value = "${pagemaker.page==idx?'class=active' :'' }"/>>
-							<%-- <c:if test="${searchKey == null && searchValue == null }"> --%>
+							<c:if test="${searchKey == null && searchValue == null }">
 								<a href="listpage?page=${idx }&perPageNum=${pagemaker.perPageNum}">${idx }</a>
-							<%-- </c:if>  --%>
-							<%-- <c:if test="${searchKey != null && searchValue != null }">
+							</c:if>
+							<c:if test="${searchKey != null && searchValue != null }">
 								<a href="listpage?page=${idx }&perPageNum=${pagemaker.perPageNum}&searchKey=${searchKey}&searchValue=${searchValue}">${idx }</a>
-							</c:if> --%>
+							</c:if>
 						</li>
 					</c:forEach>
 
 					<!-- 다음페이지 -->
 					<c:if test="${pagemaker.next }">
-						<%-- <c:if test="${searchKey == null && searchValue == null }"> --%>
+						<c:if test="${searchKey == null && searchValue == null }">
 							<li><a href="listpage?page=${pagemaker.endPage + 1 }&perPageNum=${pagemaker.perPageNum}">next</a>
 							</li>
-						<%-- </c:if> --%>
-						<%-- <c:if test="${searchKey != null && searchValue != null }">
+						</c:if>
+						<c:if test="${searchKey != null && searchValue != null }">
 							<li><a href="listpage?page=${pagemaker.endPage + 1 }&perPageNum=${pagemaker.perPageNum}&searchKey=${searchKey}&searchValue=${searchValue}">next</a>
 							</li>
-						</c:if> --%>
+						</c:if>
 					</c:if>
 				</ul>
 
@@ -91,18 +89,17 @@
 						<fieldset>
 							<div id="select_board" >
 								<select name="searchKey">
-									<option value="title"
-										<c:if test="${searchKey =='title' }">selected</c:if>>제
-										목</option>
-									<option value="title_content" selected
-										<c:if test="${searchKey=='title'||'content' }">selected</c:if>>제목
+									<option value="question_title"
+										<c:if test="${searchKey =='question_title' }">selected</c:if>>제목</option>
+									<option value="question_title&question_content" selected
+										<c:if test="${searchKey=='question_title'||'question_content' }">selected</c:if>>제목
 										+ 내용</option>
-									<option value="writer"
-										<c:if test="${searchKey=='writer' }">selected</c:if>>작성자</option>
+									<option value="mem_id"
+										<c:if test="${searchKey=='mem_id' }">selected</c:if>>작성자</option>
 								</select>
 							</div>
 							<div class="input-group input-group-sm">
-			                    <input type="text" class="form-control">
+			                    <input name="searchValue" type="text" class="form-control">
 			                    <span class="input-group-btn">
 			                      	<button class="btn btn-info btn-flat" type="Submit">Go!</button>
 			                    </span>
