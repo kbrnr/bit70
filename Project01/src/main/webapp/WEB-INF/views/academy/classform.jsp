@@ -46,6 +46,14 @@
                         <input type="text" class="form-control" id="inputEmail3" name='clz_domain'>
                       </div>
                     </div>
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">강사등록</label>
+                      <div class="col-sm-10">
+                        <button id="btn_teachlist" type="submit" class="btn btn-info pull-right">강사찾기</button>
+                      </div>
+
+                    </div>
+                      
 					========================================================
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">강사번호</label>
@@ -63,6 +71,11 @@
                         <input type="text" class="form-control" id="inputEmail3" name='mem_name'>
                       </div>
                     </div>
+                    
+                    
+                    
+                  
+                    
                     ========================================================
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">강사번호</label>
@@ -117,7 +130,7 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label" name='clz_state'>상태</label>
+                      <label for="inputPassword3" class="col-sm-2 control-label" >상태</label>
                       <div class="col-sm-10">
                         <label>
                               준비중
@@ -137,31 +150,15 @@
                         </label>
                       </div>
                     </div>                         
-                                     
-
-                   
                   </div><!-- /.box-body -->
-                  <div class="box-footer">
+                  <div class="box-footer" id='popupdiv'>
                   	<a href="classlist" class="btn btn-default">취소</a>
                     
                     <button type="submit" class="btn btn-info pull-right">등록</button>
+                    
                   </div><!-- /.box-footer -->
                 </form>
-              </div><!-- /.grid -->
-	                  	
-                  	</div><!-- /.row -->
-                  	
-                  	<div class="row">
-            		
-                  		<div class="col-sm-12">
-            
-                  		</div><!-- /.grid -->
-                  	</div><!-- /.row -->
-                    	
-                  </div><!-- /.example1_wrapper -->
-                </div><!-- /.box-body -->
-		</div><!-- /.box -->
-		
+			</div><!-- /.box box-info -->		
 		<!-- ----------------------------------------- -->
 			
 		</section>
@@ -173,5 +170,38 @@
 	<!-- /.container -->
 </div>
 <!-- /.content-wrapper -->
+
+
+<!-- 선생님리스트-->	
+<!-- ----------------------------------------- -->
+<section class="content">
+<div >
+<button type="button" id='btn_pop' class="btn btn-default">ajax테스트</button>
+	
+</div><!--  /.popupdiv -->		
+</section><!-- /.content -->
+<!-- ----------------------------------------- -->	
+<!-- /.선생님리스트 팝업 -->
+
+<script>
+$("#btn_pop").on("click", function() {
+	$.ajax({
+		url: '/academy/test',
+		type: 'post',
+		dataType:'json',
+		success: function(list){
+			var listStr = "";
+			$(list).each(
+					function(i, value) {
+						listStr += value.mem_name+"("+value.mem_id+")";
+					}
+			);
+			$("#popupdiv").append(listStr);
+		}
+	});
+});
+</script>
+
+
 
 <%@include file="/WEB-INF/views/include/footer.jsp"%>
