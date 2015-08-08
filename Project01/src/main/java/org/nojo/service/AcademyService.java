@@ -3,6 +3,7 @@ package org.nojo.service;
 import java.util.List;
 
 import org.nojo.bizDomain.ClassFormVO;
+import org.nojo.bizDomain.ClassListVO;
 import org.nojo.domain.MemberVO;
 import org.nojo.util.Criteria;
 
@@ -10,7 +11,7 @@ public interface AcademyService {
 
 	public void makeClass(ClassFormVO vo);
 	
-	public List<ClassFormVO> getClassList(Criteria cri);
+	public List<ClassListVO> getClassList(Criteria cri);
 	
 	public int getClassTotalCnt();
 	

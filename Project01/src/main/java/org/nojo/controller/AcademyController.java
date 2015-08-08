@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.nojo.bizDomain.ClassFormVO;
+import org.nojo.bizDomain.ClassListVO;
 import org.nojo.domain.MemberVO;
 import org.nojo.service.AcademyService;
 import org.nojo.util.Criteria;
@@ -43,7 +44,7 @@ public class AcademyController {
 	//수업리스트
 	@RequestMapping(value="/classlist", method=RequestMethod.GET)
 	public void classlist(Criteria cri, Model model){
-		List<ClassFormVO> list;
+		List<ClassListVO> list;
 		PageMaker pagemaker;
 		
 		list = acdmService.getClassList(cri);

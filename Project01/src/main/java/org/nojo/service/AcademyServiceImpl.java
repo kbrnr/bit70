@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.nojo.bizDomain.ClassFormVO;
+import org.nojo.bizDomain.ClassListVO;
 import org.nojo.domain.ClassVO;
 import org.nojo.domain.CourseVO;
 import org.nojo.domain.MemberVO;
@@ -58,55 +59,70 @@ public class AcademyServiceImpl implements AcademyService {
 			courseVO.setCourse_gb("member_teacher");
 			acdmMapper.insertCourse(courseVO);
 		}
-		
-		
 	}
 	
-	public List<ClassFormVO> getClassList(Criteria cri) {		
-		List<ClassFormVO> classFormList;
-		classFormList = acdmMapper.selectClass(cri);
-		
-//		System.out.println("******수업갯수**********");
-//		System.out.println(classFormList.size());
-//		System.out.println("*************************************");
-		
-		List<MemberVO> memberlist =null;
-		for(int i=0 ; i<classFormList.size() ; i++ ){
-//			System.out.println("******현재수업의 도메인**********");
-//			System.out.println(classFormList.get(i).getClz_domain());
-//			System.out.println("*************************************");
-			String domain=classFormList.get(i).getClz_domain();
-			
-			memberlist=acdmMapper.selectClassTeacherInfo(domain);
-//			System.out.println("******현재수업의 맴버수 와 리스트*******************************");
-//			System.out.println(memberlist.size());
-//			System.out.println(memberlist.toString());
-			
-			
-//			System.out.println("====================================================");
-//			System.out.println("====================================================");
-//			System.out.println("====================================================");
-//			System.out.println("====================================================");
-//			System.out.println("====================================================");
-			String[] ids = new String[memberlist.size()];
-			String[] names = new String[memberlist.size()];
-			for(int j=0 ; j<memberlist.size() ; j++ ){
-				System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-				System.out.println(memberlist.get(j).getMem_id());
-				System.out.println(memberlist.get(j).getMem_name());	
-					
-				ids[j]=memberlist.get(j).getMem_id();
-				names[j]=memberlist.get(j).getMem_name();
-				System.out.println(j+"번째 아이디값"+ids[j]);
-				System.out.println(j+"번째 이름값"+names[j]);
-				System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-			}
-			
-			classFormList.get(i).setMem_id(ids);
-			classFormList.get(i).setMem_name(names);
+	public List<ClassListVO> getClassList(Criteria cri) {		
+		List<ClassListVO> classlist;
+		List<MemberVO> teacherlist;
+		classlist = acdmMapper.selectClass(cri);
+		String domain;
+		for(int i=0; i<classlist.size(); i++){
+			domain=classlist.get(i).getClz_domain();
+			teacherlist=acdmMapper.selectClassTeacher(domain);
+			classlist.get(i).setTeacherlist(teacherlist);			
+		System.out.println(domain);
+		System.out.println(teacherlist.size());
 		}
-		return classFormList;	
+		return classlist;	
 	}
+	
+	
+	
+//	public List<ClassFormVO> getClassList(Criteria cri) {		
+//		List<ClassFormVO> classFormList;
+//		classFormList = acdmMapper.selectClass(cri);
+//		
+////		System.out.println("******수업갯수**********");
+////		System.out.println(classFormList.size());
+////		System.out.println("*************************************");
+//		
+//		List<MemberVO> memberlist =null;
+//		for(int i=0 ; i<classFormList.size() ; i++ ){
+////			System.out.println("******현재수업의 도메인**********");
+////			System.out.println(classFormList.get(i).getClz_domain());
+////			System.out.println("*************************************");
+//			String domain=classFormList.get(i).getClz_domain();
+//			
+//			memberlist=acdmMapper.selectClassTeacherInfo(domain);
+////			System.out.println("******현재수업의 맴버수 와 리스트*******************************");
+////			System.out.println(memberlist.size());
+////			System.out.println(memberlist.toString());
+//			
+//			
+////			System.out.println("====================================================");
+////			System.out.println("====================================================");
+////			System.out.println("====================================================");
+////			System.out.println("====================================================");
+////			System.out.println("====================================================");
+//			String[] ids = new String[memberlist.size()];
+//			String[] names = new String[memberlist.size()];
+//			for(int j=0 ; j<memberlist.size() ; j++ ){
+//				System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+//				System.out.println(memberlist.get(j).getMem_id());
+//				System.out.println(memberlist.get(j).getMem_name());	
+//					
+//				ids[j]=memberlist.get(j).getMem_id();
+//				names[j]=memberlist.get(j).getMem_name();
+//				System.out.println(j+"번째 아이디값"+ids[j]);
+//				System.out.println(j+"번째 이름값"+names[j]);
+//				System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+//			}
+//			
+//			classFormList.get(i).setMem_id(ids);
+//			classFormList.get(i).setMem_name(names);
+//		}
+//		return classFormList;	
+//	}
 	
 	public int getClassTotalCnt() {
 		return acdmMapper.selectClassTotalCnt();
