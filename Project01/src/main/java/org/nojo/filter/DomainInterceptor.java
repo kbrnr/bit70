@@ -25,9 +25,7 @@ public class DomainInterceptor extends HandlerInterceptorAdapter {
 		if (domain == null)
 			return true;
 		boolean existence = domainMapper.getAllDomain().contains(domain);
-		if (existence)
-			req.setAttribute("domain", domain);
-		else
+		if (!existence)
 			res.sendError(HttpServletResponse.SC_NOT_FOUND, "존재하지 않는 도메인 입니다");
 		return existence;
 	}
