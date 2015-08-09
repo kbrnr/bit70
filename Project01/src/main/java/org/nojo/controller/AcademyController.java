@@ -14,8 +14,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/academy")
@@ -41,15 +46,6 @@ public class AcademyController {
 		return "redirect:classmodify";
 	}
 	
-	
-/*	//수업등록
-	@RequestMapping(value="/classregister", method=RequestMethod.GET)
-	public String classregister(ClassFormVO vo){
-		System.out.println("@Controller:"+ vo.toString());	
-		acdmService.makeClass(vo);
-		return "redirect:classmodify";
-	}*/
-	
 	//수업상세
 	@RequestMapping(value="/classmodify", method=RequestMethod.GET)
 	public void classmodify(){
@@ -67,23 +63,6 @@ public class AcademyController {
 		model.addAttribute("pageMaker", pagemaker);
 	}
 	
-	
-	
-	
-	
-//	//수업리스트
-//	@RequestMapping(value="/classlist", method=RequestMethod.GET)
-//	public void classlist(Criteria cri, Model model){
-//		List<ClassVO> list;
-//		PageMaker pagemaker;
-//		
-//		list = acdmService.getClassList(cri);
-//		pagemaker = new PageMaker(cri, acdmService.getClassTotalCnt());
-//		model.addAttribute("list", list);
-//		model.addAttribute("pageMaker", pagemaker);
-//	}
-	
-	
 	//선생님리스트
 	@RequestMapping(value="/teacherlist", method=RequestMethod.GET)
 	public void teacherlist(Criteria cri, Model model) throws Exception{
@@ -96,18 +75,8 @@ public class AcademyController {
 		model.addAttribute("pageMaker", pagemaker);
 	}
 	
-	//선생님리스트
-
-//    @RequestMapping(value="/test", method = RequestMethod.POST) 
-//	@ResponseBody
-//    public String test(Criteria cri) throws Exception{
-//    	List<MemberVO> list;
-//    	list = acdmService.getTeacherList(cri);
-//	return "aaaaaaa";
-//    }
-
-    
-	@RequestMapping(value="/test", method= RequestMethod.POST)
+	//선생님리스트팝업
+	@RequestMapping(value="/popupteacherlist", method= RequestMethod.POST)
 	public ResponseEntity<List<MemberVO>> teacherList(Criteria cri) throws Exception{
 		ResponseEntity<List<MemberVO>> entity = null;
 		List<MemberVO> list ;
@@ -119,6 +88,13 @@ public class AcademyController {
 		}
 		return entity;
 	}
-    
-    
+	
+	//도메인체크
+	@ResponseBody
+	@RequestMapping(value="/domaincheck/", method= RequestMethod.POST)
+	public boolean canusedomain(String clz_domain) {
+		System.out.println(clz_domain);
+		return acdmService.domainCheck(clz_domain);
+	}
+	
 }

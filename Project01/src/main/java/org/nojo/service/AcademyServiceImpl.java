@@ -18,9 +18,18 @@ public class AcademyServiceImpl implements AcademyService {
 	@Inject
 	private AcademyMapper acdmMapper;
 
-	public void updateClass(){
+	public Boolean domainCheck(String domain){
+		int domainCount = acdmMapper.countDomain(domain);
+		System.out.println("검색된 도메인갯수:"+ domainCount);
 		
+		if(domainCount == 0){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
+	
 	
 	public void makeClass(ClassVO classVO, String[] mem_ids) {
 		acdmMapper.insertClass(classVO);

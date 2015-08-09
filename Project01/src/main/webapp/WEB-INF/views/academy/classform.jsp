@@ -43,15 +43,16 @@
                       <label for="inputPassword3" class="col-sm-2 control-label" >도메인</label>
                       <div class="col-sm-10">
                       	http://www.XXX.com/
-                        <input type="text" class="form-control" id="inputEmail3" name='clz_domain'>
+                      		<div id="domainmsg"></div>
+                      	<button id="btn_domaincheck" type="button" class="btn btn-info pull-right">도메인검사</button>
+                        <input id="clz_domain" type="text" class="form-control" name='clz_domain' value=''>   
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">강사등록</label>
-                      <div class="col-sm-10">
-                        <button id="btn_teachlist" type="submit" class="btn btn-info pull-right">강사찾기</button>
+                      <div class="col-sm-10" id='popupdiv'>
+                        <button id="btn_teachlist" type="button" class="btn btn-info pull-right">강사찾기</button>
                       </div>
-
                     </div>
                       
 					========================================================
@@ -151,7 +152,7 @@
                       </div>
                     </div>                         
                   </div><!-- /.box-body -->
-                  <div class="box-footer" id='popupdiv'>
+                  <div class="box-footer">
                   	<a href="classlist" class="btn btn-default">취소</a>
                     
                     <button type="submit" class="btn btn-info pull-right">등록</button>
@@ -172,34 +173,46 @@
 <!-- /.content-wrapper -->
 
 
-<!-- 선생님리스트-->	
-<!-- ----------------------------------------- -->
-<section class="content">
-<div >
-<button type="button" id='btn_pop' class="btn btn-default">ajax테스트</button>
-	
-</div><!--  /.popupdiv -->		
-</section><!-- /.content -->
-<!-- ----------------------------------------- -->	
-<!-- /.선생님리스트 팝업 -->
 
 <script>
-$("#btn_pop").on("click", function() {
+$("#btn_teachlist").on("click", function() {
 	$.ajax({
-		url: '/academy/test',
+		url: '/academy/popupteacherlist',
 		type: 'post',
 		dataType:'json',
 		success: function(list){
 			var listStr = "";
 			$(list).each(
 					function(i, value) {
-						listStr += value.mem_name+"("+value.mem_id+")";
+						listStr += value.mem_name+"("+value.mem_id+")<br>";
 					}
 			);
 			$("#popupdiv").append(listStr);
 		}
 	});
 });
+
+$("#btn_domaincheck").on("click", function() {
+	console.log($("#clz_domain").val());
+	$.ajax({
+		url: '/academy/domaincheck/',	
+		type: 'post',
+		data: $("#clz_domain").val(),
+		dataType:'text',
+		success: function(data){
+			var msg ;
+			if($(data)== true){
+				 msg ="사용할수 있는 도메인입니다.";
+			}
+			else{
+				msg ="사용할수 있는 도메인입니다.";
+			}
+			$("#domainmsg").append(msg)
+		}
+	});
+});
+
+
 </script>
 
 

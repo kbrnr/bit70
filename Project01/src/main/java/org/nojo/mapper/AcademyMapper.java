@@ -15,6 +15,10 @@ import org.nojo.util.Criteria;
 
 public interface AcademyMapper {
 
+	//도메인체크
+	@Select("select count(clz_domain) from tbl_class where clz_domain=#{domain}")  //1이면 사용불가능 0이면 사용가능
+	public int countDomain(String domain);
+	
 	//수업리스트
 	@Select("select * from tbl_class order by clz_reg_date desc limit #{first}, #{perPageNum}")
 	public List<ClassListVO> selectClass(Criteria cri);
