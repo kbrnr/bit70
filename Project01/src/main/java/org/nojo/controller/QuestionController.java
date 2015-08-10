@@ -23,12 +23,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/{domain}/qna")
 public class QuestionController {
 
+	
+	//region Inject 
 	@Inject
 	private QuestionService service;
-	
 	@Inject
 	private AnswerService ansService;
-
+	//region End
+	
+	
+	
+	
+	//리스트페이지 & 검색
 	@RequestMapping("/listpage")
 	public String ListPage(@PathVariable("domain") String domain, Criteria cri, Model model, String searchKey,
 			String searchValue) throws Exception {
@@ -40,11 +46,12 @@ public class QuestionController {
 
 		PageMaker pagemaker = null;
 		List<QuestionVO> list = null;
-
+		
 		if (search.getSearchValue() == null) {
 
 			pagemaker = new PageMaker(cri, service.getCnt(domain));
 			list = service.listQuestion(domain, cri);
+			
 		} else {
 
 			pagemaker = new PageMaker(cri, service.getSearchCnt(domain, search));
@@ -61,6 +68,8 @@ public class QuestionController {
 		return "qna/listpage";
 	}
 
+	
+	//등록 region
 	@RequestMapping(value = "/questionRegist", method = RequestMethod.GET)
 	public String regist() {
 
@@ -73,8 +82,12 @@ public class QuestionController {
 		service.addQuestion(vo);
 		return "redirect:listpage";
 	}
+	//region End
+	
 
-	//질문 조회
+	
+	
+	//질문 글 조회 
 	@RequestMapping("/detail")
 	public String readBoard(@PathVariable("domain") String domain, @RequestParam("no") int no, @ModelAttribute("cri") Criteria cri, Model model)
 			throws Exception {
@@ -91,6 +104,8 @@ public class QuestionController {
 		return "qna/detail";
 	}
 
+	
+	//글 수정 region
 	@RequestMapping("/questionModify")
 	public String modify(@PathVariable("domain") String domain, @RequestParam("no") int no, @ModelAttribute("cri") Criteria cri, Model model)
 			throws Exception {
@@ -107,7 +122,10 @@ public class QuestionController {
 
 		return "redirect:detail?no=" + vo.getQuestion_no();
 	}
+	//region End
+	
 
+	//글삭제
 	@RequestMapping(value = "/questionRemove/{no}")
 	public String removeBoard(@PathVariable("no") int no) throws Exception {
 
