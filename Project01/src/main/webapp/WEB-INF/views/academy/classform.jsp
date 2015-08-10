@@ -198,16 +198,10 @@ $("#btn_domaincheck").on("click", function() {
 		url: '/academy/domaincheck',	
 		type: 'post',
 		data: "clz_domain=" + $("#clz_domain").val(),
-		dataType:'text',
+		dataType:'json',
 		success: function(data){
 			console.log(data);
-			var msg ;
-			if(data=='true'){
-				msg ="사용할수 있는 도메인입니다.";
-			}
-			else{
-				msg ="사용할수 없는 도메인입니다.";
-			}
+			var msg = data ? "사용할수 있는 도메인입니다." : "사용할수 없는 도메인입니다.";
 			$("#domainmsg").append(msg)
 		}
 	});
