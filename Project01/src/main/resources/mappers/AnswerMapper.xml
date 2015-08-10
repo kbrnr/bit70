@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.nojo.mapper.AnswerMapper">
+
+	<select id="listAns" parameterType="map" resultType="org.nojo.domain.AnswerVO">
+
+		select answer_no, question_no, answer_title, answer_content, answer_reg_date, answer_recommend, clz_domain, mem_id
+		from tbl_answer 
+		
+		<where>
+		question_no = #{no} and clz_domain = #{domain}
+		</where>
+		
+		order by answer_recommend desc, answer_no desc;
+	
+	</select>
+
+	<select id="getTotalCnt" resultType="int">
+		
+		select count(answer_no)
+		from tbl_answer
+
+		<where>
+		<![CDATA[
+		clz_domain = #{domain} and question_no = #{no}
+		]]>
+		</where>
+	</select>
+
+</mapper>

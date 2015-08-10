@@ -29,7 +29,7 @@
 					<c:forEach items="${list}" var="vo">
 						<tr>
 							<td width = 50px><span>${vo.rowNum}</span></td>
-							<td><span><a href='read?page=${pagemaker.page }&perPagerNum=${pagemaker.perPageNum }&no=${vo.question_no}'>${vo.question_title }</a></span></td>
+							<td><span><a href='detail?page=${pagemaker.page }&perPagerNum=${pagemaker.perPageNum }&no=${vo.question_no}'>${vo.question_title }</a></span></td>
 							<td width = 120px>${vo.mem_id }</td>
 							<td width = 120px class="regDate">${vo.question_reg_date }</td>
 					</c:forEach>
@@ -77,7 +77,7 @@
 				</ul>
 
 				<!-- 글쓰기 버튼 -->
-				<a href="regist"><button style="float: right;" id="ResBoard"
+				<a href="questionRegist"><button style="float: right;" id="ResBoard"
 						type="submit" class="btn btn-primary">Write</button></a>
 			</div>
 
