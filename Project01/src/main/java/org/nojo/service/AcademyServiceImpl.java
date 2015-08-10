@@ -9,6 +9,7 @@ import org.nojo.domain.ClassVO;
 import org.nojo.domain.CourseVO;
 import org.nojo.domain.MemberVO;
 import org.nojo.mapper.AcademyMapper;
+import org.nojo.mapper.DomainMapper;
 import org.nojo.util.Criteria;
 import org.springframework.stereotype.Service;
 
@@ -17,17 +18,12 @@ public class AcademyServiceImpl implements AcademyService {
 	
 	@Inject
 	private AcademyMapper acdmMapper;
+	
+	@Inject
+	private DomainMapper  domainMapper;
 
-	public Boolean domainCheck(String domain){
-		int domainCount = acdmMapper.countDomain(domain);
-		System.out.println("검색된 도메인갯수:"+ domainCount);
-		
-		if(domainCount == 0){
-			return true;
-		}
-		else{
-			return false;
-		}
+	public boolean domainCheck(String domain){
+		return !domainMapper.isExistDomain(domain); 
 	}
 	
 	

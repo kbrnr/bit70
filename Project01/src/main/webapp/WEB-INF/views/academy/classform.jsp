@@ -195,17 +195,18 @@ $("#btn_teachlist").on("click", function() {
 $("#btn_domaincheck").on("click", function() {
 	console.log($("#clz_domain").val());
 	$.ajax({
-		url: '/academy/domaincheck/',	
+		url: '/academy/domaincheck',	
 		type: 'post',
-		data: $("#clz_domain").val(),
+		data: "clz_domain=" + $("#clz_domain").val(),
 		dataType:'text',
 		success: function(data){
+			console.log(data);
 			var msg ;
-			if($(data)== true){
-				 msg ="사용할수 있는 도메인입니다.";
+			if(data=='true'){
+				msg ="사용할수 있는 도메인입니다.";
 			}
 			else{
-				msg ="사용할수 있는 도메인입니다.";
+				msg ="사용할수 없는 도메인입니다.";
 			}
 			$("#domainmsg").append(msg)
 		}

@@ -9,7 +9,7 @@ import org.nojo.util.Criteria;
 
 public interface AcademyService {
 
-	public Boolean domainCheck(String domain);
+	public boolean domainCheck(String domain);
 	
 	public void makeClass(ClassVO vo, String[] mem_ids);
 	
