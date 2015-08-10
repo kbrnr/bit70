@@ -6,5 +6,7 @@ import org.nojo.domain.CurriculumVO;
 
 public interface CurriculumService {
 
-	public List<CurriculumVO> listCurriculum(CurriculumVO vo) throws Exception;
+	public List<CurriculumVO> list(String domain);
+	
+	public void edit(List<CurriculumVO> list, String domain);
 }

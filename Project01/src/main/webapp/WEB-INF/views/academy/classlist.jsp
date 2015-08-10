@@ -54,7 +54,11 @@
 		                      <c:forEach items="${list}" var="vo">
 			                    <tr role="row">
 			                      <td><a href="classmodify">${vo.clz_name}</a></td>
-			                      <td>강사명불러오기</td>
+			                      <td>
+			                      	<c:forEach items="${vo.teacherlist}" var="teacherlist">
+			                      		${teacherlist.mem_name}(${teacherlist.mem_id})<br> 
+			                        </c:forEach>
+			                      </td>
 			                      <td>${vo.clz_room}</td>
 			                      <td>${vo.clz_start_date}</td>
 			                      <td>${vo.clz_end_date}</td>

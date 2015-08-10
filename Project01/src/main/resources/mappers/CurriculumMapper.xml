@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.nojo.mapper.CurriculumMapper">
+
+	<insert id="add" parameterType="map">
+		insert into tbl_curriculum(curri_name, curri_pno, curri_depth, clz_domain) 
+		  values(#{vo.curri_name}, #{vo.curri_pno}, #{vo.curri_depth}, #{domain})
+		<selectKey resultType="int" keyProperty="vo.curri_no" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+	</insert>
+
+</mapper>
