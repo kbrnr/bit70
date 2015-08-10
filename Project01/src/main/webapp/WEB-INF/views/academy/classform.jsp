@@ -50,68 +50,13 @@
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">강사등록</label>
-                      <div class="col-sm-10" id='popupdiv'>
-                        <button id="btn_teachlist" type="button" class="btn btn-info pull-right">강사찾기</button>
-                      </div>
-                    </div>
-                      
-					========================================================
-                    <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">강사번호</label>
                       <div class="col-sm-10">
-                      	user02	계룡산
-						user122	김효연
-						user121	황미영
-						user120	권유리
-                        <input type="text" class="form-control" id="inputEmail3" name='mem_id'>
+                 		<button id="btn_teachlist" type="button" class="btn btn-info" data-toggle="modal" data-target="#teacherModal">강사찾기</button>
+                 			<div id="choiceteacher"></div>
+                 			<div id="hiddenid"></div>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">강사명</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputEmail3" name='mem_name'>
-                      </div>
-                    </div>
-                    
-                    
-                    
-                  
-                    
-                    ========================================================
-                    <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">강사번호</label>
-                      <div class="col-sm-10">
-                      	user02	계룡산
-						user122	김효연
-						user121	황미영
-						user120	권유리
-                        <input type="text" class="form-control" id="inputEmail3" name='mem_id'>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">강사명</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputEmail3" name='mem_name'>
-                      </div>
-                    </div>
-                    ========================================================
-                    <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">강사번호</label>
-                      <div class="col-sm-10">
-                      	user02	계룡산
-						user122	김효연
-						user121	황미영
-						user120	권유리
-                        <input type="text" class="form-control" id="inputEmail3" name='mem_id'>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">강사명</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputEmail3" name='mem_name'>
-                      </div>
-                    </div>
-                    ========================================================
+                                         
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">강의실</label>
                       <div class="col-sm-10">
@@ -174,24 +119,133 @@
 
 
 
+<!-- ****************************************************************************** -->
+<!-- ****************************************************************************** -->
+<!-- ****************************************************************************** -->
+<!-- 선생님리스트 모달창 -->
+<!-- Modal -->
+<div class="modal fade" id="teacherModal" role="dialog">
+   <div class="modal-dialog">
+    
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">선생님리스트</h4>
+      </div>
+      <div class="modal-body">    
+        <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+        	<table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+		    <thead>
+		    	<tr role="row">
+		        	<th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 109px;">아이디</th>
+			        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 142px;">성명</th>
+			        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 92px;">이메일</th>
+			        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">연락처</th>			                   
+		        </tr>
+		    </thead>
+		    <tbody id="teacherinfo">
+
+		    </tbody>
+		    </table>
+		</div><!-- /.example1_wrapper -->
+        <div class="dataTables_paginate paging_simple_numbers text-center" id="example1_paginate">
+        	<ul id="teacherpaging" class="pagination">
+            	
+        	</ul>
+        </div><!-- /.example1_paginate -->
+      </div><!-- /.modal-body -->
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+      
+  </div><!-- ./modal-dialog -->
+</div><!-- ./modal fade -->              
+<!-- ./Modal -->  
+<!-- ****************************************************************************** -->
+<!-- ****************************************************************************** -->
+<!-- ****************************************************************************** -->
+
+
+
+
 <script>
+//모달 선생님 리스트//
+var page = 1
 $("#btn_teachlist").on("click", function() {
-	$.ajax({
-		url: '/academy/popupteacherlist',
-		type: 'post',
-		dataType:'json',
-		success: function(list){
-			var listStr = "";
-			$(list).each(
-					function(i, value) {
-						listStr += value.mem_name+"("+value.mem_id+")<br>";
-					}
-			);
-			$("#popupdiv").append(listStr);
-		}
-	});
+	popteacherlist(page)
 });
 
+function popteacherlist(){
+	$.ajax({
+		url: '/academy/modalteacherlist/'+page,
+		type: 'post',
+		dataType:'json',
+		success: function(map){
+			var listStr = "";
+			$(map.poplist).each(
+					function() {
+						listStr += "<tr role='row' class='userinfo'><td class='userid'>"+this.mem_id+"</td><td class='username'>"+this.mem_name+"</td><td>"+this.mem_email+"</td><td>"+this.mem_tel+"</td></tr>";
+					}
+			);
+			$("#teacherinfo").html(listStr);
+			
+			
+			//페이징
+		    replypage = (map.poppageMaker.page);
+		var startPage = (map.poppageMaker.startPage);
+		var endPage = (map.poppageMaker.endPage);
+		var prevURL = (map.poppageMaker.startPage-1) ; 
+		var nextURL = (map.poppageMaker.endPage+1) ; 
+		var prev = (map.poppageMaker.prev);
+		var next = (map.poppageMaker.next);
+		var pageMakerList ="";
+			
+		if(prev === true){
+			pageMakerList +='<li id='+ prevURL +'><a href="#">prev</a></li>';
+		}
+		
+		for(var i=startPage; i<=endPage ; i++ ){
+			if(i==replypage){
+				pageMakerList += '<li id='+ i +'><a href="#"><b>  '+ i +' </a></b></li>';
+			}else {
+				pageMakerList += '<li id='+ i +'><a href="#">'+ i +'</a></li>';
+			}
+		}
+		
+		if(next === true){
+			pageMakerList +='<li id='+ nextURL +'><a href="#">next</a></li>';
+		}
+		
+		$("#teacherpaging").html(pageMakerList); 
+		}
+	});
+}
+
+$("#teacherpaging").on("click", "li", function(event) {
+	event.preventDefault();
+	page=$(this).attr("id");
+	popteacherlist(page)
+});
+//./모달 선생님 리스트//
+
+$("#teacherinfo").on("click", ".userinfo", function(){
+	var userid ;
+	var username ;
+	userid = $(this).children('td.userid').text();
+	username = $(this).children('td.username').text();
+	console.log(userid);
+	console.log(username);
+	$("#choiceteacher").append("<span>"+ username + "(" + userid+")&nbsp;&nbsp;&nbsp;&nbsp;</span>");
+	$("#hiddenid").append(" <input type='text' name='mem_id' value='"+userid+"' >");
+});
+
+
+
+
+//도메인체크
 $("#btn_domaincheck").on("click", function() {
 	console.log($("#clz_domain").val());
 	$.ajax({
@@ -202,7 +256,7 @@ $("#btn_domaincheck").on("click", function() {
 		success: function(data){
 			console.log(data);
 			var msg = data ? "사용할수 있는 도메인입니다." : "사용할수 없는 도메인입니다.";
-			$("#domainmsg").append(msg)
+			$("#domainmsg").html(msg)
 		}
 	});
 });
