@@ -7,7 +7,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class MainController {
 
-
+	//선생님 관련
+	@RequestMapping(value="/teacher/index", method=RequestMethod.GET)
+	public void tindex(){
+	}
+	
+	@RequestMapping(value="/teacher/main", method=RequestMethod.GET)
+	public void tmain(){
+	}
+	
+	
 	@RequestMapping(value="/mypage", method=RequestMethod.GET)
 	public void mypage(){
 	}
