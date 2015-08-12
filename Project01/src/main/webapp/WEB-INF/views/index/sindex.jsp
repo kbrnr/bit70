@@ -7,15 +7,14 @@
 </style>
 
 <div class="content-wrapper">
+	<div class="container">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
 				수업명: ${domain} <small>(${userid}학생)</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="#">
-						<i class="fa fa-dashboard"></i> Home
-					</a></li>
+				<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 				<li class="active">Dashboard</li>
 			</ol>
 		</section>
@@ -110,10 +109,46 @@
 
 		</section>
 		<!-- /.content -->
+	</div>
+	<!-- /.container -->
 </div>
 <!-- /.content-wrapper -->
 
+	<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">엑셀</h4>
+					</div>
+					<div class="modal-body"></div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<script>
+		var socket = io.connect('http://localhost:3000');
+		
+		socket.on("understanding", function(msg){
+			$(".modal-body").html(msg);
+			$('#myModal').modal('show');
+		});
+	
+		/* $("#btn").click(function (){
+			alert("aasdf");
+			socket.emit("understanding", "민아야 공부잘하고 잇지??");
+		}); */	
+	
+	
+		$("#curri").click(function(){
+			
+		});
+	
 		// Seat에서 사용하는 함수
 		$.getJSON("/${domain}/seat/ajax", function(list){
 			$(list).each(function(){

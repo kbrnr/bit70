@@ -7,6 +7,7 @@
 </style>
 
 <div class="content-wrapper">
+	<div class="container">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
@@ -39,7 +40,7 @@
 	                  	<div class="row">
 		                  	<div class="col-sm-12">
 			                  
-			                  <img src="/resources/nojo/images/main01.jpg">
+			                  <img id="curri" src="/resources/nojo/images/main01.jpg">
 				                  
 		                  	</div><!-- /.grid -->
 			                  	
@@ -101,15 +102,10 @@
 			</div><!-- /.col -->
 		</div><!-- /.row -->
 
-
-
-
-
-			
-		<!-- ----------------------------------------- -->	
-
 		</section>
 		<!-- /.content -->
+	</div>
+	<!-- /.container -->
 </div>
 <!-- /.content-wrapper -->
 
