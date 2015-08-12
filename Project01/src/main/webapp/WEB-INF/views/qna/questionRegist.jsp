@@ -38,7 +38,7 @@
 				</div>
 				<!-- /.box-header -->
 				<div class='box-body pad'>
-					<form role="form" method="post" action="regist">
+					<form role="form" method="post" action="questionRegist">
 						<div style="height: 150px;">
 							<input id="title" type="text" class="form-control" value= "${vo.question_title }" name="question_title" placeholder="title">
 							<input id="gb" type="text" class="form-control" name="question_gb" placeholder="구분은 히든으로 처리하자" >
