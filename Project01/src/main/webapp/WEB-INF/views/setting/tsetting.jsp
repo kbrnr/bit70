@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@include file="/WEB-INF/views/include/s_menu_header.jsp"%>
-<%@include file="/WEB-INF/views/include/s_mypage_aside.jsp"%>
+<%@include file="/WEB-INF/views/include/t_menu_header.jsp"%>
+<%@include file="/WEB-INF/views/include/t_setting_aside.jsp"%>
 <!-- Full Width Column -->
-
 
 <script type="text/javascript">
 // iframe resize
@@ -16,7 +15,7 @@ function autoResize(i)
 </script>
 
 <div class="content-wrapper">
-	<iframe name="inner" src="/academy/classlist" width="100%" height="100%"  onload="autoResize(this)" scrolling="no" frameborder="0" ></iframe>
+	<iframe name="inner" src="/teacher/main" width="100%" height="100%"  onload="autoResize(this)" scrolling="no" frameborder="0" ></iframe>
 </div>
 <!-- /.content-wrapper -->
  

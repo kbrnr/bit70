@@ -33,9 +33,6 @@ public class MainController {
 		return "/mypage/smypage";
 	}	
 	
-	
-	
-	
 
 	
 ///////////////////////////////////////////////////////////////
@@ -62,15 +59,34 @@ public class MainController {
 	
 	
 	
-	
+///////////////////////////////////////////////////////////////
+//세팅/서비스
+///////////////////////////////////////////////////////////////		
 	
 	//선생님/카페//설정
-	@RequestMapping(value="/{domain}/setting", method=RequestMethod.GET)
-	public String cmypage(@PathVariable("domain") String domain, Model model){
+	@RequestMapping(value="/setting/{domain}/{userid}/t", method=RequestMethod.GET)
+	public String tsetting(@PathVariable String domain, @PathVariable  String userid, Model model){
 		model.addAttribute("domain", domain);	
-		return "/setting/mypage";
+		model.addAttribute("userid", userid);
+		return "/setting/tsetting";
 	}
 
+	@RequestMapping(value="/setting/{domain}/{userid}/s", method=RequestMethod.GET)
+	public String ssetting(@PathVariable String domain, @PathVariable  String userid, Model model){
+		model.addAttribute("domain", domain);	
+		model.addAttribute("userid", userid);
+		return "/setting/ssetting";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	
 	//선생님/카페/메인(main만)
