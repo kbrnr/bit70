@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,7 +68,7 @@ html,body{
   |               | sidebar-mini                            |
   |---------------------------------------------------------|
   -->
-  <body class="skin-red sidebar-collapse">
+  <body class="skin-blue sidebar-mini">
     <div class="wrapper">
 
       <!-- Main Header -->
@@ -121,14 +123,14 @@ html,body{
                   <!-- The user image in the navbar-->
                   <img src="/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image" />
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                  <span class="hidden-xs">[${userid}] 선생님 안녕하세요</span>
+                  <span class="hidden-xs">[${userid}]님 안녕하세요</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- The user image in the menu -->
                   <li class="user-header">
                     <img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     <p>
-                      ${userid} 선생님
+                      ${userid}님
                       <small>Member since Nov. 2012</small>
                     </p>
                   </li>
