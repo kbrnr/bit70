@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.nojo.mapper.SeatMapper">
+
+	<insert id="addSeat" parameterType="map">
+		insert into tbl_seat(mem_id, seat_x, seat_y, clz_domain) values 
+		<foreach collection="list" item="vo" open="(" close=")" separator="),(">		
+			#{vo.mem_id}, #{vo.seat_x}, #{vo.seat_y}, #{domain}
+		</foreach>
+
+	</insert>
+
+</mapper>

@@ -54,3 +54,7 @@ ul {
 	height:800px;
 	background-color: lime;
 }
+
+.hidden {
+	display: none;
+}

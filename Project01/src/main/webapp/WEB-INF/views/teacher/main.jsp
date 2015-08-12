@@ -37,8 +37,18 @@
 <!-- Font Awesome Icons -->
 <link href="/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
 
-
-
+<!-- 배치도 -->
+<link rel="stylesheet" type="text/css" href="/resources/nojo/css/jquery-ui.min.css">
+<link rel="stylesheet" type="text/css" href="/resources/nojo/css/jquery-ui.structure.min.css">
+<link rel="stylesheet" type="text/css" href="/resources/nojo/css/jquery-ui.theme.min.css">
+<!--     
+<link rel="stylesheet" type="text/css" href="/resources/nojo/css/seatStyle.css">
+-->  
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="/resources/plugins/jQueryUI/jquery-ui-1.10.3.min.js"></script>
+<style>
+.chair{border: thin solid black; width: 80px; position: absolute;}
+</style>
   </head>
   <!--
   BODY TAG OPTIONS:
@@ -123,27 +133,15 @@
 	                </div><!-- /.box-header -->
 
                 	<div class="box-body">
-		                  <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-		                  	
-		                  	
-		                  	<div class="row">
-			                  	<div class="col-sm-12">
-			                  
-				              		<img src="/resources/nojo/images/main02.jpg">
-				                  
-			                  	</div><!-- /.grid -->
-		                  	</div><!-- /.row -->
-		                    	
-		                  </div><!-- /.example1_wrapper -->
+                		<div id="container" style="border: thin solid black;">
+		                  <div id="seat"  style="height: 400px; width: 700px; margin: 0 auto;">
+						  </div>
+						</div>
                 	</div><!-- /.box-body -->
 				
 				</div><!-- /.box -->
 			</div><!-- /.col -->		
 		
-
-
-
-
 			<div class="col-sm-3 main-header">
 			
 				<div class="box">
@@ -183,11 +181,26 @@
 		<!-- /.content -->
 
 
-
-
-
-
-
+	<script>
+		// Seat에서 사용하는 함수
+		$.getJSON("/${domain}/seat/ajax", function(list){
+			$(list).each(function(){
+				var x = this.seat_x;
+				var y = this.seat_y;
+				var name = this.mem_name;
+				var id = this.mem_id;
+				
+				var str = "<div class='chair' style='margin-left: " + x + "px; margin-top: " + y + "px;'>" + name + "</div>";
+				var chair = $(str);
+				chair.css( { "margin-left" : x+"px", "margin-top" : y+"px" });
+				$("#seat").append(str);
+					
+			});
+			
+			
+		});
+		
+	</script>
   </body>
 </html>
 
