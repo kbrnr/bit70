@@ -114,7 +114,7 @@
 		                    <tbody>
 		                      <c:forEach items="${list}" var="vo">
 			                    <tr role="row">
-			                      <td><a href="classmodify">${vo.clz_name}</a></td>
+			                      <td><a href="/classinfo/classmodify">${vo.clz_name}</a></td>
 			                      <td>
 			                      	<c:forEach items="${vo.teacherlist}" var="teacherlist">
 			                      		${teacherlist.mem_name}(${teacherlist.mem_id})<br> 
