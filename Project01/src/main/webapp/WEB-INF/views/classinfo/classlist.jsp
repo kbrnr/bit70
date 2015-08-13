@@ -145,7 +145,7 @@
                   				  
                   				  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
                   					<li ${pageMaker.page==idx? "class='paginate_button active'":"class='paginate_button'"}> 
-									  <a href="classlist?page=${idx}&perPageNum=${pageMaker.perPageNum}&searchOPT=${searchOPT}&keyword=${keyword}">${idx}</a>
+									  <a href="/classinfo/classlist/${userid}?page=${idx}&perPageNum=${pageMaker.perPageNum}&searchOPT=${searchOPT}&keyword=${keyword}">${idx}</a>
                   					</li>
                   				  </c:forEach>
 								  
