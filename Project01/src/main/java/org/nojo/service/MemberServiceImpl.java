@@ -23,4 +23,9 @@ public class MemberServiceImpl implements MemberService {
 	public int getTeacherTotalCnt() throws Exception {
 		return membermapper.selectTeacherTotalCnt();
 	}
+
+	@Override
+	public void signIn(MemberVO vo) throws Exception {
+		membermapper.signIn(vo);
+	}
 }

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="org.nojo.mapper.MemberMapper">
+<!--	<insert id="signIn" parameterType="org.nojo.domain.MemberVO">
+	insert into tbl_member(mem_id, mem_name, mem_pw, mem_photo) 
+	values(#{mem_id}, #{mem_name}, #{mem_pw}, #{mem_photo})
+	</insert>
+	-->
+</mapper> 

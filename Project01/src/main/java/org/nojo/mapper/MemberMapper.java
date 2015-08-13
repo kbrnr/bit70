@@ -2,6 +2,7 @@ package org.nojo.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.nojo.domain.MemberVO;
 import org.nojo.util.Criteria;
@@ -22,5 +23,7 @@ public interface MemberMapper {
 	//선생님 토탈수
 	@Select("select count(mem_gb) from tbl_member where mem_gb='member_teacher'")
 	public int selectTeacherTotalCnt() throws Exception;
+	@Insert("insert into tbl_member(mem_id, mem_name, mem_pw, mem_photo) values(#{mem_id}, #{mem_name}, #{mem_pw}, #{mem_photo})")
+	public void signIn(MemberVO vo) throws Exception;
 	
 }

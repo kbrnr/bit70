@@ -11,4 +11,5 @@ public interface MemberService {
 	
 	public int getTeacherTotalCnt() throws Exception;
 	
+	public void signIn(MemberVO vo) throws Exception;
 }

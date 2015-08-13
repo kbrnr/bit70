@@ -11,10 +11,8 @@ public class MemberVO {
 	private String mem_name;
 	private String mem_email;
 	private String mem_tel;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date mem_reg_date;
 	private String mem_gb;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date mem_login_date;
 	private byte[] mem_photo;
 

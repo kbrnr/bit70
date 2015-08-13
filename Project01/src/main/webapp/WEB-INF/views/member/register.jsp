@@ -30,18 +30,25 @@
 
       <div class="register-box-body">
         <p class="login-box-msg">Register a new membership</p>
-        <form method="post">
+        <form method="post" action="/member/signIn" enctype="multipart/form-data">
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="Name" name="name" required/>
+            <input type="text" class="form-control" placeholder="ID" name="mem_id" required/>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="Password" name="pw" required/>
+            <input type="text" class="form-control" placeholder="Name" name="mem_name" required/>
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="password" class="form-control" placeholder="Password" name="mem_pw" required/>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
             <input type="password" class="form-control" placeholder="Retype password" required/>
             <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="file" class="form-control" name="file" />
           </div>
           <div class="row">
             <div class="col-xs-8">    
