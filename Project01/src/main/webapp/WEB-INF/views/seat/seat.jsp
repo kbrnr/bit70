@@ -12,81 +12,35 @@
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="/resources/plugins/jQueryUI/jquery-ui-1.10.3.min.js"></script>
 
-<style>
-	/*div{ border: thin solid black;}*/
-	
-	#container{
-		height: 400px;
-	}
-	#seat{width:40%; float:left;}
-	#lobby{width:40%;float:left;}
-	.chair{border: thin solid black; width: 80px; position: absolute;}
-</style>
 </head>
 <body>
 <h2>${domain}좌석배치표</h2>
 
-<!-- <div id="container">
-	<div id="seat">여기는시트
-	
-	</div>
-	<div id="lobby">여기는로비
-	</div>
-	<div class="chair">여기는 학생</div>
-
-
-</div> -->
-
-
-<div id="content">
-	<div class="resetDiv">[초기화]</div>
-		<div class="seatDiv">
-			<ul id="draggable" class="connectedSortable">
-				<c:forEach items="${list}" var="vo">
-					<c:if test="${vo.seat_x != null}">
-						<div class="resultDiv" style="position:absolute; left:${vo.seat_x}px; top:${vo.seat_y}px; ">
-			                <li class="draggable ui-state-default">
-			                	<span class="hidden memId">${vo.mem_id}</span>
-			                	<span>${vo.mem_name}1</span>
-			                </li>
-		                </div>
-					</c:if>
-		</c:forEach>
-					</ul>
+<div id="container">
+	<div id="seat">
+		<c:forEach items="${list }" var="vo">
+			<c:if test="${vo.seat_x != 0}">
+				<div class="chair" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">
+					<div class="img">X</div>
+						<span class="hidden memId">${vo.mem_id}</span>
+	                	<span>${vo.mem_name}</span>
 				</div>
-			<c:forEach items="${list}" var="vo">
-				<c:if test="${vo.seat_x == null}">
-					<div class="seatDiv"></div>
-				    <div class="listDiv">
-				        <ul id="draggable" class="connectedSortable">
-				            <c:forEach items="${list}" var="vo">
-				                <li class="draggable ui-state-default">
-				                
-				                	<span class="hidden memId">${vo.mem_id}2</span>
-				                	<span>${vo.mem_name}</span>
-				                </li>
-				            </c:forEach>
-				        </ul>
-				    </div>
-				</c:if>
-			
+			</c:if>		
 		</c:forEach>
-<%-- 		<c:choose>
-		    <div class="seatDiv"></div>
-		    <div class="listDiv">
-		        <ul id="draggable" class="connectedSortable">
-		            <c:forEach items="${list}" var="vo">
-		                <li class="draggable ui-state-default">
-		                
-		                	<span class="hidden memId">${vo.mem_id}</span>
-		                	<span>${vo.mem_name}</span>
-		                </li>
-		            </c:forEach>
-		        </ul>
-		    </div>
-	    </c:choose> --%>
-	</div> 
- <button id="save" type="button">저장하기</button>
+	</div>
+	<div id="lobby">
+		<c:forEach items="${list }" var="vo">
+			<c:if test="${vo.seat_x == 0}">
+				<div class="chair" style="position: relative;">
+					<span class="hidden memId">${vo.mem_id}</span>
+                	<span>${vo.mem_name}</span>
+				</div>
+			</c:if>		
+		</c:forEach>
+	</div>
+</div>
+
+<button id="save" type="button">저장하기</button>
 
 <div class="position">Position</div>
 <div id="info" style="width: 200px; height: 40px; background-color: #e0a0a0;"></div>
@@ -149,7 +103,7 @@
    	//==============================================================================================	
     
     
-    $(".draggable").draggable({
+    $(".chair").draggable({
         containment: "div#content",
         cursorAt: {
             top: -1,
