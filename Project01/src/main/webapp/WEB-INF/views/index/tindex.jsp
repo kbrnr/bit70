@@ -109,7 +109,42 @@
 </div>
 <!-- /.content-wrapper -->
 
+<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">이해했닝</h4>
+			</div>
+			<div class="modal-body">
+				<div class="input-group">
+			      <input id="question" type="text" class="form-control" placeholder="질문을 입력하세요">
+			      <span class="input-group-btn">
+			        <button id="questionBtn" class="btn btn-default" type="button">전송</button>
+			      </span>
+			    </div><!-- /input-group -->
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<script>
+		var socket = io.connect('http://localhost:3000');
+		socket.emit("init", {domain: "${domain}", userId: "${userid}"});
+		
+		$("#curri").click(function(){
+			$('#myModal').modal('show');
+		});
+		
+		$("#questionBtn").click(function(){
+			socket.emit("understanding", $("#question").val());
+		});
+	
 		// Seat에서 사용하는 함수
 		$.getJSON("/${domain}/seat/ajax", function(list){
 			$(list).each(function(){
@@ -117,7 +152,6 @@
 				var y = this.seat_y;
 				var name = this.mem_name;
 				var id = this.mem_id;
-				
 				var str = "<div class='chair' style='margin-left: " + x + "px; margin-top: " + y + "px;'>" + name + "</div>";
 				var chair = $(str);
 				chair.css( { "margin-left" : x+"px", "margin-top" : y+"px" });
