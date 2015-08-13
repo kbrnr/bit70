@@ -13,96 +13,77 @@ public class MainController {
 ///////////////////////////////////////////////////////////////
 
 	//학원 mypage
-	@RequestMapping(value="/mypage/{userid}/a", method=RequestMethod.GET)
+	@RequestMapping(value="/{userid}/a/mypage", method=RequestMethod.GET)
 	public String amypage(@PathVariable String userid, Model model){
 		model.addAttribute("userid", userid);
 		return "/mypage/amypage";
 	}
 	
 	//선생님 mypage
-	@RequestMapping(value="/mypage/{userid}/t", method=RequestMethod.GET)
+	@RequestMapping(value="/{userid}/t/mypage", method=RequestMethod.GET)
 	public String tmypage(@PathVariable String userid, Model model){
 		model.addAttribute("userid", userid);
 		return "/mypage/tmypage";
 	}
 	
 	//학생 mypage
-	@RequestMapping(value="/mypage/{userid}/s", method=RequestMethod.GET)
+	@RequestMapping(value="/{userid}/s/mypage", method=RequestMethod.GET)
 	public String smypage(@PathVariable String userid, Model model){
 		model.addAttribute("userid", userid);
 		return "/mypage/smypage";
 	}	
-	
 
 	
+	
 ///////////////////////////////////////////////////////////////
-// 카페메인
+//카페index
 ///////////////////////////////////////////////////////////////	
 
-	//선생님/카페/메인(aheader,footer)
+	//선생님/카페//설정
 	@RequestMapping(value="/{domain}/{userid}/t", method=RequestMethod.GET)
-	public String tindex(@PathVariable String domain, @PathVariable String userid, Model model){
-		model.addAttribute("domain", domain);
-		model.addAttribute("userid", userid);
-		return "/index/tindex";
+	public String tsetting(@PathVariable String domain, @PathVariable  String userid, Model model){
+	model.addAttribute("domain", domain);	
+	model.addAttribute("userid", userid);
+	return "/index/tindex";
 	}
 	
-	
-	//선생님/카페/메인(sheader,footer)
 	@RequestMapping(value="/{domain}/{userid}/s", method=RequestMethod.GET)
-	public String sindex(@PathVariable String domain, @PathVariable String userid, Model model){
-		model.addAttribute("domain", domain);
-		model.addAttribute("userid", userid);
-		return "/index/sindex";
+	public String ssetting(@PathVariable String domain, @PathVariable  String userid, Model model){
+	model.addAttribute("domain", domain);	
+	model.addAttribute("userid", userid);
+	return "/index/sindex";
 	}
 	
 	
 	
 	
 ///////////////////////////////////////////////////////////////
-//세팅/서비스
-///////////////////////////////////////////////////////////////		
-	
-	//선생님/카페//설정
-	@RequestMapping(value="/setting/{domain}/{userid}/t", method=RequestMethod.GET)
-	public String tsetting(@PathVariable String domain, @PathVariable  String userid, Model model){
-		model.addAttribute("domain", domain);	
-		model.addAttribute("userid", userid);
-		return "/setting/tsetting";
-	}
-
-	@RequestMapping(value="/setting/{domain}/{userid}/s", method=RequestMethod.GET)
-	public String ssetting(@PathVariable String domain, @PathVariable  String userid, Model model){
-		model.addAttribute("domain", domain);	
-		model.addAttribute("userid", userid);
-		return "/setting/ssetting";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
+//카페 홈(메인)
+///////////////////////////////////////////////////////////////	
 	
 	//선생님/카페/메인(main만)
 	@RequestMapping(value="/{domain}/{userid}/t/main", method=RequestMethod.GET)
 	public String tmain(@PathVariable("domain") String domain, @PathVariable("userid") String userid, Model model){
 		model.addAttribute("domain", domain);
 		model.addAttribute("userid", userid);
-		return "/teacher/main";
+		return "/index/tmain";
 	}
 	
-
+	//선생님/카페/메인(main만)
+	@RequestMapping(value="/{domain}/{userid}/s/main", method=RequestMethod.GET)
+	public String smain(@PathVariable("domain") String domain, @PathVariable("userid") String userid, Model model){
+		model.addAttribute("domain", domain);
+		model.addAttribute("userid", userid);
+		return "/index/smain";
+	}
 
 	
 
 	
 	
+///////////////////////////////////////////////////////////////
+//기타
+///////////////////////////////////////////////////////////////	
 	
 	
 	@RequestMapping(value="/mypage", method=RequestMethod.GET)
