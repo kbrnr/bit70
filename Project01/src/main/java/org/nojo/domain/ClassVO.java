@@ -2,11 +2,15 @@ package org.nojo.domain;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class ClassVO {
 	private String clz_domain;
 	private String clz_name;
 	private String clz_room;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date clz_start_date;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date clz_end_date;
 	private int clz_state;
 	private Date clz_reg_date;

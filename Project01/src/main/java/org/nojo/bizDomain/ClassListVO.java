@@ -4,12 +4,15 @@ import java.util.Date;
 import java.util.List;
 
 import org.nojo.domain.MemberVO;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class ClassListVO {
 	private String clz_name;
 	private String clz_domain;
 	private String clz_room;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date clz_start_date;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date clz_end_date;
 	private int clz_state;
 	private List<MemberVO> teacherlist;

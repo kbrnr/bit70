@@ -92,7 +92,7 @@
                 </div><!-- /.box-header -->
                
 				<!-- form start -->
-                <form id="classinputform" class="form-horizontal" action="/academy/classregister">
+                <form id="classinputform" class="form-horizontal" action="/classinfo/classregister" method="post">
                   <div class="box-body">
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">수업명</label>
@@ -163,10 +163,11 @@
                       </div>
                     </div>                         
                   </div><!-- /.box-body -->
+                  <div id="hiddenid"></div>
                   <div class="box-footer">
                   	<a href="classlist" class="btn btn-default">취소</a>
                     
-                    <button type="submit" class="btn btn-info pull-right">등록</button>
+                    <button type="submi t" class="btn btn-info pull-right">등록</button>
                     
                   </div><!-- /.box-footer -->
                 </form>
@@ -177,7 +178,6 @@
 		<!-- /.content -->
 
 
-<div id="hiddenid"></div>
 
 
 
@@ -243,7 +243,7 @@ $("#btn_teachlist").on("click", function() {
 
 function popteacherlist(){
 	$.ajax({
-		url: '/academy/modalteacherlist/'+page,
+		url: '/member/modalteacherlist/'+page,
 		type: 'post',
 		dataType:'json',
 		success: function(map){
@@ -309,7 +309,7 @@ $("#teacherinfo").on("click", ".userinfo", function(){
 $("#btn_domaincheck").on("click", function() {
 	console.log($("#clz_domain").val());
 	$.ajax({
-		url: '/academy/domaincheck',	
+		url: '/classinfo/domaincheck',	
 		type: 'post',
 		data: "clz_domain=" + $("#clz_domain").val(),
 		dataType:'json',
