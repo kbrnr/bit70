@@ -8,6 +8,6 @@ public interface ComprehensionService {
 	
 	public List<String> listQuestion(String question) throws Exception;
 	
-	public List<String> listScore(int questionNo, String score) throws Exception;
+	public List<String> listScore(String score) throws Exception;
 	
 }

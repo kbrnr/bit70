@@ -24,8 +24,8 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 	}
 	
 	@Override
-	public List<String> listScore(int questionNo, String score) throws Exception{
-		return mapper.listScore(questionNo, score);
+	public List<String> listScore(String score) throws Exception{
+		return mapper.listScore(score);
 	}
 	
 	
