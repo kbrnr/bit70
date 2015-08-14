@@ -4,23 +4,17 @@ import java.util.Date;
 
 public class ComprehensionVO {
 	private int comprehension_no;
-	private int curri_no;
 	private int comprehension_score;
 	private Date comprehension_reg_date;
 	private String clz_domain;
 	private String mem_id;
-
+	private int teacherquestion_no;
+	
 	public int getComprehension_no() {
 		return comprehension_no;
 	}
 	public void setComprehension_no(int comprehension_no) {
 		this.comprehension_no = comprehension_no;
-	}
-	public int getCurri_no() {
-		return curri_no;
-	}
-	public void setCurri_no(int curri_no) {
-		this.curri_no = curri_no;
 	}
 	public int getComprehension_score() {
 		return comprehension_score;
@@ -46,13 +40,19 @@ public class ComprehensionVO {
 	public void setMem_id(String mem_id) {
 		this.mem_id = mem_id;
 	}
+	public int getTeacherquestion_no() {
+		return teacherquestion_no;
+	}
+	public void setTeacherquestion_no(int teacherquestion_no) {
+		this.teacherquestion_no = teacherquestion_no;
+	}
 
 	@Override
 	public String toString() {
 		return "ComprehensionVO [comprehension_no=" + comprehension_no
-				+ ", curri_no=" + curri_no + ", comprehension_score="
-				+ comprehension_score + ", comprehension_reg_date="
-				+ comprehension_reg_date + ", clz_domain=" + clz_domain
-				+ ", mem_id=" + mem_id + "]";
+				+ ", comprehension_score=" + comprehension_score
+				+ ", comprehension_reg_date=" + comprehension_reg_date
+				+ ", clz_domain=" + clz_domain + ", mem_id=" + mem_id
+				+ ", teacherquestion_no=" + teacherquestion_no + "]";
 	}
 }
