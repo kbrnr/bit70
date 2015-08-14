@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.nojo.bizDomain.JoinMemberVO;
 import org.nojo.domain.MemberVO;
 import org.nojo.mapper.MemberMapper;
 import org.nojo.util.Criteria;
@@ -23,6 +24,17 @@ public class MemberServiceImpl implements MemberService {
 	public int getTeacherTotalCnt() throws Exception {
 		return membermapper.selectTeacherTotalCnt();
 	}
+	
+	
+	public List<JoinMemberVO> getMemberByDomain(Criteria cri, String domain){
+		return membermapper.selcetMemberByDomain(cri, domain);
+	}
+	
+	public int getTotalCntByDomain(String domain){
+		return membermapper.selectTotalCntByDomain(domain);
+	}
+	
+	
 
 	@Override
 	public void signIn(MemberVO vo) throws Exception {

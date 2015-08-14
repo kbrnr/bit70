@@ -9,6 +9,7 @@ public class CourseVO {
 	private String course_gb;
 	private Date course_reg_date;
 	private int team_no;
+	
 	public String getClz_domain() {
 		return clz_domain;
 	}

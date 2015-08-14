@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.nojo.bizDomain.JoinMemberVO;
 import org.nojo.domain.MemberVO;
 import org.nojo.util.Criteria;
 
@@ -30,14 +31,14 @@ public interface MemberMapper {
 	public List<MemberVO> selcetStudentByDomain(@Param("cri") Criteria cri, @Param("domain") String domain);
 		
 	//수업별 참여인원
-	@Select("select * from tbl_course c, tbl_member m where c.mem_id = m.mem_id and c.clz_domain = ${domain} limit #{cri.first}, #{cri.perPageNum} ")
-	public List<MemberVO> selcetMemberByDomain(@Param("cri") Criteria cri, @Param("domain") String domain);
+	@Select("select * from tbl_course c, tbl_member m where c.mem_id = m.mem_id and c.clz_domain = #{domain} limit #{cri.first}, #{cri.perPageNum} ")
+	public List<JoinMemberVO> selcetMemberByDomain(@Param("cri") Criteria cri, @Param("domain") String domain);
 
 	//수업별 참여인원 토탈수
-	@Select("select count(c.mem_id) from tbl_course c, tbl_member m where c.mem_id = m.mem_id and c.clz_domain = ${domain}")
-	public List<MemberVO> selectTotalCntByDomain(String domain);
+	@Select("select count(c.mem_id) from tbl_course c, tbl_member m where c.mem_id = m.mem_id and c.clz_domain = #{domain}")
+	public int selectTotalCntByDomain(String domain);
 		
-	
+	//회원가입
 	@Insert("insert into tbl_member(mem_id, mem_name, mem_pw, mem_photo) values(#{mem_id}, #{mem_name}, #{mem_pw}, #{mem_photo})")
 	public void signIn(MemberVO vo) throws Exception;
 	

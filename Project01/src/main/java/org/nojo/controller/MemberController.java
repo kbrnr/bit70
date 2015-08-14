@@ -1,11 +1,12 @@
 package org.nojo.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.ibatis.annotations.Param;
+import org.nojo.bizDomain.JoinMemberVO;
 import org.nojo.domain.MemberVO;
 import org.nojo.service.MemberService;
 import org.nojo.util.Criteria;
@@ -45,6 +46,21 @@ public class MemberController {
 	public void register() {
 	}
 
+	// 수업참여인원
+	@RequestMapping(value = "/joinmemberlist/{domain}", method = RequestMethod.GET) 
+	public String joinlist(Criteria cri, @PathVariable("domain") String domain, Model model) {	
+		List<JoinMemberVO> list ;
+		PageMaker pagemaker;
+
+		list = memberservice.getMemberByDomain(cri, domain);
+		pagemaker = new PageMaker(cri, memberservice.getTotalCntByDomain(domain));
+
+		model.addAttribute("list", list);
+		model.addAttribute("pageMaker", pagemaker);
+		
+		return "/member/joinmemberlist";
+	}
+		
 	// 선생님리스트
 	@RequestMapping(value = "/teacherlist", method = RequestMethod.GET)
 	public String teacherlist(Criteria cri, Model model) throws Exception {
