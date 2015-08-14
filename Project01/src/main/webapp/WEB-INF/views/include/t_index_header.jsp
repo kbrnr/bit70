@@ -66,7 +66,7 @@ html,body{
   |               | sidebar-mini                            |
   |---------------------------------------------------------|
   -->
-  <body class="skin-red sidebar-collapse">
+  <body class="skin-red sidebar-mini sidebar-collapse">
     <div class="wrapper">
 
       <!-- Main Header -->

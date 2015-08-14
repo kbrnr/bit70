@@ -18,7 +18,7 @@
               
             </div>
           </div>
-<li class="treeview"><a href="/${domain}/seat" target="inner"><i class="fa fa-link"></i> <span>[반장메뉴:배치도]</a></li>
+
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
             <li class="header"></li>

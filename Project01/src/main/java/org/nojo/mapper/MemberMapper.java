@@ -29,18 +29,14 @@ public interface MemberMapper {
 	@Select("select mem_id, mem_name, mem_reg_date, mem_email, mem_tel from tbl_member where tbl_member. mem_gb='member_student' or 'mem_gb='member_clz_president' order by mem_reg_date desc limit #{cri.first}, #{cri.perPageNum} ")
 	public List<MemberVO> selcetStudentByDomain(@Param("cri") Criteria cri, @Param("domain") String domain);
 		
-	//수업별 학생 리스트
-	@Select("select * "
-			+ "from tbl_member m, "
-			+ "(select * from tbl_course where clz_domain = #{domain} "
-			+ "and course_gb = 'member_student' "
-			+ "or course_gb = 'member_clz_president') temp "
-			+ "where m.mem_id = temp.mem_id "
-			+ "order by m.mem_id") 
-	public List<String> listName(String name) throws Exception;
-	
-	
-	
+	//수업별 참여인원
+	@Select("select * from tbl_course c, tbl_member m where c.mem_id = m.mem_id and c.clz_domain = ${domain} limit #{cri.first}, #{cri.perPageNum} ")
+	public List<MemberVO> selcetMemberByDomain(@Param("cri") Criteria cri, @Param("domain") String domain);
+
+	//수업별 참여인원 토탈수
+	@Select("select count(c.mem_id) from tbl_course c, tbl_member m where c.mem_id = m.mem_id and c.clz_domain = ${domain}")
+	public List<MemberVO> selectTotalCntByDomain(String domain);
+		
 	
 	@Insert("insert into tbl_member(mem_id, mem_name, mem_pw, mem_photo) values(#{mem_id}, #{mem_name}, #{mem_pw}, #{mem_photo})")
 	public void signIn(MemberVO vo) throws Exception;
