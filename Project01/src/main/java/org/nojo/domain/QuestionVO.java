@@ -29,8 +29,10 @@ public class QuestionVO {
 	private String clz_domain;			
 	
 	//아이디
-	private String mem_id;				
+	private String mem_id;		
 	
+
+
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	@Override
@@ -86,6 +88,7 @@ public class QuestionVO {
 	public String getMem_id() {
 		return mem_id;
 	}
+	
 	//End region
 	
 	
@@ -126,6 +129,7 @@ public class QuestionVO {
 	public void setMem_id(String mem_id) {
 		this.mem_id = mem_id;
 	}
+	
 	//End region
 	
 }

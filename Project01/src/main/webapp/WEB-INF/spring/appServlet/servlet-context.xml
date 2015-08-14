@@ -37,5 +37,10 @@
 			<beans:bean class="org.nojo.filter.DomainInterceptor"/>
 		</interceptor>
 	</interceptors>
+	
+	<!-- File Upload Path -->
+	<beans:bean id="uploadPath" class="java.lang.String">
+	  <beans:constructor-arg value="C:\\TestFileSave\\upload"/>
+	</beans:bean>
 
 </beans:beans>

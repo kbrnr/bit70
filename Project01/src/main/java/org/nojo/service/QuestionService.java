@@ -2,6 +2,8 @@ package org.nojo.service;
 
 import java.util.List;
 
+import org.nojo.domain.AttachfileVO;
+import org.nojo.domain.FilemanagerVO;
 import org.nojo.domain.QuestionVO;
 import org.nojo.util.Criteria;
 import org.nojo.util.Search;
@@ -31,5 +33,11 @@ public interface QuestionService {
 	
 	//질문 검색 결과 리스트
 	public List<QuestionVO> searchQuestion(String domain, Criteria cri, Search search) throws Exception;
+	
+	
+	//파일첨부
+	public void addAttach(AttachfileVO vo) throws Exception;
+	
+	public void addAttachBoard(FilemanagerVO vo) throws Exception;
 
 }

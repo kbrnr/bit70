@@ -6,17 +6,19 @@ public class FilemanagerVO {
 	//tbl_filemanager VO
 	private int curri_no;
 	
-	//common VO
-	private int attachfile_no;
-	private String clz_domain;
-	
-	
 	//tbl_question_filemanager VO
 	private int question_no;
 	
 	//tbl_answer_filemanager VO
 	private int answer_no;
+	
+	//common VO
+	private int attachfile_no;
+	private String clz_domain;
+	
 
+	
+	
 	
 	//region Getter Start
 	public int getCurri_no() {

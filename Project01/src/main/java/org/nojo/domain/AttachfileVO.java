@@ -14,7 +14,7 @@ public class AttachfileVO {
 	private String attachfile_name;
 	
 	//파일크기
-	private int attachfile_size;
+	private long attachfile_size;
 	
 	//등록일
 	private Date attachfile_reg_date;
@@ -31,7 +31,7 @@ public class AttachfileVO {
 	public String getAttachfile_name() {
 		return attachfile_name;
 	}
-	public int getAttachfile_size() {
+	public long getAttachfile_size() {
 		return attachfile_size;
 	}
 	public Date getAttachfile_reg_date() {
@@ -52,7 +52,7 @@ public class AttachfileVO {
 	public void setAttachfile_name(String attachfile_name) {
 		this.attachfile_name = attachfile_name;
 	}
-	public void setAttachfile_size(int attachfile_size) {
+	public void setAttachfile_size(long attachfile_size) {
 		this.attachfile_size = attachfile_size;
 	}
 	public void setAttachfile_reg_date(Date attachfile_reg_date) {

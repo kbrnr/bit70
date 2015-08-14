@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.nojo.domain.AnswerVO;
+import org.nojo.domain.FilemanagerVO;
 import org.nojo.domain.QuestionVO;
 import org.nojo.service.AnswerService;
 import org.nojo.service.QuestionService;
@@ -77,14 +78,21 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/questionRegist", method = RequestMethod.POST)
-	public String registQuestion(QuestionVO vo) throws Exception {
-
+	public String registQuestion(QuestionVO vo, @RequestParam("attachfile_no") int attachfile_no) throws Exception {
+		
 		service.addQuestion(vo);
+		
+		FilemanagerVO fvo = new FilemanagerVO();
+		
+		fvo.setQuestion_no(vo.getQuestion_no());
+		fvo.setClz_domain(vo.getClz_domain());
+		fvo.setAttachfile_no(attachfile_no);
+		
+		service.addAttachBoard(fvo);
+		
 		return "redirect:listpage";
 	}
 	//region End
-	
-
 	
 	
 	//질문 글 조회 
@@ -130,7 +138,7 @@ public class QuestionController {
 	public String removeBoard(@PathVariable("no") int no) throws Exception {
 
 		service.removeQuestion(no);
-
+		
 		return "redirect:../listpage";
 	}
 
