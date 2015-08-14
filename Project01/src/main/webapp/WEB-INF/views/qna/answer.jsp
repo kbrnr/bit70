@@ -180,11 +180,6 @@
 				
 			});
 			
-			$('#edit').on('editable.beforeImageUpload', function (e, editor, images) {
-				
-				$('.froala-editor f-inline').close();
-				
-				});
 			
 	
 		

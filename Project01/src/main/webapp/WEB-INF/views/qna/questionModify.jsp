@@ -140,21 +140,18 @@
 				'createLink', 'insertImage', 'uploadFile', 'table',
 				'undo', 'redo', 'html' ],
 		imageUploadURL : "/upload",	
-		pastedImagesUploadURL : "/upload"		
+		pastedImagesUploadURL : "/upload",
+		imageDeleteURL : "/deleteFile"
 	});
 	
 	$('#edit').on('editable.afterImageUpload', function (e, editor, response) {
-		var str = "<img width ='300' class='fr-fin fr-dib' src='/displayImage?fileName="+ response +"' />";
+		var res = JSON.parse(response);
+		console.log(res);
+		var str = "<img width ='300' name='attachfile_name' class='fr-fin fr-dib' src='/displayImage?fileName="+ res.filePath +"' />";
+		var no = "<input type='hidden' name='attachfile_no' value='"+res.fileNo+"' />";
 		$(".froala-view").append(str);
-		
+		$(".froala-view").append($(no));
 	});
-	
-	$('#edit').on('editable.beforeImageUpload', function (e, editor, images) {
-		
-		$('.froala-editor f-inline').close();
-		
-		});
-
 	</script>
 
 	</body>
