@@ -15,8 +15,8 @@ public class SeatServiceImpl implements SeatService {
 	SeatMapper mapper;
 
 	@Override
-	public List<SeatVO> listMember(String clz_domain) throws Exception {
-		return mapper.listMember(clz_domain);
+	public List<SeatVO> listMember(String clz_domain, String key) throws Exception {
+		return mapper.listMember(clz_domain, key);
 	}
 
 	@Override

@@ -23,14 +23,14 @@ public class SeatController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String seatPage(@PathVariable("domain") String clz_domain, Model model) throws Exception {
 		
-		model.addAttribute("list", seatService.listMember(clz_domain));
+		model.addAttribute("list", seatService.listMember(clz_domain, "lobby"));
 		return "/seat/seat";
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="/ajax", method = RequestMethod.GET)
 	public List<SeatVO> seat(@PathVariable String domain) throws Exception {
-		return seatService.listMember(domain);
+		return seatService.listMember(domain, "seat");
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
