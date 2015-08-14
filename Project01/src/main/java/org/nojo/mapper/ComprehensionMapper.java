@@ -33,7 +33,7 @@ public interface ComprehensionMapper {
 			+ "(select c.mem_id, c.comprehension_score "
 			+ "from tbl_comprehension c, tbl_teacherquestion t "
 			+ "where c.teacherquestion_no = t.teacherquestion_no "
-			+ "and c.teacherquestion_no = #{questionNo} order by mem_id) r "
+			+ "and c.teacherquestion_no = '1' order by mem_id) r "
 			+ "on l.mem_id = r.mem_id")
-	public List<String> listScore(int questionNo, String score) throws Exception;
+	public List<String> listScore(String score) throws Exception;
 }

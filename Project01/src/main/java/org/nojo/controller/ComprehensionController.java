@@ -20,7 +20,7 @@ public class ComprehensionController {
 	ComprehensionService service;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public String comprehension(@PathVariable("domain")String domain, @PathVariable("domain")String content, int qno, String comprehension, Model model) throws Exception{
+	public String comprehension(@PathVariable("domain")String domain, @PathVariable("domain")String content, String comprehension, Model model) throws Exception{
 
 		List<String> name = null;
 		List<String> question = null;
@@ -28,7 +28,7 @@ public class ComprehensionController {
 		
 		name = service.listName(domain);
 		question = service.listQuestion(content);
-		score = service.listScore(qno, comprehension);
+		score = service.listScore(comprehension);
 		
 		System.out.println(name);
 		System.out.println(question);
