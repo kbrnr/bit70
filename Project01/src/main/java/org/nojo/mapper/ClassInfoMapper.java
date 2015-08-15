@@ -34,6 +34,15 @@ public interface ClassInfoMapper {
 	@Delete("Delete form tbl_course where clz_domain=domain and course_gb='member_teacher'")
 	public void deleteCourse(String domain);
 
+	//수정정보 상세정보
+	@Select("select * from tbl_class where tbl_class.clz_domain = #{domain}")
+	public ClassListVO selectClassOne(String domain);
+	
+	//수업수정
+	@Update("update tbl_class set clz_name=#{clz_name}, clz_room=#{clz_room}, clz_start_date=#{clz_start_date}, clz_end_date=#{clz_end_date}, clz_state=#{clz_state} where clz_domain=#{clz_domain}")
+	public void updateClass(ClassVO vo);
+	
+	
 	//아이디(담당자)별 수업리스트
 	@Select("select * from tbl_course join tbl_class on tbl_course.clz_domain = tbl_class.clz_domain where tbl_course.mem_id = #{mem_id} order by clz_reg_date desc limit #{cri.first}, #{cri.perPageNum}")
 	public List<ClassListVO> selectClassByID(@Param("mem_id") String mem_id, @Param("cri") Criteria cri);
@@ -42,10 +51,7 @@ public interface ClassInfoMapper {
 	@Select("select count(tbl_course.clz_domain) from tbl_course join tbl_class on tbl_course.clz_domain = tbl_class.clz_domain where tbl_course.mem_id = #{mem_id}")
 	public int selectClassTotalCntByID(String mem_id);
 	
-	//수업수정
-	@Update("update tbl_class set clz_name=#{clz_name}, clz_room=#{clz_room}, clz_start_date=#{clz_start_date}, clz_end_date=#{clz_end_date}, clz_state=#{clz_state} where clz_domain=#{clz_domain}")
-	public void updateClass(ClassVO vo);
-		
+	
 	//참고
 	@Update("update tbl_attach set bno=#{bno} where fno=#{fno}")
 	public void updateBno(@Param("fno") int fno,@Param("bno") int bno);

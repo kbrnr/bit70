@@ -22,5 +22,6 @@ public interface ClassInfoService {
 	
 	public int getClassListByID(String mem_id);
 	
+	public ClassListVO getClassOne(String clz_no);
 
 }

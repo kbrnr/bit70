@@ -25,13 +25,23 @@ public class ClassInfoController {
 	
 	
 	//수업상세
-	@RequestMapping(value="/classmodify", method=RequestMethod.GET)
-	public void classmodify(){
+	@RequestMapping(value="/classread", method=RequestMethod.GET)
+	public String classread(String domain, Model model){
+		ClassListVO clzVO ;
+		clzVO = classinfoservice.getClassOne(domain);
+		
+		System.out.println("===============================================");
+		System.out.println(clzVO.getTeacherlist().size());
+		System.out.println("===============================================");
+		
+		model.addAttribute("clzinfo", clzVO);
+		
+		return "/classinfo/classread" ;
 	}
 	
 	//수업리스트
-	@RequestMapping(value="/classlist", method=RequestMethod.GET)
-	public String classlist(Criteria cri, Model model){
+	@RequestMapping(value="/classlist/{userid}", method=RequestMethod.GET)
+	public String classlist(@PathVariable("userid") String userid, Criteria cri, Model model){
 		List<ClassListVO> list;
 		PageMaker pagemaker;
 		
@@ -43,9 +53,9 @@ public class ClassInfoController {
 		return "/classinfo/classlist" ;
 	}
 	
-	//개인별 수업리스트
-	@RequestMapping(value="/classlist/{userid}", method=RequestMethod.GET)
-	public String classlistbyid(@PathVariable("userid") String userid, Criteria cri, Model model){
+	//개인별(선생님) 수업리스트
+	@RequestMapping(value="/classlist/{userid}/t", method=RequestMethod.GET)
+	public String tclasslistbyid(@PathVariable("userid") String userid, Criteria cri, Model model){
 		List<ClassListVO> list;
 		PageMaker pagemaker;
 		
@@ -54,14 +64,30 @@ public class ClassInfoController {
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", pagemaker);
 		
-		return "/classinfo/classlist" ;
+		return "/classinfo/tclasslist" ;
+	}
+	
+	
+	//개인별(선생님) 수업리스트
+	@RequestMapping(value="/classlist/{userid}/s", method=RequestMethod.GET)
+	public String sclasslistbyid(@PathVariable("userid") String userid, Criteria cri, Model model){
+		List<ClassListVO> list;
+		PageMaker pagemaker;
+		
+		list = classinfoservice.getClassListByID(userid, cri); 
+		pagemaker = new PageMaker(cri, classinfoservice.getClassListTotalCntByID(userid));
+		model.addAttribute("list", list);
+		model.addAttribute("pageMaker", pagemaker);
+		
+		return "/classinfo/sclasslist" ;
 	}
 	
 	
 	
 	//수업등록폼
 	@RequestMapping(value="/classform", method=RequestMethod.GET)
-	public void classform(){
+	public String classform(){
+		return "/classinfo/classform";
 	}
 
 	//수업등록

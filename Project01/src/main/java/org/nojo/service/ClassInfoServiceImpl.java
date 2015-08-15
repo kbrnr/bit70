@@ -80,6 +80,23 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 		return classlist;	
 	}
 	
+	
+	public ClassListVO getClassOne(String domain){
+		ClassListVO clzVO;
+		List<MemberVO> teacherlist;
+		
+		clzVO = classinfomapper.selectClassOne(domain);
+		teacherlist = membermapper.selectTeacherByDomain(domain);
+	
+		clzVO.setTeacherlist(teacherlist);
+		
+		return clzVO;	
+	}
+	
+	
+	
+	
+	
 	public int getClassListTotalCntByID(String mem_id) {
 		return classinfomapper.selectClassTotalCntByID(mem_id);
 	}

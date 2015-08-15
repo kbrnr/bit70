@@ -16,7 +16,7 @@ function autoResize(i)
 </script>
 
 <div class="content-wrapper">
-	<iframe name="inner" src="/classinfo/classlist/${userid}" width="100%" height="100%"  onload="autoResize(this)" scrolling="no" frameborder="0" ></iframe>
+	<iframe name="inner" src="/classinfo/classlist/${userid}/s" width="100%" height="100%"  onload="autoResize(this)" scrolling="no" frameborder="0" ></iframe>
 </div>
 <!-- /.content-wrapper -->
  

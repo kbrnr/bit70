@@ -46,6 +46,15 @@ public class MemberController {
 	public void register() {
 	}
 
+	
+	//개인정보 보기
+	@RequestMapping(value = "/read", method = RequestMethod.POST)
+	public void read(String userid, Model model) throws Exception {
+		
+		
+	}
+
+	
 	// 수업참여인원
 	@RequestMapping(value = "/joinmemberlist/{domain}", method = RequestMethod.GET) 
 	public String joinlist(Criteria cri, @PathVariable("domain") String domain, Model model) {	

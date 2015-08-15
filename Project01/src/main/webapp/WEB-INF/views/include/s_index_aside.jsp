@@ -24,7 +24,7 @@
             <li class="header"></li>
             <!-- Optionally, you can add icons to the links -->
             <li class="treeview active"><a href="/${domain}/${userid}/t/main" target="inner"><i class="fa fa-link"></i> <span>홈</span></a></li>
-            <li class="treeview"><a href="/academy/classlist" target="inner"><i class="fa fa-link"></i> <span>수업정보(X)</span></a></li>
+       <li class="treeview"><a href="/classinfo/classread?domain=${domain}" target="inner"><i class="fa fa-link"></i> <span>${domain} 수업정보</span></a></li>
             <li class="treeview"><a href="/${domain}/curriculum/edit" target="inner"><i class="fa fa-link"></i> <span>커리큘럼</span></a></li>
           	<li class="treeview"><a href="/${domain}/qna/listpage" target="inner"><i class="fa fa-link"></i> <span>질문답변</span></a></li>
             <li class="treeview"><a href="/academy/teacherlist" target="inner"><i class="fa fa-link"></i> <span>이해도통계</span></a></li>

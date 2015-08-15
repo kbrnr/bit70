@@ -23,7 +23,7 @@
           <ul class="sidebar-menu">
             <li class="header"></li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="treeview active"><a href="/classinfo/classlist/${userid}" target="inner"><i class="fa fa-link"></i> <span>수업관리</span></a></li>
+            <li class="treeview active"><a href="/classinfo/classlist/${userid}/s" target="inner"><i class="fa fa-link"></i> <span>수업관리</span></a></li>
             <li class="treeview"><a href="/academy/teacherlist" target="inner"><i class="fa fa-link"></i> <span>개인정보관리</span></a></li>
           </ul><!-- /.sidebar-menu -->
         </section>
