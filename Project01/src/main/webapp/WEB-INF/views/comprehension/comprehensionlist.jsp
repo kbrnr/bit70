@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -67,7 +69,7 @@
   </style>
   
   
-  <body class="skin-blue sidebar-mini">
+  <body class="skin-blue sidebar-mini ">
 
 		<section class="content-header">
 			<h1>
@@ -97,6 +99,7 @@
                   	
                   	<div class="row">
 	                  	<div class="col-sm-12">
+	                  	<div class="table-responsive">
 		                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
 		                    <thead>
 		                      <tr role="row">
@@ -107,24 +110,27 @@
 			                     	</th>
 			                     </c:forEach>
 			                  </tr>
-			                </thead>			                
-			                <tbody>	 
-			                  <c:forEach items="${comprehensionmap.tqlist}" var="tqlist"  var="y" begin="0" end="${fn:length(${comprehensionmap.tqlist})}" step="1">
-			                  	<tr role="row">
-				                  	<td>
-				                  		(${tqlist.teacherquestion_no})${tqlist.teacherquestion_content}
-				                  	</td>
-				                  	<c:forEach var="x" begin="0" end="${fn:length(${comprehensionmap.scorelistset[y]})}" step="1" items="${comprehensionmap.scorelistset[y]}" var="scorelist">
-				                  		<td>
-				                  			${scorelist.teacherquestion_no}${scorelist.mem_id}/${scorelist.comprehension_score}
-				                  		</td>
-				                  	</c:forEach>
-			                  	</tr>
-			                  		
-			                  </c:forEach>
-			                 </tbody>   
+							</thead>
+							<tbody>							  
+							  <c:forEach items="${comprehensionmap.tqlist}" var="tqlist" varStatus="status">
+							  <tr>
+							  	<td>${status.index}(${tqlist.teacherquestion_no})${tqlist.teacherquestion_content}${tqlist.teacherquestion_content}
+							  	</td>
+							  	<c:forEach items="${comprehensionmap.scorelistset[status.index]}" var="scorelist">
+							  		<c:if test = "${scorelist.comprehension_score == 0}">
+							  		 <td>&nbsp;
+							  		 </td>
+							  		</c:if>
+							  		<c:if test = "${scorelist.comprehension_score != 0}">
+							  		 <td>(${scorelist.teacherquestion_no})(${scorelist.mem_id})${scorelist.comprehension_score}
+							  		 </td>
+							  		</c:if>
+							  	</c:forEach>
+							  </tr>
+							  </c:forEach>
+			                </tbody>   
 		                  </table>
-		                  
+		                  </div>
 	                  	</div><!-- /.grid -->
                   	</div><!-- /.row -->
                   	

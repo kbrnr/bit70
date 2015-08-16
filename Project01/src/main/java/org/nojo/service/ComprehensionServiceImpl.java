@@ -72,7 +72,7 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 		System.out.println("이름갯수:" +namelist.get(0).getMem_name());
 		System.out.println("질문갯수:" +tqlist.size());
 		System.out.println("점수셋갯수:" +scorelistset.size());
-		
+		System.out.println("점수셋갯수:" +scorelistset.get(0).size());
 		return comprehensionmap;
 				
 	}
