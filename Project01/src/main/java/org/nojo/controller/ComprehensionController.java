@@ -1,5 +1,7 @@
 package org.nojo.controller;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 
 import org.nojo.domain.ComprehensionVO;
@@ -44,9 +46,9 @@ public class ComprehensionController {
 
 	@RequestMapping(method=RequestMethod.GET)
 	public String comprehensionList(@PathVariable("domain") String domain, Model model) throws Exception{
-		System.out.println("@Controller:" + domain);
-		
-		service.getComprehension(domain);
+		HashMap<String, Object> comprehensionmap ;
+		comprehensionmap = service.getComprehension(domain);
+		model.addAllAttributes(comprehensionmap);
 		return "/comprehension/comprehensionlist";
 	}
 	

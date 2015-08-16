@@ -1,5 +1,6 @@
 package org.nojo.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -49,12 +50,12 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 	////tmp///////////////////////////
 	@Override
 	public HashMap<String, Object> getComprehension(String domain) throws Exception {
-		HashMap<String, Object> comprehensionmap= null ;
+		HashMap<String, Object> comprehensionmap= new HashMap<String, Object>();
 
 		List<JoinMemberVO> namelist ;
 		List<TeacherQuestionVO> tqlist ;
 		List<ScoreVO> scorelist ;
-		List<List<ScoreVO>> scorelistset = null ;
+		List<List<ScoreVO>> scorelistset = new ArrayList<List<ScoreVO>>();
 
 		namelist = mapper.selectName(domain);
 		tqlist = mapper.selectQuestion(domain);
@@ -67,6 +68,10 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 		comprehensionmap.put("namelist", namelist);
 		comprehensionmap.put("tqlist", tqlist);
 		comprehensionmap.put("scorelistset", scorelistset);
+
+		System.out.println("이름갯수:" +namelist.get(0).getMem_name());
+		System.out.println("질문갯수:" +tqlist.size());
+		System.out.println("점수셋갯수:" +scorelistset.size());
 		
 		return comprehensionmap;
 				
