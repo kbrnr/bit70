@@ -100,18 +100,32 @@
 		                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
 		                    <thead>
 		                      <tr role="row">
+		                      	 <th>&nbsp;</th>
 		                      	 <c:forEach items="${comprehensionmap.namelist}" var="namelist">
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 142px;">
-			                      ${namelist.mem_name}</th>
+			                     	<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 142px;">
+			                     	${namelist.mem_name}(${namelist.mem_id})
+			                     	</th>
 			                     </c:forEach>
-		                      </tr>
-		                    </thead>
-		                    
-		                 
+			                  </tr>
+			                </thead>			                
+			                <tbody>	 
+			                  <c:forEach items="${comprehensionmap.tqlist}" var="tqlist"  var="y" begin="0" end="${fn:length(${comprehensionmap.tqlist})}" step="1">
+			                  	<tr role="row">
+				                  	<td>
+				                  		(${tqlist.teacherquestion_no})${tqlist.teacherquestion_content}
+				                  	</td>
+				                  	<c:forEach var="x" begin="0" end="${fn:length(${comprehensionmap.scorelistset[y]})}" step="1" items="${comprehensionmap.scorelistset[y]}" var="scorelist">
+				                  		<td>
+				                  			${scorelist.teacherquestion_no}${scorelist.mem_id}/${scorelist.comprehension_score}
+				                  		</td>
+				                  	</c:forEach>
+			                  	</tr>
+			                  		
+			                  </c:forEach>
+			                 </tbody>   
 		                  </table>
 		                  
 	                  	</div><!-- /.grid -->
-	                  	
                   	</div><!-- /.row -->
                   	
                 

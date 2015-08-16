@@ -48,7 +48,7 @@ public class ComprehensionController {
 	public String comprehensionList(@PathVariable("domain") String domain, Model model) throws Exception{
 		HashMap<String, Object> comprehensionmap ;
 		comprehensionmap = service.getComprehension(domain);
-		model.addAllAttributes(comprehensionmap);
+		model.addAttribute("comprehensionmap",comprehensionmap);
 		return "/comprehension/comprehensionlist";
 	}
 	
