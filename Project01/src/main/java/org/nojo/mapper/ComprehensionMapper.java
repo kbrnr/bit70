@@ -2,11 +2,15 @@ package org.nojo.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.nojo.bizDomain.JoinMemberVO;
 import org.nojo.bizDomain.ScoreVO;
 import org.nojo.bizDomain.TeacherQuestionVO;
+import org.nojo.domain.ComprehensionVO;
+import org.nojo.domain.TeacherquestionVO;
 
 public interface ComprehensionMapper {
 	
@@ -73,5 +77,13 @@ public interface ComprehensionMapper {
 			+ "and c.teacherquestion_no = #{teacherqno} order by mem_id) r "
 			+ "on l.mem_id = r.mem_id")
 	public List<ScoreVO> selectScore(@Param("domain") String domain, @Param("teacherqno") int teacherqno) throws Exception;
+	
+	@SelectKey(before=false, keyProperty="teacherquestion_no", resultType=Integer.class, statement="select last_insert_id()")
+	@Insert("insert into tbl_teacherquestion(curri_gpno, curri_no, teacherquestion_content) values(#{curri_gpno}, #{curri_no}, #{teacherquestion_content})")
+	public int registQuestion(TeacherquestionVO vo);
+
+	@SelectKey(before=false, keyProperty="comprehension_no", resultType=Integer.class, statement="select last_insert_id()")
+	@Insert("insert into tbl_comprehension(teacherquestion_no, comprehension_score, mem_id, clz_domain) values(#{teacherquestion_no}, #{comprehension_score}, #{mem_id}, #{clz_domain})")
+	public int registComprehension(ComprehensionVO vo);
 	
 }

@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import org.nojo.bizDomain.JoinMemberVO;
 import org.nojo.bizDomain.ScoreVO;
 import org.nojo.bizDomain.TeacherQuestionVO;
+import org.nojo.domain.ComprehensionVO;
+import org.nojo.domain.TeacherquestionVO;
 import org.nojo.mapper.ComprehensionMapper;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,16 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 	@Override
 	public List<String> listScore(String score) throws Exception{
 		return mapper.listScore(score);
+	}
+	
+	@Override
+	public int registQuestion(TeacherquestionVO vo) throws Exception {
+		return mapper.registQuestion(vo);
+	}
+
+	@Override
+	public int registComprehension(ComprehensionVO vo) throws Exception {
+		return mapper.registComprehension(vo);
 	}
 	
 	////tmp///////////////////////////

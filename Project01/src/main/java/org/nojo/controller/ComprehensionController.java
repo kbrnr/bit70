@@ -2,12 +2,15 @@ package org.nojo.controller;
 
 import javax.inject.Inject;
 
+import org.nojo.domain.ComprehensionVO;
+import org.nojo.domain.TeacherquestionVO;
 import org.nojo.service.ComprehensionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
@@ -45,6 +48,20 @@ public class ComprehensionController {
 		
 		service.getComprehension(domain);
 		return "/comprehension/comprehensionlist";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/question", method=RequestMethod.POST)
+	public int registQuestion(TeacherquestionVO vo) throws Exception{
+		System.out.println(vo);
+		return service.registQuestion(vo);
 	}	
+
+	@ResponseBody
+	@RequestMapping(method=RequestMethod.POST)
+	public int registComprehension(ComprehensionVO vo) throws Exception{
+		return service.registComprehension(vo);
+	}	
+	
 }
 
