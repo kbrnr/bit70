@@ -1,5 +1,6 @@
 package org.nojo.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.nojo.domain.ComprehensionVO;
@@ -18,7 +19,7 @@ public interface ComprehensionService {
 	public int registComprehension(ComprehensionVO vo) throws Exception;
 
 	/////tmp
-	public void getComprehension(String domain) throws Exception;
+	public HashMap<String, Object> getComprehension(String domain) throws Exception;
 
 
 }

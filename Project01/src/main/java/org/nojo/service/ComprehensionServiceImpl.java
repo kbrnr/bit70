@@ -48,25 +48,27 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 	
 	////tmp///////////////////////////
 	@Override
-	public void getComprehension(String domain) throws Exception {
+	public HashMap<String, Object> getComprehension(String domain) throws Exception {
 		HashMap<String, Object> comprehensionmap= null ;
 
-		List<JoinMemberVO> namelist = null;
-		List<TeacherQuestionVO> tqlist = null;
-		List<ScoreVO> scorelist= null;
-		List<List<ScoreVO>> scorelistset = null;
+		List<JoinMemberVO> namelist ;
+		List<TeacherQuestionVO> tqlist ;
+		List<ScoreVO> scorelist ;
+		List<List<ScoreVO>> scorelistset = null ;
 
 		namelist = mapper.selectName(domain);
 		tqlist = mapper.selectQuestion(domain);
 		
-		
 		for(int i=0; i<tqlist.size(); i++){
 			scorelist = mapper.selectScore(domain, tqlist.get(i).getTeacherquestion_no());
-		    scorelistset.add(scorelist);
+			scorelistset.add(scorelist);
 		}
-		comprehensionmap.put("tqlist", tqlist);
+		
 		comprehensionmap.put("namelist", namelist);
+		comprehensionmap.put("tqlist", tqlist);
 		comprehensionmap.put("scorelistset", scorelistset);
+		
+		return comprehensionmap;
 				
 	}
 	
