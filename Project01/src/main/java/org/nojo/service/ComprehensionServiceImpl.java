@@ -36,12 +36,14 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 	
 	@Override
 	public int registQuestion(TeacherquestionVO vo) throws Exception {
-		return mapper.registQuestion(vo);
+		mapper.registQuestion(vo);
+		return vo.getTeacherquestion_no();
 	}
 
 	@Override
 	public int registComprehension(ComprehensionVO vo) throws Exception {
-		return mapper.registComprehension(vo);
+		mapper.registComprehension(vo);
+		return vo.getComprehension_no();
 	}
 	
 	////tmp///////////////////////////

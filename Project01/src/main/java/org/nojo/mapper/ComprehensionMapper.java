@@ -80,10 +80,10 @@ public interface ComprehensionMapper {
 	
 	@SelectKey(before=false, keyProperty="teacherquestion_no", resultType=Integer.class, statement="select last_insert_id()")
 	@Insert("insert into tbl_teacherquestion(curri_gpno, curri_no, teacherquestion_content) values(#{curri_gpno}, #{curri_no}, #{teacherquestion_content})")
-	public int registQuestion(TeacherquestionVO vo);
+	public void registQuestion(TeacherquestionVO vo);
 
 	@SelectKey(before=false, keyProperty="comprehension_no", resultType=Integer.class, statement="select last_insert_id()")
 	@Insert("insert into tbl_comprehension(teacherquestion_no, comprehension_score, mem_id, clz_domain) values(#{teacherquestion_no}, #{comprehension_score}, #{mem_id}, #{clz_domain})")
-	public int registComprehension(ComprehensionVO vo);
+	public void registComprehension(ComprehensionVO vo);
 	
 }
