@@ -1,9 +1,13 @@
 package org.nojo.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import org.nojo.bizDomain.JoinMemberVO;
+import org.nojo.bizDomain.ScoreVO;
+import org.nojo.bizDomain.TeacherQuestionVO;
 import org.nojo.mapper.ComprehensionMapper;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +30,30 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 	@Override
 	public List<String> listScore(String score) throws Exception{
 		return mapper.listScore(score);
+	}
+	
+	////tmp///////////////////////////
+	@Override
+	public void getComprehension(String domain) throws Exception {
+		HashMap<String, Object> comprehensionmap= null ;
+
+		List<JoinMemberVO> namelist = null;
+		List<TeacherQuestionVO> tqlist = null;
+		List<ScoreVO> scorelist= null;
+		List<List<ScoreVO>> scorelistset = null;
+
+		namelist = mapper.selectName(domain);
+		tqlist = mapper.selectQuestion(domain);
+		
+		
+		for(int i=0; i<tqlist.size(); i++){
+			scorelist = mapper.selectScore(domain, tqlist.get(i).getTeacherquestion_no());
+		    scorelistset.add(scorelist);
+		}
+		comprehensionmap.put("tqlist", tqlist);
+		comprehensionmap.put("namelist", namelist);
+		comprehensionmap.put("scorelistset", scorelistset);
+				
 	}
 	
 }

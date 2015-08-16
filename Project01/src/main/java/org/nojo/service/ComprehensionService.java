@@ -10,4 +10,6 @@ public interface ComprehensionService {
 	
 	public List<String> listScore(String score) throws Exception;
 	
+	/////tmp
+	public void getComprehension(String domain) throws Exception;
 }
