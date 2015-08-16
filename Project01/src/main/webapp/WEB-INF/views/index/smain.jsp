@@ -90,14 +90,15 @@ body{background-color:#ecf0f5;}
 		
 		<!-- ----------------------------------------- -->
 		
-		<div class="row">
+			<div class="row">
 			<div class="col-sm-12">
 				<div class="box">
-	                <div class="box-header">
-	                  <h3 class="box-title">※커리큘럼 요약 들어갈곳 이에요^^ 질문할수 있어요</h3>
-	                </div><!-- /.box-header -->
-	                <div class="box-body">
-  	                  <div class="row">
+					<div class="box-header">
+						<h3 class="box-title">※커리큘럼 요약 들어갈곳 이에요^^ 질문할수 있어요</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<div class="row">
 							<div class="col-md-3">
 								<form id="searchTree" class="form-inline">
 									<div class="input-group margin">
@@ -115,20 +116,25 @@ body{background-color:#ecf0f5;}
 										<h3 class="panel-title">자바</h3>
 									</div>
 									<div class="panel-body">
-										<p></p>
+										<p id="curriContent"></p>
 									</div>
 								</div>
 							</div>
 						</div>
-	                </div><!-- /.box-body -->
-				</div><!-- /.box -->
-			</div><!-- /.col -->
-		</div><!-- /.row -->
-		
+					</div>
+					<!-- /.box-body -->
+				</div>
+				<!-- /.box -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+
 		<script>
-			function Node(text, href) {
+			function Node(text, href, content) {
 				this.text = text;
 				this.href = href;
+				this.content = content;
 			}
 
 			$.getJSON("/${domain}/curriculum", function(data) {
@@ -139,7 +145,8 @@ body{background-color:#ecf0f5;}
 					var name = this.curri_name;
 					var depth = this.curri_depth;
 					var no = this.curri_no;
-					var node = new Node(name, no)
+					var content = this.curri_content;
+					var node = new Node(name, no, content);
 					if (depth == 1) {
 						work = [];
 						list.push(node);
@@ -166,6 +173,7 @@ body{background-color:#ecf0f5;}
 						$(":hidden[name=curri_no]").val(data.href);
 						$(":hidden[name=curri_gpno]").val(parent.href);
 						$(".panel-title").text(data.text);
+						$("#curriContent").text(data.content);
 						console.log(parent);
 					}
 				});
