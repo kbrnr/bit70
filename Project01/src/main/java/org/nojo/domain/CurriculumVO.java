@@ -12,6 +12,7 @@ public class CurriculumVO {
 	private String clz_domain;
 	private String mem_id;
 	private String mode;
+	private String curri_content;
 
 	public String getMode() {
 		return mode;
@@ -85,11 +86,18 @@ public class CurriculumVO {
 		this.mem_id = mem_id;
 	}
 
+	public String getCurri_content() {
+		return curri_content;
+	}
+
+	public void setCurri_content(String curri_content) {
+		this.curri_content = curri_content;
+	}
+
 	@Override
 	public String toString() {
 		return "CurriculumVO [curri_no=" + curri_no + ", curri_name=" + curri_name + ", curri_pno=" + curri_pno + ", curri_depth=" + curri_depth
 				+ ", curri_reg_date=" + curri_reg_date + ", curri_mod_date=" + curri_mod_date + ", clz_domain=" + clz_domain + ", mem_id=" + mem_id
-				+ ", mode=" + mode + "]";
+				+ ", mode=" + mode + ", curri_content=" + curri_content + "]";
 	}
-
 }

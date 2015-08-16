@@ -10,7 +10,7 @@ import org.nojo.domain.CurriculumVO;
 
 public interface CurriculumMapper {
 
-	@Select("SELECT d.curri_name, d.curri_no, d.curri_pno, d.curri_depth "
+	@Select("SELECT d.curri_name, d.curri_no, d.curri_pno, d.curri_depth, d.curri_content "
           +"FROM "
           +"( "
           +"SELECT dept_connect_by_parent() AS id "

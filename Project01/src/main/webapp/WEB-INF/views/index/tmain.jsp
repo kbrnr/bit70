@@ -38,7 +38,8 @@
 <link href="/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
 
 <!-- REQUIRED JS SCRIPTS -->
-
+<link href="/resources/nojo/css/bootstrap-treeview.min.css" rel="stylesheet" type="text/css" />
+<script src="/resources/nojo/script/bootstrap-treeview.min.js" type="text/javascript"></script>
 
 
   </head>
@@ -71,8 +72,6 @@
   
 <body class="skin-blue sidebar-mini">
 
-
-
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
@@ -86,39 +85,127 @@
 			</ol>
 		</section>
 
-
-
 		<!-- Main content -->
 		<section class="content">
 		
 		<!-- ----------------------------------------- -->
-		
+
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="box">
-	                <div class="box-header">
-	                  <h3 class="box-title">※커리큘럼 요약 들어갈곳 이에요^^ 질문할수 있어요</h3>
-	                </div><!-- /.box-header -->
-	                <div class="box-body">
-  	                  <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-		                  	
-	                  	<div class="row">
-		                  	<div class="col-sm-12">
-			                  
-			                  <img id="curri" src="/resources/nojo/images/main01.jpg">
-				                  
-		                  	</div><!-- /.grid -->
-			                  	
-	                  	</div><!-- /.row -->
-		                  	
-		
-		                    	
-  	                  </div><!-- /.example1_wrapper -->
-		               
-	                </div><!-- /.box-body -->
-				</div><!-- /.box -->
-			</div><!-- /.col -->
-		</div><!-- /.row -->
+					<div class="box-header">
+						<h3 class="box-title">※커리큘럼 요약 들어갈곳 이에요^^ 질문할수 있어요</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<div class="row">
+							<div class="col-md-3">
+								<form id="searchTree" class="form-inline">
+									<div class="input-group margin">
+								      <input id="treeSearchText" type="text" class="form-control" placeholder="커리큘럼 검색">
+								      <span class="input-group-btn">
+								        <button class="btn btn-info">검색</button>
+								      </span>
+								    </div><!-- /input-group -->
+								</form>
+								<div id="tree"></div>
+							</div>
+							<div class="col-md-9">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h3 class="panel-title">자바</h3>
+									</div>
+									<div class="panel-body">
+										<p id="curriContent"></p>
+										<form id="sendQuestion" class="form-inline">
+											<input type="hidden" name="curri_no">
+											<input type="hidden" name="curri_gpno">
+											<div class="input-group">
+										      <input type="text" name="teacherquestion_content" class="form-control" placeholder="질문을 입력하세요">
+										      <span class="input-group-btn">
+										        <button id="questionBtn" class="btn btn-default">전송</button>
+										      </span>
+										    </div><!-- /input-group -->
+									    </form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- /.box-body -->
+				</div>
+				<!-- /.box -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+
+		<script>
+			function Node(text, href, content) {
+				this.text = text;
+				this.href = href;
+				this.content = content;
+			}
+
+			$.getJSON("/${domain}/curriculum", function(data) {
+				//트리에 사용될 데이터를 알맞는 형식으로 변경
+				var list = [];
+				var work;
+				$(data).each(function() {
+					var name = this.curri_name;
+					var depth = this.curri_depth;
+					var no = this.curri_no;
+					var content = this.curri_content;
+					var node = new Node(name, no, content);
+					if (depth == 1) {
+						work = [];
+						list.push(node);
+					} else {
+						if (!work[depth - 2].nodes) {
+							work[depth - 2].nodes = [];
+						}
+						work[depth - 2].nodes.push(node);
+					}
+					work[depth - 1] = node;
+				});
+				console.log(list);
+				
+				//트리세팅
+				$('#tree').treeview({
+					data : list,
+					levels : 1,
+					onNodeSelected : function(event, data) {
+						console.log(data);
+						var parent = data;
+						while(parent.parentId != undefined){
+							parent = $('#tree').treeview('getParent', parent.nodeId);
+						}
+						$(":hidden[name=curri_no]").val(data.href);
+						$(":hidden[name=curri_gpno]").val(parent.href);
+						$(".panel-title").text(data.text);
+						$("#curriContent").text(data.content);
+						console.log(parent);
+					}
+				});
+				
+				//기본으로 첫번쨰 트리선택
+				$('#tree').treeview('selectNode', 0);
+				
+				//검색이벤트
+				$("#searchTree").submit(function(e){
+					e.preventDefault();
+					var text = $("#treeSearchText").val();
+					var arr= $('#tree').treeview('search', [ text, {
+					  ignoreCase: true,     // case insensitive
+					  exactMatch: false,    // like or equals
+					  revealResults: true,  // reveal matching nodes
+					}]);
+					if(arr.length > 0){
+						$('#tree').treeview("selectNode", arr[arr.length-1]);
+					}
+				});
+			});
+		</script>
 		<!-- ----------------------------------------- -->
 		
 		<div class="row">
@@ -170,23 +257,27 @@
 		</section>
 		<!-- /.content -->
 
-
+<!-- 
 
 <div class="modal fade" id="myModal" role="dialog">
 		<div class="modal-dialog">
-			<!-- Modal content-->
+			Modal content
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">이해했닝</h4>
 			</div>
 			<div class="modal-body">
-				<div class="input-group">
-			      <input id="question" type="text" class="form-control" placeholder="질문을 입력하세요">
-			      <span class="input-group-btn">
-			        <button id="questionBtn" class="btn btn-default" type="button">전송</button>
-			      </span>
-			    </div><!-- /input-group -->
+				<form id="sendQuestion" class="form-inline">
+					<input type="hidden" name="curri_no" value="23">
+					<input type="hidden" name="curri_gpno" value="20">
+					<div class="input-group">
+				      <input type="text" name="teacherquestion_content" class="form-control" placeholder="질문을 입력하세요">
+				      <span class="input-group-btn">
+				        <button id="questionBtn" class="btn btn-default">전송</button>
+				      </span>
+				    </div>/input-group
+			    </form>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -194,7 +285,7 @@
 		</div>
 	</div>
 </div>
-
+ -->
 	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<script>
 		var socket = io.connect('http://localhost:3000');
@@ -204,8 +295,14 @@
 			$('#myModal').modal('show');
 		});
 		
-		$("#questionBtn").click(function(){
-			socket.emit("understanding", $("#question").val());
+		$("#sendQuestion").submit(function(e){
+			e.preventDefault();
+			var data = $(this).serialize();
+			var question = $(this).find("[name=teacherquestion_content]").val();
+			$.post("/${domain}/comprehension/question", data, function(no){
+				socket.emit("understanding", no + "|" + question);
+				$('#myModal').modal('hide');
+			});
 		});
 	
 		// Seat에서 사용하는 함수
