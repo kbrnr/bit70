@@ -13,7 +13,7 @@ public class SeatServiceImpl implements SeatService {
 
 	@Inject
 	SeatMapper mapper;
-
+ 
 	@Override
 	public List<SeatVO> listMember(String clz_domain, String key) throws Exception {
 		return mapper.listMember(clz_domain, key);
@@ -24,6 +24,11 @@ public class SeatServiceImpl implements SeatService {
 		for (SeatVO vo : list) {
 			mapper.updateSeat(vo, domain);
 		}
+	}
+
+	@Override
+	public byte[] photo(String userId) {
+		return (byte[]) mapper.photo(userId);
 	}
 
 }
