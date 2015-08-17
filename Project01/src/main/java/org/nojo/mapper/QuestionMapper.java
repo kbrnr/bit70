@@ -8,8 +8,6 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
-import org.nojo.domain.AttachfileVO;
-import org.nojo.domain.FilemanagerVO;
 import org.nojo.domain.QuestionVO;
 import org.nojo.util.Criteria;
 import org.nojo.util.Search;
@@ -68,16 +66,6 @@ public interface QuestionMapper {
 	//검색 결과 개수
 	//QuestionMapper.xml
 	public int getSearchCnt(@Param("domain") String domain, @Param("search") Search search) throws Exception;	
-	
-	//파일 첨부
-	@SelectKey(keyColumn="attachfile_no", keyProperty="attachfile_no", before=false, resultType = Integer.class, statement = { "select last_insert_id()" })
-	@Insert("insert into tbl_attachfile(attachfile_size, attachfile_path, attachfile_name) values (#{attachfile_size}, #{attachfile_path}, #{attachfile_name})")
-	public void addAttach(AttachfileVO vo) throws Exception;
-	
-	@SelectKey(keyColumn="attachfile_no", keyProperty="attachfile_no", before=false, resultType = Integer.class, statement = { "select last_insert_id()" })
-	@Insert("insert into tbl_qfilemanager(question_no, attachfile_no , clz_domain) values (#{question_no}, #{attachfile_no} ,#{clz_domain})")
-	public void addAttachBoard(FilemanagerVO vo) throws Exception;
-
 	
 
 }

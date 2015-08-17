@@ -13,7 +13,7 @@ public class FilemanagerVO {
 	private int answer_no;
 	
 	//common VO
-	private int attachfile_no;
+	private Integer attachfile_no;
 	private String clz_domain;
 	
 
@@ -25,7 +25,7 @@ public class FilemanagerVO {
 		return curri_no;
 	}
 
-	public int getAttachfile_no() {
+	public Integer getAttachfile_no() {
 		return attachfile_no;
 	}
 
@@ -49,7 +49,7 @@ public class FilemanagerVO {
 		this.curri_no = curri_no;
 	}
 
-	public void setAttachfile_no(int attachfile_no) {
+	public void setAttachfile_no(Integer attachfile_no) {
 		this.attachfile_no = attachfile_no;
 	}
 
