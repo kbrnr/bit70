@@ -48,7 +48,7 @@
 <script>
     var array = [];
     var xxx = "";
-    var draggable = $(".draggable");
+    var chair = $(".chair");
 
     var xcnr = "";
     var ycnr = "";
@@ -66,12 +66,12 @@
     		dataType : "text",
     		data :  JSON.stringify(array),
     		success : function(data){
-    			alert("성공");
+    			alert("성공했습니다.");
     		}
     	});
     });
 
-    $(".listDiv").on("drag", function (event) {
+    $("#container").on("drag", function (event) {
         var message = "";
         if ('offsetX' in event) {
             message = "offsetX: " + event.offsetX + ", offsetY: " + event.offsetY + "<br />";
@@ -81,13 +81,13 @@
         $("#info").html(message);
     });
 
-    $(".seatDiv").on('drop', function (e) {
+    $(".seat").on('drop', function (e) {
     	//console.log(e);
     	/* 
-        var draggable = $(".draggable");
+        var chair = $(".chair");
         array = [];
-        for (var i = 0; i < draggable.length; i++) {
-            var id = $("#draggable span:nth(" + (i * 2) + ")").text();
+        for (var i = 0; i < chair.length; i++) {
+            var id = $("#chair span:nth(" + (i * 2) + ")").text();
             var x = e.offsetX;
             var y = e.offsetY;
             array.push(new Seat(id, x, y));
@@ -110,32 +110,41 @@
             left: -1
         },
         stop: function (e, ui) {
+        	console.log("e");
         	console.log(e);
+        	console.log("ui");
         	console.log(ui);
-        	if(!(e.toElement == $(".seatDiv")[0])){
+//        	if(!(e.toElement == $(".seat")[0])){
         		//팅구는로직
         		//z-index :1000으로 놓고, 기존에 있던 자리를 저장한  후. 거기서 이동하는 포지션- . 돌아가는 것..
-        		 /* $( ".draggable").animate({  revert: true }); */
-        		 $(".draggable").draggable({  revert: "invalid" });
-        		return;
-        	}
+        		 /* $( ".chair").animate({  revert: true }); */
+        		 // $(".chair").draggable({  revert: "invalid" }); 
+//        		return;
+//        	}
         	var li = ui.helper[0];
         	var id = $(li).find(".memId").text();
             var x = e.offsetX;
             var y = e.offsetY;
             array.push(new Seat(id, x, y));
-            console.log(array); 
+            
+/*         	var li = ui.helper[0];
+        	var id = $(li).find(".memId").text();
+            var x = e.offsetX;
+            var y = e.offsetY;
+            array.push(new Seat(id, x, y));
+            console.log(array);  */
+            
         }
     });
 
-    $(".seatDiv").droppable({
+    $(".seat").droppable({
         //tolerance: "intersect"
     });
 
-    $(".draggable").mouseup(function (e) {
+    $(".chair").mouseup(function (e) {
         xcnr = e.offsetX;
         ycnr = e.offsetY;
-        $(".log").append(xcnr + ',' + ycnr + ' ');
+        $(".info").append(xcnr + ',' + ycnr + ' ');
     });
 </script>
 </body>
