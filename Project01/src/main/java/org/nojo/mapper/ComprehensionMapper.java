@@ -59,7 +59,8 @@ public interface ComprehensionMapper {
 	@Select("select t.teacherquestion_no, t.teacherquestion_content, clz_domain "
 			+ "from tbl_teacherquestion t, tbl_curriculum c "
 			+ "where t.curri_no = c.curri_no "
-			+ "and c.clz_domain = #{domain}")
+			+ "and c.clz_domain = #{domain} "
+			+ "order by t.teacherquestion_no")
 	public List<TeacherQuestionVO> selectQuestion(String domain) throws Exception;
 	
 	@Select("select l.mem_id, mem_name, comprehension_score, teacherquestion_no "
@@ -75,7 +76,8 @@ public interface ComprehensionMapper {
 			+ "from tbl_comprehension c, tbl_teacherquestion t "
 			+ "where c.teacherquestion_no = t.teacherquestion_no "
 			+ "and c.teacherquestion_no = #{teacherqno} order by mem_id) r "
-			+ "on l.mem_id = r.mem_id")
+			+ "on l.mem_id = r.mem_id "
+			+ "order by l.mem_id")
 	public List<ScoreVO> selectScore(@Param("domain") String domain, @Param("teacherqno") int teacherqno) throws Exception;
 	
 	@SelectKey(before=false, keyProperty="teacherquestion_no", resultType=Integer.class, statement="select last_insert_id()")
