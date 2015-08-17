@@ -288,7 +288,7 @@
  -->
 	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<script>
-		var socket = io.connect('http://localhost:3000');
+		var socket = io.connect('http://192.168.0.18:3000');
 		socket.emit("init", {domain: "${domain}", userId: "${userid}"});
 		
 		$("#curri").click(function(){
