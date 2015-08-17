@@ -78,9 +78,7 @@
 				수업명: ${domain} <small>(${userid}선생님)</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="#">
-						<i class="fa fa-dashboard"></i> Home
-					</a></li>
+				<li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
 				<li class="active">Dashboard</li>
 			</ol>
 		</section>
@@ -92,16 +90,12 @@
 
 		<div class="row">
 			<div class="col-sm-12">
-				<div class="box">
-					<div class="box-header">
-						<h3 class="box-title">※커리큘럼 요약 들어갈곳 이에요^^ 질문할수 있어요</h3>
-					</div>
-					<!-- /.box-header -->
+				<div class="box box-primary">
 					<div class="box-body">
 						<div class="row">
 							<div class="col-md-3">
-								<form id="searchTree" class="form-inline">
-									<div class="input-group margin">
+								<form id="searchTree">
+									<div class="input-group">
 								      <input id="treeSearchText" type="text" class="form-control" placeholder="커리큘럼 검색">
 								      <span class="input-group-btn">
 								        <button class="btn btn-info">검색</button>
@@ -110,23 +104,24 @@
 								</form>
 								<div id="tree"></div>
 							</div>
-							<div class="col-md-9">
-								<div class="panel panel-default">
+							<div class="col-md-6">
+								<div class="panel panel-primary">
 									<div class="panel-heading">
-										<h3 class="panel-title">자바</h3>
+										<h1 id="curri_title" class="panel-title" style="display: inline;"></h1>
+										<a id="question" class="btn" style="color: white;"><span class="glyphicon glyphicon-question-sign"></span></a>
 									</div>
 									<div class="panel-body">
 										<p id="curriContent"></p>
-										<form id="sendQuestion" class="form-inline">
-											<input type="hidden" name="curri_no">
-											<input type="hidden" name="curri_gpno">
-											<div class="input-group">
-										      <input type="text" name="teacherquestion_content" class="form-control" placeholder="질문을 입력하세요">
-										      <span class="input-group-btn">
-										        <button id="questionBtn" class="btn btn-default">전송</button>
-										      </span>
-										    </div><!-- /input-group -->
-									    </form>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<h1 class="panel-title">첨부파일</h1>
+									</div>
+									<div class="panel-body">
+										첨부파일 데스
 									</div>
 								</div>
 							</div>
@@ -168,23 +163,20 @@
 					}
 					work[depth - 1] = node;
 				});
-				console.log(list);
 				
 				//트리세팅
 				$('#tree').treeview({
 					data : list,
 					levels : 1,
 					onNodeSelected : function(event, data) {
-						console.log(data);
 						var parent = data;
 						while(parent.parentId != undefined){
 							parent = $('#tree').treeview('getParent', parent.nodeId);
 						}
 						$(":hidden[name=curri_no]").val(data.href);
 						$(":hidden[name=curri_gpno]").val(parent.href);
-						$(".panel-title").text(data.text);
+						$("#curri_title").text(data.text);
 						$("#curriContent").text(data.content);
-						console.log(parent);
 					}
 				});
 				
@@ -257,41 +249,41 @@
 		</section>
 		<!-- /.content -->
 
-<!-- 
-
-<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
-			Modal content
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">이해했닝</h4>
-			</div>
-			<div class="modal-body">
-				<form id="sendQuestion" class="form-inline">
-					<input type="hidden" name="curri_no" value="23">
-					<input type="hidden" name="curri_gpno" value="20">
-					<div class="input-group">
-				      <input type="text" name="teacherquestion_content" class="form-control" placeholder="질문을 입력하세요">
-				      <span class="input-group-btn">
-				        <button id="questionBtn" class="btn btn-default">전송</button>
-				      </span>
-				    </div>/input-group
-			    </form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	
+	
+	<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+				Modal content
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">이해했닝</h4>
+				</div>
+				<div class="modal-body">
+					<form id="sendQuestion" class="form-inline">
+						<input type="hidden" name="curri_no">
+						<input type="hidden" name="curri_gpno">
+						<div class="input-group">
+					      <input type="text" name="teacherquestion_content" class="form-control" placeholder="질문을 입력하세요">
+					      <span class="input-group-btn">
+					        <button id="questionBtn" class="btn btn-default">전송</button>
+					      </span>
+					    </div>
+				    </form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
- -->
+
 	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<script>
 		var socket = io.connect('http://192.168.0.18:3000');
 		socket.emit("init", {domain: "${domain}", userId: "${userid}"});
 		
-		$("#curri").click(function(){
+		$("#question").click(function(){
 			$('#myModal').modal('show');
 		});
 		

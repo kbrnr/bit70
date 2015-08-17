@@ -57,7 +57,7 @@
 	    }
 	
 	    .inner {
-	        padding-left: 30px;
+	        padding-left: 10px;
 	        padding-top: 5px;
 	        list-style: none;
 	    }
@@ -81,7 +81,7 @@
 	
 	<!-- Main content -->
 	<section class="content">
-	    <div class="box box-default">
+	    <div class="box box-primary">
 	        <div class="box-header with-border">
 	            <h3 class="box-title">Blank Box</h3>
 	            <div class="pull-right">
@@ -92,7 +92,15 @@
 	            <div class="clearfix"></div>
 	        </div>
 	        	
-	        <div class="box-body"></div>
+	        <div class="box-body">
+	        	<div class="row">
+	        		<div id="curri" class="col-md-3">
+	        			
+	        		</div>
+	        		<div class="col-md-9">
+	        		</div>
+	        	</div>
+	        </div>
 	        <!-- /.box-body -->
 	    </div>
 	</section>
@@ -121,22 +129,22 @@
 	</div>
 <script>
     $("#add").click(function () {
-        $(".box-body").append(makeTag(true, null, 1, "add"));
+        $("#curri").append(makeTag(true, null, 1, "add"));
     });
 
-    $(".box-body").on("click", ".glyphicon-plus", function () {
+    $("#curri").on("click", ".glyphicon-plus", function () {
         var li = $(this).closest("li");
         var depth = parseInt(li.data("depth")) + 1;
         li.append(makeTag(false, null, depth, "add", null, li.data("no")));
     });
 
-    $(".box-body").on("click", ".glyphicon-minus", function () {
+    $("#curri").on("click", ".glyphicon-minus", function () {
     	var ul = $(this).closest("ul");
     	remove(ul);
     	
     });
     
-    $(".box-body").on("change", ".curri_name", function () {
+    $("#curri").on("change", ".curri_name", function () {
     	var li = $(this).closest("li");
     	var mode = li.data("mode");
     	if(!mode){
@@ -194,7 +202,7 @@
     		}
     	});
     	for(var i in temp){
-    		$(".box-body").append(temp[i]);
+    		$("#curri").append(temp[i]);
     	}
     });
     
@@ -251,11 +259,11 @@
             			work[depth-2].children("li:first").append(child);
             		}
                 }
-                $(".box-body > ul").each(function(){
+                $("#curri > ul").each(function(){
                 	remove($(this));
                 });
                 for(var i in temp){
-            		$(".box-body").append(temp[i]);
+            		$("#curri").append(temp[i]);
             	}
 			});
         };

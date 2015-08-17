@@ -21,7 +21,7 @@ public class CurriculumController {
   private CurriculumService curriculumService;
 
   @RequestMapping(value = "/list", method = RequestMethod.GET)
-  public String listForm() {
+  public String listForm(@PathVariable String domain) {
     return "/curriculum/list";
   }
 

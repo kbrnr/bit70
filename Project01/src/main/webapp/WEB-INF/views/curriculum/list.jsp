@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>민아님 천재</title>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
@@ -40,68 +38,129 @@
     <link href="/resources/nojo/css/dropzone.css" rel="stylesheet" type="text/css"/>
     <script src="/resources/nojo/script/dropzone.js"></script>
     <script src="/resources/nojo/script/xlsx.core.min.js"></script>
-    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+	
+	<style>
+	    body{background-color:#ecf0f5;}
+	    
+	    .icon{
+	    	cursor: pointer;
+	    	margin-right: 10px;
+	    }
+	    
+	    .tree-node{
+	    	cursor: pointer;
+	    }
+	</style>
 </head>
 
 <body>
-		<section class="content-header">
-		    <h1>
-		        커리큘럼
-		    </h1>
-		    <ol class="breadcrumb">
-		        <li><a href="#"><i class="fa fa-fw fa-home"></i>Home</a></li>
-		        <li><a href="#">java70</a></li>
-		        <li class="active">커리큘럼</li>
-		    </ol>
-		</section>
-		
-		<!-- Main content -->
-		<section class="content">
-		    <div class="box box-default">
-		        <div class="box-header with-border">
-		            <h3 class="box-title">Blank Box</h3>
-		        </div>
-		        	
-		        <div class="box-body">
-		        	<button id="btn">이해됐니?</button>
-		        </div>
-		        <!-- /.box-body -->
-		    </div>
-		</section>
-		<!-- /.content -->
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+	    <h1>
+	        커리큘럼
+	    </h1>
+	    <ol class="breadcrumb">
+	        <li><a href="#"><i class="fa fa-fw fa-home"></i>Home</a></li>
+	        <li><a href="#">${domain}</a></li>
+	        <li class="active">커리큘럼</li>
+	    </ol>
+	</section>
 	
-		<div class="modal fade" id="myModal" role="dialog">
-		  <div class="modal-dialog">
-		    <!-- Modal content-->
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal">&times;</button>
-		        <h4 class="modal-title">엑셀</h4>
-		      </div>
-		      <div class="modal-body">
-	
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-	
-	<script>
-	var socket = io.connect('http://localhost:3000');
-	socket.on("understanding", function(msg){
-		$(".modal-body").html(msg);
-		$('#myModal').modal('show');
-	});
+	<!-- Main content -->
+	<section class="content">
+	    <div class="box box-primary">
+	        <div class="box-header with-border">
+	            <h3 class="box-title">Blank Box</h3>
+	        </div>
+	        	
+	        <div class="box-body">
+	        	<div class="row">
+	        		<div class="col-md-3">
+	        			 <div class="pull-right">
+			                <button id="add" class="btn btn-primary">추가</button>
+			                <button id="mod" class="btn btn-primary">수정</button>
+			                <button id="del" class="btn btn-primary">삭제</button>
+			            </div>
+			            <div class="clearfix"></div>
+			            <div id="curri">
+			            	<ul class="list-group">
+							  <li class="tree-node list-group-item">
+							  	<span class="icon glyphicon glyphicon-plus"></span>
+							  	<span class="name">자바</span>
+							  </li>
+							  <li class="tree-node list-group-item">
+							  	<span class="icon glyphicon glyphicon-plus"></span>
+							  	<span class="name">안드로이드</span>
+							  </li>
+							  <li class="tree-node list-group-item">
+							  	<span class="icon glyphicon glyphicon-plus"></span>
+							  	<span class="name">오라클</span>
+							  </li>
+							</ul>
+			            
+			            </div>
+	        		</div>
+	        		<div class="col-md-9">
+	        		</div>
+	        	</div>
+	        </div>
+	        <!-- /.box-body -->
+	    </div>
+	</section>
+	<!-- /.content -->
 
-	$("#btn").click(function (){
-		alert("aasdf");
-		socket.emit("understanding", "민아야 공부잘하고 잇지??");
-	});
-	</script>
+<script>
+$(".tree-node").click(function(){
+	console.log($(this).siblings(".active"));
+	$(this).siblings(".active").removeClass("active");
+	$(this).addClass("active");
+});
+
+function Node(name, no, content) {
+	this.name = name;
+	this.no = no;
+	this.content = content;
+}
+
+//트리에 사용될 데이터를 알맞는 형식으로 변경
+/* var list = [];
+$.ajax({
+	async: false,
+	dataType: "json",
+	url: "/${domain}/curriculum",
+	success: function(data){
+		var work;
+		$(data).each(function() {
+			var name = this.curri_name;
+			var no = this.curri_no;
+			var content = this.curri_content;
+			var depth = this.curri_depth;
+			var node = new Node(name, no, content);
+			if (depth == 1) {
+				work = [];
+				list.push(node);
+			} else {
+				if (!work[depth - 2].children) {
+					work[depth - 2].children = [];
+				}
+				work[depth - 2].children.push(node);
+			}
+			work[depth - 1] = node;
+		});  
+	}
+});
+
+for(var i in list){
+	var str = '<ul class="list-group">'
+			+ '<li class="list-group-item">'
+			
+			+ '</li>'
+	  		+ '</ul>';
+} */
 
 
+
+</script>
 
 </body>
 </html>
