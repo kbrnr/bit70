@@ -14,14 +14,14 @@
 
 </head>
 <body>
-<h2>${domain}좌석배치표</h2>
+<h2>${domain} 좌석배치표</h2>
 
 <div id="container">
 	<div id="seat">
 		<c:forEach items="${list }" var="vo">
 			<c:if test="${vo.seat_x != 0}">
 				<div class="chair" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">
-					<div class="img"><img width="10px" height="10px" alt="" src="/${domain}/seat/seatImg?userId=a" /></div>
+					<div class="img"><img class="realImg" width="25px" height="25px" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}"/></div>
 						<span class="hidden memId">${vo.mem_id}</span>
 	                	<span>${vo.mem_name}</span>
 				</div>
@@ -32,7 +32,7 @@
 		<c:forEach items="${list }" var="vo">
 			<c:if test="${vo.seat_x == 0}">
 				<div class="chair" style="position: relative;">
-					<div class="img"><img width="10px" height="10px" alt="" src="/${domain}/seat/seatImg?userId=a" /></div>
+					<div class="img"><img width="25px" height="25px" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}" /></div>
 						<span class="hidden memId">${vo.mem_id}</span>
 	                	<span>${vo.mem_name}</span>
 				</div>
@@ -40,14 +40,29 @@
 		</c:forEach>
 	</div>
 </div>
-
+<br />
 <button id="save" type="button">저장하기</button>
 
 <div class="position">Position</div>
 <div id="info" style="width: 200px; height: 40px; background-color: #e0a0a0;"></div>
-<br/> 
 
 <script>
+
+
+$(".lol").on("click", function(e) {
+    e = e || window.event;
+
+    var target = e.target || e.srcElement,
+        rect = target.getBoundingClientRect(),
+        offsetX = e.clientX - rect.left,
+        offsetY = e.clientY - rect.top;
+
+    console.log([offsetX, offsetY]);
+});
+
+
+
+
     var array = [];
     var xxx = "";
     var chair = $(".chair");
@@ -96,20 +111,13 @@
 	        console.log(id, x, y);
         } */
     });
-    //==============================================================================================
-    	$(".resultDiv").append(function(e) {
-    		appendTo: "resultDiv";
-            var x = e.offsetX;
-       	 	var y = e.offsetY;
-    	});
-   	//==============================================================================================	
     
     
     $(".chair").draggable({
         containment: "div#content",
         cursorAt: {
-            top: -1,
-            left: -1
+            top: -2,
+            left: -2
         },
         stop: function (e, ui) {
         	console.log("e");
@@ -126,16 +134,19 @@
 			if((e.toElement.id == "lobby")) {
 	        	var li = ui.helper[0];
 	        	var id = $(li).find(".memId").text();
-	            var x = 0;
-	            var y = 0;
+	            var x = null;
+	            var y = null;
 	            array.push(new Seat(id, x, y));
-			}else {
+			}else if((e.toElement.id == "seat")) {
 				var li = ui.helper[0];
 	        	var id = $(li).find(".memId").text();
 	            var x = e.offsetX;
 	            var y = e.offsetY;
 	            array.push(new Seat(id, x, y));
-	        	
+			}else if((e.toElement.id == "")) {
+				$(".chair").draggable({  revert: true }); 
+			}else {
+				
 			}
             
 /*         	var li = ui.helper[0];
@@ -157,6 +168,21 @@
         ycnr = e.offsetY;
         $(".info").append(xcnr + ',' + ycnr + ' ');
     });
+    
+    $(".realImg").before(function(e){
+    	console.log($(".realImg"));
+    	//이미지 타입 지정
+    	console.log($(".realImg").context.contentType);
+    	$(".realImg").context.contentType.append("image/png");
+    /* 	$.ajax({
+    		url: "/${domain}/seat/seatImg?userId=a",
+    		method : "get",
+   			dataType: "text/html",
+    		contentType : "image/png",
+    		success: function(data){
+    		}
+    		}); */
+    	});
 </script>
 </body>
 </html>

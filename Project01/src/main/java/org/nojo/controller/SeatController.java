@@ -2,9 +2,11 @@ package org.nojo.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
+import java.util.UUID;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageTypeSpecifier;
@@ -13,6 +15,7 @@ import javax.imageio.stream.ImageOutputStream;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.swing.ImageIcon;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.imgscalr.Scalr;
 import org.nojo.domain.MemberVO;
@@ -57,8 +60,18 @@ public class SeatController {
 
 	//이미지 보기 
 	@RequestMapping(value = "/seatImg", method = RequestMethod.GET)
-	public void photo(String userId, HttpServletResponse res) throws IOException {
+	public void photo(String userId, HttpServletResponse res, Model model) throws IOException {
 		byte[] bytes = seatService.photo(userId);
 		res.getOutputStream().write(bytes);
+		
 	}
 }
+
+
+
+/*BufferedImage sourceImg = ImageIO.read(new File(userId));
+BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 25);
+String thumbnailName = userId;
+File newFile = new File(thumbnailName);
+String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+ImageIO.write(destImg, formatName.toUpperCase(), newFile);*/
