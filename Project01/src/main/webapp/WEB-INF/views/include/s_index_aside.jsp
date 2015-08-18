@@ -27,7 +27,7 @@
        <li class="treeview"><a href="/classinfo/classread?domain=${domain}" target="inner"><i class="fa fa-link"></i> <span>${domain} 수업정보</span></a></li>
             <li class="treeview"><a href="/${domain}/curriculum/edit" target="inner"><i class="fa fa-link"></i> <span>커리큘럼</span></a></li>
           	<li class="treeview"><a href="/${domain}/qna/listpage" target="inner"><i class="fa fa-link"></i> <span>질문답변</span></a></li>
-            <li class="treeview"><a href="/academy/teacherlist" target="inner"><i class="fa fa-link"></i> <span>이해도통계</span></a></li>
+            <li class="treeview"><a href="/${domain}/comprehension" target="inner"><i class="fa fa-link"></i> <span>이해도통계</span></a></li>
             <li class="treeview"><a href="/member/joinmemberlist/${domain}" target="inner"><i class="fa fa-link"></i> <span>우리반식구</span></a></li>
             <li class="treeview"><a href="/${domain}/seat" target="inner"><i class="fa fa-link"></i> <span>[반장메뉴:배치도]</a></li>
            </ul><!-- /.sidebar-menu -->
