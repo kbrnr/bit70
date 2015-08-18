@@ -2,15 +2,22 @@ package org.nojo.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.nojo.domain.AttachfileVO;
@@ -119,6 +126,7 @@ public class qnaFileAttachController {
 		try {
 
 			final HttpHeaders headers = new HttpHeaders();
+		
 
 			MediaType mimeType = null;
 
@@ -130,12 +138,14 @@ public class qnaFileAttachController {
 				mimeType = MediaType.IMAGE_PNG;
 			} else if (suffix.equalsIgnoreCase("gif")) {
 				mimeType = MediaType.IMAGE_GIF;
-			} else {
-
-				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-				headers.add("Content-Dispostion",
-						"attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+			} else if (suffix.equalsIgnoreCase("zip")) {
+				mimeType = MediaType.APPLICATION_OCTET_STREAM;
 			}
+			
+			headers.setContentType(mimeType);
+			headers.add("Content-Dispostion",
+					"attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+			
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
 		} catch (
 

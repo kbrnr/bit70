@@ -1,5 +1,7 @@
 package org.nojo.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.nojo.domain.AttachfileVO;
@@ -44,6 +46,11 @@ public class AttachFileServiceImpl implements AttachFileService {
 	public void removeAttachAnswerBoard(int answer_no) throws Exception {
 
 		mapper.deleteAnswerAttachBoard(answer_no);
+	}
+
+	@Override
+	public List<String> getAttachFile(Integer no, String domain) throws Exception {
+		return mapper.getAttach(no, domain);
 	}
 
 

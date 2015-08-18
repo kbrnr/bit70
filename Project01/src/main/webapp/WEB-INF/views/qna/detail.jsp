@@ -79,7 +79,12 @@
 						</div>
 						<div class="box-header with-border ">
 
-							<div class="froala-view">${QuestionVO.question_content }</div>
+							<div class="froala-view" style="width: 500px;">${QuestionVO.question_content }</div>
+							<div>
+									<ul id="fileAttach" class='list-group' >
+										<li class="list-group-item"></li>
+									</ul>
+							</div>
 
 							<div style="margin-top: 200px;">
 								<a href="answer?no=${QuestionVO.question_no}">
@@ -144,5 +149,33 @@
 			}); 
 		})
 	});
+	
+
+	function getFileInfo(filePath){
+		
+		var filename, fileLink;
+		
+		filesrc = "/displayFile?filename="+filePath;
+		fileLink = filePath.substr(0,14);
+		filename = fileLink.substr(fileLink.indexOf("_") + 1);
+		
+		return {filename:filename, filesrc:filesrc, filePath:filePath};
+		
+	}
+	
+	var no = ${QuestionVO.question_no};
+	var domain = '${domain}';
+	
+	$.getJSON(+"/getAttachFile/"+no, function(list){
+		$(list).each(function(){
+			
+			var fileInfo = getFileInfo(this);
+			var file = "<li><span>"+fileInfo+"</span></li>";
+			$('#fileAttachfile').append(file);
+		});	
+	});
+	
+		
+		
 </script>
 </html>

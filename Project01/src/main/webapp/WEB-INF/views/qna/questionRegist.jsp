@@ -101,15 +101,10 @@
 						<section id="editor" style="width: 100%; margin: auto;">
 							<form id='regForm' role="form" method="post" action="questionRegist">
 								<div style="height: 150px;">
-									<input id="title" type="text" class="form-control"
-										value="${vo.question_title }" name="question_title"
-										placeholder="title"> <input id="gb" type="text"
-										class="form-control" name="question_gb"
-										placeholder="구분은 히든으로 처리하자"> <input id="mem_id"
-										type="text" class="form-control" name="mem_id"
-										placeholder="맴버아이디 히든으로 처리하자"> <input id="clz_domain"
-										type="text" class="form-control" name="clz_domain"
-										placeholder="도메인 히든으로 처리하자">
+									<input id="title" type="text" class="form-control" value="${vo.question_title }" name="question_title" placeholder="title"> 
+									<input id="gb" type="text"class="form-control" name="question_gb" placeholder="구분은 히든으로 처리하자"> 
+									<input id="mem_id" type="text" class="form-control" name="mem_id" placeholder="맴버아이디 히든으로 처리하자"> 
+									<input id="clz_domain" type="text" class="form-control" name="clz_domain" placeholder="도메인 히든으로 처리하자">
 								</div>
 
 								<textarea id='edit' name="question_content" style="margin-top: 30px;"></textarea>
@@ -183,9 +178,7 @@
 	$('#edit').on('editable.afterFileUpload', function (e, editor, response) {
 		
 		var res = JSON.parse(response);
-		console.log(res.filePath);
-		var str = "<a href='displayFile?fileName="+res.filePath+"'<span>"+res.fileName+"</span></a>";
-		
+		var str = "<a href='/displayFile?fileName="+res.filePath+"'<span>"+res.fileName+"</span></a><br/>";
 		$(".list-group-item").append(str);
 		});
 	

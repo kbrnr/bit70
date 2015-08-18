@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/{domain}/qna")
@@ -121,6 +122,20 @@ public class QuestionController {
 
 		return "qna/detail";
 	}
+	
+	//파일첨부 조회
+	@ResponseBody
+	@RequestMapping("/getAttachFile/{no}")
+	public List<String> getAttach(@PathVariable("no") Integer no, 
+									@PathVariable("domain") String domain, Model model) throws Exception{
+		
+		List<String> fileList = null;
+		fileList = fileService.getAttachFile(no, domain);
+		model.addAttribute("file", fileList);
+		return fileList;
+		
+	}
+	
 
 	// 글 수정 region
 	@RequestMapping("/questionModify")
