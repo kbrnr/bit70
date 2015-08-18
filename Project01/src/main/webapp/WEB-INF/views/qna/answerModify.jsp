@@ -150,13 +150,32 @@
 				'createLink', 'insertImage', 'uploadFile', 'table',
 				'undo', 'redo', 'html' ],
 		imageUploadURL : "/upload",	
-		pastedImagesUploadURL : "/upload"		
+		pastedImagesUploadURL : "/upload",		
+		fileUploadURL: "/upload"
 	});
 	
 	$('#edit').on('editable.afterImageUpload', function (e, editor, response) {
-		var str = "<img width ='300' class='fr-fin fr-dib' src='/displayImage?fileName="+ response +"' />";
-		$(".froala-view").append(str);
 		
+		var res = JSON.parse(response);
+		var str = "<img width ='300' name='attachfile_name' class='fr-fin fr-dib' data-fileNo='"+res.fileNo+"' data-src="+ res.filePath +" src='/displayFile?fileName="+ res.filePath +"' />";
+		var no = "<input class='fno' type='hidden' name='attachfile_no' value='"+res.fileNo+"' />";
+		
+		$(".froala-view").append(str);
+		$("#regForm").append($(no));
+		
+	});
+	
+	$('#edit').on('editable.beforeRemoveImage', function (e, editor, img) {
+		
+		var attachfile_no = img.context.dataset.fileno;
+		var attachfile_name = img.context.dataset.src;
+	
+		$.post("/deleteFile", { attachfile_name : attachfile_name ,
+								attachfile_no : attachfile_no }, function(){
+									
+			$(":hidden[value="+attachfile_no+"]").remove();
+			
+		});
 	});
 	
 

@@ -14,36 +14,35 @@ import javax.inject.Inject;
 
 import org.apache.commons.io.IOUtils;
 import org.nojo.domain.AttachfileVO;
-import org.nojo.mapper.QuestionMapper;
+import org.nojo.service.AttachFileService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 //QnA 게시판 파일 첨부 컨트롤러
-@Controller
+@RestController
 public class qnaFileAttachController {
 
 	@Inject
-	private QuestionMapper mapper;
+	private AttachFileService service;
 
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 
-	@ResponseBody
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
 	public void upload() {
 
 	}
 
-	@ResponseBody
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	public Map<String, Object> upload(MultipartFile file) throws Exception {
 
@@ -55,11 +54,12 @@ public class qnaFileAttachController {
 		vo.setAttachfile_path(attachfile_name);
 		vo.setAttachfile_size(file.getSize());
 
-		mapper.addAttach(vo);
+		service.addAttachFile(vo);
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("filePath", attachfile_name);
 		map.put("fileNo", vo.getAttachfile_no());
+		map.put("fileName", fileName);
 		return map;
 	}
 
@@ -109,8 +109,7 @@ public class qnaFileAttachController {
 		}
 	}
 
-	@ResponseBody
-	@RequestMapping("/displayImage")
+	@RequestMapping("/displayFile")
 	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
 
 		InputStream in = new FileInputStream(uploadPath + fileName);
@@ -118,7 +117,7 @@ public class qnaFileAttachController {
 		ResponseEntity<byte[]> entity = null;
 
 		try {
-			
+
 			final HttpHeaders headers = new HttpHeaders();
 
 			MediaType mimeType = null;
@@ -131,43 +130,41 @@ public class qnaFileAttachController {
 				mimeType = MediaType.IMAGE_PNG;
 			} else if (suffix.equalsIgnoreCase("gif")) {
 				mimeType = MediaType.IMAGE_GIF;
-			}
+			} else {
 
-			headers.setContentType(mimeType);
-			
-			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers ,HttpStatus.CREATED);
-			
-		} catch (Exception e) {
-			
+				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+				headers.add("Content-Dispostion",
+						"attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+			}
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+		} catch (
+
+		Exception e)
+
+		{
+
 			e.printStackTrace();
 			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
 
-		} finally {
-			
+		} finally
+
+		{
+
 			in.close();
-		
+
 		}
-		
+
 		return entity;
 
 	}
 
-	@ResponseBody
 	@RequestMapping(value = "/deleteFile", method = RequestMethod.POST)
-	public ResponseEntity<String> deleteFile(@RequestParam("attachfile_name") String attachfile_name) {
+	public ResponseEntity<String> deleteFile(@RequestParam("attachfile_name") String attachfile_name,
+			@RequestParam("attachfile_no") Integer attachfile_no) throws Exception {
 
-		String dir = attachfile_name.substring(0, 12);
-
-		System.out.println("--------------");
-		System.out.println(attachfile_name);
-		System.out.println("--------------");
-		System.out.println(dir);
-		System.out.println("--------------");
-		System.out.println(new File(uploadPath + dir));
-		System.out.println("--------------");
-		System.out.println(new File(uploadPath + attachfile_name));
-		new File(uploadPath + dir.replace('/', File.pathSeparatorChar)).delete();
 		new File(uploadPath + attachfile_name.replace('/', File.pathSeparatorChar)).delete();
+
+		service.removeAttach(attachfile_no);
 
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
 

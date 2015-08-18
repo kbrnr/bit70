@@ -21,7 +21,7 @@
 		<c:forEach items="${list }" var="vo">
 			<c:if test="${vo.seat_x != 0}">
 				<div class="chair" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">
-					<div class="img">X</div>
+					<div class="img"><img width="10px" height="10px" alt="" src="/${domain}/seat/seatImg?userId=a" /></div>
 						<span class="hidden memId">${vo.mem_id}</span>
 	                	<span>${vo.mem_name}</span>
 				</div>
@@ -32,8 +32,9 @@
 		<c:forEach items="${list }" var="vo">
 			<c:if test="${vo.seat_x == 0}">
 				<div class="chair" style="position: relative;">
-					<span class="hidden memId">${vo.mem_id}</span>
-                	<span>${vo.mem_name}</span>
+					<div class="img"><img width="10px" height="10px" alt="" src="/${domain}/seat/seatImg?userId=a" /></div>
+						<span class="hidden memId">${vo.mem_id}</span>
+	                	<span>${vo.mem_name}</span>
 				</div>
 			</c:if>		
 		</c:forEach>
@@ -45,6 +46,7 @@
 <div class="position">Position</div>
 <div id="info" style="width: 200px; height: 40px; background-color: #e0a0a0;"></div>
 <br/> 
+
 <script>
     var array = [];
     var xxx = "";
@@ -121,11 +123,20 @@
         		 // $(".chair").draggable({  revert: "invalid" }); 
 //        		return;
 //        	}
-        	var li = ui.helper[0];
-        	var id = $(li).find(".memId").text();
-            var x = e.offsetX;
-            var y = e.offsetY;
-            array.push(new Seat(id, x, y));
+			if((e.toElement.id == "lobby")) {
+	        	var li = ui.helper[0];
+	        	var id = $(li).find(".memId").text();
+	            var x = 0;
+	            var y = 0;
+	            array.push(new Seat(id, x, y));
+			}else {
+				var li = ui.helper[0];
+	        	var id = $(li).find(".memId").text();
+	            var x = e.offsetX;
+	            var y = e.offsetY;
+	            array.push(new Seat(id, x, y));
+	        	
+			}
             
 /*         	var li = ui.helper[0];
         	var id = $(li).find(".memId").text();

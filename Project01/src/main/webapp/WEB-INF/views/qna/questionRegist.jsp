@@ -99,7 +99,7 @@
 					<!-- /.box-header -->
 					<div class='box-body pad'>
 						<section id="editor" style="width: 100%; margin: auto;">
-							<form role="form" method="post" action="questionRegist">
+							<form id='regForm' role="form" method="post" action="questionRegist">
 								<div style="height: 150px;">
 									<input id="title" type="text" class="form-control"
 										value="${vo.question_title }" name="question_title"
@@ -112,19 +112,17 @@
 										placeholder="도메인 히든으로 처리하자">
 								</div>
 
-								<textarea id='edit' name="question_content"
-									style="margin-top: 30px;"></textarea>
+								<textarea id='edit' name="question_content" style="margin-top: 30px;"></textarea>
 								<br />
 								<div>
-									<ul class='list-group'>
-										<li class="list-group-item">파일명</li>
+									<ul class='list-group' >
+										<li class="list-group-item"></li>
 									</ul>
 								</div>
 								<div class="box-footer">
 									<button id="RegBoard" type="submit" class="btn btn-primary">Submit</button>
 									<a href="listpage">
-										<button type="button" class="btn btn-info"
-											style="float: right;">Go List</button>
+										<button type="button" class="btn btn-info" style="float: right;">Go List</button>
 									</a>
 								</div>
 							</form>
@@ -178,37 +176,42 @@
 				'undo', 'redo', 'html' ],
 		imageUploadURL : "/upload",	
 		pastedImagesUploadURL : "/upload",
-		imageDeleteURL : "/deleteFile",
+		fileUploadURL: "/upload"
+		
 	});
 	
-	$('#edit').on('editable.afterImageUpload', function (e, editor, response) {
+	$('#edit').on('editable.afterFileUpload', function (e, editor, response) {
+		
 		var res = JSON.parse(response);
-		var str = "<img width ='300' name='attachfile_name' class='fr-fin fr-dib' data-src="+ res.filePath+" src='/displayImage?fileName="+ res.filePath +"' />";
-		var no = "<div class=input><input type='hidden' name='attachfile_no' value='"+res.fileNo+"' /></div>";
+		console.log(res.filePath);
+		var str = "<a href='displayFile?fileName="+res.filePath+"'<span>"+res.fileName+"</span></a>";
+		
+		$(".list-group-item").append(str);
+		});
+	
+	
+	$('#edit').on('editable.afterImageUpload', function (e, editor, response) {
+		
+		var res = JSON.parse(response);
+		var str = "<img width ='300' name='attachfile_name' class='fr-fin fr-dib' data-fileNo='"+res.fileNo+"' data-src="+ res.filePath +" src='/displayFile?fileName="+ res.filePath +"' />";
+		var no = "<input class='fno' type='hidden' name='attachfile_no' value='"+res.fileNo+"' />";
+		
 		$(".froala-view").append(str);
-		$(".froala-view").append($(no));
+		$("#regForm").append($(no));
 		
 	});
 	
 	$('#edit').on('editable.beforeRemoveImage', function (e, editor, img) {
-			
-			var attachfile_name = img.context.dataset.src;
-			
-			alert(attachfile_name);
-			console.log(img.context.dataset.src);
-			
-			$.post("/deleteFile", { attachfile_name : attachfile_name }, function(){
-				
-				
-			});
-	});
 		
-	
-	$('#edit').on('editable.afterRemoveImage', function (e, editor, img) {
-		
-			$(".input").remove();
+		var attachfile_no = img.context.dataset.fileno;
+		var attachfile_name = img.context.dataset.src;
+
+		$.post("/deleteFile", { attachfile_name : attachfile_name ,
+								attachfile_no : attachfile_no }, function(){
+									
+			$(":hidden[value="+attachfile_no+"]").remove();
 			
-		
+		});
 	});
 	
 	

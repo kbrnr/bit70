@@ -4,14 +4,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.nojo.domain.AttachfileVO;
-import org.nojo.domain.FilemanagerVO;
 import org.nojo.domain.QuestionVO;
 import org.nojo.mapper.QuestionMapper;
 import org.nojo.util.Criteria;
 import org.nojo.util.Search;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
@@ -66,16 +63,6 @@ public class QuestionServiceImpl implements QuestionService {
 		return mapper.searchPage(domain, cri, search);
 	}
 
-	@Override
-	public void addAttach(AttachfileVO vo) throws Exception {
-		
-		mapper.addAttach(vo);
-	}
 
-	@Override
-	public void addAttachBoard(FilemanagerVO vo) throws Exception {
-
-		mapper.addAttachBoard(vo);
-	}
-
+	
 }
