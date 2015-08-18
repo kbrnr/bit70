@@ -40,7 +40,8 @@
 <!-- REQUIRED JS SCRIPTS -->
 <link href="/resources/nojo/css/bootstrap-treeview.min.css" rel="stylesheet" type="text/css" />
 <script src="/resources/nojo/script/bootstrap-treeview.min.js" type="text/javascript"></script>
-
+<!-- 배치도 CSS 추가-->
+<link rel="stylesheet" type="text/css" href="/resources/nojo/css/seatStyle.css">
 
   </head>
   <!--
@@ -207,8 +208,9 @@ body{background-color:#ecf0f5;}
 	                </div><!-- /.box-header -->
 
                 	<div class="box-body">
-                		<div id="container" style="border: thin solid black;">
-		                  <div id="seat"  style="height: 400px; width: 700px; margin: 0 auto; overflow: auto; ">
+                		<div id="container">
+		                  <div id="seat">
+		             
 						  </div>
 						</div>
                 	</div><!-- /.box-body -->
@@ -313,12 +315,11 @@ body{background-color:#ecf0f5;}
 				var y = this.seat_y;
 				var name = this.mem_name;
 				var id = this.mem_id;
-				
-				var str = "<div class='chair' style='margin-left: " + x + "px; margin-top: " + y + "px;'>" + name + "</div>";
+				var domain = "${domain}";
+				var str = "<div class='chair' style='margin-left: " + x + "px; margin-top: " + y + "px;'><div class='img'><img class='realImg' src='/" + domain + "/seat/seatImg?userId=" + id + "' '/></div>" + name + "</div>";
 				var chair = $(str);
 				chair.css( { "margin-left" : x+"px", "margin-top" : y+"px" });
 				$("#seat").append(str);
-					
 			});
 			
 			
