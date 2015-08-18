@@ -122,7 +122,7 @@
 							  		 </td>
 							  		</c:if>
 							  		<c:if test = "${scorelist.comprehension_score != 0}">
-							  		 <td>(${scorelist.teacherquestion_no})(${scorelist.mem_id})${scorelist.comprehension_score}
+							  		 <td>${scorelist.comprehension_score}
 							  		 </td>
 							  		</c:if>
 							  	</c:forEach>
