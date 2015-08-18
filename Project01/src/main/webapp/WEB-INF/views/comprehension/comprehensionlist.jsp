@@ -106,7 +106,7 @@
 		                      	 <th>&nbsp;</th>
 		                      	 <c:forEach items="${comprehensionmap.namelist}" var="namelist">
 			                     	<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 142px;">
-			                     	${namelist.mem_name}(${namelist.mem_id})
+			                     	${namelist.mem_name}
 			                     	</th>
 			                     </c:forEach>
 			                  </tr>
@@ -114,7 +114,7 @@
 							<tbody>							  
 							  <c:forEach items="${comprehensionmap.tqlist}" var="tqlist" varStatus="status">
 							  <tr>
-							  	<td>${status.index}(${tqlist.teacherquestion_no})${tqlist.teacherquestion_content}${tqlist.teacherquestion_content}
+							  	<td>${tqlist.teacherquestion_content}
 							  	</td>
 							  	<c:forEach items="${comprehensionmap.scorelistset[status.index]}" var="scorelist">
 							  		<c:if test = "${scorelist.comprehension_score == 0}">
