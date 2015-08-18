@@ -152,7 +152,16 @@
 		imageUploadURL : "/upload",	
 		pastedImagesUploadURL : "/upload",		
 		fileUploadURL: "/upload"
+			
 	});
+	
+	$('#edit').on('editable.afterFileUpload', function (e, editor, response) {
+		
+		var res = JSON.parse(response);
+		console.log(res.filePath);
+		var str = "<a href='/displayFile?fileName="+res.filePath+"'<span>"+res.fileName+"</span></a><br/>";
+		$(".list-group-item").append(str);
+		});
 	
 	$('#edit').on('editable.afterImageUpload', function (e, editor, response) {
 		

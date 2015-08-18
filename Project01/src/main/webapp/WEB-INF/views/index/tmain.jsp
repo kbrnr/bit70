@@ -67,7 +67,6 @@
 <style>
 	body{background-color:#ecf0f5;}
   
-  	.chair{border: thin solid black; width: 80px; position: absolute;}
 </style>
   
   

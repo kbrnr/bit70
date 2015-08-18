@@ -8,25 +8,29 @@
     <link rel="stylesheet" type="text/css" href="/resources/nojo/css/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="/resources/nojo/css/jquery-ui.structure.min.css">
     <link rel="stylesheet" type="text/css" href="/resources/nojo/css/jquery-ui.theme.min.css">
+<!-- seat Style -->
     <link rel="stylesheet" type="text/css" href="/resources/nojo/css/seatStyle.css">
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="/resources/plugins/jQueryUI/jquery-ui-1.10.3.min.js"></script>
-
 </head>
 <body>
 <h2>${domain} 좌석배치표</h2>
 
 <div id="container">
-	<div id="seat">
-		<c:forEach items="${list }" var="vo">
-			<c:if test="${vo.seat_x != 0}">
-				<div class="chair" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">
-					<div class="img"><img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}"/></div>
-						<span class="hidden memId">${vo.mem_id}</span>
-	                	<span>${vo.mem_name}</span>
-				</div>
-			</c:if>		
-		</c:forEach>
+	<div id="wrapper">
+		<div id="relative">
+			<div id="seat">
+				<c:forEach items="${list }" var="vo">
+					<c:if test="${vo.seat_x != 0}">
+						<div class="chair" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">
+							<div class="img"><img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}"/></div>
+								<span class="hidden memId">${vo.mem_id}</span>
+			                	<span>${vo.mem_name}</span>
+						</div>
+					</c:if>		
+				</c:forEach>
+			</div>
+		</div>
 	</div>
 	<div id="lobby">
 		<c:forEach items="${list }" var="vo">
@@ -40,31 +44,13 @@
 		</c:forEach>
 	</div>
 </div>
-<br />
 <button id="save" type="button">저장하기</button>
 
 <div class="position">Position</div>
 <div id="info" style="width: 200px; height: 40px; background-color: #e0a0a0;"></div>
 
 <script>
-
-
-$(".lol").on("click", function(e) {
-    e = e || window.event;
-
-    var target = e.target || e.srcElement,
-        rect = target.getBoundingClientRect(),
-        offsetX = e.clientX - rect.left,
-        offsetY = e.clientY - rect.top;
-
-    console.log([offsetX, offsetY]);
-});
-
-
-
-
     var array = [];
-    var xxx = "";
     var chair = $(".chair");
 
     var xcnr = "";
@@ -98,21 +84,6 @@ $(".lol").on("click", function(e) {
         $("#info").html(message);
     });
 
-    $(".seat").on('drop', function (e) {
-    	//console.log(e);
-    	/* 
-        var chair = $(".chair");
-        array = [];
-        for (var i = 0; i < chair.length; i++) {
-            var id = $("#chair span:nth(" + (i * 2) + ")").text();
-            var x = e.offsetX;
-            var y = e.offsetY;
-            array.push(new Seat(id, x, y));
-	        console.log(id, x, y);
-        } */
-    });
-    
-    
     $(".chair").draggable({
         containment: "div#content",
         cursorAt: {
@@ -120,17 +91,6 @@ $(".lol").on("click", function(e) {
             left: -2
         },
         stop: function (e, ui) {
-        	console.log("e");
-        	console.log(e);
-        	console.log("ui");
-        	console.log(ui);
-//        	if(!(e.toElement == $(".seat")[0])){
-        		//팅구는로직
-        		//z-index :1000으로 놓고, 기존에 있던 자리를 저장한  후. 거기서 이동하는 포지션- . 돌아가는 것..
-        		 /* $( ".chair").animate({  revert: true }); */
-        		 // $(".chair").draggable({  revert: "invalid" }); 
-//        		return;
-//        	}
 			if((e.toElement.id == "lobby")) {
 	        	var li = ui.helper[0];
 	        	var id = $(li).find(".memId").text();
@@ -143,46 +103,14 @@ $(".lol").on("click", function(e) {
 	            var x = e.offsetX;
 	            var y = e.offsetY;
 	            array.push(new Seat(id, x, y));
+//이 이후는 고칠 것.(seat, lobby에 있는 chair Div들이 밖으로 나가면 revert 시키는 것 만들기!!)
 			}else if((e.toElement.id == "")) {
 				$(".chair").draggable({  revert: true }); 
 			}else {
-				
 			}
-            
-/*         	var li = ui.helper[0];
-        	var id = $(li).find(".memId").text();
-            var x = e.offsetX;
-            var y = e.offsetY;
-            array.push(new Seat(id, x, y));
-            console.log(array);  */
-            
         }
     });
 
-    $(".seat").droppable({
-        //tolerance: "intersect"
-    });
-
-    $(".chair").mouseup(function (e) {
-        xcnr = e.offsetX;
-        ycnr = e.offsetY;
-        $(".info").append(xcnr + ',' + ycnr + ' ');
-    });
-    
-    $(".realImg").before(function(e){
-    	console.log($(".realImg"));
-    	//이미지 타입 지정
-    	console.log($(".realImg").context.contentType);
-    	$(".realImg").context.contentType.append("image/png");
-    /* 	$.ajax({
-    		url: "/${domain}/seat/seatImg?userId=a",
-    		method : "get",
-   			dataType: "text/html",
-    		contentType : "image/png",
-    		success: function(data){
-    		}
-    		}); */
-    	});
 </script>
 </body>
 </html>

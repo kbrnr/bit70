@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -119,9 +119,8 @@
 			<div class="input-group input-group-lg">
 				<div class="box-body">
 					<form name="searchFrom">
-						<fieldset>
-							<div id="select_board" >
-								<select name="searchKey">
+							<div id="select_board">
+								<select name="searchKey" class="form-control" style="width: 150px; margin-right: 10px;">
 									<option value="question_title"
 										<c:if test="${searchKey =='question_title' }">selected</c:if>>제목</option>
 									<option value="question_title&question_content" selected
@@ -130,14 +129,13 @@
 									<option value="mem_id"
 										<c:if test="${searchKey=='mem_id' }">selected</c:if>>작성자</option>
 								</select>
-							</div>
-							<div class="input-group input-group-sm">
-			                    <input name="searchValue" type="text" class="form-control">
-			                    <span class="input-group-btn">
-			                      	<button class="btn btn-info btn-flat" type="Submit">Go!</button>
-			                    </span>
+								<div class="input-group">
+   								   <input type="text" class="form-control" name="searchValue" style="width: 200px;">
+								      <span class="input-group-btn">
+								        <button class="btn btn-default" type="Submit">Go!</button>
+								      </span>
 		                 	 </div><!-- /input-group -->
-						</fieldset>
+							</div>
 					</form>
 				</div>
 				<!-- /btn-group -->
