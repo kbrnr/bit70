@@ -110,13 +110,23 @@ body{background-color:#ecf0f5;}
 								</form>
 								<div id="tree"></div>
 							</div>
-							<div class="col-md-9">
-								<div class="panel panel-default">
+							<div class="col-md-6">
+								<div class="panel panel-primary">
 									<div class="panel-heading">
-										<h3 class="panel-title">자바</h3>
+										<h1 id="curri_title" class="panel-title" style="display: inline;"></h1>
 									</div>
 									<div class="panel-body">
 										<p id="curriContent"></p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<h1 class="panel-title">첨부파일</h1>
+									</div>
+									<div class="panel-body">
+										첨부파일 데스
 									</div>
 								</div>
 							</div>
@@ -165,16 +175,14 @@ body{background-color:#ecf0f5;}
 					data : list,
 					levels : 1,
 					onNodeSelected : function(event, data) {
-						console.log(data);
 						var parent = data;
 						while(parent.parentId != undefined){
 							parent = $('#tree').treeview('getParent', parent.nodeId);
 						}
 						$(":hidden[name=curri_no]").val(data.href);
 						$(":hidden[name=curri_gpno]").val(parent.href);
-						$(".panel-title").text(data.text);
+						$("#curri_title").text(data.text);
 						$("#curriContent").text(data.content);
-						console.log(parent);
 					}
 				});
 				
