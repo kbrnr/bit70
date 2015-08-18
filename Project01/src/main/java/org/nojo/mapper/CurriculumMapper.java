@@ -29,6 +29,6 @@ public interface CurriculumMapper {
 	@Delete("delete from tbl_curriculum where curri_no = #{curri_no}")
 	public void delete(int curri_no);
 
-	@Update("update tbl_curriculum set curri_name = #{curri_name} where curri_no = #{curri_no}")
+	@Update("update tbl_curriculum set curri_name = #{curri_name}, curri_content = #{curri_content} where curri_no = #{curri_no}")
 	public void update(CurriculumVO vo);
 }

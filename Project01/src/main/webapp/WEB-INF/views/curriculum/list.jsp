@@ -183,7 +183,16 @@
 	
 	$("#curri_content").change(function(){
 	  var target = $(".node-name.active");
-	  target.next().text($("#curri_content").val());
+	  var content = target.next();
+	  if(!content.length){
+		content = $('<span class="node-content">');
+		target.parent().append(content);
+	  }
+	  content.text($("#curri_content").val());
+	  var li = target.parent();
+	  if(!li.data("mode")){
+		  li.attr("data-mode", "modify");
+	  }
 	});
 	
 	$("#save").click(function(){

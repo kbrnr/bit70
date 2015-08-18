@@ -4,8 +4,8 @@
 <mapper namespace="org.nojo.mapper.CurriculumMapper">
 
 	<insert id="insert" parameterType="map">
-		insert into tbl_curriculum(curri_name, curri_pno, curri_depth, clz_domain) 
-		  values(#{vo.curri_name}, #{vo.curri_pno}, #{vo.curri_depth}, #{domain})
+		insert into tbl_curriculum(curri_name, curri_pno, curri_depth, clz_domain, curri_content) 
+		  values(#{vo.curri_name}, #{vo.curri_pno}, #{vo.curri_depth}, #{domain}, #{vo.curri_content})
 		<selectKey resultType="int" keyProperty="vo.curri_no" order="AFTER">
 			select last_insert_id()
 		</selectKey>
