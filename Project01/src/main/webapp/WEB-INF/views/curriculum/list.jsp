@@ -40,16 +40,29 @@
     <script src="/resources/nojo/script/xlsx.core.min.js"></script>
 	
 	<style>
+	    .list-group-item {
+	        padding: 5px;
+	    }
+	
+	    .glyphicon-minus {
+	        margin-right: 10px;
+	    }
+	
+	    .glyphicon {
+	        cursor: pointer;
+	    }
+	
+	    .box-header {
+	        padding-bottom: 3px;
+	    }
+	
+	    .inner {
+	        padding-left: 10px;
+	        padding-top: 5px;
+	        list-style: none;
+	    }
+	    
 	    body{background-color:#ecf0f5;}
-	    
-	    .icon{
-	    	cursor: pointer;
-	    	margin-right: 10px;
-	    }
-	    
-	    .tree-node{
-	    	cursor: pointer;
-	    }
 	</style>
 </head>
 
@@ -61,7 +74,7 @@
 	    </h1>
 	    <ol class="breadcrumb">
 	        <li><a href="#"><i class="fa fa-fw fa-home"></i>Home</a></li>
-	        <li><a href="#">${domain}</a></li>
+	        <li><a href="#">java70</a></li>
 	        <li class="active">커리큘럼</li>
 	    </ol>
 	</section>
@@ -70,35 +83,15 @@
 	<section class="content">
 	    <div class="box box-primary">
 	        <div class="box-header with-border">
-	            <h3 class="box-title">Blank Box</h3>
+	        	<button id="save" class="btn bg-olive">저장</button>
+	            <button id="excel" class="btn bg-olive" data-toggle="modal" data-target="#myModal">엑셀</button>
+	            <button id="add" class="btn bg-olive">추가</button>
 	        </div>
 	        	
 	        <div class="box-body">
 	        	<div class="row">
-	        		<div class="col-md-3">
-	        			 <div class="pull-right">
-			                <button id="add" class="btn btn-primary">추가</button>
-			                <button id="mod" class="btn btn-primary">수정</button>
-			                <button id="del" class="btn btn-primary">삭제</button>
-			            </div>
-			            <div class="clearfix"></div>
-			            <div id="curri">
-			            	<ul class="list-group">
-							  <li class="tree-node list-group-item">
-							  	<span class="icon glyphicon glyphicon-plus"></span>
-							  	<span class="name">자바</span>
-							  </li>
-							  <li class="tree-node list-group-item">
-							  	<span class="icon glyphicon glyphicon-plus"></span>
-							  	<span class="name">안드로이드</span>
-							  </li>
-							  <li class="tree-node list-group-item">
-							  	<span class="icon glyphicon glyphicon-plus"></span>
-							  	<span class="name">오라클</span>
-							  </li>
-							</ul>
-			            
-			            </div>
+	        		<div id="curri" class="col-md-3">
+	        			
 	        		</div>
 	        		<div class="col-md-9">
 	        		</div>
@@ -108,58 +101,200 @@
 	    </div>
 	</section>
 	<!-- /.content -->
-
+        
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+	  <div class="modal-dialog">
+	  
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">엑셀</h4>
+	      </div>
+	      <div class="modal-body">
+	        <button>다운하기</button>
+	        <input type="file" id="excelUpload">
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	    
+	  </div>
+	</div>
 <script>
-$(".tree-node").click(function(){
-	console.log($(this).siblings(".active"));
-	$(this).siblings(".active").removeClass("active");
-	$(this).addClass("active");
-});
+    $("#add").click(function () {
+        $("#curri").append(makeTag(true, null, 1, "add"));
+    });
 
-function Node(name, no, content) {
-	this.name = name;
-	this.no = no;
-	this.content = content;
-}
+    $("#curri").on("click", ".glyphicon-plus", function () {
+        var li = $(this).closest("li");
+        var depth = parseInt(li.data("depth")) + 1;
+        li.append(makeTag(false, null, depth, "add", null, li.data("no")));
+    });
 
-//트리에 사용될 데이터를 알맞는 형식으로 변경
-/* var list = [];
-$.ajax({
-	async: false,
-	dataType: "json",
-	url: "/${domain}/curriculum",
-	success: function(data){
-		var work;
-		$(data).each(function() {
-			var name = this.curri_name;
-			var no = this.curri_no;
-			var content = this.curri_content;
-			var depth = this.curri_depth;
-			var node = new Node(name, no, content);
-			if (depth == 1) {
-				work = [];
-				list.push(node);
-			} else {
-				if (!work[depth - 2].children) {
-					work[depth - 2].children = [];
-				}
-				work[depth - 2].children.push(node);
+    $("#curri").on("click", ".glyphicon-minus", function () {
+    	var ul = $(this).closest("ul");
+    	remove(ul);
+    	
+    });
+    
+    $("#curri").on("change", ".curri_name", function () {
+    	var li = $(this).closest("li");
+    	var mode = li.data("mode");
+    	if(!mode){
+    		li.attr("data-mode", "modify");
+    	}
+    });
+    
+    $("#save").click(function(){
+    	if(!confirm("정말 저장 하시겠습니까?")){ 
+    		return;
+    	}
+    	var list = [];
+    	var d = $(".curri");
+    	d.each(function(){
+    		var mode = $(this).data("mode");
+    		if(!mode){return;}
+    		var no = $(this).data("no");
+    		var pno = $(this).data("pno");
+    		var depth = $(this).data("depth"); 
+    		var name = $(this).find(".curri_name").val();
+    		list.push(new Curriculum(no, pno, name, depth, mode));
+    	});
+    	console.log(list);
+    	if(list.length < 1){
+    		return;
+    	}
+    	$.ajax({
+    		url : "/${domain}/curriculum",
+	        type : "POST",
+	        contentType : "application/json",
+	        data : JSON.stringify(list),
+	        success : function(data) {
+	            alert("가니?");
+	        }
+    	});
+    	location.reload();
+    });
+    
+    $.getJSON("/${domain}/curriculum", function(list){
+    	var temp = [];
+    	var work;
+    	$(list).each(function(){
+    		var name = this.curri_name;
+    		var depth = this.curri_depth;
+    		var no = this.curri_no;
+    		if(depth == 1){
+    			var root = makeTag(true, name, depth, null, no);
+    			work = [root];
+    			temp.push(root);
+    		}else{
+    			var parent = work[depth-2];
+    			var child = makeTag(false, name, depth, null, no, this.curri_pno);
+    			work[depth-1] = child;
+    			parent.children("li:first").append(child);
+    		}
+    	});
+    	for(var i in temp){
+    		$("#curri").append(temp[i]);
+    	}
+    });
+    
+    
+	
+	var colors = ["list-group-item-success", "list-group-item-info", "list-group-item-warning", "list-group-item-danger"];
+
+
+    function Curriculum(no, pno, name, depth, mode) {
+    	this.curri_no = no;
+    	this.curri_pno = pno;
+    	this.curri_name = name;
+        this.curri_depth = depth;
+        this.mode = mode;
+    }
+	
+	function remove(ul){
+		var li = ul.find("li");
+		li.each(function(){
+			if($(this).data("mode")=="add"){
+				$(this).removeAttr("data-mode");
+			}else{
+				$(this).attr("data-mode", "remove");
 			}
-			work[depth - 1] = node;
-		});  
+		});
+	    ul.css("display", "none");
 	}
-});
-
-for(var i in list){
-	var str = '<ul class="list-group">'
-			+ '<li class="list-group-item">'
-			
-			+ '</li>'
-	  		+ '</ul>';
-} */
-
-
-
+	
+	$("#excelUpload").change(handleFile);
+	function handleFile(e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        var name = file.name;
+        reader.onload = function(e) {
+            var data = e.target.result;
+            var workbook = XLSX.read(data, {type : 'binary'});
+            var sheet_name_list = workbook.SheetNames;
+            sheet_name_list.forEach(function(y) {
+                var worksheet = workbook.Sheets[y];
+                var temp = [];
+                var work;
+                for (z in worksheet) {
+                    if (z[0] === '!')
+                        continue;
+                    var name = worksheet[z].v;
+                    var depth = z.charCodeAt(0) - 64;
+            		if(depth == 1){
+            			var root = makeTag(true, name, depth, "add");
+            			work = [root];
+            			temp.push(root);
+            		}else{
+            			var child = makeTag(false, name, depth, "add");
+            			work[depth-1] = child;
+            			work[depth-2].children("li:first").append(child);
+            		}
+                }
+                $("#curri > ul").each(function(){
+                	remove($(this));
+                });
+                for(var i in temp){
+            		$("#curri").append(temp[i]);
+            	}
+			});
+        };
+        reader.readAsBinaryString(file);
+    }
+	
+	function makeTag(isRoot, value, depth, mode, no, pno) {
+	    var ulClass = isRoot ? "list-group" : "inner";
+	    var liClass = isRoot ? "list-group-item " + colors[parseInt(Math.random()*4)] : "";
+	    var divClass = isRoot ? "input-group-lg" : "input-group-sm";
+	    var value = value ? "value='" + value + "'" : "";
+	    var depth = depth ? "data-depth='" + depth + "' " : "";
+	    var mode = mode ? "data-mode='" + mode + "' " : "";
+	    var no = no ? "data-no='" + no + "' " : "";
+	    var pno = pno ? "data-pno='" + pno + "'" : "";
+	    var str = '<ul class="' + ulClass + '">'
+	            + '<li class="curri ' + liClass + '" ' + depth + mode + no + pno + '>'
+	            + '<div class="input-group ' + divClass + '">'
+	            + '<input type="text" class="form-control curri_name" ' + value + '>'
+	            + '<div class="input-group-addon">'
+	            + '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>'
+	            + '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>'
+	            + '</div>'
+	            + '</div>'
+	            + '</li>'
+	            + '</ul>';
+	    var tag = $(str);
+	    /*
+	    if (isRoot) {
+	        var dropZone = $('<form action="/" class="dropzone dz-clickable"><div class="dz-message"><span>파일 업로드</span></div></form>');
+	        dropZone.dropzone({url: "/"});
+	        tag.append($("<li class='list-group-item'>").append(dropZone));
+	    }*/
+	    return tag; 
+	}
 </script>
 
 </body>

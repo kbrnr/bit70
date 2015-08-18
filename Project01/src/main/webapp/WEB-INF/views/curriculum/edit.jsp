@@ -83,13 +83,9 @@
 	<section class="content">
 	    <div class="box box-primary">
 	        <div class="box-header with-border">
-	            <h3 class="box-title">Blank Box</h3>
-	            <div class="pull-right">
-	            	<button id="save" class="btn bg-olive">저장</button>
-	                <button id="excel" class="btn bg-olive" data-toggle="modal" data-target="#myModal">엑셀</button>
-	                <button id="add" class="btn bg-olive">추가</button>
-	            </div>
-	            <div class="clearfix"></div>
+	        	<button id="save" class="btn bg-olive">저장</button>
+	            <button id="excel" class="btn bg-olive" data-toggle="modal" data-target="#myModal">엑셀</button>
+	            <button id="add" class="btn bg-olive">추가</button>
 	        </div>
 	        	
 	        <div class="box-body">
