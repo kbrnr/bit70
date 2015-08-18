@@ -101,8 +101,8 @@ body{background-color:#ecf0f5;}
 					<div class="box-body">
 						<div class="row">
 							<div class="col-md-3">
-								<form id="searchTree" class="form-inline">
-									<div class="input-group margin">
+								<form id="searchTree">
+									<div class="input-group">
 								      <input id="treeSearchText" type="text" class="form-control" placeholder="커리큘럼 검색">
 								      <span class="input-group-btn">
 								        <button class="btn btn-info">검색</button>
@@ -254,66 +254,28 @@ body{background-color:#ecf0f5;}
 			</div><!-- /.col -->
 		</div><!-- /.row -->
 
-
-
-
-
-			
 		<!-- ----------------------------------------- -->	
 
 		</section>
 		<!-- /.content -->
 
-	 <div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">이해했니?</h4>
-			</div>
-			<div class="modal-body">
-				<p id="msg">이해되냐</p>
-				<div class="row">
-  					<div class="col-md-3">
-  						<form id="sendScore" class="form-inline">
-							<input type="hidden" name="clz_domain" value="${domain}">
-							<input type="hidden" name="mem_id" value="${userid}">
-							<input type="hidden" name="teacherquestion_no">
-							<div class="input-group">
-						      <input type="number" name="comprehension_score" class="form-control" min="0" max="10" placeholder="점수" required="required">
-						      <span class="input-group-btn">
-						        <button class="btn btn-default">전송</button>
-						      </span>
-						    </div>
-					    </form>
-			    	</div>
-			    </div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
 	
-	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<script>
-		var socket = io.connect('http://192.168.0.18:3000');
-		socket.emit("init", {domain: "${domain}", userId: "${userid}"});
-		socket.on("understanding", function(msg){
+		parent.socket.emit("init", {domain: "${domain}", userId: "${userid}"});
+		parent.socket.on("understanding", function(msg){
 			var arr = msg.split("|");
-			$("#sendScore [name=teacherquestion_no]").val(arr[0]);
-			$("#msg").text(arr[1]);
-			$('#myModal').modal('show');
+			parent.$("#sendScore [name=teacherquestion_no]").val(arr[0]);
+			parent.$("#msg").text(arr[1]);
+			parent.$('#myModal').modal('show');
 		});
 		
-		$("#sendScore").submit(function(e){
+		parent.$("#sendScore").submit(function(e){
 			e.preventDefault();
+			console.log($(this).serialize());
 			$.post("/${domain}/comprehension", $(this).serialize(), function(data){
 				console.log(data);
 			});
-			$('#myModal').modal('hide');
+			parent.$('#myModal').modal('hide');
 		});
 			
 		// Seat에서 사용하는 함수

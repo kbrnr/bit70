@@ -169,12 +169,12 @@
 					data : list,
 					levels : 1,
 					onNodeSelected : function(event, data) {
-						var parent = data;
-						while(parent.parentId != undefined){
-							parent = $('#tree').treeview('getParent', parent.nodeId);
+						var p = data;
+						while(p.parentId != undefined){
+							p = $('#tree').treeview('getParent', p.nodeId);
 						}
-						$(":hidden[name=curri_no]").val(data.href);
-						$(":hidden[name=curri_gpno]").val(parent.href);
+						parent.$(":hidden[name=curri_no]").val(data.href);
+						parent.$(":hidden[name=curri_gpno]").val(p.href);
 						$("#curri_title").text(data.text);
 						$("#curriContent").text(data.content);
 					}
@@ -249,51 +249,20 @@
 		</section>
 		<!-- /.content -->
 
-	
-	
-	<div class="modal fade" id="myModal" role="dialog">
-			<div class="modal-dialog">
-				Modal content
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">이해했닝</h4>
-				</div>
-				<div class="modal-body">
-					<form id="sendQuestion" class="form-inline">
-						<input type="hidden" name="curri_no">
-						<input type="hidden" name="curri_gpno">
-						<div class="input-group">
-					      <input type="text" name="teacherquestion_content" class="form-control" placeholder="질문을 입력하세요">
-					      <span class="input-group-btn">
-					        <button id="questionBtn" class="btn btn-default">전송</button>
-					      </span>
-					    </div>
-				    </form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<script>
-		var socket = io.connect('http://192.168.0.18:3000');
-		socket.emit("init", {domain: "${domain}", userId: "${userid}"});
-		
 		$("#question").click(function(){
-			$('#myModal').modal('show');
+			parent.$('#myModal').modal('show');
 		});
 		
-		$("#sendQuestion").submit(function(e){
+		parent.$("#sendQuestion").submit(function(e){
 			e.preventDefault();
+			console.log($(this));
 			var data = $(this).serialize();
+			console.log(data);
 			var question = $(this).find("[name=teacherquestion_content]").val();
 			$.post("/${domain}/comprehension/question", data, function(no){
-				socket.emit("understanding", no + "|" + question);
-				$('#myModal').modal('hide');
+				parent.socket.emit("understanding", no + "|" + question);
+				parent.$('#myModal').modal('hide');
 			});
 		});
 	
@@ -309,10 +278,7 @@
 				var chair = $(str);
 				chair.css( { "margin-left" : x+"px", "margin-top" : y+"px" });
 				$("#seat").append(str);
-					
 			});
-			
-			
 		});
 		
 	</script>
