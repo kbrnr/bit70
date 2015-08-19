@@ -40,364 +40,256 @@
     <script src="/resources/nojo/script/xlsx.core.min.js"></script>
 	
 	<style>
-	    .tree {
-	        padding-left: 0px;
+	    .list-group-item {
+	        padding: 5px;
+	    }
+	
+	    .glyphicon-minus {
+	        margin-right: 10px;
+	    }
+	
+	    .glyphicon {
+	        cursor: pointer;
+	    }
+	
+	    .box-header {
+	        padding-bottom: 3px;
+	    }
+	
+	    .inner {
+	        padding-left: 10px;
+	        padding-top: 5px;
 	        list-style: none;
-	        margin-bottom: 0px;
 	    }
 	    
-	    .tree-node{
-	    	padding: 0px;
-	    }
-	    
-	    .node-content{
-	    	display: none;
-	    }
-	    
-	    .node-name{
-	    	display: block;
-	    	cursor: pointer;
-	    	padding: 10px 0px 10px 10px;
-	    }
-	    
-	    .node-name:hover{
-	    	background: #DDD;
-	    }
-	    
-	    .node-name.active{
-	    	background-color: #337ab7;
-	    	color: #fff;
-	    }
-	    
-	    .node-name.parent{
-	    	font: bold;
-	    }
-	    
-	    .node-name.parent:after {
-	    	content: '›';
-	    	margin-left: 5px;
-	    	font-weight: normal;
-	    }
-	    
-	    li li > .node-name { padding-left: 20px; }
-	  	li li li > .node-name { padding-left: 30px; }
-	  	li li li li > .node-name { padding-left: 40px; }
-	  	li li li li li > .node-name { padding-left: 50px; } 
-	  	
 	    body{background-color:#ecf0f5;}
 	</style>
 </head>
 
 <body>
-	<div class="container">
-		<!-- Content Header (Page header) -->
-		<section class="content-header">
-		    <h1>
-		        커리큘럼
-		    </h1>
-		    <ol class="breadcrumb">
-		        <li><a href="#"><i class="fa fa-fw fa-home"></i>Home</a></li>
-		        <li><a href="#">java70</a></li>
-		        <li class="active">커리큘럼</li>
-		    </ol>
-		</section>
-		<!-- Main content -->
-		<section class="content">
-		    <div class="box box-primary">
-		        <div class="box-header with-border">
-		            <button id="add" class="btn bg-olive">추가</button>
-		            <button id="del" class="btn bg-olive">삭제</button>
-		            <button id="mod" class="btn bg-olive">수정</button>
-		        	<button id="save" class="btn bg-olive">저장</button>
-		        	<div class="pull-right">
-		        		<button id="excel" class="btn bg-olive" data-toggle="modal" data-target="#myModal">엑셀</button>
-		        	</div>
-		        </div>
-		        <div class="box-body">
-		        	<div class="row">
-		        		<div class="col-md-3">
-		        			<form id="searchTree">
-								<div class="input-group">
-							      <input id="treeSearchText" type="text" class="form-control" placeholder="커리큘럼 검색">
-							      <span class="input-group-btn">
-							        <button class="btn btn-info">검색</button>
-							      </span>
-							    </div><!-- /input-group -->
-							</form>
-		        			<div id="curri"></div>
-		        		</div>
-		        		<div class="col-md-6">
-		        			<div class="panel panel-primary">
-								<div class="panel-heading">
-									<h1 id="curri_title" class="panel-title" style="display: inline;">　</h1>
-								</div>
-								<div class="panel-body">
-									<textarea id="curri_content" class="form-control" rows="5"></textarea>
-								</div>
-							</div>
-		        		</div>
-		        		<div class="col-md-3">
-							<div class="panel panel-primary">
-								<div class="panel-heading">
-									<h1 class="panel-title">첨부파일</h1>
-								</div>
-								<div class="panel-body">
-									첨부파일 데스
-								</div>
-							</div>
-						</div>
-		        	</div>
-		        </div>
-		    </div>
-		</section>
-		
-		<!-- Modal -->
-		<div class="modal fade" id="myModal" role="dialog">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal">&times;</button>
-		        <h4 class="modal-title">엑셀</h4>
-		      </div>
-		      <div class="modal-body">
-		        <input type="file" id="excelUpload">
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-		<!-- /Modal -->
-		
+	<!-- Content Header (Page header) -->
+	<section class="content-header">
+	    <h1>
+	        커리큘럼
+	    </h1>
+	    <ol class="breadcrumb">
+	        <li><a href="#"><i class="fa fa-fw fa-home"></i>Home</a></li>
+	        <li><a href="#">java70</a></li>
+	        <li class="active">커리큘럼</li>
+	    </ol>
+	</section>
+	
+	<!-- Main content -->
+	<section class="content">
+	    <div class="box box-primary">
+	        <div class="box-header with-border">
+	        	<button id="save" class="btn bg-olive">저장</button>
+	            <button id="excel" class="btn bg-olive" data-toggle="modal" data-target="#myModal">엑셀</button>
+	            <button id="add" class="btn bg-olive">추가</button>
+	        </div>
+	        	
+	        <div class="box-body">
+	        	<div class="row">
+	        		<div id="curri" class="col-md-3">
+	        			
+	        		</div>
+	        		<div class="col-md-9">
+	        		</div>
+	        	</div>
+	        </div>
+	        <!-- /.box-body -->
+	    </div>
+	</section>
+	<!-- /.content -->
+        
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" role="dialog">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h4 class="modal-title">엑셀</h4>
+	      </div>
+	      <div class="modal-body">
+	        <input type="file" id="excelUpload">
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
 	</div>
 <script>
-	function Curriculum(obj) {
-		this.curri_no = obj.no;
-		this.curri_pno = obj.pno;
-		this.curri_name = obj.name;
-	    this.curri_depth = obj.depth;
-	    this.curri_content = obj.content
-	    this.mode = obj.mode;
-	}
-	
-	$("#curri_content").change(function(){
-	  var target = $(".node-name.active");
-	  var content = target.next();
-	  if(!content.length){
-		content = $('<span class="node-content">');
-		target.parent().append(content);
-	  }
-	  content.text($("#curri_content").val());
-	  var li = target.parent();
-	  if(!li.data("mode")){
-		  li.attr("data-mode", "modify");
-	  }
-	});
-	
-	$("#save").click(function(){
-		if(!confirm("정말 저장 하시겠습니까?")){ 
-			return;
-		}
-		var list = [];
-		var d = $(".tree-node");
-		d.each(function(){
-			var mode = $(this).data("mode");
-			if(!mode){
-			  return;
-			}
-			var no = $(this).data("no");
-			var pno = $(this).data("pno");
-			var depth = $(this).data("depth"); 
-			var name = $(this).children(".node-name").text();
-			var content = $(this).children(".node-content").text();
-			list.push(new Curriculum({no: no, pno: pno, depth: depth, name: name, content: content, mode: mode}));
-		});
-		console.log(list);
-		if(list.length < 1){
-			return;
-		}
-		$.ajax({
-		  url : "/${domain}/curriculum",
-	      type : "POST",
-	      contentType : "application/json",
-	      data : JSON.stringify(list),
-	      success : function(data) {
-	        alert("가니?");
-			location.reload();
-	      }
-		});
-	});
+    $("#add").click(function () {
+        $("#curri").append(makeTag(true, null, 1, "add"));
+    });
 
-	$("#mod").click(function(){
-	  var target = $(".node-name.active");
-	  if(target.length){
-	    var li = target.parent();
-	  	var mode = li.data("mode");
-	  	if(!mode){
-	  		li.attr("data-mode", "modify");
-	  	}
-	  	var name = target.text();
-	  	li.prepend('<input class="node-name-input form-control" type="text" value="' + name + '">');
-	  	target.remove();
-	  }else{
-	    alert("수정할 타겟을 선택하십쇼");
-	  }
-	});
+    $("#curri").on("click", ".glyphicon-plus", function () {
+        var li = $(this).closest("li");
+        var depth = parseInt(li.data("depth")) + 1;
+        li.append(makeTag(false, null, depth, "add", null, li.data("no")));
+    });
 
-	$("#del").click(function(){
-	  var target = $(".node-name.active");
-	  if(target.length){
-	    var ul = target.closest(".tree");
-		var li = ul.find(".tree-node");	        
-	    li.each(function(){
-			if($(this).data("mode")=="add"){
-				$(this).removeAttr("data-mode");
-			}else{
-				$(this).attr("data-mode", "remove");
-			}
-		});
-		ul.css("display", "none");	    
-	  }else{
-	    alert("삭제할 타겟을 선택하십쇼");
-	  }
-	});
-
-	$("#add").click(function(){
-	  var target = $(".node-name.active");
-	  var str = ''
-	  if(target.length){
-	    var li = target.parent();
-    	var depth = parseInt(li.data("depth")) + 1;
-    	var pno = li.data("no");
-    	var str = '<ul class="tree">'
-		        + '<li class="tree-node" data-mode="add" data-depth="' + depth + '" data-pno="' + pno + '">'
-		        + '<input class="node-name-input form-control" type="text" placeholder="입력">'
-		        + '</li>'
-		        + '</ul>';
-	    li.append(str);  
-	  }else{
-	    var str = '<ul class="tree list-group">'
-		        + '<li class="tree-node list-group-item" data-mode="add" data-depth="1">'
-		        + '<input class="node-name-input form-control" type="text" placeholder="입력">'
-		        + '</li>'
-		        + '</ul>';
-	    $("#curri").append(str);
-	  }
-	});
-	
-	$("#curri").on("keypress", ".node-name-input", function(e){
-	  if(e.keyCode == 13){
-	  	var name = $(this).val();
-	  	$(this).parent().prepend('<span class="node-name">' + name + '</span>');
-	  	$(this).closest(".tree").siblings(".node-name").addClass("parent");
-	  	$(this).remove();
-	  }
-	});
-
-	$("#curri").on("click", ".node-name", function(){
-	  var $this = $(this);
-	  if(! $this.hasClass("active")){
-	  	$(".node-name.active").removeClass("active");
-	  }
-	  $this.toggleClass("active");
-	  $this.parent().children(".tree").slideToggle();
-	  $("#curri_title").text($this.text());
-	  $("#curri_content").val($this.next().text());
-	});
-
-   $.getJSON("/${domain}/curriculum", function(list){
+    $("#curri").on("click", ".glyphicon-minus", function () {
+    	var ul = $(this).closest("ul");
+    	remove(ul);
+    	
+    });
+    
+    $("#curri").on("change", ".curri_name", function () {
+    	var li = $(this).closest("li");
+    	var mode = li.data("mode");
+    	if(!mode){
+    		li.attr("data-mode", "modify");
+    	}
+    });
+    
+    $("#save").click(function(){
+    	if(!confirm("정말 저장 하시겠습니까?")){ 
+    		return;
+    	}
+    	var list = [];
+    	var d = $(".curri");
+    	d.each(function(){
+    		var mode = $(this).data("mode");
+    		if(!mode){return;}
+    		var no = $(this).data("no");
+    		var pno = $(this).data("pno");
+    		var depth = $(this).data("depth"); 
+    		var name = $(this).find(".curri_name").val();
+    		list.push(new Curriculum(no, pno, name, depth, mode));
+    	});
+    	console.log(list);
+    	if(list.length < 1){
+    		return;
+    	}
+    	$.ajax({
+    		url : "/${domain}/curriculum",
+	        type : "POST",
+	        contentType : "application/json",
+	        data : JSON.stringify(list),
+	        success : function(data) {
+	            alert("가니?");
+	        }
+    	});
+    	location.reload();
+    });
+    
+    $.getJSON("/${domain}/curriculum", function(list){
     	var temp = [];
     	var work;
     	$(list).each(function(){
     		var name = this.curri_name;
     		var depth = this.curri_depth;
     		var no = this.curri_no;
-    		var content = this.curri_content || "";
     		if(depth == 1){
-    		  	var str = '<ul class="tree list-group">'
-			            + '<li class="tree-node list-group-item" data-no="' + no + '" data-depth="' + depth + '">'
-			            + '<span class="node-name">' + name + '</span>'
-			            + '<span class="node-content">' + content + '</span>'
-			            + '</li>'
-			            + '</ul>';
-			    var root = $(str);
+    			var root = makeTag(true, name, depth, null, no);
     			work = [root];
     			temp.push(root);
     		}else{
     			var parent = work[depth-2];
-    			var str = '<ul class="tree" style="display: none;">'
-			            + '<li class="tree-node" data-no="' + no + '" data-depth="' + depth + '" data-pno="' + this.curri_pno + '">'
-			            + '<span class="node-name">' + name + '</span>'
-			            + '<span class="node-content">' + content + '</span>'
-			            + '</li>'
-			            + '</ul>';
-    			var child = $(str);
+    			var child = makeTag(false, name, depth, null, no, this.curri_pno);
     			work[depth-1] = child;
-    			parent.children("li:first").append(child).children(".node-name").addClass("parent");
+    			parent.children("li:first").append(child);
     		}
     	});
     	for(var i in temp){
     		$("#curri").append(temp[i]);
     	}
     });
-   
-   $("#excelUpload").change(handleFile);
- 	function handleFile(e) {
-         var file = e.target.files[0];
-         var reader = new FileReader();
-         var name = file.name;
-         reader.onload = function(e) {
-             var data = e.target.result;
-             var workbook = XLSX.read(data, {type : 'binary'});
-             var sheet_name_list = workbook.SheetNames;
-             sheet_name_list.forEach(function(y) {
-                 var worksheet = workbook.Sheets[y];
-                 var temp = [];
-                 var work;
-                 for (z in worksheet) {
-                     if (z[0] === '!')
-                         continue;
-                     var name = worksheet[z].v;
-                     var depth = z.charCodeAt(0) - 64;
-             		if(depth == 1){
-	             		var str = '<ul class="tree list-group">'
-		 			            + '<li class="tree-node list-group-item" data-mode="add" data-depth="' + depth + '">'
-		 			            + '<span class="node-name">' + name + '</span>'
-		 			            + '</li>'
-		 			            + '</ul>';
-		 			    var root = $(str);
-             			work = [root];
-             			temp.push(root);
-             		}else{
-             		 	var str = '<ul class="tree" style="display: none;">'
-		 			            + '<li class="tree-node" data-mode="add" data-depth="' + depth + '">'
-		 			            + '<span class="node-name">' + name + '</span>'
-		 			            + '</li>'
-		 			            + '</ul>';
-		     			var child = $(str);
-             			work[depth-1] = child;
-             			work[depth-2].children(".tree-node").append(child).children(".node-name").addClass("parent");
-             		}
-                 }
-                 $("#curri > .tree").each(function(){
-             	    var ul = $(this);
-               		var li = ul.find(".tree-node");	        
-               	    li.each(function(){
-               			if($(this).data("mode")=="add"){
-               				$(this).removeAttr("data-mode");
-               			}else{
-               				$(this).attr("data-mode", "remove");
-               			}
-               		});
-               		ul.css("display", "none");	    
-        		 });
-		        for ( var i in temp) {
-		          $("#curri").append(temp[i]);
-		        }
-	      	});
-	    };
-	    reader.readAsBinaryString(file);
+    
+    
+	
+	var colors = ["list-group-item-success", "list-group-item-info", "list-group-item-warning", "list-group-item-danger"];
+
+
+    function Curriculum(no, pno, name, depth, mode) {
+    	this.curri_no = no;
+    	this.curri_pno = pno;
+    	this.curri_name = name;
+        this.curri_depth = depth;
+        this.mode = mode;
+    }
+	
+	function remove(ul){
+		var li = ul.find("li");
+		li.each(function(){
+			if($(this).data("mode")=="add"){
+				$(this).removeAttr("data-mode");
+			}else{
+				$(this).attr("data-mode", "remove");
+			}
+		});
+	    ul.css("display", "none");
+	}
+	
+	$("#excelUpload").change(handleFile);
+	function handleFile(e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        var name = file.name;
+        reader.onload = function(e) {
+            var data = e.target.result;
+            var workbook = XLSX.read(data, {type : 'binary'});
+            var sheet_name_list = workbook.SheetNames;
+            sheet_name_list.forEach(function(y) {
+                var worksheet = workbook.Sheets[y];
+                var temp = [];
+                var work;
+                for (z in worksheet) {
+                    if (z[0] === '!')
+                        continue;
+                    var name = worksheet[z].v;
+                    var depth = z.charCodeAt(0) - 64;
+            		if(depth == 1){
+            			var root = makeTag(true, name, depth, "add");
+            			work = [root];
+            			temp.push(root);
+            		}else{
+            			var child = makeTag(false, name, depth, "add");
+            			work[depth-1] = child;
+            			work[depth-2].children("li:first").append(child);
+            		}
+                }
+                $("#curri > ul").each(function(){
+                	remove($(this));
+                });
+                for(var i in temp){
+            		$("#curri").append(temp[i]);
+            	}
+			});
+        };
+        reader.readAsBinaryString(file);
+    }
+	
+	function makeTag(isRoot, value, depth, mode, no, pno) {
+	    var ulClass = isRoot ? "list-group" : "inner";
+	    var liClass = isRoot ? "list-group-item " + colors[parseInt(Math.random()*4)] : "";
+	    var divClass = isRoot ? "input-group-lg" : "input-group-sm";
+	    var value = value ? "value='" + value + "'" : "";
+	    var depth = depth ? "data-depth='" + depth + "' " : "";
+	    var mode = mode ? "data-mode='" + mode + "' " : "";
+	    var no = no ? "data-no='" + no + "' " : "";
+	    var pno = pno ? "data-pno='" + pno + "'" : "";
+	    var str = '<ul class="' + ulClass + '">'
+	            + '<li class="curri ' + liClass + '" ' + depth + mode + no + pno + '>'
+	            + '<div class="input-group ' + divClass + '">'
+	            + '<input type="text" class="form-control curri_name" ' + value + '>'
+	            + '<div class="input-group-addon">'
+	            + '<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>'
+	            + '<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>'
+	            + '</div>'
+	            + '</div>'
+	            + '</li>'
+	            + '</ul>';
+	    var tag = $(str);
+	    /*
+	    if (isRoot) {
+	        var dropZone = $('<form action="/" class="dropzone dz-clickable"><div class="dz-message"><span>파일 업로드</span></div></form>');
+	        dropZone.dropzone({url: "/"});
+	        tag.append($("<li class='list-group-item'>").append(dropZone));
+	    }*/
+	    return tag; 
 	}
 </script>
 
