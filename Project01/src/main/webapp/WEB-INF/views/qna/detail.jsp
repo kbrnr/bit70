@@ -80,8 +80,11 @@
 						<div class="box-header with-border ">
 
 							<div class="froala-view">${QuestionVO.question_content }</div>
-
-							<div style="margin-top: 200px;">
+							<div>
+									<ul id="fileAttach" class='list-group' >
+										<li class="list-group-item"></li>
+									</ul>
+									<div style="margin-top: 200px;">
 								<a href="answer?no=${QuestionVO.question_no}">
 									<button style="float: left;" id="AnsBoard" type="submit"
 										class="btn btn-primary">Answer</button>
@@ -91,6 +94,7 @@
 									<button type="submit" id="delQuestionBtn" class="btn btn">Delete</button>
 								</a>
 							</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -98,7 +102,6 @@
 
 			<div class="box-body">
 				<div class="box-group" id="accordion">
-					<!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
 					<c:forEach items="${ansList}" var="vo">
 						<div class="panel box box-success">
 							<div class="box-header with-border">
@@ -109,22 +112,26 @@
 								<h4 class="box-title">${vo.answer_recommend }</h4>
 							</div>
 							<div class="box-header with-border ">
-								<div class="box-body" style="height: 500px;">
-									${vo.answer_content }</div>
+								<div class="froala-view">${vo.answer_content }</div>
+								<ul id="ansfileAttach" class='list-group' >
+										<li class="list-group-item ans"></li>
+									</ul>
 								<div>
-									<a href="questionRegist">
-										<button style="float: left;" id="ResBoard" type="submit"
-											class="btn btn-primary">Write</button>
-									</a> <a
-										href="answerModify?rno=${vo.answer_no }&no=${vo.question_no } ">
+									 <a	href="answerModify?rno=${vo.answer_no }&no=${vo.question_no } ">
 										<button type="submit" class="btn btn-info">Modify</button>
-									</a> <a href="answerRemove/${vo.answer_no }">
+										</a>
+									 <a href="answerRemove/${vo.answer_no }">
 										<button type="submit" id="delBtn" class="btn btn">Delete</button>
 									</a>
 								</div>
 							</div>
 						</div>
 					</c:forEach>
+					<div style="float: right;">
+					<a href="listpage">
+						<button type="button" class="btn btn-info" style="float: right;">Go	List</button>
+					</a>
+				</div>
 				</div>
 			</div>
 			<!-- Answer box End -->
@@ -144,5 +151,47 @@
 			}); 
 		})
 	});
+	
+	function getFileInfo(filePath){
+		
+		var path = filePath.attachfile_path;
+		var filename, fileLink, fileno;
+		
+		fileno = filePath.attachfile_no;
+		filesrc = "/displayFile?fileName="+path;
+		fileLink = path.substr(0,14);
+		filename = fileLink.substr(path.indexOf("_") + 1);
+		return {filename:filename, filesrc:filesrc, filePath:filePath, fileno:fileno};
+		
+	}
+	
+	var no = ${QuestionVO.question_no};
+	var domain = '${domain}';
+	$.get(domain+"/../getQuestionFile/"+no, function(list){
+		
+		$(list).each(function(){
+			
+			var fileInfo = getFileInfo(this);
+			var filePath = fileInfo.filePath.attachfile_path;
+			var filename = fileInfo.filePath.attachfile_name;
+			var file = "<div class='attach'><a href="+filesrc+"><span>"+filename+"</span></a><br/></div>";
+			$('.list-group-item').append(file);
+		});	
+	});
+	
+	var rno = ${vo.answer_no};
+	var domain = '${domain}';
+	$.get(domain+"/../getAnsFile/"+rno, function(list){
+		
+		$(list).each(function(){
+			
+			var fileInfo = getFileInfo(this);
+			var filePath = fileInfo.filePath.attachfile_path;
+			var filename = fileInfo.filePath.attachfile_name;
+			var file = "<div class='attach'><a href="+filesrc+"><span>"+filename+"</span></a><br/></div>";
+			$('.list-group-item').append(file);
+		});	
+	});
+		
 </script>
 </html>

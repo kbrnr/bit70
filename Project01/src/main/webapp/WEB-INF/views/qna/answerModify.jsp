@@ -69,8 +69,10 @@
 							<h5 class="box-title">${QuestionVO.question_title }</h5>
 						</div>
 						<div class="box-header with-border ">
-							<div class="box-body" style="height: 500px;">
-								${QuestionVO.question_content }</div>
+							<div class="froala-view">${QuestionVO.question_content }</div>
+							<ul id="fileAttach" class='list-group' >
+										<li class="list-group-item"></li>
+									</ul>
 							<div>
 								<a href="regist">
 									<button style="float: left;" id="ResBoard" type="submit"
@@ -109,6 +111,12 @@
 							</div>
 							
 							<textarea id='edit' name="answer_content" style="margin-top: 30px;">${vo.answer_content }</textarea>
+							<br/>
+							<div>
+									<ul class='list-group' >
+										<li class="list-group-item"></li>
+									</ul>
+							</div>
 						<div class="box-footer">
 							<button id="ansModify" type="submit" class="btn btn-primary">Submit</button>
 							<a href="listpage">
@@ -152,7 +160,18 @@
 		imageUploadURL : "/upload",	
 		pastedImagesUploadURL : "/upload",		
 		fileUploadURL: "/upload"
+			
 	});
+	
+	
+	$('#edit').on('editable.afterFileUpload', function (e, editor, response) {
+		
+		var res = JSON.parse(response);
+		var str = "<a href='/displayFile?fileName="+res.filePath+"'<span>"+res.fileName+"</span></a><br/>";
+		var no =  "<input class='fno' type='hidden' name='attachfile_no' value='"+res.fileNo+"' />";
+		$(".list-group-item").append(str);
+		$("#regForm").append($(no));
+		});
 	
 	$('#edit').on('editable.afterImageUpload', function (e, editor, response) {
 		

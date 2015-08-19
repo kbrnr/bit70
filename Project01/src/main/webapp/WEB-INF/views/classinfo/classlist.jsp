@@ -96,8 +96,32 @@
                   	
                   	
                   	<div class="row">
+                  		<div class="col-sm-10">
+                  		<form name="searchFrom">
+							<div id="select_board">
+								<select name="searchKey" class="form-control" style="width: 150px; margin-right: 10px;">
+									<option value="question_title"
+										<c:if test="${searchKey =='question_title' }">selected</c:if>>제목</option>
+									<option value="question_title&question_content" selected
+										<c:if test="${searchKey=='question_title'||'question_content' }">selected</c:if>>
+										+ 내용</option>
+									<option value="mem_id"
+										<c:if test="${searchKey=='mem_id' }">selected</c:if>>작성자</option>
+								</select>
+								<div class="input-group">
+   								   <input type="text" class="form-control" name="searchValue" style="width: 200px;">
+								      <span class="input-group-btn">
+								        <button class="btn btn-default" type="Submit">Go!</button>
+								      </span>
+		                 	 </div><!-- /input-group -->
+							</div>
+						</form>
+                  		</div>
+                  		
+	                  	<div class="col-sm-2"><a href="/classinfo/classform" class="btn btn-primary pull-right margin-bottom">수업등록</a>
+	                  	</div>
 	                  	<div class="col-sm-12">
-		        		  <a href="/classinfo/classform" class="btn btn-primary pull-right margin-bottom">수업등록</a>
+		        		  
 		                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
 		                    <thead>
 		                      <tr role="row">
@@ -156,6 +180,12 @@
                   			</div>
                   		</div><!-- /.grid -->
                   	</div><!-- /.row -->
+                  	
+ 
+   
+   
+      
+                  	
                     	
                   </div><!-- /.example1_wrapper -->
                 </div><!-- /.box-body -->

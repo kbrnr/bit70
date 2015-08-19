@@ -19,12 +19,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -113,12 +111,13 @@ public class qnaFileAttachController {
 	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
 
 		InputStream in = new FileInputStream(uploadPath + fileName);
-
+		
 		ResponseEntity<byte[]> entity = null;
 
 		try {
 
 			final HttpHeaders headers = new HttpHeaders();
+		
 
 			MediaType mimeType = null;
 
@@ -130,12 +129,14 @@ public class qnaFileAttachController {
 				mimeType = MediaType.IMAGE_PNG;
 			} else if (suffix.equalsIgnoreCase("gif")) {
 				mimeType = MediaType.IMAGE_GIF;
-			} else {
-
-				headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-				headers.add("Content-Dispostion",
-						"attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+			} else if (suffix.equalsIgnoreCase("zip")) {
+				mimeType = MediaType.APPLICATION_OCTET_STREAM;
 			}
+			fileName = fileName.substring(fileName.indexOf("_")+1);
+			headers.setContentType(mimeType);
+			headers.add("Content-Disposition",
+					"attachment; fileName=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+			
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
 		} catch (
 

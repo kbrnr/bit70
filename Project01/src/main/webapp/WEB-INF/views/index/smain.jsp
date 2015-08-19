@@ -40,7 +40,8 @@
 <!-- REQUIRED JS SCRIPTS -->
 <link href="/resources/nojo/css/bootstrap-treeview.min.css" rel="stylesheet" type="text/css" />
 <script src="/resources/nojo/script/bootstrap-treeview.min.js" type="text/javascript"></script>
-
+<!-- 배치도 CSS 추가-->
+<link rel="stylesheet" type="text/css" href="/resources/nojo/css/seatStyle.css">
 
   </head>
   <!--
@@ -66,7 +67,6 @@
 
 <style>
 body{background-color:#ecf0f5;}
-.chair{border: thin solid black; width: 80px; position: absolute;}
 </style>
 
 <body class="skin-blue sidebar-mini">
@@ -100,8 +100,8 @@ body{background-color:#ecf0f5;}
 					<div class="box-body">
 						<div class="row">
 							<div class="col-md-3">
-								<form id="searchTree" class="form-inline">
-									<div class="input-group margin">
+								<form id="searchTree">
+									<div class="input-group">
 								      <input id="treeSearchText" type="text" class="form-control" placeholder="커리큘럼 검색">
 								      <span class="input-group-btn">
 								        <button class="btn btn-info">검색</button>
@@ -110,13 +110,23 @@ body{background-color:#ecf0f5;}
 								</form>
 								<div id="tree"></div>
 							</div>
-							<div class="col-md-9">
-								<div class="panel panel-default">
+							<div class="col-md-6">
+								<div class="panel panel-primary">
 									<div class="panel-heading">
-										<h3 class="panel-title">자바</h3>
+										<h1 id="curri_title" class="panel-title" style="display: inline;"></h1>
 									</div>
 									<div class="panel-body">
 										<p id="curriContent"></p>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<h1 class="panel-title">첨부파일</h1>
+									</div>
+									<div class="panel-body">
+										첨부파일 데스
 									</div>
 								</div>
 							</div>
@@ -165,16 +175,14 @@ body{background-color:#ecf0f5;}
 					data : list,
 					levels : 1,
 					onNodeSelected : function(event, data) {
-						console.log(data);
 						var parent = data;
 						while(parent.parentId != undefined){
 							parent = $('#tree').treeview('getParent', parent.nodeId);
 						}
 						$(":hidden[name=curri_no]").val(data.href);
 						$(":hidden[name=curri_gpno]").val(parent.href);
-						$(".panel-title").text(data.text);
+						$("#curri_title").text(data.text);
 						$("#curriContent").text(data.content);
-						console.log(parent);
 					}
 				});
 				
@@ -207,9 +215,10 @@ body{background-color:#ecf0f5;}
 	                </div><!-- /.box-header -->
 
                 	<div class="box-body">
-                		<div id="container" style="border: thin solid black;">
-		                  <div id="seat"  style="height: 400px; width: 700px; margin: 0 auto; overflow: auto; ">
-						  </div>
+                		<div id="container">
+		             		<div id="seat">
+		             		
+		             		</div>
 						</div>
                 	</div><!-- /.box-body -->
 				
@@ -244,66 +253,28 @@ body{background-color:#ecf0f5;}
 			</div><!-- /.col -->
 		</div><!-- /.row -->
 
-
-
-
-
-			
 		<!-- ----------------------------------------- -->	
 
 		</section>
 		<!-- /.content -->
 
-	 <div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">이해했니?</h4>
-			</div>
-			<div class="modal-body">
-				<p id="msg">이해되냐</p>
-				<div class="row">
-  					<div class="col-md-3">
-  						<form id="sendScore" class="form-inline">
-							<input type="hidden" name="clz_domain" value="${domain}">
-							<input type="hidden" name="mem_id" value="${userid}">
-							<input type="hidden" name="teacherquestion_no">
-							<div class="input-group">
-						      <input type="number" name="comprehension_score" class="form-control" min="0" max="10" placeholder="점수" required="required">
-						      <span class="input-group-btn">
-						        <button class="btn btn-default">전송</button>
-						      </span>
-						    </div>
-					    </form>
-			    	</div>
-			    </div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
 	
-	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<script>
-		var socket = io.connect('http://192.168.0.18:3000');
-		socket.emit("init", {domain: "${domain}", userId: "${userid}"});
-		socket.on("understanding", function(msg){
+		parent.socket.emit("init", {domain: "${domain}", userId: "${userid}"});
+		parent.socket.on("understanding", function(msg){
 			var arr = msg.split("|");
-			$("#sendScore [name=teacherquestion_no]").val(arr[0]);
-			$("#msg").text(arr[1]);
-			$('#myModal').modal('show');
+			parent.$("#sendScore [name=teacherquestion_no]").val(arr[0]);
+			parent.$("#msg").text(arr[1]);
+			parent.$('#myModal').modal('show');
 		});
 		
-		$("#sendScore").submit(function(e){
+		parent.$("#sendScore").submit(function(e){
 			e.preventDefault();
+			console.log($(this).serialize());
 			$.post("/${domain}/comprehension", $(this).serialize(), function(data){
 				console.log(data);
 			});
-			$('#myModal').modal('hide');
+			parent.$('#myModal').modal('hide');
 		});
 			
 		// Seat에서 사용하는 함수
@@ -313,12 +284,11 @@ body{background-color:#ecf0f5;}
 				var y = this.seat_y;
 				var name = this.mem_name;
 				var id = this.mem_id;
-				
-				var str = "<div class='chair' style='margin-left: " + x + "px; margin-top: " + y + "px;'>" + name + "</div>";
+				var domain = "${domain}";
+				var str = "<div class='chair' style='margin-left: " + x + "px; margin-top: " + y + "px;'><div class='img'><img class='realImg' src='/" + domain + "/seat/seatImg?userId=" + id + "' '/></div>" + name + "</div>";
 				var chair = $(str);
 				chair.css( { "margin-left" : x+"px", "margin-top" : y+"px" });
 				$("#seat").append(str);
-					
 			});
 			
 			

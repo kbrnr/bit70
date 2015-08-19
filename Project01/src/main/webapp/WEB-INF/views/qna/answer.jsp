@@ -71,15 +71,12 @@
 							<h5 class="box-title">${QuestionVO.question_title }</h5>
 						</div>
 						<div class="box-header with-border ">
-							<div class="box-body" style="height: 500px;">
-								${QuestionVO.question_content }</div>
+							<div class="froala-view">${QuestionVO.question_content }</div>
+							<br/>
 							<div>
-							    <a href="modify?no=${QuestionVO.question_no } ">
-									<button type="submit" class="btn btn-info">Modify</button>
-								</a> 
-								<a href="remove/${QuestionVO.question_no }">
-									<button type="submit" id="delBtn" class="btn btn">Delete</button>
-								</a>
+							<ul id="fileAttach" class='list-group' >
+										<li id="question_attachfile" class="list-group-item"></li>
+									</ul>
 							</div>
 						</div>
 					</div>
@@ -98,7 +95,7 @@
 				<!-- /.box-header -->
 				<div class='box-body pad'>
 					<section id="editor" style="width : 100%; margin: auto;">
-						<form role="form" method="post" action="answer">
+						<form id="ansForm" role="form" method="post" action="answer">
 							<div style="height: 150px;">
 								<input id="question_no" type="hidden" class="form-control" name="question_no" value= " ${QuestionVO.question_no }" placeholder="맴버아이디 히든으로 처리하자">
 								<input id="title" type="text" class="form-control" value= "Re : ${QuestionVO.question_title }" name="answer_title" placeholder="title">
@@ -109,7 +106,12 @@
 								<input id="clz_domain" type="text" class="form-control" name="clz_domain" placeholder="도메인 히든으로 처리하자">
 							</div>
 							<textarea id='edit' name="answer_content" style="margin-top: 30px;"></textarea>
-						
+							<br/>
+							<div>
+									<ul class='list-group' >
+										<li class="list-group-item"></li>
+									</ul>
+							</div>
 						<div class="box-footer">
 							<button id="answerRegist" type="submit" class="btn btn-primary">Submit</button>
 							<a href="listpage">
@@ -160,6 +162,7 @@
 <!-- Text Editor -->	
 	
 <script type="text/javascript">
+
 		$('#edit').editable({
 			inlineMode : false,
 			height : 500,
@@ -172,16 +175,27 @@
 			imageUploadURL : "/upload",	
 			pastedImagesUploadURL : "/upload",		
 			fileUploadURL: "/upload"
+					
 		});
+		
+		$('#edit').on('editable.afterFileUpload', function (e, editor, response) {
+			
+			var res = JSON.parse(response);
+			var str = "<a href='/displayFile?fileName="+res.filePath+"'<span>"+res.fileName+"</span></a><br/>";
+			var no =  "<input class='fno' type='hidden' name='attachfile_no' value='"+res.fileNo+"' />";
+			$(".list-group-item").append(str);
+			$("#ansForm").append($(no));
+			});
 		
 		$('#edit').on('editable.afterImageUpload', function (e, editor, response) {
 			
 			var res = JSON.parse(response);
 			var str = "<img width ='300' name='attachfile_name' class='fr-fin fr-dib' data-fileNo='"+res.fileNo+"' data-src="+ res.filePath +" src='/displayFile?fileName="+ res.filePath +"' />";
 			var no = "<input class='fno' type='hidden' name='attachfile_no' value='"+res.fileNo+"' />";
-			
-			$(".froala-view").append(str);
-			$("#regForm").append($(no));
+			var view = $(".f-placeholder.froala-view.froala-element.not-msie.f-basic");
+			console.log(view);
+			view.append(str);
+			$("#ansForm").append($(no));
 			
 		});
 		
@@ -198,6 +212,33 @@
 			});
 		});
 	
+
+		function getFileInfo(filePath){
+			
+			var path = filePath.attachfile_path;
+			var filename, fileLink;
+			
+			filesrc = "/displayFile?fileName="+path;
+			fileLink = path.substr(0,14);
+			filename = fileLink.substr(path.indexOf("_") + 1);
+			
+			return {filename:filename, filesrc:filesrc, filePath:filePath};
+			
+		}
+		
+		var no = ${QuestionVO.question_no};
+		var domain = '${domain}';
+		$.get(domain+"../qna/getQuestionFile/"+no, function(list){
+			
+			$(list).each(function(){
+				
+				var fileInfo = getFileInfo(this);
+				var filePath = fileInfo.filePath.attachfile_path;
+				var filename = fileInfo.filePath.attachfile_name;
+				var file = "<a href="+filesrc+"><span>"+filename+"</span></a><br/>";
+				$('#question_attachfile').append(file);
+			});	
+		});
 		
 </script>
 

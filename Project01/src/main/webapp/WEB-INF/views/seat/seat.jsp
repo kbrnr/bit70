@@ -8,31 +8,33 @@
     <link rel="stylesheet" type="text/css" href="/resources/nojo/css/jquery-ui.min.css">
     <link rel="stylesheet" type="text/css" href="/resources/nojo/css/jquery-ui.structure.min.css">
     <link rel="stylesheet" type="text/css" href="/resources/nojo/css/jquery-ui.theme.min.css">
+<!-- seat Style -->
     <link rel="stylesheet" type="text/css" href="/resources/nojo/css/seatStyle.css">
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="/resources/plugins/jQueryUI/jquery-ui-1.10.3.min.js"></script>
-
 </head>
 <body>
-<h2>${domain}좌석배치표</h2>
+<h2>${domain} 좌석배치표</h2>
 
 <div id="container">
-	<div id="seat">
-		<c:forEach items="${list }" var="vo">
-			<c:if test="${vo.seat_x != 0}">
-				<div class="chair" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">
-					<div class="img"><img width="10px" height="10px" alt="" src="/${domain}/seat/seatImg?userId=a" /></div>
-						<span class="hidden memId">${vo.mem_id}</span>
-	                	<span>${vo.mem_name}</span>
-				</div>
-			</c:if>		
-		</c:forEach>
+	<div id="wrapper">
+		<div id="seat">
+			<c:forEach items="${list }" var="vo">
+				<c:if test="${vo.seat_x != 0}">
+					<div class="chair" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">
+						<div class="img"><img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}"/></div>
+							<span class="hidden memId">${vo.mem_id}</span>
+		                	<span>${vo.mem_name}</span>
+					</div>
+				</c:if>		
+			</c:forEach>
+		</div>
 	</div>
-	<div id="lobby">
+<div id="lobby">
 		<c:forEach items="${list }" var="vo">
 			<c:if test="${vo.seat_x == 0}">
 				<div class="chair" style="position: relative;">
-					<div class="img"><img width="10px" height="10px" alt="" src="/${domain}/seat/seatImg?userId=a" /></div>
+					<div class="img"><img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}" /></div>
 						<span class="hidden memId">${vo.mem_id}</span>
 	                	<span>${vo.mem_name}</span>
 				</div>
@@ -40,16 +42,13 @@
 		</c:forEach>
 	</div>
 </div>
-
 <button id="save" type="button">저장하기</button>
 
 <div class="position">Position</div>
 <div id="info" style="width: 200px; height: 40px; background-color: #e0a0a0;"></div>
-<br/> 
 
 <script>
     var array = [];
-    var xxx = "";
     var chair = $(".chair");
 
     var xcnr = "";
@@ -83,80 +82,33 @@
         $("#info").html(message);
     });
 
-    $(".seat").on('drop', function (e) {
-    	//console.log(e);
-    	/* 
-        var chair = $(".chair");
-        array = [];
-        for (var i = 0; i < chair.length; i++) {
-            var id = $("#chair span:nth(" + (i * 2) + ")").text();
-            var x = e.offsetX;
-            var y = e.offsetY;
-            array.push(new Seat(id, x, y));
-	        console.log(id, x, y);
-        } */
-    });
-    //==============================================================================================
-    	$(".resultDiv").append(function(e) {
-    		appendTo: "resultDiv";
-            var x = e.offsetX;
-       	 	var y = e.offsetY;
-    	});
-   	//==============================================================================================	
-    
-    
     $(".chair").draggable({
         containment: "div#content",
         cursorAt: {
-            top: -1,
-            left: -1
+            top: -2,
+            left: -2
         },
         stop: function (e, ui) {
-        	console.log("e");
-        	console.log(e);
-        	console.log("ui");
-        	console.log(ui);
-//        	if(!(e.toElement == $(".seat")[0])){
-        		//팅구는로직
-        		//z-index :1000으로 놓고, 기존에 있던 자리를 저장한  후. 거기서 이동하는 포지션- . 돌아가는 것..
-        		 /* $( ".chair").animate({  revert: true }); */
-        		 // $(".chair").draggable({  revert: "invalid" }); 
-//        		return;
-//        	}
 			if((e.toElement.id == "lobby")) {
 	        	var li = ui.helper[0];
 	        	var id = $(li).find(".memId").text();
-	            var x = 0;
-	            var y = 0;
+	            var x = null;
+	            var y = null;
 	            array.push(new Seat(id, x, y));
-			}else {
+			}else if((e.toElement.id == "seat")) {
 				var li = ui.helper[0];
 	        	var id = $(li).find(".memId").text();
 	            var x = e.offsetX;
 	            var y = e.offsetY;
 	            array.push(new Seat(id, x, y));
-	        	
+//이 이후는 고칠 것.(seat, lobby에 있는 chair Div들이 밖으로 나가면 revert 시키는 것 만들기!!)
+			}else if((e.toElement.id == "")) {
+				$(".chair").draggable({  revert: true }); 
+			}else {
 			}
-            
-/*         	var li = ui.helper[0];
-        	var id = $(li).find(".memId").text();
-            var x = e.offsetX;
-            var y = e.offsetY;
-            array.push(new Seat(id, x, y));
-            console.log(array);  */
-            
         }
     });
 
-    $(".seat").droppable({
-        //tolerance: "intersect"
-    });
-
-    $(".chair").mouseup(function (e) {
-        xcnr = e.offsetX;
-        ycnr = e.offsetY;
-        $(".info").append(xcnr + ',' + ycnr + ' ');
-    });
 </script>
 </body>
 </html>

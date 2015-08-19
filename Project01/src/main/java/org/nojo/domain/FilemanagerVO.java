@@ -16,10 +16,28 @@ public class FilemanagerVO {
 	private Integer attachfile_no;
 	private String clz_domain;
 	
+	//
+	private String attachfile_name;
+	private String attachfile_path;
+	
+	
+	
+	public String getAttachfile_name() {
+		return attachfile_name;
+	}
 
-	
-	
-	
+	public void setAttachfile_name(String attachfile_name) {
+		this.attachfile_name = attachfile_name;
+	}
+
+	public String getAttachfile_path() {
+		return attachfile_path;
+	}
+
+	public void setAttachfile_path(String attachfile_path) {
+		this.attachfile_path = attachfile_path;
+	}
+
 	//region Getter Start
 	public int getCurri_no() {
 		return curri_no;

@@ -40,7 +40,8 @@
 <!-- REQUIRED JS SCRIPTS -->
 <link href="/resources/nojo/css/bootstrap-treeview.min.css" rel="stylesheet" type="text/css" />
 <script src="/resources/nojo/script/bootstrap-treeview.min.js" type="text/javascript"></script>
-
+<!-- 배치도 CSS 추가-->
+<link rel="stylesheet" type="text/css" href="/resources/nojo/css/seatStyle.css">
 
   </head>
   <!--
@@ -66,7 +67,6 @@
 <style>
 	body{background-color:#ecf0f5;}
   
-  	.chair{border: thin solid black; width: 80px; position: absolute;}
 </style>
   
   
@@ -78,9 +78,7 @@
 				수업명: ${domain} <small>(${userid}선생님)</small>
 			</h1>
 			<ol class="breadcrumb">
-				<li><a href="#">
-						<i class="fa fa-dashboard"></i> Home
-					</a></li>
+				<li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
 				<li class="active">Dashboard</li>
 			</ol>
 		</section>
@@ -92,16 +90,12 @@
 
 		<div class="row">
 			<div class="col-sm-12">
-				<div class="box">
-					<div class="box-header">
-						<h3 class="box-title">※커리큘럼 요약 들어갈곳 이에요^^ 질문할수 있어요</h3>
-					</div>
-					<!-- /.box-header -->
+				<div class="box box-primary">
 					<div class="box-body">
 						<div class="row">
 							<div class="col-md-3">
-								<form id="searchTree" class="form-inline">
-									<div class="input-group margin">
+								<form id="searchTree">
+									<div class="input-group">
 								      <input id="treeSearchText" type="text" class="form-control" placeholder="커리큘럼 검색">
 								      <span class="input-group-btn">
 								        <button class="btn btn-info">검색</button>
@@ -110,23 +104,24 @@
 								</form>
 								<div id="tree"></div>
 							</div>
-							<div class="col-md-9">
-								<div class="panel panel-default">
+							<div class="col-md-6">
+								<div class="panel panel-primary">
 									<div class="panel-heading">
-										<h3 class="panel-title">자바</h3>
+										<h1 id="curri_title" class="panel-title" style="display: inline;"></h1>
+										<a id="question" class="btn" style="color: white;"><span class="glyphicon glyphicon-question-sign"></span></a>
 									</div>
 									<div class="panel-body">
 										<p id="curriContent"></p>
-										<form id="sendQuestion" class="form-inline">
-											<input type="hidden" name="curri_no">
-											<input type="hidden" name="curri_gpno">
-											<div class="input-group">
-										      <input type="text" name="teacherquestion_content" class="form-control" placeholder="질문을 입력하세요">
-										      <span class="input-group-btn">
-										        <button id="questionBtn" class="btn btn-default">전송</button>
-										      </span>
-										    </div><!-- /input-group -->
-									    </form>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="panel panel-primary">
+									<div class="panel-heading">
+										<h1 class="panel-title">첨부파일</h1>
+									</div>
+									<div class="panel-body">
+										첨부파일 데스
 									</div>
 								</div>
 							</div>
@@ -168,23 +163,20 @@
 					}
 					work[depth - 1] = node;
 				});
-				console.log(list);
 				
 				//트리세팅
 				$('#tree').treeview({
 					data : list,
 					levels : 1,
 					onNodeSelected : function(event, data) {
-						console.log(data);
-						var parent = data;
-						while(parent.parentId != undefined){
-							parent = $('#tree').treeview('getParent', parent.nodeId);
+						var p = data;
+						while(p.parentId != undefined){
+							p = $('#tree').treeview('getParent', p.nodeId);
 						}
-						$(":hidden[name=curri_no]").val(data.href);
-						$(":hidden[name=curri_gpno]").val(parent.href);
-						$(".panel-title").text(data.text);
+						parent.$(":hidden[name=curri_no]").val(data.href);
+						parent.$(":hidden[name=curri_gpno]").val(p.href);
+						$("#curri_title").text(data.text);
 						$("#curriContent").text(data.content);
-						console.log(parent);
 					}
 				});
 				
@@ -217,8 +209,8 @@
 	                </div><!-- /.box-header -->
 
                 	<div class="box-body">
-                		<div id="container" style="border: thin solid black;">
-		                  <div id="seat"  style="height: 400px; width: 700px; margin: 0 auto; overflow: auto; ">
+                		<div id="container">
+		                  <div id="seat">
 						  </div>
 						</div>
                 	</div><!-- /.box-body -->
@@ -257,51 +249,20 @@
 		</section>
 		<!-- /.content -->
 
-<!-- 
-
-<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
-			Modal content
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">이해했닝</h4>
-			</div>
-			<div class="modal-body">
-				<form id="sendQuestion" class="form-inline">
-					<input type="hidden" name="curri_no" value="23">
-					<input type="hidden" name="curri_gpno" value="20">
-					<div class="input-group">
-				      <input type="text" name="teacherquestion_content" class="form-control" placeholder="질문을 입력하세요">
-				      <span class="input-group-btn">
-				        <button id="questionBtn" class="btn btn-default">전송</button>
-				      </span>
-				    </div>/input-group
-			    </form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div>
-</div>
- -->
-	<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 	<script>
-		var socket = io.connect('http://192.168.0.18:3000');
-		socket.emit("init", {domain: "${domain}", userId: "${userid}"});
-		
-		$("#curri").click(function(){
-			$('#myModal').modal('show');
+		$("#question").click(function(){
+			parent.$('#myModal').modal('show');
 		});
 		
-		$("#sendQuestion").submit(function(e){
+		parent.$("#sendQuestion").submit(function(e){
 			e.preventDefault();
+			console.log($(this));
 			var data = $(this).serialize();
+			console.log(data);
 			var question = $(this).find("[name=teacherquestion_content]").val();
 			$.post("/${domain}/comprehension/question", data, function(no){
-				socket.emit("understanding", no + "|" + question);
-				$('#myModal').modal('hide');
+				parent.socket.emit("understanding", no + "|" + question);
+				parent.$('#myModal').modal('hide');
 			});
 		});
 	
@@ -312,14 +273,12 @@
 				var y = this.seat_y;
 				var name = this.mem_name;
 				var id = this.mem_id;
-				var str = "<div class='chair' style='margin-left: " + x + "px; margin-top: " + y + "px;'>" + name + "</div>";
+				var domain = "${domain}";
+				var str = "<div class='chair' style='margin-left: " + x + "px; margin-top: " + y + "px;'><div class='img'><img class='realImg' src='/" + domain + "/seat/seatImg?userId=" + id + "' '/></div>" + name + "</div>";
 				var chair = $(str);
 				chair.css( { "margin-left" : x+"px", "margin-top" : y+"px" });
 				$("#seat").append(str);
-					
 			});
-			
-			
 		});
 		
 	</script>
