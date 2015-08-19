@@ -38,6 +38,10 @@ public class QuestionController {
 	@Inject
 	private AttachFileService fileService;
 
+	
+	
+	
+	
 	// 리스트페이지 & 검색
 	@RequestMapping("/listpage")
 	public String ListPage(@PathVariable("domain") String domain, Criteria cri, Model model, String searchKey,
