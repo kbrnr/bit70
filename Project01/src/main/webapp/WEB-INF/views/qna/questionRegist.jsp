@@ -175,14 +175,6 @@
 		
 	});
 	
-	$('#edit').on('editable.afterFileUpload', function (e, editor, response) {
-		
-		var res = JSON.parse(response);
-		var str = "<a href='/displayFile?fileName="+res.filePath+"'<span>"+res.fileName+"</span></a><br/>";
-		$(".list-group-item").append(str);
-		});
-	
-	
 	$('#edit').on('editable.afterImageUpload', function (e, editor, response) {
 		
 		var res = JSON.parse(response);
@@ -192,6 +184,40 @@
 		$(".froala-view").append(str);
 		$("#regForm").append($(no));
 		
+	});
+	
+	$('#edit').on('editable.afterFileUpload', function (e, editor, response) {
+		
+		var res = JSON.parse(response);
+		var str = "<div class='attach'><a href='/displayFile?fileName='"+res.filePath+"><span>"+res.fileName+"</span></a>"
+				+ "<a href='#' class='removeBtn' data-fileNo='"+res.fileNo+"' data-src="+res.fileName+"><span class='glyphicon glyphicon-remove-circle' style='float: right;'></span></a><br/></div>";
+		var no =  "<input class='fno' type='hidden' name='attachfile_no' value='"+res.fileNo+"' />";
+		$(".list-group-item").append(str);
+		$("#regForm").append($(no));
+		});
+	
+	$('.list-group-item').on("click",".removeBtn",function(event){
+		
+		var $that = $(this);
+		
+		var attachfile_no =  $that.attr("data-fileNo")
+		var attachfile_name = $that.attr("data-src");
+		var $this = $(this);
+		
+		 $.ajax({
+			url: "/deleteFile",
+			type: "post",
+			data: {attachfile_name: attachfile_name,
+				   attachfile_no : attachfile_no },
+			dataType: "text",
+			
+			success : function(result){
+				if(result == 'deleted'){
+					$(":hidden[value="+attachfile_no+"]").remove();
+					$this.parent().remove();
+				}
+			}
+		}); 
 	});
 	
 	$('#edit').on('editable.beforeRemoveImage', function (e, editor, img) {

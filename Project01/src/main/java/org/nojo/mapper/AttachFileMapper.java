@@ -23,10 +23,19 @@ public interface AttachFileMapper {
 		public void addAttachBoard(FilemanagerVO vo) throws Exception;
 		
 		
-		@Select("select question_no, attachfile_name, attachfile_path, clz_domain "
-					+ "from tbl_qfilemanager a join tbl_attachfile b on a.attachfile_no = b.attachfile_no "
-					+ "where question_no = #{no} and clz_domain = #{domain}")
-		public List<String> getAttach(@Param("no" )Integer no, @Param("domain") String domain) throws Exception;
+		@Select("select question_no, a.attachfile_no as attachfile_no, attachfile_name, attachfile_path, clz_domain "
+					+ "from tbl_qfilemanager a "
+					+ "join tbl_attachfile b "
+					+ "on a.attachfile_no = b.attachfile_no "
+					+ "where a.question_no = #{no} and a.clz_domain = #{domain}")
+		public List<FilemanagerVO> getQAttach(@Param("no" )Integer no, @Param("domain") String domain) throws Exception;
+		
+		@Select("select answer_no, a.attachfile_no as attachfile_no, attachfile_name, attachfile_path, clz_domain "
+				+ "from tbl_afilemanager a "
+				+ "join tbl_attachfile b "
+				+ "on a.attachfile_no = b.attachfile_no "
+				+ "where a.answer_no = #{rno} and a.clz_domain = #{domain}")
+		public List<FilemanagerVO> getAnsAttach(@Param("rno" )Integer rno, @Param("domain") String domain) throws Exception;
 		
 		@Delete("delete from tbl_attachfile where attachfile_no = #{attachfile_no}")
 		public void deleteAttach(int attachfile_no) throws Exception;

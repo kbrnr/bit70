@@ -113,6 +113,9 @@
 							</div>
 							<div class="box-header with-border ">
 								<div class="froala-view">${vo.answer_content }</div>
+								<ul id="ansfileAttach" class='list-group' >
+										<li class="list-group-item ans"></li>
+									</ul>
 								<div>
 									 <a	href="answerModify?rno=${vo.answer_no }&no=${vo.question_no } ">
 										<button type="submit" class="btn btn-info">Modify</button>
@@ -149,32 +152,46 @@
 		})
 	});
 	
-
 	function getFileInfo(filePath){
 		
-		var filename, fileLink;
+		var path = filePath.attachfile_path;
+		var filename, fileLink, fileno;
 		
-		filesrc = "/displayFile?filename="+filePath;
-		fileLink = filePath.substr(0,14);
-		filename = fileLink.substr(fileLink.indexOf("_") + 1);
-		
-		return {filename:filename, filesrc:filesrc, filePath:filePath};
+		fileno = filePath.attachfile_no;
+		filesrc = "/displayFile?fileName="+path;
+		fileLink = path.substr(0,14);
+		filename = fileLink.substr(path.indexOf("_") + 1);
+		return {filename:filename, filesrc:filesrc, filePath:filePath, fileno:fileno};
 		
 	}
 	
 	var no = ${QuestionVO.question_no};
 	var domain = '${domain}';
-	
-	$.getJSON(+"/getAttachFile/"+no, function(list){
+	$.get(domain+"/../getQuestionFile/"+no, function(list){
+		
 		$(list).each(function(){
 			
 			var fileInfo = getFileInfo(this);
-			var file = "<li><span>"+fileInfo+"</span></li>";
-			$('#fileAttachfile').append(file);
+			var filePath = fileInfo.filePath.attachfile_path;
+			var filename = fileInfo.filePath.attachfile_name;
+			var file = "<div class='attach'><a href="+filesrc+"><span>"+filename+"</span></a><br/></div>";
+			$('.list-group-item').append(file);
 		});	
 	});
 	
+	var rno = ${vo.answer_no};
+	var domain = '${domain}';
+	$.get(domain+"/../getAnsFile/"+rno, function(list){
 		
+		$(list).each(function(){
+			
+			var fileInfo = getFileInfo(this);
+			var filePath = fileInfo.filePath.attachfile_path;
+			var filename = fileInfo.filePath.attachfile_name;
+			var file = "<div class='attach'><a href="+filesrc+"><span>"+filename+"</span></a><br/></div>";
+			$('.list-group-item').append(file);
+		});	
+	});
 		
 </script>
 </html>

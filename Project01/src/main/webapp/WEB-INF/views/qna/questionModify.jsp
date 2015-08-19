@@ -81,7 +81,12 @@
 							</div>
 							
 							<textarea id='edit' name="question_content" style="margin-top: 30px;">${QuestionVO.question_content }</textarea>
-	
+							<br />
+								<div>
+									<ul class='list-group' >
+										<li class="list-group-item"></li>
+									</ul>
+								</div>
 							<div class="box-footer">
 								<button type="submit" class="btn btn-info">Modify</button>
 								<a href="remove/${QuestionVO.question_no }" method="POST">
@@ -130,8 +135,6 @@
 
 <script type="text/javascript">
 		
-		
-		
 		$('#edit').editable({
 			inlineMode : false,
 			height : 500,
@@ -169,6 +172,75 @@
 				$(":hidden[value="+attachfile_no+"]").remove();
 				
 			});
+		});
+		
+		$('#edit').on('editable.afterFileUpload', function (e, editor, response) {
+			
+			var res = JSON.parse(response);
+			var str = "<div class='attach'><a href='/displayFile?fileName='"+res.filePath+"><span>"+res.fileName+"</span></a>"
+					+ "<a href='#' class='removeBtn' data-fileNo='"+res.fileNo+"' data-src="+res.fileName+"><span class='glyphicon glyphicon-remove-circle' style='float: right;'></span></a><br/></div>";
+			var no =  "<input class='fno' type='hidden' name='attachfile_no' value='"+res.fileNo+"' />";
+			$(".list-group-item").append(str);
+			$("#regForm").append($(no));
+			});
+		
+		$('.list-group-item').on("click",".removeBtn",function(event){
+			
+			var $that = $(this);
+			
+			var attachfile_no =  $that.attr("data-fileNo")
+			var attachfile_name = $that.attr("data-src");
+			var $this = $(this);
+			
+			 $.ajax({
+				url: "/deleteFile",
+				type: "post",
+				data: {attachfile_name: attachfile_name,
+					   attachfile_no : attachfile_no },
+				dataType: "text",
+				
+				success : function(result){
+					if(result == 'deleted'){
+						$(":hidden[value="+attachfile_no+"]").remove();
+						$this.parent().remove();
+					}
+				}
+			}); 
+		});
+		
+		function getFileInfo(filePath){
+			
+			var path = filePath.attachfile_path;
+			var filename, fileLink, fileno;
+			
+			fileno = filePath.attachfile_no;
+			filesrc = "/displayFile?fileName="+path;
+			fileLink = path.substr(0,14);
+			filename = fileLink.substr(path.indexOf("_") + 1);
+			return {filename:filename, filesrc:filesrc, filePath:filePath, fileno:fileno};
+			
+		}
+		
+		var no = ${QuestionVO.question_no};
+		var domain = '${domain}';
+		console.log(domain);
+		$.get(domain+"/../getQuestionFile/"+no, function(list){
+			
+			$(list).each(function(){
+				
+				
+				var fileInfo = getFileInfo(this);
+				console.log(fileInfo);
+				var filePath = fileInfo.filePath.attachfile_path;
+				var filename = fileInfo.filePath.attachfile_name;
+				var fileno = fileInfo.filePath.attachfile_no;
+				var file = "<div class='attach'><a href='"+filesrc+"'><span>"+filename+"</span></a>" 
+						+ "<a href='#' class='removeBtn' data-fileNo='"+fileno+"' data-src='"+filename+"'>"
+					 	+ "<span class='glyphicon glyphicon-remove-circle' style='float: right;'></span></a><br/></div>";
+				
+				
+				$('.list-group-item').append(file);
+			});	
 		});
 
 	</script>

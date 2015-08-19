@@ -2,22 +2,15 @@ package org.nojo.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.nojo.domain.AttachfileVO;
@@ -26,12 +19,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -120,7 +111,7 @@ public class qnaFileAttachController {
 	public ResponseEntity<byte[]> displayFile(String fileName) throws Exception {
 
 		InputStream in = new FileInputStream(uploadPath + fileName);
-
+		
 		ResponseEntity<byte[]> entity = null;
 
 		try {
@@ -141,10 +132,10 @@ public class qnaFileAttachController {
 			} else if (suffix.equalsIgnoreCase("zip")) {
 				mimeType = MediaType.APPLICATION_OCTET_STREAM;
 			}
-			
+			fileName = fileName.substring(fileName.indexOf("_")+1);
 			headers.setContentType(mimeType);
-			headers.add("Content-Dispostion",
-					"attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+			headers.add("Content-Disposition",
+					"attachment; fileName=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
 			
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
 		} catch (

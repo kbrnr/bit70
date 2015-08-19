@@ -19,8 +19,7 @@ public class AttachfileVO {
 	//등록일
 	private Date attachfile_reg_date;
 	
-	
-	
+		
 	//region Getter Start
 	public int getAttachfile_no() {
 		return attachfile_no;

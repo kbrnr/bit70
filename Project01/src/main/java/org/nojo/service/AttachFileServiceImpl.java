@@ -49,8 +49,13 @@ public class AttachFileServiceImpl implements AttachFileService {
 	}
 
 	@Override
-	public List<String> getAttachFile(Integer no, String domain) throws Exception {
-		return mapper.getAttach(no, domain);
+	public List<FilemanagerVO> getQAttachFile(Integer no, String domain) throws Exception {
+		return mapper.getQAttach(no, domain);
+	}
+
+	@Override
+	public List<FilemanagerVO> getAnsAttachfile(Integer rno, String domain) throws Exception {
+		return mapper.getAnsAttach(rno, domain);
 	}
 
 

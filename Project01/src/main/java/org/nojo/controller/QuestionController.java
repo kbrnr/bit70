@@ -1,13 +1,10 @@
 package org.nojo.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import org.apache.ibatis.annotations.Param;
 import org.nojo.domain.AnswerVO;
-import org.nojo.domain.AttachfileVO;
 import org.nojo.domain.FilemanagerVO;
 import org.nojo.domain.QuestionVO;
 import org.nojo.service.AnswerService;
@@ -125,13 +122,12 @@ public class QuestionController {
 	
 	//파일첨부 조회
 	@ResponseBody
-	@RequestMapping("/getAttachFile/{no}")
-	public List<String> getAttach(@PathVariable("no") Integer no, 
-									@PathVariable("domain") String domain, Model model) throws Exception{
+	@RequestMapping("/getQuestionFile/{no}")
+	public List<FilemanagerVO> getAttach(@PathVariable("no") Integer no, 
+									@PathVariable("domain") String domain) throws Exception{
 		
-		List<String> fileList = null;
-		fileList = fileService.getAttachFile(no, domain);
-		model.addAttribute("file", fileList);
+		List<FilemanagerVO> fileList = null;
+		fileList = fileService.getQAttachFile(no, domain);
 		return fileList;
 		
 	}
