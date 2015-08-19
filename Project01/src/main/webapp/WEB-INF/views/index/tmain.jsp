@@ -209,8 +209,8 @@
 	                </div><!-- /.box-header -->
 
                 	<div class="box-body">
-                		<div id="container" style="border: thin solid black;">
-		                  <div id="seat"  style="height: 400px; width: 700px; margin: 0 auto; overflow: auto; ">
+                		<div id="container">
+		                  <div id="seat">
 						  </div>
 						</div>
                 	</div><!-- /.box-body -->

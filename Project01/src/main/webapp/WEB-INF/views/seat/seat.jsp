@@ -18,21 +18,19 @@
 
 <div id="container">
 	<div id="wrapper">
-		<div id="relative">
-			<div id="seat">
-				<c:forEach items="${list }" var="vo">
-					<c:if test="${vo.seat_x != 0}">
-						<div class="chair" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">
-							<div class="img"><img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}"/></div>
-								<span class="hidden memId">${vo.mem_id}</span>
-			                	<span>${vo.mem_name}</span>
-						</div>
-					</c:if>		
-				</c:forEach>
-			</div>
+		<div id="seat">
+			<c:forEach items="${list }" var="vo">
+				<c:if test="${vo.seat_x != 0}">
+					<div class="chair" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">
+						<div class="img"><img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}"/></div>
+							<span class="hidden memId">${vo.mem_id}</span>
+		                	<span>${vo.mem_name}</span>
+					</div>
+				</c:if>		
+			</c:forEach>
 		</div>
 	</div>
-	<div id="lobby">
+<div id="lobby">
 		<c:forEach items="${list }" var="vo">
 			<c:if test="${vo.seat_x == 0}">
 				<div class="chair" style="position: relative;">

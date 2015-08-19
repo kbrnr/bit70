@@ -67,7 +67,6 @@
 
 <style>
 body{background-color:#ecf0f5;}
-.chair{border: thin solid black; width: 80px; position: absolute;}
 </style>
 
 <body class="skin-blue sidebar-mini">
@@ -217,9 +216,9 @@ body{background-color:#ecf0f5;}
 
                 	<div class="box-body">
                 		<div id="container">
-		                  <div id="seat">
-		             
-						  </div>
+		             		<div id="seat">
+		             		
+		             		</div>
 						</div>
                 	</div><!-- /.box-body -->
 				
