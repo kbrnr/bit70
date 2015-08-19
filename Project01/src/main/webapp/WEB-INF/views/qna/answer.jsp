@@ -71,8 +71,7 @@
 							<h5 class="box-title">${QuestionVO.question_title }</h5>
 						</div>
 						<div class="box-header with-border ">
-							<div class="box-body" style="height: 500px;">
-								${QuestionVO.question_content }</div>
+							<div class="froala-view">${QuestionVO.question_content }</div>
 							<div>
 							    <a href="modify?no=${QuestionVO.question_no } ">
 									<button type="submit" class="btn btn-info">Modify</button>
