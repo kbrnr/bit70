@@ -1,9 +1,11 @@
 package org.nojo.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 
+import org.nojo.bizDomain.TQuestionScoreListVO;
 import org.nojo.domain.ComprehensionVO;
 import org.nojo.domain.TeacherquestionVO;
 import org.nojo.service.ComprehensionService;
@@ -46,9 +48,9 @@ public class ComprehensionController {
 
 	@RequestMapping(method=RequestMethod.GET)
 	public String comprehensionList(@PathVariable("domain") String domain, Model model) throws Exception{
-		HashMap<String, Object> comprehensionmap ;
-		comprehensionmap = service.getComprehension(domain);
-		model.addAttribute("comprehensionmap",comprehensionmap);
+		List<TQuestionScoreListVO> tqscorelist ; 
+		tqscorelist = service.getComprehension(domain);
+		model.addAttribute("tqscorelist",tqscorelist);
 		return "/comprehension/comprehensionlist";
 	}
 	

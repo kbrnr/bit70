@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 import org.nojo.bizDomain.JoinMemberVO;
 import org.nojo.bizDomain.ScoreVO;
-import org.nojo.bizDomain.TeacherQuestionVO;
+import org.nojo.bizDomain.TQuestionScoreListVO;
 import org.nojo.domain.ComprehensionVO;
 import org.nojo.domain.TeacherquestionVO;
 
@@ -61,7 +61,7 @@ public interface ComprehensionMapper {
 			+ "where t.curri_no = c.curri_no "
 			+ "and c.clz_domain = #{domain} "
 			+ "order by t.teacherquestion_no")
-	public List<TeacherQuestionVO> selectQuestion(String domain) throws Exception;
+	public List<TQuestionScoreListVO> selectQuestion(String domain) throws Exception;
 	
 	@Select("select l.mem_id, mem_name, comprehension_score, teacherquestion_no "
 			+ "from "
