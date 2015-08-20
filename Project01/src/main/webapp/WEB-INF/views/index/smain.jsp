@@ -260,19 +260,22 @@ body{background-color:#ecf0f5;}
 
 	
 	<script>
-		parent.socket.emit("init", {domain: "${domain}", userId: "${userid}"});
 		parent.socket.on("understanding", function(msg){
-			var arr = msg.split("|");
-			parent.$("#sendScore [name=teacherquestion_no]").val(arr[0]);
-			parent.$("#msg").text(arr[1]);
+			parent.$("#sendScore [name=teacherquestion_no]").val(msg.teacherquestion_no);
+			parent.$("#msg").text(msg.teacherquestion_content);
 			parent.$('#myModal').modal('show');
 		});
 		
 		parent.$("#sendScore").submit(function(e){
 			e.preventDefault();
-			console.log($(this).serialize());
-			$.post("/${domain}/comprehension", $(this).serialize(), function(data){
-				console.log(data);
+			var $this = $(this);
+			$.post("/${domain}/comprehension", $this.serialize(), function(data){
+				var obj = {
+					mem_id: "${memid}", 
+					teacherquestion_no: $this.find("[name=teacherquestion_no]").val(),
+					comprehension_score: $this.find("[name=comprehension_score]").val(),
+				}
+				parent.socket.emit("seatScore", obj);
 			});
 			parent.$('#myModal').modal('hide');
 		});

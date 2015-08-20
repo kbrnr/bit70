@@ -256,12 +256,12 @@
 		
 		parent.$("#sendQuestion").submit(function(e){
 			e.preventDefault();
-			console.log($(this));
-			var data = $(this).serialize();
-			console.log(data);
-			var question = $(this).find("[name=teacherquestion_content]").val();
+			var $this = $(this);
+			var data = $this.serialize();
 			$.post("/${domain}/comprehension/question", data, function(no){
-				parent.socket.emit("understanding", no + "|" + question);
+				var question = $this.find("[name=teacherquestion_content]").val();
+				var obj = {teacherquestion_no: no, teacherquestion_content: question};
+				parent.socket.emit("understanding", obj);
 				parent.$('#myModal').modal('hide');
 			});
 		});

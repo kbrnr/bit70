@@ -2,20 +2,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="/WEB-INF/views/include/t_index_header.jsp"%>
 <%@include file="/WEB-INF/views/include/t_index_aside.jsp"%>
-<!-- Full Width Column -->
-
-<script type="text/javascript">
-// iframe resize
-function autoResize(i)
-{
-    var iframeHeight=
-    (i).contentWindow.document.body.scrollHeight;
-    (i).height=iframeHeight+20;
-}
-</script>
+<style>
+.wrapper, .wrapper .content-wrapper, .content-wrapper *{
+	height: 100%;
+} 
+</style>
 
 <div class="content-wrapper">
-	<iframe name="inner" src="/${domain}/${userid}/t/main" width="100%" height="100%"  onload="autoResize(this)" scrolling="no" frameborder="0" ></iframe>
+	<iframe name="inner" src="/${domain}/${userid}/t/main" width="100%" height="100%"  onload="autoResize(this)" frameborder="0"></iframe>
 </div>
 <!-- /.content-wrapper -->
 
@@ -47,7 +41,9 @@ function autoResize(i)
 </div>
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script>
- 	var socket = io.connect('http://14.32.66.104:3002');
-	socket.emit("init", {domain: "${domain}", userId: "${userid}"});
+	var socket = io.connect('http://14.32.66.104:3002');
+	socket.on("connect", function(){
+		socket.emit("init", {domain: "${domain}", userId: "${userid}"});	
+	});
 </script>
 <%@include file="/WEB-INF/views/include/footer.jsp"%>
