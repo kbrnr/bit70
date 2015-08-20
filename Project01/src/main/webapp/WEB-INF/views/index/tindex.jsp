@@ -9,7 +9,7 @@
 </style>
 
 <div class="content-wrapper">
-	<iframe name="inner" src="/${domain}/${userid}/t/main" width="100%" height="100%"  onload="autoResize(this)" frameborder="0"></iframe>
+	<iframe name="inner" src="/${domain}/${userid}/t/main" width="100%" height="100%" style="border:none;"></iframe>
 </div>
 <!-- /.content-wrapper -->
 
