@@ -118,6 +118,10 @@ public class QuestionController {
 		pagemaker = new PageMaker(cri, ansService.getCntList(no));
 		list = ansService.getAllAnswers(domain, no, cri);
 
+		for (AnswerVO vo : list) {
+			vo.getAnswer_no();
+		}
+		
 		model.addAttribute("ansList", list);
 		model.addAttribute("QuestionVO", service.getReadQuestion(no));
 

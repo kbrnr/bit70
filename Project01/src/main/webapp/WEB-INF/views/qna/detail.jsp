@@ -80,11 +80,11 @@
 						<div class="box-header with-border ">
 
 							<div class="froala-view">${QuestionVO.question_content }</div>
-							<div>
-									<ul id="fileAttach" class='list-group' >
-										<li class="list-group-item"></li>
-									</ul>
+									
 									<div style="margin-top: 200px;">
+									<ul class='list-group' >
+										<li id="attach" class="list-group-item"></li>
+									</ul>
 								<a href="answer?no=${QuestionVO.question_no}">
 									<button style="float: left;" id="AnsBoard" type="submit"
 										class="btn btn-primary">Answer</button>
@@ -104,9 +104,10 @@
 				<div class="box-group" id="accordion">
 					<c:forEach items="${ansList}" var="vo">
 						<div class="panel box box-success">
+						<input type="hidden" name="domain" value="${vo.clz_domain }">
 							<div class="box-header with-border">
 								<h4 class="box-title">${vo.question_no }</h4>
-								<h4 class="box-title">${vo.answer_no }</h4>
+								<h4 id="ans_no" class="box-title">${vo.answer_no }</h4>
 								<h5 class="box-title">${vo.answer_title }</h5>
 								<h4 class="box-title">${vo.mem_id }</h4>
 								<h4 class="box-title">${vo.answer_recommend }</h4>
@@ -114,7 +115,8 @@
 							<div class="box-header with-border ">
 								<div class="froala-view">${vo.answer_content }</div>
 								<ul id="ansfileAttach" class='list-group' >
-										<li class="list-group-item ans"></li>
+										<li id="ansAttach" class="list-group-item ans">
+										</li>
 									</ul>
 								<div>
 									 <a	href="answerModify?rno=${vo.answer_no }&no=${vo.question_no } ">
@@ -126,6 +128,20 @@
 								</div>
 							</div>
 						</div>
+						<script type="text/javascript">
+						var domain = "${domain}";
+						var ano = ${vo.answer_no};
+							$.get(domain+"/../getAnsFile/"+ano, function(list){
+								$(list).each(function(){
+									
+									var fileInfo = getFileInfo(this);
+									var filePath = fileInfo.filePath.attachfile_path;
+									var filename = fileInfo.filePath.attachfile_name;
+									var file = "<div class='attach'><a href="+filesrc+"><span>"+filename+"</span></a><br/></div>";
+									$('#ansAttach').append(file);
+								});
+							});
+						</script>
 					</c:forEach>
 					<div style="float: right;">
 					<a href="listpage">
@@ -142,7 +158,10 @@
 	<!-- /.row -->
 </body>
 <script type="text/javascript">
-
+		
+	var no = ${QuestionVO.question_no};
+	var domain = '${domain}';
+	
 	$('#delQuestionBtn').on('click', function() {
 		$("img").each(function(idx){
 			var query = "attachfile_no=" + $(this).data("fileno") +"&attachfile_name=" + $(this).data("src");
@@ -165,33 +184,18 @@
 		
 	}
 	
-	var no = ${QuestionVO.question_no};
-	var domain = '${domain}';
 	$.get(domain+"/../getQuestionFile/"+no, function(list){
 		
 		$(list).each(function(){
-			
 			var fileInfo = getFileInfo(this);
 			var filePath = fileInfo.filePath.attachfile_path;
 			var filename = fileInfo.filePath.attachfile_name;
 			var file = "<div class='attach'><a href="+filesrc+"><span>"+filename+"</span></a><br/></div>";
-			$('.list-group-item').append(file);
+			$('#attach').append(file);
 		});	
 	});
+
 	
-	var rno = ${vo.answer_no};
-	var domain = '${domain}';
-	$.get(domain+"/../getAnsFile/"+rno, function(list){
-		
-		$(list).each(function(){
-			
-			var fileInfo = getFileInfo(this);
-			var filePath = fileInfo.filePath.attachfile_path;
-			var filename = fileInfo.filePath.attachfile_name;
-			var file = "<div class='attach'><a href="+filesrc+"><span>"+filename+"</span></a><br/></div>";
-			$('.list-group-item').append(file);
-		});	
-	});
 		
 </script>
 </html>

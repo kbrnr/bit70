@@ -11,6 +11,8 @@ public interface AttachFileService {
 	
 	public void addAttachFileBoard(FilemanagerVO vo) throws Exception;
 	
+	public void addAttachFileAnsBoard(FilemanagerVO vo) throws Exception;
+	
 	public List<FilemanagerVO> getQAttachFile(Integer no, String domain) throws Exception;
 	
 	public List<FilemanagerVO> getAnsAttachfile(Integer rno, String domain) throws Exception;

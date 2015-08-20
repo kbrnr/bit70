@@ -73,12 +73,10 @@
 						<div class="box-header with-border ">
 							<div class="froala-view">${QuestionVO.question_content }</div>
 							<br/>
-							<div>
-							<ul id="fileAttach" class='list-group' >
+						</div>
+						<ul id="fileAttach" class='list-group' >
 										<li id="question_attachfile" class="list-group-item"></li>
 									</ul>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -103,13 +101,13 @@
 								<input id="answer_visible" type="radio" name="answer_visible" value = "1" checked> 공개
 								<input id="answer_visible" type="radio" name="answer_visible" value = "0" > 비공개
 								<input id="mem_id" type="text" class="form-control" name="mem_id" placeholder="맴버아이디 히든으로 처리하자">
-								<input id="clz_domain" type="text" class="form-control" name="clz_domain" placeholder="도메인 히든으로 처리하자">
+								<input id="clz_domain" type="hidden" class="form-control" name="clz_domain" value="bit70">
 							</div>
 							<textarea id='edit' name="answer_content" style="margin-top: 30px;"></textarea>
 							<br/>
 							<div>
 									<ul class='list-group' >
-										<li class="list-group-item"></li>
+										<li id="ansAttach" class="list-group-item"></li>
 									</ul>
 							</div>
 						<div class="box-footer">
@@ -162,7 +160,11 @@
 <!-- Text Editor -->	
 	
 <script type="text/javascript">
+		
+		var no = ${QuestionVO.question_no};
+		var domain = '${domain}';
 
+	
 		$('#edit').editable({
 			inlineMode : false,
 			height : 500,
@@ -181,9 +183,10 @@
 		$('#edit').on('editable.afterFileUpload', function (e, editor, response) {
 			
 			var res = JSON.parse(response);
-			var str = "<a href='/displayFile?fileName="+res.filePath+"'<span>"+res.fileName+"</span></a><br/>";
+			var str = "<a href='/displayFile?fileName="+res.filePath+"'<span>"+res.fileName+"</span></a>"
+				 + "<a href='#' class='removeBtn' data-fileNo='"+res.fileNo+"' data-src="+res.fileName+"><span class='glyphicon glyphicon-remove-circle' style='float: right;'></span></a><br/></div>";
 			var no =  "<input class='fno' type='hidden' name='attachfile_no' value='"+res.fileNo+"' />";
-			$(".list-group-item").append(str);
+			$("#ansAttach").append(str);
 			$("#ansForm").append($(no));
 			});
 		
@@ -193,7 +196,6 @@
 			var str = "<img width ='300' name='attachfile_name' class='fr-fin fr-dib' data-fileNo='"+res.fileNo+"' data-src="+ res.filePath +" src='/displayFile?fileName="+ res.filePath +"' />";
 			var no = "<input class='fno' type='hidden' name='attachfile_no' value='"+res.fileNo+"' />";
 			var view = $(".f-placeholder.froala-view.froala-element.not-msie.f-basic");
-			console.log(view);
 			view.append(str);
 			$("#ansForm").append($(no));
 			
@@ -216,18 +218,16 @@
 		function getFileInfo(filePath){
 			
 			var path = filePath.attachfile_path;
-			var filename, fileLink;
+			var filename, fileLink, fileno;
 			
 			filesrc = "/displayFile?fileName="+path;
 			fileLink = path.substr(0,14);
 			filename = fileLink.substr(path.indexOf("_") + 1);
-			
-			return {filename:filename, filesrc:filesrc, filePath:filePath};
+			fileno = filePath.attachfile_no;
+			return {filename:filename, filesrc:filesrc, filePath:filePath, fileno:fileno};
 			
 		}
 		
-		var no = ${QuestionVO.question_no};
-		var domain = '${domain}';
 		$.get(domain+"../qna/getQuestionFile/"+no, function(list){
 			
 			$(list).each(function(){
@@ -238,6 +238,30 @@
 				var file = "<a href="+filesrc+"><span>"+filename+"</span></a><br/>";
 				$('#question_attachfile').append(file);
 			});	
+		});
+		
+		$('#ansAttach').on("click",".removeBtn",function(event){
+			
+			var $that = $(this);
+			
+			var attachfile_no =  $that.attr("data-fileNo")
+			var attachfile_name = $that.attr("data-src");
+			var $this = $(this);
+			
+			 $.ajax({
+				url: "/deleteFile",
+				type: "post",
+				data: {attachfile_name: attachfile_name,
+					   attachfile_no : attachfile_no },
+				dataType: "text",
+				
+				success : function(result){
+					if(result == 'deleted'){
+						$(":hidden[value="+attachfile_no+"]").remove();
+						$this.parent().remove();
+					}
+				}
+			}); 
 		});
 		
 </script>

@@ -134,6 +134,9 @@
 </body>
 
 <script type="text/javascript">
+
+		var no = ${QuestionVO.question_no};
+		var domain = '${domain}';
 		
 		$('#edit').editable({
 			inlineMode : false,
@@ -221,9 +224,7 @@
 			
 		}
 		
-		var no = ${QuestionVO.question_no};
-		var domain = '${domain}';
-		console.log(domain);
+		
 		$.get(domain+"/../getQuestionFile/"+no, function(list){
 			
 			$(list).each(function(){

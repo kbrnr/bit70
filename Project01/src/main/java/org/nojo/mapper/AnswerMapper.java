@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.Update;
 import org.nojo.domain.AnswerVO;
 import org.nojo.util.Criteria;
@@ -13,6 +14,7 @@ import org.nojo.util.Criteria;
 public interface AnswerMapper {
 	
 	//답변 글 작성
+	@SelectKey(keyColumn="answer_no" ,  keyProperty="answer_no", before=false, resultType = Integer.class, statement = {"select last_insert_id()" })
 	@Insert("insert into tbl_answer(question_no, answer_title, answer_content, answer_visible, clz_domain, mem_id) "
 			+ "values (#{question_no}, #{answer_title}, #{answer_content}, #{answer_visible}, #{clz_domain}, #{mem_id})")
 	public void create(AnswerVO vo) throws Exception;

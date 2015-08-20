@@ -85,16 +85,8 @@
 				<div class='box'>
 					<div class='box-header'>
 						<h3 class='box-title'>
-							Bootstrap WYSIHTML5 <small>Simple and fast</small>
+							<small>Simple and fast</small>
 						</h3>
-						<!-- tools box -->
-						<div class="pull-right box-tools">
-							<button class="btn btn-default btn-sm" data-widget='collapse'
-								data-toggle="tooltip" title="Collapse">
-								<i class="fa fa-minus"></i>
-							</button>
-						</div>
-						<!-- /. tools -->
 					</div>
 					<!-- /.box-header -->
 					<div class='box-body pad'>
@@ -102,13 +94,12 @@
 							<form id='regForm' role="form" method="post" action="questionRegist">
 								<div style="height: 150px;">
 									<input id="title" type="text" class="form-control" value="${vo.question_title }" name="question_title" placeholder="title"> 
-									<input id="gb" type="text"class="form-control" name="question_gb" placeholder="구분은 히든으로 처리하자"> 
+									<input id="gb" type="hidden"class="form-control" name="question_gb" value="member_student"> 
 									<input id="mem_id" type="text" class="form-control" name="mem_id" placeholder="맴버아이디 히든으로 처리하자"> 
-									<input id="clz_domain" type="text" class="form-control" name="clz_domain" placeholder="도메인 히든으로 처리하자">
+									<input id="clz_domain" type="hidden" class="form-control" name="clz_domain" value="bit70">
 								</div>
-
 								<textarea id='edit' name="question_content" style="margin-top: 30px;"></textarea>
-								<br />
+								<br/>
 								<div>
 									<ul class='list-group' >
 										<li class="list-group-item"></li>

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Param;
 import org.nojo.domain.AnswerVO;
 import org.nojo.domain.FilemanagerVO;
 import org.nojo.service.AnswerService;
@@ -12,7 +13,9 @@ import org.nojo.service.AttachFileService;
 import org.nojo.service.QuestionService;
 import org.nojo.util.Criteria;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,16 +49,43 @@ public class AnswerController {
 	}
 
 	// 답변 글쓰기
+	@Transactional
 	@RequestMapping(value = "/answer", method = RequestMethod.POST)
-	public String resigtAnswer(@PathVariable("domain") String domain, AnswerVO vo, Criteria cri, Model model)
+	public String resigtAnswer(@PathVariable("domain") String domain, AnswerVO vo, 
+							@RequestParam(value = "attachfile_no", required = false) Integer[] attachfile_no,Criteria cri, Model model)
 			throws Exception {
 
 		service.addAnswer(vo);
+		
+		if(attachfile_no != null){
+			
+			for (Integer files : attachfile_no) {
+
+				FilemanagerVO fvo = new FilemanagerVO();
+				fvo.setAnswer_no(vo.getAnswer_no());
+				fvo.setClz_domain(vo.getClz_domain());
+				fvo.setAttachfile_no(files);
+				
+				fileService.addAttachFileAnsBoard(fvo);
+			}
+			
+		}
 
 		return "redirect: detail?no= " + vo.getQuestion_no();
 	}
 	//region End
+	
+	@ResponseBody
+	@RequestMapping("/getAllAns/{no}")
+	public List<AnswerVO> getAllans(@PathVariable("domain") String domain, @PathVariable("no") int no,
+			@ModelAttribute("cri") Criteria cri, Model model) throws Exception{
 		
+		List<AnswerVO> list = null;
+		list = service.getAllAnswers(domain, no, cri);
+		
+		return list;
+	}
+	
 	//답변 수정하기 region Start
 	//원문 글 가져오기
 	public void readQuestion(@PathVariable("domain") String domain, @RequestParam("no") Integer no, Criteria cri,
@@ -92,10 +122,11 @@ public class AnswerController {
 	@ResponseBody
 	@RequestMapping("/getAnsFile/{rno}")
 	public List<FilemanagerVO> getAttach(@PathVariable("rno") Integer rno, 
-									@PathVariable("domain") String domain) throws Exception{
+									@PathVariable("domain") String domain, Model model) throws Exception{
 		
 		List<FilemanagerVO> fileList = null;
 		fileList = fileService.getAnsAttachfile(rno, domain);
+		model.addAttribute("file", fileList);
 		return fileList;
 		
 	}

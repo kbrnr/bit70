@@ -28,6 +28,12 @@ public class AttachFileServiceImpl implements AttachFileService {
 
 		mapper.addAttachBoard(vo);
 	}
+	
+	@Override
+	public void addAttachFileAnsBoard(FilemanagerVO vo) throws Exception {
+		
+		mapper.addAttachAnsBoard(vo);		
+	}
 
 	@Override
 	public void removeAttach(int attachfile_no) throws Exception {
@@ -58,5 +64,6 @@ public class AttachFileServiceImpl implements AttachFileService {
 		return mapper.getAnsAttach(rno, domain);
 	}
 
+	
 
 }

@@ -62,7 +62,15 @@
 					<c:forEach items="${list}" var="vo">
 						<tr>
 							<td width = 50px><span>${vo.rowNum}</span></td>
-							<td><span><a href='detail?page=${pagemaker.page }&perPagerNum=${pagemaker.perPageNum }&no=${vo.question_no}'>${vo.question_title }</a></span></td>
+							<c:set var = "v" value= "0" />
+							<c:choose>
+							<c:when test="${v eq 0 }" > 
+							 	<td>쉿</td>
+							</c:when>
+							<c:otherwise>
+								<td><span><a href='detail?page=${pagemaker.page }&perPagerNum=${pagemaker.perPageNum }&no=${vo.question_no}'>${vo.question_title }</a></span></td>
+							</c:otherwise>
+							</c:choose>
 							<td width = 120px>${vo.mem_id }</td>
 							<td width = 120px class="regDate">${vo.question_reg_date }</td>
 					</c:forEach>

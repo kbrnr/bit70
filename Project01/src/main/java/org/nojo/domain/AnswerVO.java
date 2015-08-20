@@ -91,14 +91,4 @@ public class AnswerVO {
 	}
 	//region End
 	
-	@Override
-	public String toString() {
-		return "AnswerVO [answer_no=" + answer_no + ", question_no=" + question_no + ", answer_title=" + answer_title
-				+ ", answer_content=" + answer_content + ", answer_reg_date=" + answer_reg_date + ", answer_visible="
-				+ answer_visible + ", answer_recommend=" + answer_recommend + ", clz_domain=" + clz_domain + ", mem_id="
-				+ mem_id + "]";
-	}
-
-	
-
 }

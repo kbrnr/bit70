@@ -22,6 +22,10 @@ public interface AttachFileMapper {
 		@Insert("insert into tbl_qfilemanager(question_no, attachfile_no , clz_domain) values (#{question_no}, #{attachfile_no} ,#{clz_domain})")
 		public void addAttachBoard(FilemanagerVO vo) throws Exception;
 		
+		@SelectKey(keyColumn="attachfile_no", keyProperty="attachfile_no", before=false, resultType = Integer.class, statement = { "select last_insert_id()" })
+		@Insert("insert into tbl_afilemanager(answer_no, attachfile_no , clz_domain) values (#{answer_no}, #{attachfile_no} ,#{clz_domain})")
+		public void addAttachAnsBoard(FilemanagerVO vo) throws Exception;
+		
 		
 		@Select("select question_no, a.attachfile_no as attachfile_no, attachfile_name, attachfile_path, clz_domain "
 					+ "from tbl_qfilemanager a "
