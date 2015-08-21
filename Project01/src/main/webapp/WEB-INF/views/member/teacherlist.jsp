@@ -104,6 +104,7 @@
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 129px;">가입일</th>
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 92px;">이메일</th>
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">연락처</th>			                   
+		                      	  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">구분</th>		
 		                      </tr>
 		                    </thead>
 		                    <tbody>
@@ -114,6 +115,7 @@
 			                      <td>${vo.mem_reg_date}</td>
 			                      <td>${vo.mem_email}</td>
 			                      <td>${vo.mem_tel}</td>
+			                      <td>${vo.mem_gb}</td>
 			                    </tr>
 		                      </c:forEach>
 		                    </tbody>
@@ -128,23 +130,66 @@
                   		<div class="col-sm-12">
                   			<div class="dataTables_paginate paging_simple_numbers text-center" id="example1_paginate">
                   				<ul class="pagination">
+								  <!--이전페이지 -->	
                   				  <c:if test="${pageMaker.prev}">
-                  					<li class="paginate_button previous" id="example1_previous"><a href="teacherlist?page=${pageMaker.startPage-1}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
+                  				  		<c:if test="${scri.searchKey[0] == null && scri.searchValue == null }">
+                  							<li class="paginate_button previous" id="example1_previous"><a href="teacherlist?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
+                  				  		</c:if>
+                  				  		<c:if test="${scri.searchKey[0] != null && scri.searchValue != null }">
+                  							<li class="paginate_button previous" id="example1_previous"><a href="teacherlist?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}&searchKey=${scri.searchKey[0]}&searchValue=${searchValue}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
+                  				  		</c:if>
                   				  </c:if>
                   				  
-                  				  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-                  					<li ${pageMaker.page==idx? "class='paginate_button active'":"class='paginate_button'"}> 
-									  <a href="teacherlist?page=${idx}&perPageNum=${pageMaker.perPageNum}&searchOPT=${searchOPT}&keyword=${keyword}">${idx}</a>
-                  					</li>
+                  				  <!-- 페이징 -->
+                  				  <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+									<li <c:out value = "${pageMaker.page==idx?'class=active' :'' }"/>>
+										<c:if test="${scri.searchKey[0] == null && scri.searchValue == null }">
+											<a href="teacherlist?page=${idx }&perPageNum=${pageMaker.perPageNum}">${idx }</a>
+										</c:if>
+										<c:if test="${scri.searchKey[0] != null && scri.searchValue != null }">
+											<a href="teacherlist?page=${idx }&perPageNum=${pageMaker.perPageNum}&searchKey=${scri.searchKey[0]}&searchValue=${scri.searchValue}">${idx }</a>
+										</c:if>
+									</li>
                   				  </c:forEach>
 								  
+								  <!--다음페이지 -->
 								  <c:if test="${pageMaker.next}">
-                  					<li class="paginate_button next" id="example1_next"><a href="teacherlist?page=${pageMaker.endPage+1}&perPageNum=${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li>
+                  						<c:if test="${scri.searchKey[0] == null && scri.searchValue == null }">
+                  							<li class="paginate_button previous" id="example1_previous"><a href="teacherlist?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
+                  				  		</c:if>
+                  				  		<c:if test="${scri.searchKey[0] != null && scri.searchValue != null }">
+                  							<li class="paginate_button previous" id="example1_previous"><a href="teacherlist?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}&searchKey=${scri.searchKey[0]}&searchValue=${searchValue}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
+                  				  		</c:if>
                   				  </c:if>
                   				</ul>
                   			</div>
+
+                  			
+                  			<form name="searchFrom" action="/member/teacherlist" method="get">
+								<div id="select_board" class="text-center" >
+									<select name="searchKey" class="form-control" style="width: 150px; margin-right: 10px;">
+										<option value="id" <c:out value="${scri.searchKey[0] == 'id'?'selected':'' }" />>
+										아이디
+										</option>	
+										<option value="name" <c:out value="${scri.searchKey[0] == 'name'?'selected':'' }" />>
+										성명	
+										</option>
+									</select>
+									<div class="input-group">
+	   								   <input type="text" class="form-control" name="searchValue" value="${scri.searchValue}" style="width: 200px;">
+									      <span class="input-group-btn">
+									        <button class="btn btn-default" type="Submit">검색</button>
+									      </span>
+			                 	 	</div><!-- /input-group -->
+								</div>
+							</form>
+                  			
                   		</div><!-- /.grid -->
                   	</div><!-- /.row -->
+                  	
+                  	
+                  	
+                  	
                     	
                   </div><!-- /.example1_wrapper -->
                 </div><!-- /.box-body -->

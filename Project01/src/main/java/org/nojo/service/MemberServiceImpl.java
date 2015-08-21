@@ -8,6 +8,7 @@ import org.nojo.bizDomain.JoinMemberVO;
 import org.nojo.domain.MemberVO;
 import org.nojo.mapper.MemberMapper;
 import org.nojo.util.Criteria;
+import org.nojo.util.Search;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,12 +18,12 @@ public class MemberServiceImpl implements MemberService {
 	private MemberMapper membermapper;
 
 	
-	public List<MemberVO> getTeacherList(Criteria cri) throws Exception {
-		return membermapper.selcetTeacher(cri);
+	public List<MemberVO> getTeacherList(Criteria cri, Search scri) throws Exception {
+		return membermapper.selcetTeacher(cri, scri);
 	}
 
-	public int getTeacherTotalCnt() throws Exception {
-		return membermapper.selectTeacherTotalCnt();
+	public int getTeacherTotalCnt(Search scri) throws Exception {
+		return membermapper.selectTeacherTotalCnt(scri);
 	}
 	
 	
@@ -40,4 +41,6 @@ public class MemberServiceImpl implements MemberService {
 	public void signIn(MemberVO vo) throws Exception {
 		membermapper.signIn(vo);
 	}
+
+
 }
