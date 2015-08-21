@@ -5,7 +5,7 @@ public class Criteria {
 
 	private int page;
 	private int perPageNum;
-	
+
 	// select * from tbl_board order by bno desc limit 10, 10;
 	public Criteria() {
 		this.page=1;
@@ -35,10 +35,11 @@ public class Criteria {
 	public void setPerPageNum(int perPageNum) {
 		this.perPageNum = perPageNum;
 	}
-	
+
 	
 	@Override
 	public String toString() {
 		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + "]";
 	}
+
 }

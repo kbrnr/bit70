@@ -2,9 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
  <mapper namespace="org.nojo.mapper.MemberMapper">
-<!--	<insert id="signIn" parameterType="org.nojo.domain.MemberVO">
-	insert into tbl_member(mem_id, mem_name, mem_pw, mem_photo) 
-	values(#{mem_id}, #{mem_name}, #{mem_pw}, #{mem_photo})
-	</insert>
-	-->
-</mapper> 
+
+<!-- ///////////////////////////////////////////////////////////////////////////////////////// -->	
+<!-- 선생님 관련 -->
+<!-- ///////////////////////////////////////////////////////////////////////////////////////// -->	
+	
+	<!-- 선생님 리스트 / 검색결과 포함 -->
+	<select	id="selcetTeacher" parameterType="java.util.Map" resultType="org.nojo.domain.MemberVO" >
+	<![CDATA[
+		select mem_id, mem_name, mem_reg_date, mem_email, mem_tel, mem_gb
+		from tbl_member
+		where mem_gb='member_teacher'   
+	]]>
+	<if test="scri.searchKey != null">
+		<if test="scri.searchKey[0] == 'id'">
+			and mem_id like CONCAT('%', #{scri.searchValue}, '%')
+		</if>
+		<if test="scri.searchKey[0] == 'name'">
+			and mem_name like CONCAT('%', #{scri.searchValue}, '%')
+		</if>
+	</if>
+	<![CDATA[	 
+		order by mem_reg_date desc	
+		limit #{cri.first}, #{cri.perPageNum};
+	]]>	
+	</select>
+	
+	
+	
+	<!-- 선생님 토탈갯수 / 검색결과 토탈갯수 포함 -->
+	<select	id="selectTeacherTotalCnt" parameterType="org.nojo.util.Search" resultType="java.lang.Integer" >
+	<![CDATA[
+		select count(mem_gb)
+		from tbl_member
+		where mem_gb='member_teacher'   
+	]]>
+	<if test="searchKey != null">
+		<if test="searchKey[0] == 'id'">
+			and mem_id like CONCAT('%', #{searchValue}, '%')
+		</if>
+		<if test="searchKey[0] == 'name'">
+			and mem_name like CONCAT('%', #{searchValue}, '%')
+		</if>
+	</if>
+	</select>
+	
+</mapper>
