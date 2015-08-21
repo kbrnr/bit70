@@ -74,7 +74,10 @@
 						<form role="form" method="post">
 							<div style="height: 150px;">
 								<input id="no" type="hidden" class="form-control" value="${QuestionVO.question_no}" name="question_no" > 
-								<input id="title" type="text" class="form-control" value="${QuestionVO.question_title }" name="question_title"> 
+								<input id="title" type="text" class="form-control" value="${QuestionVO.question_title }" name="question_title">
+								<!-- if 공개&비공개 -->
+								<input id="question_visible" type="radio" name="question_visible" value = "1" checked> 공개
+								<input id="question_visible" type="radio" name="question_visible" value = "0" > 비공개 
 								<input id="gb" type="hidden" class="form-control" value="${QuestionVO.question_gb}" name="question_gb" > 
 								<input id="mem_id" type="hidden" class="form-control" value="${QuestionVO.mem_id }" name="mem_id"> 
 								<input id="clz_domain" type="hidden" class="form-control" value="${QuestionVO.clz_domain}" name="clz_domain">

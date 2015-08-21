@@ -31,6 +31,6 @@ public interface AnswerService {
 	
 	
 	//답변 추천 개수 조회 (미구현)
-	public void voteRecommend(AnswerVO vo) throws Exception;
+	public void voteRecommend(Integer no) throws Exception;
 
 }

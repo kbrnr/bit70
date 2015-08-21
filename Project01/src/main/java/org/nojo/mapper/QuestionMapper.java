@@ -16,11 +16,12 @@ public interface QuestionMapper {
 
 	// 게시글 생성
 	@SelectKey(keyColumn="question_no" ,  keyProperty="question_no", before=false, resultType = Integer.class, statement = {"select last_insert_id()" })
-	@Insert("insert into tbl_question(question_title, question_content, question_gb, clz_domain, mem_id) "
+	@Insert("insert into tbl_question(question_title, question_content, question_gb, question_visible ,clz_domain, mem_id) "
 								+ "values "
 								+ "(#{question_title}, "
 								+ "#{question_content}, "
 								+ "#{question_gb}, "
+								+ "#{question_visible}, "
 								+ "#{clz_domain}, "
 								+ "#{mem_id})")
 	public void create(QuestionVO vo) throws Exception;
@@ -54,7 +55,7 @@ public interface QuestionMapper {
 	public int getTotalCnt(String domain) throws Exception;
 
 	//게시글 조회
-	@Select("select question_no, question_title, question_content, mem_id, clz_domain "
+	@Select("select question_no, question_title, question_content, question_visible, mem_id, clz_domain "
 								+ "from tbl_question "
 								+ "where question_no = #{no}")
 	public QuestionVO readBoard(int no) throws Exception;

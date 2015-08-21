@@ -105,6 +105,8 @@
 								<input id="answer_no" type="hidden" class="form-control" value= "${vo.answer_no }" name="answer_no" >	
 								<input id="question_no" type="hidden" class="form-control" value= "${vo.question_no }" name="question_no" >							
 								<input id="title" type="text" class="form-control" value= "${vo.answer_title }" name="answer_title" placeholder="title">
+								<input id="answer_visible" type="radio" name="answer_visible" value = "1" checked> 공개
+								<input id="answer_visible" type="radio" name="answer_visible" value = "0" > 비공개
 								<!-- <input id="gb" type="text" class="form-control" name="question_gb" value= placeholder="구분은 히든으로 처리하자" > -->
 								<input id="mem_id" type="text" class="form-control" name="mem_id" value = '${vo.mem_id }' placeholder="맴버아이디 히든으로 처리하자">
 								<input id="clz_domain" type="text" class="form-control" name="clz_domain" value= "${vo.clz_domain }" } placeholder="도메인 히든으로 처리하자">

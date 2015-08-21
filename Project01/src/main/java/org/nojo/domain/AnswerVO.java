@@ -9,7 +9,7 @@ public class AnswerVO {
 	private String answer_title;
 	private String answer_content;
 	private Date answer_reg_date;
-	private int answer_visible;
+	private boolean answer_visible;
 	private int answer_recommend;
 	private String clz_domain;
 	private String mem_id;
@@ -35,7 +35,7 @@ public class AnswerVO {
 		return answer_reg_date;
 	}
 
-	public int getAnswer_visible() {
+	public boolean getAnswer_visible() {
 		return answer_visible;
 	}
 
@@ -74,7 +74,7 @@ public class AnswerVO {
 		this.answer_reg_date = answer_reg_date;
 	}
 
-	public void setAnswer_visible(int answer_visible) {
+	public void setAnswer_visible(boolean answer_visible) {
 		this.answer_visible = answer_visible;
 	}
 

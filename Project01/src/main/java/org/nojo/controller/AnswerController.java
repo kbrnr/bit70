@@ -5,7 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.annotations.Param;
 import org.nojo.domain.AnswerVO;
 import org.nojo.domain.FilemanagerVO;
 import org.nojo.service.AnswerService;
@@ -132,9 +131,13 @@ public class AnswerController {
 	}
 	
 		
-	// 추천 (부가기능 미구현)
-	public void vote(AnswerVO vo) throws Exception {
-
+	// 추천
+	@ResponseBody
+	@RequestMapping(value= "/answerRecommend", method=RequestMethod.POST)
+	public void vote(@RequestParam("ano") Integer ano) throws Exception {
+		
+		service.voteRecommend(ano);
+		
 	}
 	
 	

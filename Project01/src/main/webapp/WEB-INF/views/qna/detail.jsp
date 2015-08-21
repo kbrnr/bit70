@@ -103,31 +103,48 @@
 			<div class="box-body">
 				<div class="box-group" id="accordion">
 					<c:forEach items="${ansList}" var="vo">
-						<div class="panel box box-success">
-						<input type="hidden" name="domain" value="${vo.clz_domain }">
-							<div class="box-header with-border">
-								<h4 class="box-title">${vo.question_no }</h4>
-								<h4 id="ans_no" class="box-title">${vo.answer_no }</h4>
-								<h5 class="box-title">${vo.answer_title }</h5>
-								<h4 class="box-title">${vo.mem_id }</h4>
-								<h4 class="box-title">${vo.answer_recommend }</h4>
+							<div class="panel box box-success">
+								<input type="hidden" name="domain" value="${vo.clz_domain }">
+								<c:set var = "v" value= "${vo.answer_visible }" />
+									<c:choose>
+										<c:when test="${v == false }" > 
+											<div class="box-header with-border">
+										 		<h4 class="box-title">비밀 답변 입니다.</h4>
+									 		</div>
+									 		<div class="froala-view">비밀 글입니다.</div>
+										</c:when>
+										<c:when test="${v == true }" > 
+											<div class="box-header with-border">
+												<h4 class="box-title" style="display :none;">${vo.question_no }</h4>
+												<h4 id="answer_no" class="box-title" style="display :none;">${vo.answer_no }</h4>
+												<h5 class="box-title">${vo.answer_title }</h5>
+												<h4 class="box-title">${vo.mem_id }</h4>
+											</div>
+											<div class="box-header with-border">
+											<div class="froala-view">${vo.answer_content }</div>
+											<div id="recommend btn-group" >
+												<button class="ddabong glyphicon glyphicon-thumbs-up btn btn-default btn-lg" style="size: 30px;" value="${vo.answer_no }">
+												<span>${vo.answer_recommend }</span>
+												</button>
+											</div>
+											<div style="margin-top: 200px;">
+												<ul id="ansfileAttach" class='list-group' >
+													<li id="ansAttach" class="list-group-item ans">
+													</li>
+												</ul>
+											</div>
+											<div>
+												 <a	href="answerModify?rno=${vo.answer_no }&no=${vo.question_no } ">
+													<button type="submit" class="btn btn-info">Modify</button>
+													</a>
+												 <a href="answerRemove/${vo.answer_no }">
+													<button type="submit" id="delBtn" class="btn btn">Delete</button>
+												</a>
+											</div>
+											</div>
+										</c:when>
+									</c:choose>
 							</div>
-							<div class="box-header with-border ">
-								<div class="froala-view">${vo.answer_content }</div>
-								<ul id="ansfileAttach" class='list-group' >
-										<li id="ansAttach" class="list-group-item ans">
-										</li>
-									</ul>
-								<div>
-									 <a	href="answerModify?rno=${vo.answer_no }&no=${vo.question_no } ">
-										<button type="submit" class="btn btn-info">Modify</button>
-										</a>
-									 <a href="answerRemove/${vo.answer_no }">
-										<button type="submit" id="delBtn" class="btn btn">Delete</button>
-									</a>
-								</div>
-							</div>
-						</div>
 						<script type="text/javascript">
 						var domain = "${domain}";
 						var ano = ${vo.answer_no};
@@ -154,7 +171,6 @@
 		</div>
 		<!-- /.box -->
 		<!-- /.col -->
-	</div>
 	<!-- /.row -->
 </body>
 <script type="text/javascript">
@@ -194,8 +210,23 @@
 			$('#attach').append(file);
 		});	
 	});
-
 	
-		
+	
+	$(".ddabong").on("click",function(event){
+		var $this = this;
+		var ano = $($this).val();
+		console.log(ano);
+		 $.ajax({
+				url: "../qna/answerRecommend",
+				type: "post",
+				data: {ano: ano}, 
+				dataType: "text",
+				
+				success : function(result){
+					alert("추천!!");
+				}
+			}); 
+	});		
+	
 </script>
 </html>

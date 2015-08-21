@@ -52,9 +52,9 @@ public class AnswerServiceImpl implements AnswerService {
 	}
 
 	@Override
-	public void voteRecommend(AnswerVO vo) throws Exception {
+	public void voteRecommend(Integer no) throws Exception {
 
-		mapper.UpdateReCommend(vo);
+		mapper.UpdateReCommend(no);
 	}
 
 }

@@ -29,6 +29,7 @@ public interface AnswerMapper {
 	@Update("update tbl_answer set "
 								+ "answer_title = #{answer_title}, "
 								+ "answer_content = #{answer_content}, "
+								+ "answer_visible = #{answer_visible}, "
 								+ "answer_reg_date = now() "
 								+ "where answer_no = #{answer_no}")
 	public void update(AnswerVO vo) throws Exception;
@@ -44,7 +45,7 @@ public interface AnswerMapper {
 
 	
 	//답변글 조회
-	@Select("select answer_no, question_no, answer_title, answer_content, answer_reg_date, clz_domain, mem_id "
+	@Select("select answer_no, question_no, answer_title, answer_content, answer_visible, answer_reg_date, clz_domain, mem_id "
 								+ "from tbl_answer "
 								+ "where question_no = #{no} "
 								+ "and clz_domain = #{domain} " 
@@ -52,10 +53,12 @@ public interface AnswerMapper {
 	public AnswerVO readAns(@Param("no") Integer no, @Param("domain") String domain, @Param("rno") Integer rno) throws Exception;
 	
 	
+	
+	//추천
 	@Update("update tbl_answer "
 								+ "set "
-								+ "answer_recommend = #{answer_recommend} "
-								+ "where answer_no = #{answer_no}")
-	public void UpdateReCommend(AnswerVO vo) throws Exception;
+								+ "answer_recommend = answer_recommend +1 "
+								+ "where answer_no = #{no}")
+	public void UpdateReCommend(Integer no) throws Exception;
 
 }

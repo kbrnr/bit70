@@ -8,14 +8,14 @@
 	<!-- 답변글 리스트 조회 AnswerMapper.listAns-->
 	<select id="listAns" parameterType="map" resultType="org.nojo.domain.AnswerVO">
 
-		select answer_no, question_no, answer_title, answer_content, answer_reg_date, answer_recommend, clz_domain, mem_id
+		select answer_no, question_no, answer_title, answer_content, answer_visible ,answer_reg_date, answer_recommend, clz_domain, mem_id
 		from tbl_answer 
 		
 		<where>
 		question_no = #{no} and clz_domain = #{domain}
 		</where>
 		
-		order by answer_recommend desc, answer_no desc;
+		order by answer_recommend desc;
 	
 	</select>
 
