@@ -18,4 +18,10 @@ public class CourseServiceImpl implements CourseService {
 		courseMapper.insertCourse(vo);
 	}
 	
+	
+	public void setCourseOK(CourseVO vo){
+		vo.setCourse_state(2); //[가입완료]
+		courseMapper.updateCourse(vo);
+	}
+	
 }

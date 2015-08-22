@@ -15,6 +15,8 @@ public interface ClassInfoService {
 	
 	public List<ClassListVO> getClassList(SearchCriteria cri) ;
 
+	public List<ClassListVO> getClassListJoin(SearchCriteria cri, String userid);
+	
 	public int getClassTotalCnt(SearchCriteria cri);
 
 	public List<ClassListVO> getClassListByID(String mem_id, Criteria cri);
@@ -24,5 +26,7 @@ public interface ClassInfoService {
 	public int getClassListByID(String mem_id);
 	
 	public ClassListVO getClassOne(String clz_no);
+	
+	
 
 }

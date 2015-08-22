@@ -65,6 +65,23 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 	}
 	
 	
+	public List<ClassListVO> getClassListJoin(SearchCriteria cri, String userid){
+		List<ClassListVO> classlist;
+		List<MemberVO> teacherlist;
+		String domain;		
+		
+		classlist = classinfoMapper.selectClassJoin(cri, userid);
+		
+		for(int i=0; i<classlist.size(); i++){
+			domain=classlist.get(i).getClz_domain();
+			teacherlist=memberMapper.selectTeacherByDomain(domain);
+			classlist.get(i).setTeacherlist(teacherlist);		
+		}
+		return classlist;
+	}
+	
+	
+	
 	public int getClassTotalCnt(SearchCriteria cri) {
 		return classinfoMapper.selectClassTotalCnt(cri);
 	}
@@ -99,6 +116,7 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 	}
 	
 	
+
 	
 	
 	

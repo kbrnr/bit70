@@ -95,7 +95,7 @@
                   <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                   	<div class="row">
                   		<div class="col-sm-12">
-                  			<a href="/classinfo/sclasslistjoin" class=" pull-right margin-bottom"> 전체수업리스트 </a>
+                   			<a href="/classinfo/sclasslistjoin/${userid}" class=" pull-right margin-bottom"> 전체수업리스트 </a>
  							<p class=" pull-right margin-bottom">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</p>                 	
                   			<a href="/classinfo/classlist/${userid}/s" class=" pull-right margin-bottom">나의수업리스트 </a>
 	                  	</div>
@@ -110,9 +110,10 @@
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 129px;">강의실</th>
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 92px;">시작일</th>
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">종료일</th>			                   
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">상태</th>
+			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">수업상태(준비중1,강의중2,종료3,일시정지4)</th>
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">주소</th>
-		                      </tr>
+								  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">가입여부(승인전0, 승인요청1, 가입완료2, 정지3)</th>		                     
+							 </tr>
 		                    </thead>
 		                    
 		                    <tbody>
@@ -128,7 +129,8 @@
 			                      <td>${vo.clz_start_date}</td>
 			                      <td>${vo.clz_end_date}</td>
 			                      <td>${vo.clz_state}</td>
-			                      <td><a href="/${vo.clz_domain}/${userid}/s" target=_blank>${vo.clz_domain}</a></td>
+			                      <td class="domain"><a href="/${vo.clz_domain}/${userid}/t" target=_blank>${vo.clz_domain}</a></td>
+			                      <td class="joincourse">${vo.course_state}</td>
 			                    </tr>
 		                      </c:forEach>
 		                    </tbody>

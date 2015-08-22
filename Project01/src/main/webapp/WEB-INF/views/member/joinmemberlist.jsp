@@ -103,18 +103,18 @@
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 142px;">이름</th>
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 129px;">이메일</th>
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 92px;">전화번호</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">가입상태</th>			                   
+			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">가입상태(승인전0, 승인요청1, 가입완료2, 정지3)</th>			                   
 		                          <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">구분</th>
 		                      </tr>
 		                    </thead>
 		                    <tbody>
 		                      <c:forEach items="${list}" var="vo">
 			                    <tr role="row">
-			                      <td>${vo.mem_id}</td>
+			                      <td class="userid">${vo.mem_id}</td>
 			                      <td>${vo.mem_name}</td>
 			                      <td>${vo.mem_email}</td>
 			                      <td>${vo.mem_tel}</td>
-			                      <td>${vo.course_state}</td>
+			                      <td class="joincourse"><a href=#>[ ${vo.course_state} ]</a></td>
 			                      <td>${vo.course_gb}</td>
 			                    </tr>
 		                      </c:forEach>
@@ -162,3 +162,36 @@
   </body>
 </html>
 
+<script>
+
+/*--------수업신청하기---------*/
+$(".joincourse").on("click", function() {
+	event.preventDefault();
+	$this=$(this);
+	console.log($this);
+	console.log($this.siblings("td.userid").text());
+	console.log("${domain}");
+
+	
+	var url = '/course/joinclassOK';
+	$.ajax({
+		type : 'PUT',
+		url : url ,
+		headers : {
+			"Content-Type" : "application/json",
+			"X-HTTP-Method-Override" : "PUT"
+		},
+		data : JSON.stringify({
+				mem_id: $this.siblings("td.userid").text(),
+				clz_domain: "${domain}"
+				}),
+		success : function(result) {
+			alert("승인완료")
+			$this.text("[2]")
+		}
+		
+	});
+	
+	
+});
+</script>

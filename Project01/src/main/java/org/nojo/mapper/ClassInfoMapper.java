@@ -56,7 +56,7 @@ public interface ClassInfoMapper {
 	
 	
 	//수업전체리스트 가입(승인요청) 포함
-	public List<ClassListVO> selectClassJoin(@Param("mem_id") String mem_id, @Param("cri") SearchCriteria cri);
+	public List<ClassListVO> selectClassJoin(@Param("cri") SearchCriteria cri, @Param("mem_id") String mem_id);
 	
 	
 	//참고

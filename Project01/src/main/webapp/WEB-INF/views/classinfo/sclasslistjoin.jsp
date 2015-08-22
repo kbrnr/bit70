@@ -88,7 +88,7 @@
 		<!-- ----------------------------------------- -->
 		<div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">■수업리스트</h3>
+                  <h3 class="box-title">■수업리스트dfasfafd</h3>
                 </div><!-- /.box-header -->
                 
                 <div class="box-body">
@@ -97,7 +97,7 @@
                   	
                   	<div class="row">
 	                    <div class="col-sm-12">
-                  			<a href="/classinfo/sclasslistjoin" class=" pull-right margin-bottom"> 전체수업리스트 </a>
+                  			<a href="/classinfo/sclasslistjoin/${userid}" class=" pull-right margin-bottom"> 전체수업리스트 </a>
  							<p class=" pull-right margin-bottom">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</p>                 	
                   			<a href="/classinfo/classlist/${userid}/s" class=" pull-right margin-bottom">나의수업리스트 </a>
 	                  	</div>
@@ -111,9 +111,9 @@
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 129px;">강의실</th>
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 92px;">시작일</th>
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">종료일</th>			                   
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">상태</th>
+			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">수업상태(준비중1,강의중2,종료3,일시정지4)</th>
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">주소</th>
-			                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">신청</th>
+			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">가입여부(승인전0, 승인요청1, 가입완료2, 정지3)</th>
 		                      </tr>
 		                    </thead>
 		                    
@@ -131,7 +131,7 @@
 			                      <td>${vo.clz_end_date}</td>
 			                      <td>${vo.clz_state}</td>
 			                      <td class="domain"><a href="/${vo.clz_domain}/${userid}/t" target=_blank>${vo.clz_domain}</a></td>
-			                      <td class="joincourse">[수업신청]</td>
+			                      <td class="joincourse"><a href="#">[${vo.course_state}]</a></td>
 			                    </tr>
 		                      </c:forEach>
 		                    </tbody>
@@ -149,10 +149,10 @@
 								  <!--이전페이지 -->	
                   				  <c:if test="${pageMaker.prev}">
                   				  		<c:if test="${cri.searchType == null && cri.keyword == null }">
-                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/sclasslistjoin?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
+                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/sclasslistjoin/${userid}?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
                   				  		</c:if>
                   				  		<c:if test="${cri.searchType != null && cri.keyword != null }">
-                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/sclasslistjoin?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
+                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/sclasslistjoin/${userid}?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
                   				  		</c:if>
                   				  </c:if>
                   				  
@@ -160,10 +160,10 @@
                   				  <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 									<li <c:out value = "${pageMaker.page==idx?'class=active' :'' }"/>>
 										<c:if test="${cri.searchType == null && cri.keyword == null }">
-											<a href="/classinfo/sclasslistjoin?page=${idx }&perPageNum=${pageMaker.perPageNum}">${idx }</a>
+											<a href="/classinfo/sclasslistjoin/${userid}?page=${idx }&perPageNum=${pageMaker.perPageNum}">${idx }</a>
 										</c:if>
 										<c:if test="${cri.searchType != null && cri.keyword != null }">
-											<a href="/classinfo/sclasslistjoin?page=${idx }&perPageNum=${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}">${idx }</a>
+											<a href="/classinfo/sclasslistjoin/${userid}?page=${idx }&perPageNum=${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}">${idx }</a>
 										</c:if>
 									</li>
                   				  </c:forEach>
@@ -171,10 +171,10 @@
 								  <!--다음페이지 -->
 								  <c:if test="${pageMaker.next}">
                   						<c:if test="${cri.searchType == null && cri.keyword == null }">
-                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/sclasslistjoin?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
+                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/sclasslistjoin/${userid}?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
                   				  		</c:if>
                   				  		<c:if test="${cri.searchType != null && cri.keyword != null }">
-                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/sclasslistjoin?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
+                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/sclasslistjoin/${userid}?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
                   				  		</c:if>
                   				  </c:if>
                   				</ul>
@@ -225,19 +225,20 @@
 <script>
 /*--------수업신청하기---------*/
 $(".joincourse").on("click", function() {
+	event.preventDefault();
 	$this=$(this);
 	console.log($this);
 	console.log($this.siblings("td.domain").text());
 	console.log("${userid}");
 
 	
-	var url = '/classinfo/joinclass';
+	var url = '/course/joinclass';
 	$.ajax({
-		type : 'PUT',
+		type : 'POST',
 		url : url ,
 		headers : {
 			"Content-Type" : "application/json",
-			"X-HTTP-Method-Override" : "PUT"
+			"X-HTTP-Method-Override" : "POST"
 		},
 		data : JSON.stringify({
 				clz_domain: $this.siblings("td.domain").text(),
@@ -245,7 +246,7 @@ $(".joincourse").on("click", function() {
 				}),
 		success : function(result) {
 			alert("요청완료")
-			$this.text("[승인대기]")
+			$this.text("[1]")
 		}
 		
 	});
