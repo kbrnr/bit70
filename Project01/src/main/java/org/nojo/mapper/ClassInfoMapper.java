@@ -11,16 +11,17 @@ import org.nojo.bizDomain.ClassListVO;
 import org.nojo.domain.ClassVO;
 import org.nojo.domain.CourseVO;
 import org.nojo.util.Criteria;
+import org.nojo.util.SearchCriteria;
 
 public interface ClassInfoMapper {
 	
-	//수업리스트
-	@Select("select * from tbl_class order by clz_reg_date desc limit #{first}, #{perPageNum}")
-	public List<ClassListVO> selectClass(Criteria cri);
+	//*수업전체리스트
+	//@Select("select * from tbl_class order by clz_reg_date desc limit #{first}, #{perPageNum}")
+	public List<ClassListVO> selectClass(SearchCriteria cri);
 	
-	//수업 토탈갯수
-	@Select("select count(clz_domain) from tbl_class")
-	public int selectClassTotalCnt();
+	//*수업 토탈갯수
+	//@Select("select count(clz_domain) from tbl_class")
+	public int selectClassTotalCnt(SearchCriteria cri);
 	
 	//수업생성
 	@Insert("Insert into tbl_class (clz_domain, clz_name, clz_room, clz_start_date, clz_end_date, clz_state) values (#{clz_domain}, #{clz_name}, #{clz_room}, #{clz_start_date}, #{clz_end_date}, #{clz_state})")

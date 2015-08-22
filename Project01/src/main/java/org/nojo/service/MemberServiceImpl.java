@@ -8,38 +8,35 @@ import org.nojo.bizDomain.JoinMemberVO;
 import org.nojo.domain.MemberVO;
 import org.nojo.mapper.MemberMapper;
 import org.nojo.util.Criteria;
-import org.nojo.util.Search;
+import org.nojo.util.SearchCriteria;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MemberServiceImpl implements MemberService {
-	
+
 	@Inject
-	private MemberMapper membermapper;
+	private MemberMapper memberMapper;
 
 	
-	public List<MemberVO> getTeacherList(Criteria cri, Search scri) throws Exception {
-		return membermapper.selcetTeacher(cri, scri);
+	public List<MemberVO> getTeacherList(SearchCriteria cri) throws Exception {
+		return memberMapper.selcetTeacher(cri);
 	}
 
-	public int getTeacherTotalCnt(Search scri) throws Exception {
-		return membermapper.selectTeacherTotalCnt(scri);
+	public int getTeacherTotalCnt(SearchCriteria cri) throws Exception {
+		return memberMapper.selectTeacherTotalCnt(cri);
 	}
-	
 	
 	public List<JoinMemberVO> getMemberByDomain(Criteria cri, String domain){
-		return membermapper.selcetMemberByDomain(cri, domain);
+		return memberMapper.selcetMemberByDomain(cri, domain);
 	}
 	
 	public int getTotalCntByDomain(String domain){
-		return membermapper.selectTotalCntByDomain(domain);
+		return memberMapper.selectTotalCntByDomain(domain);
 	}
-	
-	
 
 	@Override
 	public void signIn(MemberVO vo) throws Exception {
-		membermapper.signIn(vo);
+		memberMapper.signIn(vo);
 	}
 
 

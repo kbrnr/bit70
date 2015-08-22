@@ -9,6 +9,7 @@ import org.nojo.domain.ClassVO;
 import org.nojo.service.ClassInfoService;
 import org.nojo.util.Criteria;
 import org.nojo.util.PageMaker;
+import org.nojo.util.SearchCriteria;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,14 +22,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ClassInfoController {
 
 	@Inject
-	private ClassInfoService classinfoservice;
+	private ClassInfoService classInfoService;
 	
 	
 	//수업상세
 	@RequestMapping(value="/classread", method=RequestMethod.GET)
 	public String classread(String domain, Model model){
 		ClassListVO clzVO ;
-		clzVO = classinfoservice.getClassOne(domain);
+		clzVO = classInfoService.getClassOne(domain);
 		
 		System.out.println("===============================================");
 		System.out.println(clzVO.getTeacherlist().size());
@@ -40,18 +41,46 @@ public class ClassInfoController {
 	}
 	
 	//수업리스트
-	@RequestMapping(value="/classlist/{userid}", method=RequestMethod.GET)
-	public String classlist(@PathVariable("userid") String userid, Criteria cri, Model model){
+	@RequestMapping(value="/classlist", method=RequestMethod.GET)
+	public String classlist(SearchCriteria cri, Model model){
 		List<ClassListVO> list;
 		PageMaker pagemaker;
 		
-		list = classinfoservice.getClassList(cri);
-		pagemaker = new PageMaker(cri, classinfoservice.getClassTotalCnt());
+		System.out.println(cri.getKeyword());
+		System.out.println(cri.getSearchType());
+		System.out.println(cri.getFirst());
+		System.out.println(cri.getPerPageNum());
+		
+		list = classInfoService.getClassList(cri);
+		pagemaker = new PageMaker(cri, classInfoService.getClassTotalCnt(cri));
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", pagemaker);
-		
+		model.addAttribute("cri", cri);
+
 		return "/classinfo/classlist" ;
 	}
+	
+	//my페이지 전체 수업리스트
+	@RequestMapping(value="/sclasslistjoin", method=RequestMethod.GET)
+	public String classlistjoin(SearchCriteria cri, Model model){
+		List<ClassListVO> list;
+		PageMaker pagemaker;
+		
+		System.out.println(cri.getKeyword());
+		System.out.println(cri.getSearchType());
+		System.out.println(cri.getFirst());
+		System.out.println(cri.getPerPageNum());
+		
+		list = classInfoService.getClassList(cri);
+		pagemaker = new PageMaker(cri, classInfoService.getClassTotalCnt(cri));
+		model.addAttribute("list", list);
+		model.addAttribute("pageMaker", pagemaker);
+		model.addAttribute("cri", cri);
+
+		return "/classinfo/sclasslistjoin" ;
+	}
+	
+	
 	
 	//개인별(선생님) 수업리스트
 	@RequestMapping(value="/classlist/{userid}/t", method=RequestMethod.GET)
@@ -59,8 +88,8 @@ public class ClassInfoController {
 		List<ClassListVO> list;
 		PageMaker pagemaker;
 		
-		list = classinfoservice.getClassListByID(userid, cri); 
-		pagemaker = new PageMaker(cri, classinfoservice.getClassListTotalCntByID(userid));
+		list = classInfoService.getClassListByID(userid, cri); 
+		pagemaker = new PageMaker(cri, classInfoService.getClassListTotalCntByID(userid));
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", pagemaker);
 		
@@ -74,8 +103,8 @@ public class ClassInfoController {
 		List<ClassListVO> list;
 		PageMaker pagemaker;
 		
-		list = classinfoservice.getClassListByID(userid, cri); 
-		pagemaker = new PageMaker(cri, classinfoservice.getClassListTotalCntByID(userid));
+		list = classInfoService.getClassListByID(userid, cri); 
+		pagemaker = new PageMaker(cri, classInfoService.getClassListTotalCntByID(userid));
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", pagemaker);
 		
@@ -97,7 +126,7 @@ public class ClassInfoController {
 		System.out.println("@Controller:"+ mem_id[0]);	
 		System.out.println("@Controller:"+ mem_id[1]);	
 		System.out.println("@Controller:"+ mem_id[2]);	
-		classinfoservice.makeClass(vo, mem_id);
+		classInfoService.makeClass(vo, mem_id);
 		
 		return "redirect:classmodify";
 	}
@@ -107,7 +136,7 @@ public class ClassInfoController {
 	@RequestMapping(value="/domaincheck", method= RequestMethod.POST)
 	public boolean canusedomain(String clz_domain) {
 		System.out.println(clz_domain);
-		return classinfoservice.domainCheck(clz_domain);
+		return classInfoService.domainCheck(clz_domain);
 	}
 
 	

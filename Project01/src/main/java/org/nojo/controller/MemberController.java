@@ -1,6 +1,5 @@
 package org.nojo.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +9,7 @@ import org.nojo.domain.MemberVO;
 import org.nojo.service.MemberService;
 import org.nojo.util.Criteria;
 import org.nojo.util.PageMaker;
-import org.nojo.util.Search;
+import org.nojo.util.SearchCriteria;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class MemberController {
 
 	@Inject
-	private MemberService memberservice;
+	private MemberService memberService;
 
 	@RequestMapping("/login")
 	public void login() {
@@ -36,7 +35,7 @@ public class MemberController {
 		System.out.println("file: " + file);
 		System.out.println("========================================================");
 		vo.setMem_photo(file.getBytes());
-		memberservice.signIn(vo);
+		memberService.signIn(vo);
 	}
 
 	@RequestMapping("/register")
@@ -51,14 +50,36 @@ public class MemberController {
 		
 	}
 
+	
+	// 선생님리스트
+	@RequestMapping(value = "/teacherlist", method = RequestMethod.GET)
+	public String teacherlist(SearchCriteria cri, Model model) throws Exception {
+				
+		System.out.println("SearchType: " + cri.getSearchType());
+		System.out.println("Keyword: " + cri.getKeyword());
+		List<MemberVO> list;
+		PageMaker pageMaker;
+
+		list = memberService.getTeacherList(cri);
+		pageMaker = new PageMaker(cri, memberService.getTeacherTotalCnt(cri));
+		model.addAttribute("list", list);
+		model.addAttribute("pageMaker", pageMaker);
+		model.addAttribute("cri", cri);
+
+		return "/member/teacherlist";
+	}
+	
+	
+	
+	
 	// 수업참여인원
 	@RequestMapping(value = "/joinmemberlist/{domain}", method = RequestMethod.GET) 
 	public String joinlist(Criteria cri, @PathVariable("domain") String domain, Model model) {	
 		List<JoinMemberVO> list ;
 		PageMaker pagemaker;
 
-		list = memberservice.getMemberByDomain(cri, domain);
-		pagemaker = new PageMaker(cri, memberservice.getTotalCntByDomain(domain));
+		list = memberService.getMemberByDomain(cri, domain);
+		pagemaker = new PageMaker(cri, memberService.getTotalCntByDomain(domain));
 
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", pagemaker);
@@ -67,24 +88,7 @@ public class MemberController {
 	}
 
 	
-	// 선생님리스트
-	@RequestMapping(value = "/teacherlist", method = RequestMethod.GET)
-	public String teacherlist(Criteria cri, Search scri, Model model) throws Exception {
-				
-		System.out.println("SearchKey: " + Arrays.toString(scri.getSearchKey()));
-		System.out.println("SearchValue: " + scri.getSearchValue());
-		List<MemberVO> list;
-		PageMaker pagemaker;
 
-		list = memberservice.getTeacherList(cri, scri);
-		pagemaker = new PageMaker(cri, memberservice.getTeacherTotalCnt(scri));
-		model.addAttribute("list", list);
-		model.addAttribute("pageMaker", pagemaker);
-		model.addAttribute("scri", scri);
-
-		return "/member/teacherlist";
-	}
-	
 
 	
 //	// 선생님리스트팝업

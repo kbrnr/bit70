@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.nojo.bizDomain.JoinMemberVO;
 import org.nojo.domain.MemberVO;
 import org.nojo.util.Criteria;
-import org.nojo.util.Search;
+import org.nojo.util.SearchCriteria;
 
 public interface MemberMapper {
 	
@@ -23,13 +23,13 @@ public interface MemberMapper {
 //선생님관련
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	//선생님전체리스트
+	//*선생님전체리스트
 	//@Select("select mem_id, mem_name, mem_reg_date, mem_email, mem_tel from tbl_member where mem_gb='member_teacher' order by mem_reg_date desc limit #{first}, #{perPageNum} ")
-	public List<MemberVO> selcetTeacher(@Param("cri") Criteria cri, @Param("scri") Search scri);
+	public List<MemberVO> selcetTeacher(SearchCriteria cri);
 	
-	//선생님 토탈수
+	//*선생님 토탈수
 	//@Select("select count(mem_gb) from tbl_member where mem_gb='member_teacher'")
-	public int selectTeacherTotalCnt(Search scri) throws Exception;
+	public int selectTeacherTotalCnt(SearchCriteria cri) throws Exception;
 
 	
 //	//선생님검색결과리스트

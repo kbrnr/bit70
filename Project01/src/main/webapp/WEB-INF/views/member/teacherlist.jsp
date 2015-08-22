@@ -132,33 +132,33 @@
                   				<ul class="pagination">
 								  <!--이전페이지 -->	
                   				  <c:if test="${pageMaker.prev}">
-                  				  		<c:if test="${scri.searchKey[0] == null && scri.searchValue == null }">
+                  				  		<c:if test="${cri.searchType == null && cri.keyword == null }">
                   							<li class="paginate_button previous" id="example1_previous"><a href="teacherlist?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
                   				  		</c:if>
-                  				  		<c:if test="${scri.searchKey[0] != null && scri.searchValue != null }">
-                  							<li class="paginate_button previous" id="example1_previous"><a href="teacherlist?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}&searchKey=${scri.searchKey[0]}&searchValue=${searchValue}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
+                  				  		<c:if test="${cri.searchType != null && cri.keyword != null }">
+                  							<li class="paginate_button previous" id="example1_previous"><a href="teacherlist?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
                   				  		</c:if>
                   				  </c:if>
                   				  
                   				  <!-- 페이징 -->
                   				  <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 									<li <c:out value = "${pageMaker.page==idx?'class=active' :'' }"/>>
-										<c:if test="${scri.searchKey[0] == null && scri.searchValue == null }">
+										<c:if test="${cri.searchType == null && cri.keyword == null }">
 											<a href="teacherlist?page=${idx }&perPageNum=${pageMaker.perPageNum}">${idx }</a>
 										</c:if>
-										<c:if test="${scri.searchKey[0] != null && scri.searchValue != null }">
-											<a href="teacherlist?page=${idx }&perPageNum=${pageMaker.perPageNum}&searchKey=${scri.searchKey[0]}&searchValue=${scri.searchValue}">${idx }</a>
+										<c:if test="${cri.searchType != null && cri.keyword != null }">
+											<a href="teacherlist?page=${idx }&perPageNum=${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}">${idx }</a>
 										</c:if>
 									</li>
                   				  </c:forEach>
 								  
 								  <!--다음페이지 -->
 								  <c:if test="${pageMaker.next}">
-                  						<c:if test="${scri.searchKey[0] == null && scri.searchValue == null }">
+                  						<c:if test="${cri.searchType == null && cri.keyword == null }">
                   							<li class="paginate_button previous" id="example1_previous"><a href="teacherlist?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
                   				  		</c:if>
-                  				  		<c:if test="${scri.searchKey[0] != null && scri.searchValue != null }">
-                  							<li class="paginate_button previous" id="example1_previous"><a href="teacherlist?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}&searchKey=${scri.searchKey[0]}&searchValue=${searchValue}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
+                  				  		<c:if test="${cri.searchType != null && cri.keyword != null }">
+                  							<li class="paginate_button previous" id="example1_previous"><a href="teacherlist?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
                   				  		</c:if>
                   				  </c:if>
                   				</ul>
@@ -167,16 +167,16 @@
                   			
                   			<form name="searchFrom" action="/member/teacherlist" method="get">
 								<div id="select_board" class="text-center" >
-									<select name="searchKey" class="form-control" style="width: 150px; margin-right: 10px;">
-										<option value="id" <c:out value="${scri.searchKey[0] == 'id'?'selected':'' }" />>
+									<select name="searchType" class="form-control" style="width: 150px; margin-right: 10px;">
+										<option value="id" <c:out value="${cri.searchType == 'id'?'selected':'' }" />>
 										아이디
 										</option>	
-										<option value="name" <c:out value="${scri.searchKey[0] == 'name'?'selected':'' }" />>
+										<option value="name" <c:out value="${cri.searchType == 'name'?'selected':'' }" />>
 										성명	
 										</option>
 									</select>
 									<div class="input-group">
-	   								   <input type="text" class="form-control" name="searchValue" value="${scri.searchValue}" style="width: 200px;">
+	   								   <input type="text" class="form-control" name="keyword" value="${cri.keyword}" style="width: 200px;">
 									      <span class="input-group-btn">
 									        <button class="btn btn-default" type="Submit">검색</button>
 									      </span>

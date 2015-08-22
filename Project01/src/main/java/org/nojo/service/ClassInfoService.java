@@ -5,6 +5,7 @@ import java.util.List;
 import org.nojo.bizDomain.ClassListVO;
 import org.nojo.domain.ClassVO;
 import org.nojo.util.Criteria;
+import org.nojo.util.SearchCriteria;
 
 public interface ClassInfoService {
 
@@ -12,9 +13,9 @@ public interface ClassInfoService {
 	
 	public void makeClass(ClassVO classVO, String[] mem_ids) ;
 	
-	public List<ClassListVO> getClassList(Criteria cri) ;
+	public List<ClassListVO> getClassList(SearchCriteria cri) ;
 
-	public int getClassTotalCnt();
+	public int getClassTotalCnt(SearchCriteria cri);
 
 	public List<ClassListVO> getClassListByID(String mem_id, Criteria cri);
 

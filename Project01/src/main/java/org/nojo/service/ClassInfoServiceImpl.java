@@ -12,16 +12,17 @@ import org.nojo.mapper.ClassInfoMapper;
 import org.nojo.mapper.DomainMapper;
 import org.nojo.mapper.MemberMapper;
 import org.nojo.util.Criteria;
+import org.nojo.util.SearchCriteria;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ClassInfoServiceImpl implements ClassInfoService {
 
 	@Inject
-	private ClassInfoMapper classinfomapper;
+	private ClassInfoMapper classinfoMapper;
 	
 	@Inject
-	private MemberMapper membermapper;
+	private MemberMapper memberMapper;
 	
 	@Inject
 	private DomainMapper  domainMapper;
@@ -32,7 +33,7 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 	}
 	
 	public void makeClass(ClassVO classVO, String[] mem_ids) {
-		classinfomapper.insertClass(classVO);
+		classinfoMapper.insertClass(classVO);
 		String domain = classVO.getClz_domain();
 		
 		CourseVO courseVO = new CourseVO();
@@ -41,18 +42,21 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 			courseVO.setClz_domain(domain);
 			courseVO.setCourse_state(1); //0가입요청,  1가입완료
 			courseVO.setCourse_gb("member_teacher");
-			classinfomapper.insertCourse(courseVO);
+			classinfoMapper.insertCourse(courseVO);
 		}				
 	}
 	
-	public List<ClassListVO> getClassList(Criteria cri) {		
+	
+	public List<ClassListVO> getClassList(SearchCriteria cri) {		
 		List<ClassListVO> classlist;
 		List<MemberVO> teacherlist;
-		classlist = classinfomapper.selectClass(cri);
 		String domain;
+		
+		classlist = classinfoMapper.selectClass(cri);
+		
 		for(int i=0; i<classlist.size(); i++){
 			domain=classlist.get(i).getClz_domain();
-			teacherlist=membermapper.selectTeacherByDomain(domain);
+			teacherlist=memberMapper.selectTeacherByDomain(domain);
 			classlist.get(i).setTeacherlist(teacherlist);			
 		System.out.println(domain);
 		System.out.println(teacherlist.size());
@@ -60,19 +64,20 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 		return classlist;	
 	}
 	
-	public int getClassTotalCnt() {
-		return classinfomapper.selectClassTotalCnt();
+	
+	public int getClassTotalCnt(SearchCriteria cri) {
+		return classinfoMapper.selectClassTotalCnt(cri);
 	}
 	
 	
 	public List<ClassListVO> getClassListByID(String mem_id, Criteria cri) {		
 		List<ClassListVO> classlist;
 		List<MemberVO> teacherlist;
-		classlist = classinfomapper.selectClassByID(mem_id, cri);
+		classlist = classinfoMapper.selectClassByID(mem_id, cri);
 		String domain;
 		for(int i=0; i<classlist.size(); i++){
 			domain=classlist.get(i).getClz_domain();
-			teacherlist=membermapper.selectTeacherByDomain(domain);
+			teacherlist=memberMapper.selectTeacherByDomain(domain);
 			classlist.get(i).setTeacherlist(teacherlist);			
 		System.out.println(domain);
 		System.out.println(teacherlist.size());
@@ -85,8 +90,8 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 		ClassListVO clzVO;
 		List<MemberVO> teacherlist;
 		
-		clzVO = classinfomapper.selectClassOne(domain);
-		teacherlist = membermapper.selectTeacherByDomain(domain);
+		clzVO = classinfoMapper.selectClassOne(domain);
+		teacherlist = memberMapper.selectTeacherByDomain(domain);
 	
 		clzVO.setTeacherlist(teacherlist);
 		
@@ -98,7 +103,7 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 	
 	
 	public int getClassListTotalCntByID(String mem_id) {
-		return classinfomapper.selectClassTotalCntByID(mem_id);
+		return classinfoMapper.selectClassTotalCntByID(mem_id);
 	}
 
 	@Override

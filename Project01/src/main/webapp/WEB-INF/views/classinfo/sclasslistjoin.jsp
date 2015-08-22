@@ -96,7 +96,10 @@
                   	
                   	
                   	<div class="row">
-	                  	<div class="col-sm-12"><a href="/classinfo/classform" class="btn btn-primary pull-right margin-bottom">수업등록</a>
+	                    <div class="col-sm-12">
+                  			<a href="/classinfo/sclasslistjoin" class=" pull-right margin-bottom"> 전체수업리스트 </a>
+ 							<p class=" pull-right margin-bottom">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</p>                 	
+                  			<a href="/classinfo/classlist/${userid}/s" class=" pull-right margin-bottom">나의수업리스트 </a>
 	                  	</div>
 	                  	<div class="col-sm-12">
 		        		  
@@ -110,6 +113,7 @@
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">종료일</th>			                   
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">상태</th>
 			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">주소</th>
+			                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">신청</th>
 		                      </tr>
 		                    </thead>
 		                    
@@ -127,6 +131,7 @@
 			                      <td>${vo.clz_end_date}</td>
 			                      <td>${vo.clz_state}</td>
 			                      <td><a href="/${vo.clz_domain}/${userid}/t" target=_blank>${vo.clz_domain}</a></td>
+			                      <td><a href="">[수업신청]</a></td>
 			                    </tr>
 		                      </c:forEach>
 		                    </tbody>
@@ -144,10 +149,10 @@
 								  <!--이전페이지 -->	
                   				  <c:if test="${pageMaker.prev}">
                   				  		<c:if test="${cri.searchType == null && cri.keyword == null }">
-                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/classlist?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
+                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/sclasslistjoin?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
                   				  		</c:if>
                   				  		<c:if test="${cri.searchType != null && cri.keyword != null }">
-                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/classlist?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
+                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/sclasslistjoin?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
                   				  		</c:if>
                   				  </c:if>
                   				  
@@ -155,10 +160,10 @@
                   				  <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
 									<li <c:out value = "${pageMaker.page==idx?'class=active' :'' }"/>>
 										<c:if test="${cri.searchType == null && cri.keyword == null }">
-											<a href="/classinfo/classlist?page=${idx }&perPageNum=${pageMaker.perPageNum}">${idx }</a>
+											<a href="/classinfo/sclasslistjoin?page=${idx }&perPageNum=${pageMaker.perPageNum}">${idx }</a>
 										</c:if>
 										<c:if test="${cri.searchType != null && cri.keyword != null }">
-											<a href="/classinfo/classlist?page=${idx }&perPageNum=${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}">${idx }</a>
+											<a href="/classinfo/sclasslistjoin?page=${idx }&perPageNum=${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}">${idx }</a>
 										</c:if>
 									</li>
                   				  </c:forEach>
@@ -166,16 +171,16 @@
 								  <!--다음페이지 -->
 								  <c:if test="${pageMaker.next}">
                   						<c:if test="${cri.searchType == null && cri.keyword == null }">
-                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/classlist?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
+                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/sclasslistjoin?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
                   				  		</c:if>
                   				  		<c:if test="${cri.searchType != null && cri.keyword != null }">
-                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/classlist?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
+                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/sclasslistjoin?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
                   				  		</c:if>
                   				  </c:if>
                   				</ul>
                   			</div>
                   			
-                  			<form name="searchFrom" action="/classinfo/classlist" method="get">
+                  			<form name="searchFrom" action="/classinfo/sclasslistjoin" method="get">
 								<div id="select_board" class="text-center" >
 									<select name="searchType" class="form-control" style="width: 150px; margin-right: 10px;">
 										<option value="className" <c:out value="${cri.searchType == 'className'?'selected':'' }" />>
