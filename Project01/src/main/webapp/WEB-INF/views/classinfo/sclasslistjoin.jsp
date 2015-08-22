@@ -120,7 +120,7 @@
 		                    <tbody>
 		                      <c:forEach items="${list}" var="vo">
 			                    <tr role="row">
-			                      <td><a href="/classinfo/classread?domain=${vo.clz_domain}">${vo.clz_name}</a></td>
+			                      <td"><a href="/classinfo/classread?domain=${vo.clz_domain}">${vo.clz_name}</a></td>
 			                      <td>
 			                      	<c:forEach items="${vo.teacherlist}" var="teacherlist">
 			                      		${teacherlist.mem_name}(${teacherlist.mem_id})<br> 
@@ -130,8 +130,8 @@
 			                      <td>${vo.clz_start_date}</td>
 			                      <td>${vo.clz_end_date}</td>
 			                      <td>${vo.clz_state}</td>
-			                      <td><a href="/${vo.clz_domain}/${userid}/t" target=_blank>${vo.clz_domain}</a></td>
-			                      <td><a href="">[수업신청]</a></td>
+			                      <td class="domain"><a href="/${vo.clz_domain}/${userid}/t" target=_blank>${vo.clz_domain}</a></td>
+			                      <td class="joincourse"><a href="">[수업신청]</a></td>
 			                    </tr>
 		                      </c:forEach>
 		                    </tbody>
@@ -222,3 +222,15 @@
   </body>
 </html>
 
+<script>
+/*--------수업신청하기---------*/
+$(".joincourse").on("click", function() {
+	$this= $(this);
+	$this.siblings(".domain").val();
+	
+	
+	
+});	
+	
+
+</script>

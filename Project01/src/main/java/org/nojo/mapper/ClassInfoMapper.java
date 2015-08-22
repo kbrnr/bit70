@@ -44,6 +44,8 @@ public interface ClassInfoMapper {
 	public void updateClass(ClassVO vo);
 	
 	
+	
+	
 	//아이디(담당자)별 수업리스트
 	@Select("select * from tbl_course join tbl_class on tbl_course.clz_domain = tbl_class.clz_domain where tbl_course.mem_id = #{mem_id} order by clz_reg_date desc limit #{cri.first}, #{cri.perPageNum}")
 	public List<ClassListVO> selectClassByID(@Param("mem_id") String mem_id, @Param("cri") Criteria cri);

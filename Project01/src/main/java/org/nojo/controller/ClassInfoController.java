@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.nojo.bizDomain.ClassListVO;
 import org.nojo.domain.ClassVO;
+import org.nojo.domain.CourseVO;
 import org.nojo.service.ClassInfoService;
 import org.nojo.util.Criteria;
 import org.nojo.util.PageMaker;
@@ -130,6 +131,19 @@ public class ClassInfoController {
 		
 		return "redirect:classmodify";
 	}
+	
+	
+	//학생 수업 참여 
+	@ResponseBody
+	@RequestMapping(value="/joinclass", method=RequestMethod.POST)
+	public void joinclass(CourseVO vo){
+		System.out.println("@Controller:"+ vo.getClz_domain());	
+		System.out.println("@Controller:"+ vo.getMem_id());
+	}
+	
+	
+	
+	
 	
 	//도메인체크
 	@ResponseBody
