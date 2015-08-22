@@ -13,6 +13,8 @@ public class CourseServiceImpl implements CourseService {
 	private CourseMapper courseMapper;
 	
 	public void setCourse(CourseVO vo){
+		vo.setCourse_state(1); //[승인대기]
+		vo.setCourse_gb("member_student");
 		courseMapper.insertCourse(vo);
 	}
 	

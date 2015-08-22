@@ -120,7 +120,7 @@
 		                    <tbody>
 		                      <c:forEach items="${list}" var="vo">
 			                    <tr role="row">
-			                      <td"><a href="/classinfo/classread?domain=${vo.clz_domain}">${vo.clz_name}</a></td>
+			                      <td><a href="/classinfo/classread?domain=${vo.clz_domain}">${vo.clz_name}</a></td>
 			                      <td>
 			                      	<c:forEach items="${vo.teacherlist}" var="teacherlist">
 			                      		${teacherlist.mem_name}(${teacherlist.mem_id})<br> 
@@ -131,7 +131,7 @@
 			                      <td>${vo.clz_end_date}</td>
 			                      <td>${vo.clz_state}</td>
 			                      <td class="domain"><a href="/${vo.clz_domain}/${userid}/t" target=_blank>${vo.clz_domain}</a></td>
-			                      <td class="joincourse"><a href="">[수업신청]</a></td>
+			                      <td class="joincourse">[수업신청]</td>
 			                    </tr>
 		                      </c:forEach>
 		                    </tbody>
@@ -225,9 +225,30 @@
 <script>
 /*--------수업신청하기---------*/
 $(".joincourse").on("click", function() {
-	$this= $(this);
-	$this.siblings(".domain").val();
+	$this=$(this);
+	console.log($this);
+	console.log($this.siblings("td.domain").text());
+	console.log("${userid}");
+
 	
+	var url = '/classinfo/joinclass';
+	$.ajax({
+		type : 'PUT',
+		url : url ,
+		headers : {
+			"Content-Type" : "application/json",
+			"X-HTTP-Method-Override" : "PUT"
+		},
+		data : JSON.stringify({
+				clz_domain: $this.siblings("td.domain").text(),
+				mem_id: "${userid}"
+				}),
+		success : function(result) {
+			alert("요청완료")
+			$this.text("[승인대기]")
+		}
+		
+	});
 	
 	
 });	

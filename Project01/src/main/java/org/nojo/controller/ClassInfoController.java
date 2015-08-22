@@ -8,12 +8,14 @@ import org.nojo.bizDomain.ClassListVO;
 import org.nojo.domain.ClassVO;
 import org.nojo.domain.CourseVO;
 import org.nojo.service.ClassInfoService;
+import org.nojo.service.CourseService;
 import org.nojo.util.Criteria;
 import org.nojo.util.PageMaker;
 import org.nojo.util.SearchCriteria;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +26,9 @@ public class ClassInfoController {
 
 	@Inject
 	private ClassInfoService classInfoService;
+	
+	@Inject
+	private CourseService courseService;
 	
 	
 	//수업상세
@@ -62,8 +67,8 @@ public class ClassInfoController {
 	}
 	
 	//my페이지 전체 수업리스트
-	@RequestMapping(value="/sclasslistjoin", method=RequestMethod.GET)
-	public String classlistjoin(SearchCriteria cri, Model model){
+	@RequestMapping(value="/sclasslistjoin/{userid}", method=RequestMethod.GET)
+	public String classlistjoin(@PathVariable("userid") String userid, SearchCriteria cri, Model model){
 		List<ClassListVO> list;
 		PageMaker pagemaker;
 		
@@ -98,7 +103,7 @@ public class ClassInfoController {
 	}
 	
 	
-	//개인별(선생님) 수업리스트
+	//개인별(학생) 수업리스트
 	@RequestMapping(value="/classlist/{userid}/s", method=RequestMethod.GET)
 	public String sclasslistbyid(@PathVariable("userid") String userid, Criteria cri, Model model){
 		List<ClassListVO> list;
@@ -135,11 +140,15 @@ public class ClassInfoController {
 	
 	//학생 수업 참여 
 	@ResponseBody
-	@RequestMapping(value="/joinclass", method=RequestMethod.POST)
-	public void joinclass(CourseVO vo){
+	@RequestMapping(value="/joinclass", method=RequestMethod.PUT)
+	public void joinclass(@RequestBody CourseVO vo){
 		System.out.println("@Controller:"+ vo.getClz_domain());	
-		System.out.println("@Controller:"+ vo.getMem_id());
+		System.out.println("@Controller:"+ vo.getMem_id());	
+		
+		courseService.setCourse(vo);	
 	}
+	
+	
 	
 	
 	

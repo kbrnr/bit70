@@ -55,6 +55,10 @@ public interface ClassInfoMapper {
 	public int selectClassTotalCntByID(String mem_id);
 	
 	
+	//수업전체리스트 가입(승인요청) 포함
+	public List<ClassListVO> selectClassJoin(@Param("mem_id") String mem_id, @Param("cri") SearchCriteria cri);
+	
+	
 	//참고
 	@Update("update tbl_attach set bno=#{bno} where fno=#{fno}")
 	public void updateBno(@Param("fno") int fno,@Param("bno") int bno);

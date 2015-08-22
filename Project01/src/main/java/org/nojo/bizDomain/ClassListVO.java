@@ -15,60 +15,70 @@ public class ClassListVO {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date clz_end_date;
 	private int clz_state;
+	private int course_state;
 	private List<MemberVO> teacherlist;
-
+	
+	
 	public String getClz_name() {
 		return clz_name;
 	}
-
+	
 	public void setClz_name(String clz_name) {
 		this.clz_name = clz_name;
 	}
-
+	
 	public String getClz_domain() {
 		return clz_domain;
 	}
-
+	
 	public void setClz_domain(String clz_domain) {
 		this.clz_domain = clz_domain;
 	}
-
+	
 	public String getClz_room() {
 		return clz_room;
 	}
-
+	
 	public void setClz_room(String clz_room) {
 		this.clz_room = clz_room;
 	}
-
+	
 	public Date getClz_start_date() {
 		return clz_start_date;
 	}
-
+	
 	public void setClz_start_date(Date clz_start_date) {
 		this.clz_start_date = clz_start_date;
 	}
-
+	
 	public Date getClz_end_date() {
 		return clz_end_date;
 	}
-
+	
 	public void setClz_end_date(Date clz_end_date) {
 		this.clz_end_date = clz_end_date;
 	}
-
+	
 	public int getClz_state() {
 		return clz_state;
 	}
-
+	
 	public void setClz_state(int clz_state) {
 		this.clz_state = clz_state;
 	}
-
+	
+	public int getCourse_state() {
+		return course_state;
+	}
+	
+	public void setCourse_state(int course_state) {
+		this.course_state = course_state;
+	}
+	
 	public List<MemberVO> getTeacherlist() {
 		return teacherlist;
 	}
-
+	
 	public void setTeacherlist(List<MemberVO> teacherlist) {
 		this.teacherlist = teacherlist;
 	}
@@ -88,9 +98,13 @@ public class ClassListVO {
 				+ clz_end_date
 				+ ", clz_state="
 				+ clz_state
+				+ ", course_state="
+				+ course_state
 				+ ", teacherlist="
 				+ (teacherlist != null ? teacherlist.subList(0,
 						Math.min(teacherlist.size(), maxLen)) : null) + "]";
 	}
+
+	
 	
 }
