@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <!DOCTYPE html>
 <html>
@@ -67,7 +69,7 @@
   </style>
   
   
-  <body class="skin-blue sidebar-mini">
+  <body class="skin-blue sidebar-mini ">
 
 		<section class="content-header">
 			<h1>
@@ -88,7 +90,7 @@
 		<!-- ----------------------------------------- -->
 		<div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">■수업리스트</h3>
+                  <h3 class="box-title">■${domain} 이해도</h3>
                 </div><!-- /.box-header -->
                 
                 <div class="box-body">
@@ -97,65 +99,42 @@
                   	
                   	<div class="row">
 	                  	<div class="col-sm-12">
-		        		  
+	                  	<div class="table-responsive">
 		                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
 		                    <thead>
 		                      <tr role="row">
-		                      	  <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 109px;">강의명</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 142px;">강사명</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 129px;">강의실</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 92px;">시작일</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">종료일</th>			                   
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">상태</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">주소</th>
-		                      </tr>
-		                    </thead>
-		                    
-		                    <tbody>
-		                      <c:forEach items="${list}" var="vo">
-			                    <tr role="row">
-			                      <td><a href="/classinfo/classread?domain=${vo.clz_domain}">${vo.clz_name}</a></td>
-			                      <td>
-			                      	<c:forEach items="${vo.teacherlist}" var="teacherlist">
-			                      		${teacherlist.mem_name}(${teacherlist.mem_id})<br> 
-			                        </c:forEach>
-			                      </td>
-			                      <td>${vo.clz_room}</td>
-			                      <td>${vo.clz_start_date}</td>
-			                      <td>${vo.clz_end_date}</td>
-			                      <td>${vo.clz_state}</td>
-			                      <td><a href="/${vo.clz_domain}" target=_blank>${vo.clz_domain}</a></td>
-			                    </tr>
-		                      </c:forEach>
-		                    </tbody>
+		                      	 <th>&nbsp;</th>
+		                      	 <c:forEach items="${tqscorelist[0].scorelist}" var="namelist">
+			                     	<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 142px;">
+			                     	(${namelist.mem_id})${namelist.mem_name}
+			                     	</th>
+			                     </c:forEach>
+			                  </tr>
+							</thead>
+							<tbody>							  
+  								<c:forEach items="${tqscorelist}" var="tqlist" varStatus="status">
+							  <tr>
+							  	<td>(${tqlist.teacherquestion_no})${tqlist.teacherquestion_content}
+							  	</td>
+							  		<c:forEach items="${tqlist.scorelist}" var="scorelist">
+								  		<c:if test = "${scorelist.comprehension_score == 0}">
+									  		<td>&nbsp;
+									  		</td>
+								  		</c:if>
+							  			<c:if test = "${scorelist.comprehension_score != 0}">
+							  		 		<td>(${scorelist.teacherquestion_no})(${scorelist.mem_id})${scorelist.comprehension_score}
+							  		 		</td>
+							  			</c:if>
+							  		</c:forEach>
+							  </tr>
+							  </c:forEach>
+			                </tbody>   
 		                  </table>
-		                  
+		                  </div>
 	                  	</div><!-- /.grid -->
-	                  	
                   	</div><!-- /.row -->
                   	
-                  	<div class="row">
-            		
-                  		<div class="col-sm-12">
-                  			<div class="dataTables_paginate paging_simple_numbers text-center" id="example1_paginate">
-                  				<ul class="pagination">
-                  				  <c:if test="${pageMaker.prev}">
-                  					<li class="paginate_button previous" id="example1_previous"><a href="teacherlist?page=${pageMaker.startPage-1}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
-                  				  </c:if>
-                  				  
-                  				  <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-                  					<li ${pageMaker.page==idx? "class='paginate_button active'":"class='paginate_button'"}> 
-									  <a href="/classinfo/classlist/${userid}?page=${idx}&perPageNum=${pageMaker.perPageNum}&searchOPT=${searchOPT}&keyword=${keyword}">${idx}</a>
-                  					</li>
-                  				  </c:forEach>
-								  
-								  <c:if test="${pageMaker.next}">
-                  					<li class="paginate_button next" id="example1_next"><a href="teacherlist?page=${pageMaker.endPage+1}&perPageNum=${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="7" tabindex="0">Next</a></li>
-                  				  </c:if>
-                  				</ul>
-                  			</div>
-                  		</div><!-- /.grid -->
-                  	</div><!-- /.row -->
+                
                     	
                   </div><!-- /.example1_wrapper -->
                 </div><!-- /.box-body -->

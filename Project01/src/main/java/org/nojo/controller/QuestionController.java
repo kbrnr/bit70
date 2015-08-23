@@ -76,7 +76,7 @@ public class QuestionController {
 
 	// 등록 region
 	@RequestMapping(value = "/questionRegist", method = RequestMethod.GET)
-	public String regist() {
+	public String regist(@PathVariable("domain") String domain) {
 
 		return "qna/questionRegist";
 	}
@@ -84,8 +84,8 @@ public class QuestionController {
 	@Transactional
 	@RequestMapping(value = "/questionRegist", method = RequestMethod.POST)
 	public String registQuestion(QuestionVO vo,
-			@RequestParam(value = "attachfile_no", required = false) Integer[] attachfile_no) throws Exception {
-
+			@RequestParam(value = "attachfile_no", required = false) Integer[] attachfile_no,@PathVariable("domain") String domain) throws Exception {
+		
 		service.addQuestion(vo);
 
 		 if (attachfile_no != null) {

@@ -129,7 +129,7 @@
 			                      <td>${vo.clz_start_date}</td>
 			                      <td>${vo.clz_end_date}</td>
 			                      <td>${vo.clz_state}</td>
-			                      <td class="domain"><a href="/${vo.clz_domain}/${userid}/t" target=_blank>${vo.clz_domain}</a></td>
+			                      <td><a href="/${vo.clz_domain}" target=_blank>${vo.clz_domain}</a></td>
 			                      <td class="joincourse">${vo.course_state}</td>
 			                    </tr>
 		                      </c:forEach>

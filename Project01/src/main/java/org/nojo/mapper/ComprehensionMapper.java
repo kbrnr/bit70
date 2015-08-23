@@ -80,6 +80,26 @@ public interface ComprehensionMapper {
 			+ "order by l.mem_id")
 	public List<ScoreVO> selectScore(@Param("domain") String domain, @Param("teacherqno") int teacherqno) throws Exception;
 	
+	
+	//특정반 특정ID 의 이해도
+	@Select("select l.teacherquestion_no, l.teacherquestion_content, r.comprehension_score, r.mem_id, l.clz_domain"
+	+ "from "
+	+ "(select t.teacherquestion_no, t.teacherquestion_content, clz_domain "
+	+ "from tbl_teacherquestion t, tbl_curriculum c "
+	+ "where t.curri_no = c.curri_no "
+	+ "and c.clz_domain = #{domain}) l "
+	+ "left join "
+	+ "(select t.teacherquestion_no, t.teacherquestion_content, c.comprehension_score, c.mem_id "
+	+ "from tbl_comprehension c, tbl_teacherquestion t "
+	+ "where c.teacherquestion_no = t.teacherquestion_no "
+	+ "and c.clz_domain = #{domain} "
+	+ "and c.mem_id = #{mem_id}) r "
+	+ "on l.teacherquestion_no = r.teacherquestion_no "
+	+ "order by l.teacherquestion_no")
+	public List<ScoreVO> selectScoreByID(@Param("domain") String domain, @Param("mem_id") String mem_id) throws Exception;
+	
+	
+	
 	@SelectKey(before=false, keyProperty="teacherquestion_no", resultType=Integer.class, statement="select last_insert_id()")
 	@Insert("insert into tbl_teacherquestion(curri_gpno, curri_no, teacherquestion_content) values(#{curri_gpno}, #{curri_no}, #{teacherquestion_content})")
 	public void registQuestion(TeacherquestionVO vo);
@@ -87,5 +107,25 @@ public interface ComprehensionMapper {
 	@SelectKey(before=false, keyProperty="comprehension_no", resultType=Integer.class, statement="select last_insert_id()")
 	@Insert("insert into tbl_comprehension(teacherquestion_no, comprehension_score, mem_id, clz_domain) values(#{teacherquestion_no}, #{comprehension_score}, #{mem_id}, #{clz_domain})")
 	public void registComprehension(ComprehensionVO vo);
+	
+	
+//	select l.teacherquestion_no, l.teacherquestion_content, r.comprehension_score, r.mem_id, l.clz_domain, r.comprehension_replycnt
+//	from
+//	(
+//	select t.teacherquestion_no, t.teacherquestion_content, clz_domain
+//	from tbl_teacherquestion t, tbl_curriculum c
+//	where t.curri_no = c.curri_no
+//	and c.clz_domain = 'bit70'
+//	) l left join
+//	(
+//	select t.teacherquestion_no, t.teacherquestion_content, c.comprehension_score, c.mem_id, c.comprehension_replycnt
+//	from tbl_comprehension c, tbl_teacherquestion t
+//	where c.teacherquestion_no = t.teacherquestion_no
+//	and c.clz_domain = 'bit70' 
+//	and c.mem_id = '김현빈'
+//	) r
+//	on l.teacherquestion_no = r.teacherquestion_no
+//	order by l.teacherquestion_no;
+	
 	
 }
