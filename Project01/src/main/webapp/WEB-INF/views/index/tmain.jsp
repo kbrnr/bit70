@@ -221,23 +221,15 @@
 			<div class="col-sm-3 main-header">
 			
 				<div class="box">
-	                <div class="box-header">
-	                  <h3 class="box-title">※알림 들어갈곳^^</h3>
-	                </div><!-- /.box-header -->
-
                 	<div class="box-body">
-		                  <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-		                  	
-		                  	
-		                  	<div class="row">
-			                  	<div class="col-sm-12">
-	<!--------------->
-	<img src="/resources/nojo/images/main03.jpg">
-	<!--------------->			                  
-			                  	</div><!-- /.grid -->
-		                  	</div><!-- /.row -->
-		                    	
-		                  </div><!-- /.example1_wrapper -->
+                		<div id="notifications" class="list-group">
+	                		<c:forEach var="noti" items="${notifications}">
+		                		<a href="#" class="notification list-group-item ${noti.noti_read_gb ? '' : 'list-group-item-info'}" data-noti_no="${noti.noti_no}">
+								    <h4 class="list-group-item-heading">${noti.noti_service_name} <small>[${noti.noti_sender_id}]</small></h4>
+								    <p class="list-group-item-text">${noti.noti_summation}</p>
+								</a>
+	                		</c:forEach>
+						</div>
                 	</div><!-- /.box-body -->
 				
 				</div><!-- /.box -->
@@ -250,6 +242,20 @@
 		<!-- /.content -->
 
 	<script>
+		$("#notifications").on("click", ".notification", function(e){
+			e.preventDefault();
+			var $this = $(this);
+			if($this.hasClass("list-group-item-info")){
+				$.ajax({
+					url: "/${domain}/${userid}/notification/" + $this.data("noti_no"), 
+					method: "patch",
+					success: function(){
+						$this.removeClass("list-group-item-info");
+					}
+				});
+			}
+		});
+	
 		$("#question").click(function(){
 			parent.$('#myModal').modal('show');
 		});

@@ -32,19 +32,19 @@
         <p class="login-box-msg">Register a new membership</p>
         <form method="post" action="/member/signIn" enctype="multipart/form-data">
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="ID" name="mem_id" required/>
+            <input type="text" class="form-control" placeholder="아이디" name="mem_id" required/>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="Name" name="mem_name" required/>
+            <input type="text" class="form-control" placeholder="이름" name="mem_name" required/>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="Password" name="mem_pw" required/>
+            <input type="password" class="form-control" placeholder="비밀번호" name="mem_pw" required/>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" placeholder="Retype password" required/>
+            <input type="password" class="form-control" placeholder="비밀번호 재입력" required/>
             <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.nojo.bizDomain.ScoreVO;
 import org.nojo.bizDomain.TQuestionScoreListVO;
 import org.nojo.domain.ComprehensionVO;
+import org.nojo.domain.NotificationVO;
 import org.nojo.domain.TeacherquestionVO;
 import org.nojo.mapper.ComprehensionMapper;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,8 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 	@Override
 	public int registQuestion(TeacherquestionVO vo) throws Exception {
 		mapper.registQuestion(vo);
+		NotificationVO nvo = new NotificationVO();
+		nvo.setNoti_service_name("이해도");
 		return vo.getTeacherquestion_no();
 	}
 

@@ -11,6 +11,7 @@ import org.nojo.service.AnswerService;
 import org.nojo.service.AttachFileService;
 import org.nojo.service.QuestionService;
 import org.nojo.util.Criteria;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -39,6 +40,7 @@ public class AnswerController {
 	
 	//답변 글쓰기 region Start
 	//원문 글 가져오기
+	@Secured("")
 	@RequestMapping(value = "/answer", method = RequestMethod.GET)
 	public String regist(@RequestParam("no") int no, Model model) throws Exception {
 

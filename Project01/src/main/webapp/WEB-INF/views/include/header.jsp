@@ -1,8 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<sec:authentication var="user" property="principal"/>
+<sec:authorize access="hasRole('ROLE_ADMIN')" var="isAdmin"/>
+<sec:authorize access="hasRole('ROLE_TEACHER')" var="isTeacher"/>
+<sec:authorize access="hasRole('ROLE_STUDENT')" var="isStudent"/>
+<c:set var="grade">
+	<c:if test="${isAdmin}">
+      	학원
+    </c:if>
+    <c:if test="${isTeacher}">
+    	선생님
+    </c:if>
+    <c:if test="${isStudent}">
+    	학생
+    </c:if>
+</c:set>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AdminLTE 2 | Dashboard</title>
+<title>Project01</title>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <!-- Bootstrap 3.3.4 -->
 <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -36,10 +55,10 @@
 
 
 
-<style type="text/css">
-html,body{
+<style>
+html, body, .wrapper, .wrapper .content-wrapper, .content-wrapper *{
 	height: 100%;
-}
+} 
 </style>
 
 
@@ -71,11 +90,11 @@ html,body{
       <header class="main-header">
 
         <!-- Logo -->
-        <a href="index2.html" class="logo">
+        <a href="/" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>A</b>LT</span>
+          <span class="logo-mini"><b>노조</b></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>Admin</b>LTE</span>
+          <span class="logo-lg"><b>Project</b>01</span>
         </a>
 
         <!-- Header Navbar -->
@@ -119,14 +138,14 @@ html,body{
                   <!-- The user image in the navbar-->
                   <img src="/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image" />
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                  <span class="hidden-xs">Alexander Pierce</span>
+                  <span class="hidden-xs">[${user.name} ${grade}]</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- The user image in the menu -->
                   <li class="user-header">
                     <img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
                     <p>
-                      Alexander Pierce - Web Developer
+                      ${user.name} ${grade}
                       <small>Member since Nov. 2012</small>
                     </p>
                   </li>
@@ -148,7 +167,7 @@ html,body{
                       <a href="#" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                      <a href="/member/logout" class="btn btn-default btn-flat">로그아웃</a>
                     </div>
                   </li>
                 </ul>
