@@ -7,20 +7,16 @@
 	<!-- Include Editor style. -->
 	<link href="/resources/froala_editor/css/froala_editor.min.css" rel="stylesheet" type="text/css" />
 	<link href="/resources/froala_editor/css/froala_style.min.css" rel="stylesheet" type="text/css" />   
-</head>
 
-<body>
 <!-- Content Wrapper. Contains page content -->
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-	<h1>
-		Text Editors <small>Advanced form element</small>
-	</h1>
-	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="#">Forms</a></li>
-		<li class="active">Editors</li>
-	</ol>
+	    <h1>질문답변</h1>
+	    <ol class="breadcrumb">
+	        <li><a href="#"><i class="fa fa-fw fa-home"></i>Home</a></li>
+	        <li><a href="#">${domain }</a></li>
+	        <li class="active">질문답변</li>
+	    </ol>
 	</section>
 
 	<!-- Main content -->
@@ -64,8 +60,8 @@
 								<!-- <input id="gb" type="text" class="form-control" name="question_gb" placeholder="구분은 히든으로 처리하자" > -->
 								<input id="answer_visible" type="radio" name="answer_visible" value = "1" checked> 공개
 								<input id="answer_visible" type="radio" name="answer_visible" value = "0" > 비공개
-								<input id="mem_id" type="text" class="form-control" name="mem_id" placeholder="맴버아이디 히든으로 처리하자">
-								<input id="clz_domain" type="hidden" class="form-control" name="clz_domain" value="bit70">
+								<input id="mem_id" type="hidden" class="form-control" name="mem_id" value="${user.id}">
+								<input id="clz_domain" type="hidden" class="form-control" name="clz_domain" value="${domain }">
 							</div>
 							<textarea id='edit' name="answer_content" style="margin-top: 30px;"></textarea>
 							<br/>

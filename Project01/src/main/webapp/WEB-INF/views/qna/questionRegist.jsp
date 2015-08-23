@@ -31,11 +31,10 @@
 							<form id='regForm' role="form" method="post" action="questionRegist">
 								<div style="height: 150px;">
 									<input id="title" type="text" class="form-control" value="${vo.question_title }" name="question_title" placeholder="title"> 
-									<input id="gb" type="hidden"class="form-control" name="question_gb" value="member_student"> 
-									<input id="mem_id" type="text" class="form-control" name="mem_id" placeholder="맴버아이디 히든으로 처리하자"> 
+									<input id="mem_id" type="hidden" class="form-control" name="mem_id" value="${user.id}"> 
 									<input id="question_visible" type="radio" name="question_visible" value = "1" checked> 공개
 									<input id="question_visible" type="radio" name="question_visible" value = "0" > 비공개
-									<input id="clz_domain" type="hidden" class="form-control" name="clz_domain" value="bit70">
+									<input id="clz_domain" type="hidden" class="form-control" name="clz_domain" value="${domain }">
 								</div>
 								<textarea id='edit' name="question_content" style="margin-top: 30px;"></textarea>
 								<br/>
