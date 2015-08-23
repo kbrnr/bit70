@@ -43,10 +43,14 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 		}
 		
 		SecurityContext context =  SecurityContextHolder.getContext();
+		if(context==null){
+			res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "권한이 없습니다.");
+			return false;
+		}
 		Authentication auth  = context.getAuthentication();
 		String authority = securityMapper.getClassAuthority(domain, SecurityUtil.getUser().getId());
 		if(authority == null){
-			res.sendError(HttpServletResponse.SC_NOT_FOUND, "권한이 없습니다.");
+			res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "권한이 없습니다.");
 			return false;
 		}
 		context.setAuthentication(new UsernamePasswordAuthenticationToken(
@@ -61,7 +65,6 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 		List<GrantedAuthority> after = new ArrayList<GrantedAuthority>();
 		for (GrantedAuthority auth : collection) {
 			String authName = auth.toString();
-			System.out.println(authName);
 			if(!authName.startsWith("ROLE_CLASS_"))
 				after.add(auth);
 		}

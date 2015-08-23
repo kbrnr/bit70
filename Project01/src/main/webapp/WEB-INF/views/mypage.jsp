@@ -49,7 +49,7 @@
 
 <!-- Full Width Column -->
 <div class="content-wrapper">
-	<iframe name="inner" src="/classinfo/classlist/${user.id}" width="100%" height="100%" style="border:none;"></iframe>
+	<iframe name="inner" src="/classinfo/classlist/${user.id}/s" width="100%" height="100%" style="border:none;"></iframe>
 </div>
 <!-- /.content-wrapper -->
  

@@ -10,7 +10,7 @@ public interface SecurityMapper {
   public boolean isExistDomain(String domain);
   
   //수업에대한 권한
-  @Select("select course_gb from tbl_course where mem_id= #{id} and clz_domain= #{domain}")
+  @Select("select course_gb from tbl_course where mem_id= #{id} and clz_domain= #{domain} and course_state= 2")
   public String getClassAuthority(@Param("domain") String domain, @Param("id") String id);
   
 }
