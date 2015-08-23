@@ -76,7 +76,7 @@ public class QuestionController {
 
 	// 등록 region
 	@RequestMapping(value = "/questionRegist", method = RequestMethod.GET)
-	public String regist() {
+	public String regist(@PathVariable("domain") String domain) {
 
 		return "qna/questionRegist";
 	}

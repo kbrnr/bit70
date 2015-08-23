@@ -40,8 +40,8 @@
 							</c:choose>
 							<td width = 120px>${vo.mem_id }</td>
 							<td width = 120px class="regDate">${vo.question_reg_date }</td>
+						</tr>
 					</c:forEach>
-					</tr>
 				</table>
 			</div>
 			<!-- /.box-body -->
@@ -127,7 +127,4 @@
 </div>
 </section>
 
-<!-- /.content -->
-<!-- /.content-wrapper -->
-</body>
-</html>
+<%@include file="/WEB-INF/views/include/frameFooter.jsp"%>
