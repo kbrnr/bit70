@@ -34,7 +34,8 @@
 		<interceptor>
 			<mapping path="/**"/>
 			<exclude-mapping path="/resources/**"/>
-			<beans:bean class="org.nojo.filter.DomainInterceptor"/>
+			<exclude-mapping path="/favicon.ico"/>
+			<beans:bean class="org.nojo.filter.SecurityInterceptor"/>
 		</interceptor>
 	</interceptors>
 	

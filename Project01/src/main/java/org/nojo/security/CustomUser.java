@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.User;
 
 public class CustomUser extends User {
 	
+	private static final long serialVersionUID = 7189696952953597117L;
+
 	private String id;
 	private String name;
 	private String email;

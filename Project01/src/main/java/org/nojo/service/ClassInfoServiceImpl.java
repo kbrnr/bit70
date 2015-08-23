@@ -9,8 +9,8 @@ import org.nojo.domain.ClassVO;
 import org.nojo.domain.CourseVO;
 import org.nojo.domain.MemberVO;
 import org.nojo.mapper.ClassInfoMapper;
-import org.nojo.mapper.DomainMapper;
 import org.nojo.mapper.MemberMapper;
+import org.nojo.mapper.SecurityMapper;
 import org.nojo.util.Criteria;
 import org.nojo.util.SearchCriteria;
 import org.springframework.stereotype.Service;
@@ -25,11 +25,11 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 	private MemberMapper memberMapper;
 	
 	@Inject
-	private DomainMapper  domainMapper;
+	private SecurityMapper securiryMapper;
 	
 	
 	public boolean domainCheck(String domain){
-		return !domainMapper.isExistDomain(domain); 
+		return !securiryMapper.isExistDomain(domain); 
 	}
 	
 	public void makeClass(ClassVO classVO, String[] mem_ids) {
