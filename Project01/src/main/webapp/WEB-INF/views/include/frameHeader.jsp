@@ -3,8 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <sec:authentication var="user" property="principal"/>
 <sec:authorize access="hasRole('ROLE_ADMIN')" var="isAdmin"/>
-<sec:authorize access="hasRole('ROLE_TEACHER')" var="isTeacher"/>
-<sec:authorize access="hasRole('ROLE_STUDENT')" var="isStudent"/>
+<sec:authorize access="hasRole('ROLE_CLASS_TEACHER')" var="isTeacher"/>
+<sec:authorize access="hasRole('ROLE_CLASS_STUDENT')" var="isStudent"/>
 <c:set var="grade">
 	<c:if test="${isAdmin}">
       	학원
