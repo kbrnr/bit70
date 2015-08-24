@@ -203,7 +203,7 @@
 	$("#notifications").on("click", ".notification", function(e){
 		e.preventDefault();
 		var $this = $(this);
-		if($this.hasClass("list-group-item-info"))
+		if(!$this.hasClass("list-group-item-info"))
 			return;
 		$.ajax({
 			url: "/${domain}/notification/" + $this.data("noti_no"), 
