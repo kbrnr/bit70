@@ -30,16 +30,18 @@ public interface NotificationMapper {
 	@SelectKey(before=false, keyProperty="noti_no", statement="select last_insert_id()", resultType=Integer.class)
 	@Insert("insert into tbl_notification("
 			+ "	noti_service_name, "
-			+ "	noti_service_pk, "
+			+ "	noti_service_link, "
 			+ "	noti_sender_id, "
 			+ "	noti_receiver_id, "
-			+ "	noti_summation) "
+			+ "	noti_summation, "
+			+ " clz_domain ) "
 			+ "values("
 			+ "	#{noti_service_name}, "
-			+ "	#{noti_service_pk}, "
+			+ "	#{noti_service_link}, "
 			+ "	#{noti_sender_id}, "
 			+ "	#{noti_receiver_id}, "
-			+ "	#{noti_receiver_id}"
+			+ "	#{noti_summation}, "
+			+ "	#{clz_domain}"
 			+ ")")
 	public void insert(NotificationVO vo);
 	

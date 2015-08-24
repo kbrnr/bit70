@@ -1,6 +1,7 @@
 package org.nojo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.nojo.bizDomain.TQuestionScoreListVO;
 import org.nojo.domain.ComprehensionVO;
@@ -14,7 +15,7 @@ public interface ComprehensionService {
 	
 	public List<String> listScore(String score) throws Exception;
 	
-	public int registQuestion(TeacherquestionVO vo) throws Exception;
+	public Map<String, Object> registQuestion(String domain, TeacherquestionVO vo) throws Exception;
 
 	public int registComprehension(ComprehensionVO vo) throws Exception;
 

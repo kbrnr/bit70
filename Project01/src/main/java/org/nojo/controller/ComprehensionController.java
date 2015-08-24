@@ -2,12 +2,14 @@ package org.nojo.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.nojo.bizDomain.TQuestionScoreListVO;
 import org.nojo.domain.ComprehensionVO;
 import org.nojo.domain.TeacherquestionVO;
+import org.nojo.security.SecurityUtil;
 import org.nojo.service.ComprehensionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,9 +58,9 @@ public class ComprehensionController {
 	
 	@ResponseBody
 	@RequestMapping(value="/question", method=RequestMethod.POST)
-	public int registQuestion(TeacherquestionVO vo) throws Exception{
+	public Map<String, Object> registQuestion(@PathVariable String domain, TeacherquestionVO vo) throws Exception{
 		System.out.println(vo);
-		return service.registQuestion(vo);
+		return service.registQuestion(domain, vo);
 	}	
 
 	@ResponseBody

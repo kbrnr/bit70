@@ -1,6 +1,9 @@
 package org.nojo.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -10,13 +13,24 @@ import org.nojo.domain.ComprehensionVO;
 import org.nojo.domain.NotificationVO;
 import org.nojo.domain.TeacherquestionVO;
 import org.nojo.mapper.ComprehensionMapper;
+import org.nojo.mapper.CourseMapper;
+import org.nojo.mapper.NotificationMapper;
+import org.nojo.security.SecurityUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ComprehensionServiceImpl implements ComprehensionService{
 
 	@Inject		//주입
 	private ComprehensionMapper mapper;
+	
+	@Inject
+	private CourseMapper courseMapper;
+	
+	@Inject
+	private NotificationMapper notiMapper;
+	
 	
 	@Override
 	public List<String> listName(String name) throws Exception {
@@ -34,11 +48,29 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 	}
 	
 	@Override
-	public int registQuestion(TeacherquestionVO vo) throws Exception {
+	@Transactional
+	public Map<String, Object> registQuestion(String domain, TeacherquestionVO vo) throws Exception {
 		mapper.registQuestion(vo);
-		NotificationVO nvo = new NotificationVO();
-		nvo.setNoti_service_name("이해도");
-		return vo.getTeacherquestion_no();
+		List<String> idList = courseMapper.getStudentIdList(domain);
+		String senderId = SecurityUtil.getUser().getId();
+		String link = "/"+domain+"/comprehension";
+		String summation = vo.getTeacherquestion_content();
+		List<NotificationVO> list = new ArrayList<>();
+		for (String id : idList) {
+			NotificationVO nvo = new NotificationVO();
+			nvo.setNoti_service_name("이해도");
+			nvo.setNoti_service_link(link);
+			nvo.setNoti_receiver_id(id);
+			nvo.setNoti_summation(summation);
+			nvo.setNoti_sender_id(senderId);
+			nvo.setClz_domain(domain);
+			notiMapper.insert(nvo);
+			list.add(nvo);
+		}
+		Map<String, Object> data = new HashMap<>();
+		data.put("questionNo", vo.getTeacherquestion_no());
+		data.put("notiList", list);
+		return data;
 	}
 
 	@Override

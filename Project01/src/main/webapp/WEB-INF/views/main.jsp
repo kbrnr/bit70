@@ -167,10 +167,12 @@
 		parent.$("#sendQuestion").submit(function(e){
 			e.preventDefault();
 			var $this = $(this);
-			$.post("/${domain}/comprehension/question", $this.serialize(), function(no){
+			$.post("/${domain}/comprehension/question", $this.serialize(), function(data){
+				console.log(data.notiList);
 				var question = $this.find("[name=teacherquestion_content]").val();
-				var obj = {teacherquestion_no: no, teacherquestion_content: question};
+				var obj = {teacherquestion_no: data.questionNo, teacherquestion_content: question};
 				parent.socket.emit("understanding", obj);
+				parent.socket.emit("notification", data.notiList[0]);
 				parent.$('#myModal').modal('hide');
 			});
 		});
@@ -210,6 +212,13 @@
 				$this.removeClass("list-group-item-info");
 			}
 		});
+	});
+	parent.socket.on("notification", function(data){
+		var str = '<a href="#" class="notification list-group-item list-group-item-info" data-noti_no="' + data.noti_no + '">'
+	    		+ '  <h4 class="list-group-item-heading">' + data.noti_service_name + '<small>[' + data.noti_sender_id + ']</small></h4>'
+	    		+ '  <p class="list-group-item-text">' + data.noti_summation + '</p>'
+				+ '</a>';
+		$("#notifications").prepend(str);
 	});
 	
 

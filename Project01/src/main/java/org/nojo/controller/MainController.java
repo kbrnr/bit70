@@ -31,7 +31,6 @@ public class MainController {
 	//선생님/카페//설정
 	@RequestMapping(value="/{domain}", method=RequestMethod.GET)
 	public String tsetting(@PathVariable String domain){
-		System.out.println(SecurityUtil.hasAuthority(Authority.ROLE_CLASS_STUDENT));
 		return "/index";
 	}
 	
