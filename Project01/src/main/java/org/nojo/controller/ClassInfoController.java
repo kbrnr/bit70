@@ -6,13 +6,12 @@ import javax.inject.Inject;
 
 import org.nojo.bizDomain.ClassListVO;
 import org.nojo.domain.ClassVO;
+import org.nojo.security.SecurityUtil;
 import org.nojo.service.ClassInfoService;
-import org.nojo.util.Criteria;
 import org.nojo.util.PageMaker;
 import org.nojo.util.SearchCriteria;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,8 +22,55 @@ public class ClassInfoController {
 
 	@Inject
 	private ClassInfoService classInfoService;
-	
 
+	
+	//전체수업리스트
+	@RequestMapping(value="/classlist", method=RequestMethod.GET)
+	public String classlist(SearchCriteria cri, Model model){
+		List<ClassListVO> list;
+		PageMaker pagemaker;
+		
+		list = classInfoService.getClassList(cri);
+		pagemaker = new PageMaker(cri, classInfoService.getClassTotalCnt(cri));
+		model.addAttribute("list", list);
+		model.addAttribute("pageMaker", pagemaker);
+		model.addAttribute("cri", cri);
+
+		return "/classinfo/classlist" ;
+	}
+
+
+	//my페이지 학생 전체수업리스트 수업신청 기능 포함
+	@RequestMapping(value="/sclasslistjoin", method=RequestMethod.GET)
+	public String classlistjoin(SearchCriteria cri, Model model){
+		List<ClassListVO> list;
+		PageMaker pagemaker;
+		
+		list = classInfoService.getClassListJoin(cri, SecurityUtil.getUser().getId());
+		pagemaker = new PageMaker(cri, classInfoService.getClassTotalCnt(cri));
+
+		model.addAttribute("list", list);
+		model.addAttribute("pageMaker", pagemaker);
+		model.addAttribute("cri", cri);
+		
+		return "/classinfo/sclasslistjoin" ;
+	}
+
+
+	//개인별(선생님 학생) 수업리스트
+	@RequestMapping(value="/myclasslist", method=RequestMethod.GET)
+	public String myclasslist(SearchCriteria cri, Model model){
+		List<ClassListVO> list;
+		PageMaker pagemaker;
+		
+		list = classInfoService.getClassListByID(SecurityUtil.getUser().getId(), cri); 
+		pagemaker = new PageMaker(cri, classInfoService.getClassListTotalCntByID(SecurityUtil.getUser().getId()));
+		model.addAttribute("list", list);
+		model.addAttribute("pageMaker", pagemaker);
+		model.addAttribute("cri", cri);
+		
+		return "/classinfo/myclasslist" ;
+	}
 	
 	
 	//수업상세
@@ -42,67 +88,25 @@ public class ClassInfoController {
 		return "/classinfo/classread" ;
 	}
 	
-	//수업리스트
-	@RequestMapping(value="/classlist", method=RequestMethod.GET)
-	public String classlist(SearchCriteria cri, Model model){
-		List<ClassListVO> list;
-		PageMaker pagemaker;
-		
-		System.out.println(cri.getKeyword());
-		System.out.println(cri.getSearchType());
-		System.out.println(cri.getFirst());
-		System.out.println(cri.getPerPageNum());
-		
-		list = classInfoService.getClassList(cri);
-		pagemaker = new PageMaker(cri, classInfoService.getClassTotalCnt(cri));
-		model.addAttribute("list", list);
-		model.addAttribute("pageMaker", pagemaker);
-		model.addAttribute("cri", cri);
+	
+	
 
-		return "/classinfo/classlist" ;
-	}
 	
-	//my페이지 전체 수업리스트
-	@RequestMapping(value="/sclasslistjoin/{userid}", method=RequestMethod.GET)
-	public String classlistjoin(@PathVariable("userid") String userid, SearchCriteria cri, Model model){
-		List<ClassListVO> list;
-		PageMaker pagemaker;
-		
-		list = classInfoService.getClassListJoin(cri, userid);
-		pagemaker = new PageMaker(cri, classInfoService.getClassTotalCnt(cri));
+	
+	
+	
+	
 
-		model.addAttribute("list", list);
-		model.addAttribute("pageMaker", pagemaker);
-		model.addAttribute("cri", cri);
-		
-		return "/classinfo/sclasslistjoin" ;
-	}
-	
-	
-	
-	//개인별(선생님) 수업리스트
-	@RequestMapping(value="/classlist/{userid}/t", method=RequestMethod.GET)
-	public String tclasslistbyid(@PathVariable("userid") String userid, Criteria cri, Model model){
-		List<ClassListVO> list;
-		PageMaker pagemaker;
-		
-		list = classInfoService.getClassListByID(userid, cri); 
-		pagemaker = new PageMaker(cri, classInfoService.getClassListTotalCntByID(userid));
-		model.addAttribute("list", list);
-		model.addAttribute("pageMaker", pagemaker);
-		
-		return "/classinfo/tclasslist" ;
-	}
 	
 	
 	//개인별(학생) 수업리스트
-	@RequestMapping(value="/classlist/{userid}/s", method=RequestMethod.GET)
-	public String sclasslistbyid(@PathVariable("userid") String userid, Criteria cri, Model model){
+	@RequestMapping(value="/sclasslist", method=RequestMethod.GET)
+	public String sclasslistbyid(SearchCriteria cri, Model model){
 		List<ClassListVO> list;
 		PageMaker pagemaker;
 		
-		list = classInfoService.getClassListByID(userid, cri); 
-		pagemaker = new PageMaker(cri, classInfoService.getClassListTotalCntByID(userid));
+		list = classInfoService.getClassListByID(SecurityUtil.getUser().getId(), cri); 
+		pagemaker = new PageMaker(cri, classInfoService.getClassListTotalCntByID(SecurityUtil.getUser().getId()));
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", pagemaker);
 		

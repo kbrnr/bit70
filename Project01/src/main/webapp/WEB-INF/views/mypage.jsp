@@ -26,18 +26,18 @@
       <%-- 학원 --%>
       <c:if test="${isAdmin}">
 	      <li class="treeview active"><a href="/classinfo/classlist" target="inner"><i class="fa fa-link"></i> <span>수업관리</span></a></li>
-          <li class="treeview"><a href="/member/teacherlist" target="inner"><i class="fa fa-link"></i> <span>선생님관리</span></a></li>
+          <li class="treeview"><a href="/membership/teacherlist" target="inner"><i class="fa fa-link"></i> <span>선생님관리</span></a></li>
       </c:if>
       
       <%-- 선생님 --%>
 	  <c:if test="${isTeacher}">
-	      <li class="treeview active"><a href="/classinfo/classlist/${user.id}/t" target="inner"><i class="fa fa-link"></i> <span>나의수업관리</span></a></li>
-	      <li class="treeview"><a href="/academy/teacherlist" target="inner"><i class="fa fa-link"></i> <span>개인정보관리(X)</span></a></li>
+	      <li class="treeview active"><a href="/classinfo/myclasslist" target="inner"><i class="fa fa-link"></i> <span>나의수업관리</span></a></li>
+	      <li class="treeview"><a href="/academy/teacherlist" target="inner"><i class="fa fa-link"></i> <span>개인정보관리</span></a></li>
 	  </c:if>
 	  
 	  <%-- 학생 --%>
       <c:if test="${isStudent}">
-	      <li class="treeview active"><a href="/classinfo/classlist/${user.id}/s" target="inner"><i class="fa fa-link"></i> <span>수업관리</span></a></li>
+	      <li class="treeview active"><a href="/classinfo/myclasslist" target="inner"><i class="fa fa-link"></i> <span>수업관리</span></a></li>
 	      <li class="treeview"><a href="/academy/teacherlist" target="inner"><i class="fa fa-link"></i> <span>개인정보관리</span></a></li>
       </c:if>
 	  
@@ -48,9 +48,28 @@
 
 
 <!-- Full Width Column -->
-<div class="content-wrapper">
-	<iframe name="inner" src="/classinfo/classlist/${user.id}/s" width="100%" height="100%" style="border:none;"></iframe>
-</div>
+<%-- 학원 --%>
+<c:if test="${isAdmin}">
+	<div class="content-wrapper">
+		<iframe name="inner" src="/classinfo/classlist" width="100%" height="100%" style="border:none;"></iframe>
+	</div>
+</c:if>
+
+<%-- 선생님 --%>
+<c:if test="${isTeacher}">
+	<div class="content-wrapper">
+		<iframe name="inner" src="/classinfo/myclasslist" width="100%" height="100%" style="border:none;"></iframe>
+	</div>
+</c:if>
+
+<%-- 학생 --%>
+<c:if test="${isStudent}">
+	<div class="content-wrapper">
+		<iframe name="inner" src="/classinfo/myclasslist" width="100%" height="100%" style="border:none;"></iframe>
+	</div>
+</c:if>
+
+
 <!-- /.content-wrapper -->
  
 <%@include file="/WEB-INF/views/include/footer.jsp"%>

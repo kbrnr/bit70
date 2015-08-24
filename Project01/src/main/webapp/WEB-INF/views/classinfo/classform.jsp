@@ -175,7 +175,7 @@ $("#btn_teachlist").on("click", function() {
 
 function popteacherlist(){
 	$.ajax({
-		url: '/member/modalteacherlist/'+page,
+		url: '/membership/modalteacherlist/'+page,
 		type: 'post',
 		dataType:'json',
 		success: function(map){

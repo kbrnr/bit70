@@ -40,7 +40,7 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 		for(int i=0; i<mem_ids.length; i++){
 			courseVO.setMem_id(mem_ids[i]);
 			courseVO.setClz_domain(domain);
-			courseVO.setCourse_state(1); //0가입요청,  1가입완료
+			courseVO.setCourse_state(2); //가입여부(승인전0, 승인요청1, 가입완료2, 정지3)
 			courseVO.setCourse_gb("member_teacher");
 			classinfoMapper.insertCourse(courseVO);
 		}				
