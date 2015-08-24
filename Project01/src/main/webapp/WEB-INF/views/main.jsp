@@ -231,11 +231,14 @@
 				chair.css( { "margin-left" : x+"px", "margin-top" : y+"px" });
 				$("#seat").append(str);
 			});
+			parent.socket.emit("seatReady");
 		});
 	//Seat에서 on/off표시
-	parent.socket.on("onlineUser", function(user){
-		console.log("onlineUser: " + user);
-		$(".chair[data-mem_id='" + user + "']").css( { "border" : "3px solid red"});
+	parent.socket.on("onlineUser", function(users){
+		for(var i in users){
+			console.log("onlineUser: " + users[i]);
+			$(".chair[data-mem_id='" + users[i] + "']").css( { "border" : "3px solid red"});
+		}
 	});
 	parent.socket.on("offlineUser", function(user){
 		console.log("offlineUser" + user);
