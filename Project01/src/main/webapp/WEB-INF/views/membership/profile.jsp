@@ -3,12 +3,9 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-	<h1>
-		${user.id} <small>기본정보</small>
-	</h1>
 	<ol class="breadcrumb">
 		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class="active">${user.id} 기본정보</li>
+		<li class="active">개인정보관리</li>
 	</ol>
 </section>
 
@@ -17,16 +14,85 @@
 <section class="content">
     <div class="box box-primary">
     	<div class="box-header with-border">
-    	</div>
-    	<div class="box-body">
-			<table class="table table-striped">
-				<thead>
-					<h2>${user.id}님의 기본정보</h2>
-				</thead>
-				<tbody>
-				</tbody>
-			</table>
-		</div>
+    		<h3 class="box-title">■${user.id}님의 기본정보</h3>
+    	</div><!-- /.box-header -->
+  	
+		<!-- form start -->
+        <form id="profileModify" class="table-striped form-horizontal" method="post">
+               <div class="box-body">
+                 <div class="form-group">
+                   <label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
+                   <div class="col-sm-6">
+                   		${profile.mem_id}
+                   </div>
+                 </div>
+                 <div class="form-group">
+                   <label for="inputPassword3" class="col-sm-2 control-label" >비밀번호</label>
+                      <div class="col-sm-4">
+                        <input type="password" class="form-control" id="inputEmail3" name='clz_name' value="${profile.mem_pw}">
+                      </div>
+                 </div>
+  	             <div class="form-group">
+                   <label for="inputPassword3" class="col-sm-2 control-label" >새 비밀번호</label>
+                      <div class="col-sm-4">
+                        <input type="password" class="form-control" id="inputEmail3" name='clz_name'">
+                      </div>
+                   <label for="inputPassword3" class="col-sm-2 control-label" >확인</label>
+                      <div class="col-sm-2">
+                      </div>
+                      <div class="col-sm-4">
+                        <input type="password" class="form-control" id="inputEmail3" name='clz_name'">
+                      </div>
+                 </div>
+                 <div class="form-group">
+                   <label for="inputPassword3" class="col-sm-2 control-label">이름</label>
+                    <div class="col-sm-6">
+                   		${profile.mem_name}
+                   </div>
+                 </div>
+                 <div class="form-group">
+                   <label for="inputPassword3" class="col-sm-2 control-label">E-MAIL</label>
+                    <div class="col-sm-4">
+                    	<input type="password" class="form-control" id="inputEmail3" name='clz_name'" value="${profile.mem_email}">
+                   </div>
+                                      <label for="inputPassword3" class="col-sm-2 control-label" >E-MAIL 확인</label>
+                    <div class="col-sm-4">
+                   		<input type="password" class="form-control" id="inputEmail3" name='clz_name'" value="${profile.mem_tel}">
+                   </div>
+                 </div>
+                 <div class="form-group">
+                   <label for="inputPassword3" class="col-sm-2 control-label">TEL</label>
+                    <div class="col-sm-4">
+                   		<input type="password" class="form-control" id="inputEmail3" name='clz_name'" value="${profile.mem_tel}">
+                   </div>
+                 </div>
+                                      
+                 <div class="form-group">
+                   <label for="inputPassword3" class="col-sm-2 control-label">사진</label>
+                   <div class="col-sm-10">
+                   	<div class="col-sm-4">
+                   		<img src="/membership/seatImg?userId=${profile.mem_id}">
+                   	</div>
+                   	<div class="col-sm-6">
+			            <input type="file" class="form-control" name="file" />
+                   	</div>
+                   </div>
+                 </div>
+                
+               </div><!-- /.box-body -->
+               <div id="hiddenid"></div>
+               <div class="box-footer">
+               	<a href="classlist" class="btn btn-default">취소</a>
+                 
+                 <button type="submi t" class="btn btn-info pull-right">등록</button>
+                 
+               </div><!-- /.box-footer -->
+             </form>
+</div><!-- /.box box-info -->		
+<!-- ----------------------------------------- -->		
+		
+		
+		
 	</div>
 </section>
 <%@include file="/WEB-INF/views/include/frameFooter.jsp"%>

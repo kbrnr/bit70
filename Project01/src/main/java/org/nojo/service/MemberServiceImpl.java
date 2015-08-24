@@ -39,5 +39,10 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.signIn(vo);
 	}
 
+	@Override
+	public MemberVO personalInfo(String mem_id) throws Exception {
+		return memberMapper.personalInfo(mem_id); 
+	}
+
 
 }

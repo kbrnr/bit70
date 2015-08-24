@@ -18,4 +18,6 @@ public interface MemberService {
 	public List<JoinMemberVO> getMemberByDomain(Criteria cri, String domain);
 	
 	public int getTotalCntByDomain(String domain);
+	
+	public MemberVO personalInfo(String mem_id) throws Exception;
 }

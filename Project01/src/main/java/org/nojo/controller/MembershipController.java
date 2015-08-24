@@ -1,13 +1,17 @@
 package org.nojo.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
 
 import org.nojo.bizDomain.JoinMemberVO;
 import org.nojo.domain.MemberVO;
+import org.nojo.security.SecurityUtil;
 import org.nojo.service.MemberService;
+import org.nojo.service.SeatService;
 import org.nojo.util.Criteria;
 import org.nojo.util.PageMaker;
 import org.nojo.util.SearchCriteria;
@@ -26,6 +30,8 @@ public class MembershipController {
 
 	@Inject
 	private MemberService memberService;
+	@Inject
+	SeatService seatService;
 	
 	// 선생님리스트
 	@RequestMapping(value = "/teacherlist", method = RequestMethod.GET)
@@ -84,10 +90,22 @@ public class MembershipController {
 		
 		return "/member/joinmemberlist";
 	}
-	//프로필 수정
+	//프로필 읽기
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public void personalInfo() {
+	public void personalInfo(Model model) throws Exception {
+		model.addAttribute("profile", memberService.personalInfo(SecurityUtil.getUser().getId()));
+	}
+	
+	//프로필 수정
+	public void personalInfoModify() {
 		
+	}
+	
+	//이미지보기
+	@RequestMapping(value = "/seatImg", method = RequestMethod.GET)
+	public void photo(HttpServletResponse res, Model model) throws IOException {
+		byte[] bytes = seatService.photo(SecurityUtil.getUser().getId());
+		res.getOutputStream().write(bytes);
 	}
 
 	
