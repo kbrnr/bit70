@@ -84,13 +84,7 @@
 				<div class="box">
 	               	<div class="box-body">
 	               		<div id="notifications" class="list-group">
-	                		<c:forEach var="noti" items="${notifications}">
-		                		<a href="#" class="notification list-group-item ${noti.noti_read_gb ? '' : 'list-group-item-info'}" data-noti_no="${noti.noti_no}">
-								    <h4 class="list-group-item-heading">${noti.noti_service_name} <small>[${noti.noti_sender_id}]</small></h4>
-								    <p class="list-group-item-text">${noti.noti_summation}</p>
-								</a>
-	                		</c:forEach>
-						</div>
+	               		</div>
 	               	</div>
 				</div>
 			</div>
@@ -172,7 +166,6 @@
 				var question = $this.find("[name=teacherquestion_content]").val();
 				var obj = {teacherquestion_no: data.questionNo, teacherquestion_content: question};
 				parent.socket.emit("understanding", obj);
-				parent.socket.emit("notification", data.notiList);
 				parent.$('#myModal').modal('hide');
 			});
 		});
@@ -213,16 +206,25 @@
 			}
 		});
 	});
-	parent.socket.on("notification", function(data){
-		console.log(data);
-		var str = '<a href="#" class="notification list-group-item list-group-item-info" data-noti_no="' + data.noti_no + '">'
-	    		+ '  <h4 class="list-group-item-heading">' + data.noti_service_name + '<small>[' + data.noti_sender_id + ']</small></h4>'
-	    		+ '  <p class="list-group-item-text">' + data.noti_summation + '</p>'
-				+ '</a>';
-		$("#notifications").prepend(str);
-	});
+	function getNotifications(){
+		$.getJSON("/${domain}/notification", function(data){
+			if(data.length > 0)
+				$("#notifications").html("");
+			$(data).each(function(){
+				var $a = $('<a href="#" class="notification list-group-item" data-noti_no="' + this.noti_no + '">'
+			    		+   '  <h4 class="list-group-item-heading">' + this.noti_service_name + '<small>[' + this.noti_sender_id + ']</small></h4>'
+			    		+   '  <p class="list-group-item-text">' + this.noti_summation + '</p>'
+						+   '</a>');
+				if(this.noti_read_gb){
+					$a.addClass("list-group-item-info");
+				}
+				$("#notifications").prepend($a);			
+			});
+		});
+	}
+	getNotifications();
+	setInterval(getNotifications, 30000);
 	
-
 	//----------------------------------------------- 배치도 -----------------------------------------------------
 	$.getJSON("/${domain}/seat/ajax", function(list){
 			$(list).each(function(){

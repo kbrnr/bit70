@@ -1,9 +1,6 @@
 package org.nojo.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -49,13 +46,12 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 	
 	@Override
 	@Transactional
-	public Map<String, Object> registQuestion(String domain, TeacherquestionVO vo) throws Exception {
+	public int registQuestion(String domain, TeacherquestionVO vo) throws Exception {
 		mapper.registQuestion(vo);
 		List<String> idList = courseMapper.getStudentIdList(domain);
 		String senderId = SecurityUtil.getUser().getId();
 		String link = "/"+domain+"/comprehension";
 		String summation = vo.getTeacherquestion_content();
-		List<NotificationVO> list = new ArrayList<>();
 		for (String id : idList) {
 			NotificationVO nvo = new NotificationVO();
 			nvo.setNoti_service_name("이해도");
@@ -65,12 +61,8 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 			nvo.setNoti_sender_id(senderId);
 			nvo.setClz_domain(domain);
 			notiMapper.insert(nvo);
-			list.add(nvo);
 		}
-		Map<String, Object> data = new HashMap<>();
-		data.put("questionNo", vo.getTeacherquestion_no());
-		data.put("notiList", list);
-		return data;
+		return vo.getTeacherquestion_no();
 	}
 
 	@Override

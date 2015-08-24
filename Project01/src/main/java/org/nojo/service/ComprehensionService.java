@@ -15,7 +15,7 @@ public interface ComprehensionService {
 	
 	public List<String> listScore(String score) throws Exception;
 	
-	public Map<String, Object> registQuestion(String domain, TeacherquestionVO vo) throws Exception;
+	public int registQuestion(String domain, TeacherquestionVO vo) throws Exception;
 
 	public int registComprehension(ComprehensionVO vo) throws Exception;
 
