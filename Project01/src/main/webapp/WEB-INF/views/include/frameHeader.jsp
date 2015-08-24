@@ -3,8 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <sec:authentication var="user" property="principal"/>
 <sec:authorize access="hasRole('ROLE_ADMIN')" var="isAdmin"/>
-<sec:authorize access="hasRole('ROLE_CLASS_TEACHER')" var="isTeacher"/>
-<sec:authorize access="hasRole('ROLE_CLASS_STUDENT')" var="isStudent"/>
+<sec:authorize access="hasRole('ROLE_TEACHER')" var="isTeacher"/>
+<sec:authorize access="hasRole('ROLES_STUDENT')" var="isStudent"/>
+
+<sec:authorize access="hasRole('ROLE_CLASS_TEACHER')" var="isClassTeacher"/>
+<sec:authorize access="hasRole('ROLE_CLASS_PRESIDENT')" var="isClassPresident"/>
+<sec:authorize access="hasRole('ROLE_CLASS_STUDENT')" var="isClassStudent"/>
 <c:set var="grade">
 	<c:if test="${isAdmin}">
       	학원
@@ -13,6 +17,21 @@
     	선생님
     </c:if>
     <c:if test="${isStudent}">
+    	학생
+    </c:if>
+</c:set>
+
+<c:set var="classGrade">
+	<c:if test="${isAdmin}">
+      	학원
+    </c:if>
+    <c:if test="${isClassTeacher}">
+    	선생님
+    </c:if>
+    <c:if test="${isClassPresident}">
+    	반장
+    </c:if>
+    <c:if test="${isClassStudent}">
     	학생
     </c:if>
 </c:set>
