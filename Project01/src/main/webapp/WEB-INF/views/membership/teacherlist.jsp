@@ -14,6 +14,15 @@
 			</ol>
 		</section>
 
+		<section class="content-header">
+			<h1>${domain} 좌석배치표</h1>
+		    <ol class="breadcrumb">
+		        <li><a href="#"><i class="fa fa-fw fa-home"></i>Home</a></li>
+		        <li><a href="#">${domain}</a></li>
+		        <li class="active">배치도</li>
+		    </ol>
+		</section>
+		
 
 
 		<!-- Main content -->

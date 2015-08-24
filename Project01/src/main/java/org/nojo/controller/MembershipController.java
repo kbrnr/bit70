@@ -84,7 +84,11 @@ public class MembershipController {
 		
 		return "/member/joinmemberlist";
 	}
-	
+	//프로필 수정
+	@RequestMapping(value = "/profile", method = RequestMethod.GET)
+	public void personalInfo() {
+		
+	}
 
 	
 }

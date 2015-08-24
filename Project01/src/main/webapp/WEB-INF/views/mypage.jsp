@@ -32,13 +32,13 @@
       <%-- 선생님 --%>
 	  <c:if test="${isTeacher}">
 	      <li class="treeview active"><a href="/classinfo/myclasslist" target="inner"><i class="fa fa-link"></i> <span>나의수업관리</span></a></li>
-	      <li class="treeview"><a href="/academy/teacherlist" target="inner"><i class="fa fa-link"></i> <span>개인정보관리</span></a></li>
+	      <li class="treeview"><a href="/membership/profile" target="inner"><i class="fa fa-link"></i> <span>개인정보관리</span></a></li>
 	  </c:if>
 	  
 	  <%-- 학생 --%>
       <c:if test="${isStudent}">
 	      <li class="treeview active"><a href="/classinfo/myclasslist" target="inner"><i class="fa fa-link"></i> <span>수업관리</span></a></li>
-	      <li class="treeview"><a href="/academy/teacherlist" target="inner"><i class="fa fa-link"></i> <span>개인정보관리</span></a></li>
+	      <li class="treeview"><a href="/membership/profile" target="inner"><i class="fa fa-link"></i> <span>개인정보관리</span></a></li>
       </c:if>
 	  
     </ul><!-- /.sidebar-menu -->
