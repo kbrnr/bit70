@@ -21,7 +21,7 @@
 		<!-- ----------------------------------------- -->
 		<div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">■수업리스트 <sec:authentication property="authorities"></sec:authentication>${ isStudent}</h3>
+                  <h3 class="box-title">■수업리스트</h3>
                 </div><!-- /.box-header -->
                 
                 <div class="box-body">

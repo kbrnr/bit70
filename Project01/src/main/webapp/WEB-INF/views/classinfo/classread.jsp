@@ -88,11 +88,20 @@
                   </div><!-- /.box-body -->
                   <div id="hiddenid"></div>
                   
-                  <c:if test="${isTeacher || isStudent}">
+                  <c:if test="${isAdmin}">
 	                  <div class="box-footer">
 	                  	<a href="/classinfo/classlist/" class="btn btn-info pull-right">목록</a>        
 	                  </div><!-- /.box-footer -->
                   </c:if>
+                  <c:if test="${isTeacher || isStudent}">
+	                  <div class="box-footer">
+	                  	<a href="/classinfo/myclasslist/" class="btn btn-info pull-right">목록</a>        
+	                  </div><!-- /.box-footer -->
+                  </c:if>
+                  
+                  
+                  
+                  
                 </form>
 			</div><!-- /.box box-info -->		
 		<!-- ----------------------------------------- -->
