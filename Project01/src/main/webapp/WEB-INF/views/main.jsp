@@ -226,7 +226,8 @@
 					+ y + "px;'><div class='img'><img class='realImg' src='/" 
 					+ domain + "/seat/seatImg?userId=" 
 					+ id + "' '/></div>"
-					+ name + "</div>"
+					+ "<div class='name'>"+name + "</div>"
+					+ "</div>"
 				var chair = $(str);
 				chair.css( { "margin-left" : x+"px", "margin-top" : y+"px" });
 				$("#seat").append(str);
