@@ -97,7 +97,7 @@ public class MembershipController {
 	}
 	
 	//프로필 수정
-	public void personalInfoModify() {
+	public void personalInfoModify(MemberVO vo) {
 		
 	}
 	
