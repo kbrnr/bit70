@@ -215,18 +215,23 @@
 
 	//----------------------------------------------- 배치도 -----------------------------------------------------
 	$.getJSON("/${domain}/seat/ajax", function(list){
-		$(list).each(function(){
-			var x = this.seat_x;
-			var y = this.seat_y;
-			var name = this.mem_name;
-			var id = this.mem_id;
-			var domain = "${domain}";
-			var str = "<div class='chair' style='margin-left: " + x + "px; margin-top: " + y + "px;'><div class='img'><img class='realImg' src='/" + domain + "/seat/seatImg?userId=" + id + "' '/></div>" + name + "</div>";
-			var chair = $(str);
-			chair.css( { "margin-left" : x+"px", "margin-top" : y+"px" });
-			$("#seat").append(str);
+			$(list).each(function(){
+				var x = this.seat_x;
+				var y = this.seat_y;
+				var name = this.mem_name;
+				var id = this.mem_id;
+				var domain = "${domain}";
+				var str = "<div class='chair' data-mem_id='" + id + "' data-trigger='manual' data-placement='top' style='margin-left: " 
+					+ x + "px; margin-top: " 
+					+ y + "px;'><div class='img'><img class='realImg' src='/" 
+					+ domain + "/seat/seatImg?userId=" 
+					+ id + "' '/></div>"
+					+ name + "</div>"
+				var chair = $(str);
+				chair.css( { "margin-left" : x+"px", "margin-top" : y+"px" });
+				$("#seat").append(str);
+			});
 		});
-	});
 	//Seat에서 on/off표시
 	parent.socket.on("onlineUser", function(user){
 		console.log("onlineUser: " + user);
