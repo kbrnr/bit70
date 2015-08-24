@@ -69,28 +69,25 @@
 							<div class="panel box box-success">
 								<input type="hidden" name="domain" value="${vo.clz_domain }">
 								<c:set var = "v" value= "${vo.answer_visible }" />
+								<c:set var = "memId" value= "${vo.mem_id }" />
+								<c:set var = "userId" value= "${user.id}" />
+								<c:set var = "t" value= "${isTeacher}" />
 									<c:choose>
-										<c:when test="${v == false }" > 
-											<div class="box-header with-border">
-										 		<h4 class="box-title">비밀 답변 입니다.</h4>
-									 		</div>
-									 		<div class="froala-view">비밀 글입니다.</div>
-										</c:when>
-										<c:when test="${v == true }" > 
-											<div class="box-header with-border">
+										<c:when test="${v == true || t == true || memId == userId}" > 
+											<div class="box-header with-border" >
 												<h4 class="box-title" style="display :none;">${vo.question_no }</h4>
 												<h4 id="answer_no" class="box-title" style="display :none;">${vo.answer_no }</h4>
 												<h5 class="box-title">${vo.answer_title }</h5>
 												<h4 class="box-title">${vo.mem_id }</h4>
 											</div>
 											<div class="box-header with-border">
-											<div class="froala-view">${vo.answer_content }</div>
-											<div id="recommend btn-group" >
+											<div class="froala-view" style="height: 200px;">${vo.answer_content }</div>
+												<div id="recommend btn-group" style="width: 50px; margin: 0 auto;">
 												<button class="ddabong glyphicon glyphicon-thumbs-up btn btn-default btn-lg" style="size: 30px;" value="${vo.answer_no }">
-												<span>${vo.answer_recommend }</span>
+												<span class="recommendCnt">${vo.answer_recommend }</span>
 												</button>
-											</div>
-											<div style="margin-top: 200px;">
+												</div>
+											<div style="margin-top: 10px;">
 												<ul id="ansfileAttach" class='list-group' >
 													<li id="ansAttach" class="list-group-item ans">
 													</li>
@@ -105,6 +102,12 @@
 												</a>
 											</div>
 											</div>
+										</c:when>
+										<c:when test="${v == false || memId != userId }" > 
+											<div class="box-header with-border">
+										 		<h4 class="box-title">비밀 답변 입니다.</h4>
+									 		</div>
+									 		<div class="froala-view">비밀 글입니다.</div>
 										</c:when>
 									</c:choose>
 							</div>
@@ -177,7 +180,6 @@
 	$(".ddabong").on("click",function(event){
 		var $this = this;
 		var ano = $($this).val();
-		console.log(ano);
 		 $.ajax({
 				url: "../qna/answerRecommend",
 				type: "post",
@@ -186,9 +188,10 @@
 				
 				success : function(result){
 					alert("추천!!");
+					location.reload(); 
 				}
 			}); 
-	});		
+	});	
 	
 </script>
 <%@include file="/WEB-INF/views/include/frameFooter.jsp"%>

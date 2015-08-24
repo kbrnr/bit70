@@ -76,6 +76,7 @@ public class AnswerController {
 	}
 	//region End
 	
+	//답글 전체 가져오기
 	@ResponseBody
 	@RequestMapping("/getAllAns/{no}")
 	public List<AnswerVO> getAllans(@PathVariable("domain") String domain, @PathVariable("no") int no,
@@ -86,6 +87,7 @@ public class AnswerController {
 		
 		return list;
 	}
+	
 	
 	//답변 수정하기 region Start
 	//원문 글 가져오기
@@ -119,6 +121,8 @@ public class AnswerController {
 	}
 	//region End
 	
+	
+	
 	//파일첨부 조회
 	@ResponseBody
 	@RequestMapping("/getAnsFile/{rno}")
@@ -136,10 +140,12 @@ public class AnswerController {
 	// 추천
 	@ResponseBody
 	@RequestMapping(value= "/answerRecommend", method=RequestMethod.POST)
-	public void vote(@RequestParam("ano") Integer ano) throws Exception {
+	public String vote(@RequestParam("ano") Integer ano, HttpServletRequest request) throws Exception {
 		
+		String referer = request.getHeader("Referer");
 		service.voteRecommend(ano);
 		
+		return "redirect:" + referer;
 	}
 	
 	

@@ -22,21 +22,19 @@
 						<th>등록일</th>
 					</tr>
 					<c:forEach items="${list}" var="vo">
-					<c:if test="권한이 학생이면">
-					
-					</c:if>
-					<c:if test="선생이면">
-					</c:if>
 						<tr>
 							<td width = 50px><span>${vo.rowNum}</span></td>
 							<c:set var = "v" value= "${vo.question_visible }" />
+							<c:set var = "memId" value= "${vo.mem_id }" />
+							<c:set var = "userId" value= "${user.id}" />
+							<c:set var = "t" value= "${isTeacher}" />
 							<c:choose>
-							<c:when test="${v == false }" > 
-							 	<td>비밀글 입니다.</td>
-							</c:when>
-							<c:when test="${v == true }" > 
+							<c:when test="${v == true || t == true || memId == userId}" > 
 								<td><span><a href='detail?page=${pagemaker.page }&perPagerNum=${pagemaker.perPageNum }&no=${vo.question_no}'>${vo.question_title }</a></span></td>
 						    </c:when>
+							<c:when test="${v == false || memId != userId }" > 
+							 	<td>비밀글 입니다.</td>
+							</c:when>
 							</c:choose>
 							<td width = 120px>${vo.mem_id }</td>
 							<td width = 120px class="regDate">${vo.question_reg_date }</td>
