@@ -7,12 +7,11 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
-import org.nojo.bizDomain.JoinMemberVO;
 import org.nojo.domain.MemberVO;
 import org.nojo.security.SecurityUtil;
 import org.nojo.service.MemberService;
+import org.nojo.service.MembershipService;
 import org.nojo.service.SeatService;
-import org.nojo.util.Criteria;
 import org.nojo.util.PageMaker;
 import org.nojo.util.SearchCriteria;
 import org.springframework.http.HttpStatus;

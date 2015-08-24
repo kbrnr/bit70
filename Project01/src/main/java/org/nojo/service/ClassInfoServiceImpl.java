@@ -9,7 +9,7 @@ import org.nojo.domain.ClassVO;
 import org.nojo.domain.CourseVO;
 import org.nojo.domain.MemberVO;
 import org.nojo.mapper.ClassInfoMapper;
-import org.nojo.mapper.MemberMapper;
+import org.nojo.mapper.MembershipMapper;
 import org.nojo.mapper.SecurityMapper;
 import org.nojo.util.Criteria;
 import org.nojo.util.SearchCriteria;
@@ -22,7 +22,7 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 	private ClassInfoMapper classinfoMapper;
 	
 	@Inject
-	private MemberMapper memberMapper;
+	private MembershipMapper membershipMapper;
 	
 	@Inject
 	private SecurityMapper securiryMapper;
@@ -56,7 +56,7 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 		
 		for(int i=0; i<classlist.size(); i++){
 			domain=classlist.get(i).getClz_domain();
-			teacherlist=memberMapper.selectTeacherByDomain(domain);
+			teacherlist=membershipMapper.selectTeacherByDomain(domain);
 			classlist.get(i).setTeacherlist(teacherlist);			
 		System.out.println(domain);
 		System.out.println(teacherlist.size());
@@ -74,7 +74,7 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 		
 		for(int i=0; i<classlist.size(); i++){
 			domain=classlist.get(i).getClz_domain();
-			teacherlist=memberMapper.selectTeacherByDomain(domain);
+			teacherlist=membershipMapper.selectTeacherByDomain(domain);
 			classlist.get(i).setTeacherlist(teacherlist);		
 		}
 		return classlist;
@@ -94,7 +94,7 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 		String domain;
 		for(int i=0; i<classlist.size(); i++){
 			domain=classlist.get(i).getClz_domain();
-			teacherlist=memberMapper.selectTeacherByDomain(domain);
+			teacherlist=membershipMapper.selectTeacherByDomain(domain);
 			classlist.get(i).setTeacherlist(teacherlist);			
 		System.out.println(domain);
 		System.out.println(teacherlist.size());
@@ -108,7 +108,7 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 		List<MemberVO> teacherlist;
 		
 		clzVO = classinfoMapper.selectClassOne(domain);
-		teacherlist = memberMapper.selectTeacherByDomain(domain);
+		teacherlist = membershipMapper.selectTeacherByDomain(domain);
 	
 		clzVO.setTeacherlist(teacherlist);
 		
