@@ -79,7 +79,7 @@
 	  					<div class="col-md-3">
 	  						<form id="sendScore" class="form-inline">
 								<input type="hidden" name="clz_domain" value="${domain}">
-								<input type="hidden" name="mem_id" value="${userid}">
+								<input type="hidden" name="mem_id" value="${user.id}">
 								<input type="hidden" name="teacherquestion_no">
 								<div class="input-group">
 							      <input type="number" name="comprehension_score" class="form-control" min="0" max="10" placeholder="점수" required="required">
@@ -104,7 +104,7 @@
 <script>
 	var socket = io.connect('http://14.32.66.104:3002');
 	socket.on("connect", function(){
-		socket.emit("init", {domain: "${domain}", userId: "${userid}"});	
+		socket.emit("init", {domain: "${domain}", userId: "${user.id}"});	
 	});
 </script>
 

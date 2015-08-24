@@ -160,20 +160,43 @@
 	});
 	
 	//----------------------------------------------- 이해도 질문 -----------------------------------------------------
-	$("#question").click(function(){
-		parent.$('#myModal').modal('show');
-	});
-	parent.$("#sendQuestion").submit(function(e){
-		e.preventDefault();
-		var $this = $(this);
-		$.post("/${domain}/comprehension/question", $this.serialize(), function(no){
-			var question = $this.find("[name=teacherquestion_content]").val();
-			var obj = {teacherquestion_no: no, teacherquestion_content: question};
-			parent.socket.emit("understanding", obj);
-			parent.$('#myModal').modal('hide');
+	<c:if test="${isTeacher}">
+		$("#question").click(function(){
+			parent.$('#myModal').modal('show');
 		});
-	});
+		parent.$("#sendQuestion").submit(function(e){
+			e.preventDefault();
+			var $this = $(this);
+			$.post("/${domain}/comprehension/question", $this.serialize(), function(no){
+				var question = $this.find("[name=teacherquestion_content]").val();
+				var obj = {teacherquestion_no: no, teacherquestion_content: question};
+				parent.socket.emit("understanding", obj);
+				parent.$('#myModal').modal('hide');
+			});
+		});
+	</c:if>
 	
+	<c:if test="${isStudent}">
+		//seat에 이해도 부문 표시
+		parent.socket.on("understanding", function(msg){
+			$("#sendScore [name=teacherquestion_no]").val(msg.teacherquestion_no);
+			$("#msg").text(msg.teacherquestion_content);
+			$('#myModal').modal('show');
+		});
+		$("#sendScore").submit(function(e){
+			e.preventDefault();
+			var $this = $(this);
+			$.post("/${domain}/comprehension", $this.serialize(), function(data){
+				var obj = {
+					mem_id: "${user.id}", 
+					teacherquestion_no: $this.find("[name=teacherquestion_no]").val(),
+					comprehension_score: $this.find("[name=comprehension_score]").val(),
+				}
+				parent.socket.emit("seatScore", obj);
+			});
+			$('#myModal').modal('hide');
+		});
+	</c:if>
 	//----------------------------------------------- 알림 ----------------------------------------------------------
 	$("#notifications").on("click", ".notification", function(e){
 		e.preventDefault();
@@ -203,6 +226,26 @@
 			chair.css( { "margin-left" : x+"px", "margin-top" : y+"px" });
 			$("#seat").append(str);
 		});
+	});
+	//Seat에서 on/off표시
+	parent.socket.on("onlineUser", function(user){
+		console.log("onlineUser: " + user);
+		$(".chair[data-mem_id='" + user + "']").css( { "border" : "3px solid red"});
+	});
+	parent.socket.on("offlineUser", function(user){
+		console.log("offlineUser" + user);
+		$(".chair[data-mem_id='" + user + "']").css( { "border" : "thin solid gray"});
+	});
+	
+	//Seat에서 이해도 점수 표시
+	parent.socket.on("seatScore", function(data){
+		var target = $(".chair[data-mem_id='"+data.mem_id+"']");
+		target.attr("data-content", data.comprehension_score);
+		//data-container='body' data-toggle='popover' data-placement='bottom
+		target.popover('show');
+		setTimeout(function(){
+			target.popover('destroy');
+		}, 30000);
 	});
 	
 </script>

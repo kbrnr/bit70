@@ -1,52 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>seat Page</title>
-    <link rel="stylesheet" type="text/css" href="/resources/nojo/css/jquery-ui.min.css">
-    <link rel="stylesheet" type="text/css" href="/resources/nojo/css/jquery-ui.structure.min.css">
-    <link rel="stylesheet" type="text/css" href="/resources/nojo/css/jquery-ui.theme.min.css">
+<%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
 <!-- seat Style -->
     <link rel="stylesheet" type="text/css" href="/resources/nojo/css/seatStyle.css">
-    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="/resources/plugins/jQueryUI/jquery-ui-1.10.3.min.js"></script>
-</head>
-<body>
-<h2>${domain} 좌석배치표</h2>
 
-<div id="container">
-	<div id="wrapper">
-		<div id="seat">
-			<c:forEach items="${list }" var="vo">
-				<c:if test="${vo.seat_x != 0}">
-					<div class="chair" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">
-						<div class="img"><img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}"/></div>
-							<span class="hidden memId">${vo.mem_id}</span>
-		                	<span>${vo.mem_name}</span>
+	<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1>${domain} 좌석배치표</h1>
+		    <ol class="breadcrumb">
+		        <li><a href="#"><i class="fa fa-fw fa-home"></i>Home</a></li>
+		        <li><a href="#">${domain}</a></li>
+		        <li class="active">배치도</li>
+		    </ol>
+		</section>
+		<!-- Main content -->
+		<section class="content">
+		    <div class="box box-primary">
+		        <div class="box-header with-border">
+        		</div>
+	        <div class="box-body">
+				<div id="container">
+					<div id="wrapper">
+						<div id="seat">
+							<c:forEach items="${list }" var="vo">
+								<c:if test="${vo.seat_x != 0}">
+									<div class="chair" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">
+										<div class="img"><img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}"/></div>
+											<span class="hidden memId">${vo.mem_id}</span>
+						                	<span>${vo.mem_name}</span>
+									</div>
+								</c:if>		
+							</c:forEach>
+						</div>
 					</div>
-				</c:if>		
-			</c:forEach>
-		</div>
-	</div>
-<div id="lobby">
-		<c:forEach items="${list }" var="vo">
-			<c:if test="${vo.seat_x == 0}">
-				<div class="chair" style="position: relative;">
-					<div class="img"><img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}" /></div>
-						<span class="hidden memId">${vo.mem_id}</span>
-	                	<span>${vo.mem_name}</span>
+				<div id="lobby">
+						<c:forEach items="${list }" var="vo">
+							<c:if test="${vo.seat_x == 0}">
+								<div class="chair" style="position: relative;">
+									<div class="img"><img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}" /></div>
+										<span class="hidden memId">${vo.mem_id}</span>
+					                	<span>${vo.mem_name}</span>
+								</div>
+							</c:if>		
+						</c:forEach>
+					</div>
 				</div>
-			</c:if>		
-		</c:forEach>
-	</div>
-</div>
-<button id="save" type="button">저장하기</button>
-
-<div class="position">Position</div>
-<div id="info" style="width: 200px; height: 40px; background-color: #e0a0a0;"></div>
-
+				<button id="save" type="button">저장하기</button>
+				
+				<div class="position">Position</div>
+				<div id="info" style="width: 200px; height: 40px; background-color: #e0a0a0;"></div>
+			</div>
+		</div>
+</section>
 <script>
     var array = [];
     var chair = $(".chair");
@@ -110,5 +115,5 @@
     });
 
 </script>
-</body>
-</html>
+
+<%@include file="/WEB-INF/views/include/frameFooter.jsp"%>

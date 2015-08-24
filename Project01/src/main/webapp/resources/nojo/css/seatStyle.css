@@ -29,7 +29,6 @@
 	min-width: 300px;
 	height: 400px;
 	float: left;
-	border: thin solid blue;
 	overflow: auto;
 }
 
