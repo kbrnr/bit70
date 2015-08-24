@@ -179,11 +179,11 @@
 	<c:if test="${isStudent}">
 		//seat에 이해도 부문 표시
 		parent.socket.on("understanding", function(msg){
-			$("#sendScore [name=teacherquestion_no]").val(msg.teacherquestion_no);
-			$("#msg").text(msg.teacherquestion_content);
-			$('#myModal').modal('show');
+			parent.$("#sendScore [name=teacherquestion_no]").val(msg.teacherquestion_no);
+			parent.$("#msg").text(msg.teacherquestion_content);
+			parent.$('#myModal').modal('show');
 		});
-		$("#sendScore").submit(function(e){
+		parent.$("#sendScore").submit(function(e){
 			e.preventDefault();
 			var $this = $(this);
 			$.post("/${domain}/comprehension", $this.serialize(), function(data){
@@ -194,7 +194,7 @@
 				}
 				parent.socket.emit("seatScore", obj);
 			});
-			$('#myModal').modal('hide');
+			parent.$('#myModal').modal('hide');
 		});
 	</c:if>
 	//----------------------------------------------- 알림 ----------------------------------------------------------
