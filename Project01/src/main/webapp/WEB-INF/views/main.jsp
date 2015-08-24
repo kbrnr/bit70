@@ -172,7 +172,7 @@
 				var question = $this.find("[name=teacherquestion_content]").val();
 				var obj = {teacherquestion_no: data.questionNo, teacherquestion_content: question};
 				parent.socket.emit("understanding", obj);
-				parent.socket.emit("notification", data.notiList[0]);
+				parent.socket.emit("notification", data.notiList);
 				parent.$('#myModal').modal('hide');
 			});
 		});
@@ -214,6 +214,7 @@
 		});
 	});
 	parent.socket.on("notification", function(data){
+		console.log(data);
 		var str = '<a href="#" class="notification list-group-item list-group-item-info" data-noti_no="' + data.noti_no + '">'
 	    		+ '  <h4 class="list-group-item-heading">' + data.noti_service_name + '<small>[' + data.noti_sender_id + ']</small></h4>'
 	    		+ '  <p class="list-group-item-text">' + data.noti_summation + '</p>'
@@ -246,7 +247,6 @@
 	//Seat에서 on/off표시
 	parent.socket.on("onlineUser", function(users){
 		for(var i in users){
-			console.log("onlineUser: " + users[i]);
 			$(".chair[data-mem_id='" + users[i] + "']").css( { "border" : "3px solid red"});
 		}
 	});
