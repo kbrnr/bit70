@@ -1,28 +1,13 @@
 package org.nojo.controller;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
 
-import org.nojo.bizDomain.JoinMemberVO;
 import org.nojo.domain.MemberVO;
-import org.nojo.security.SecurityUtil;
 import org.nojo.service.MemberService;
-import org.nojo.service.SeatService;
-import org.nojo.util.Criteria;
-import org.nojo.util.PageMaker;
-import org.nojo.util.SearchCriteria;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller

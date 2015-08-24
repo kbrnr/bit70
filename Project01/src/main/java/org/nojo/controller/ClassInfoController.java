@@ -39,6 +39,44 @@ public class ClassInfoController {
 		return "/classinfo/classlist" ;
 	}
 
+	
+	//수업등록폼
+	@RequestMapping(value="/classform", method=RequestMethod.GET)
+	public String classform(){
+		return "/classinfo/classform";
+	}
+
+	//수업등록
+	@RequestMapping(value="/classregister", method=RequestMethod.POST)
+	public String classregister(ClassVO vo, String[] mem_id){
+		classInfoService.makeClass(vo, mem_id);
+		return "redirect:/classinfo/classread?domain=" + vo.getClz_domain();
+	}
+	
+	//도메인체크
+	@ResponseBody
+	@RequestMapping(value="/domaincheck", method= RequestMethod.POST)
+	public boolean canusedomain(String clz_domain) {
+		System.out.println(clz_domain);
+		return classInfoService.domainCheck(clz_domain);
+	}
+
+	//수업상세
+	@RequestMapping(value="/classread", method=RequestMethod.GET)
+	public String classread(String domain, Model model){
+		ClassListVO clzVO ;
+		clzVO = classInfoService.getClassOne(domain);
+		
+		System.out.println("===============================================");
+		System.out.println(clzVO.getTeacherlist().size());
+		System.out.println("===============================================");
+		
+		model.addAttribute("clzinfo", clzVO);
+		
+		return "/classinfo/classread" ;
+	}
+
+
 
 	//my페이지 학생 전체수업리스트 수업신청 기능 포함
 	@RequestMapping(value="/sclasslistjoin", method=RequestMethod.GET)
@@ -73,20 +111,6 @@ public class ClassInfoController {
 	}
 	
 	
-	//수업상세
-	@RequestMapping(value="/classread", method=RequestMethod.GET)
-	public String classread(String domain, Model model){
-		ClassListVO clzVO ;
-		clzVO = classInfoService.getClassOne(domain);
-		
-		System.out.println("===============================================");
-		System.out.println(clzVO.getTeacherlist().size());
-		System.out.println("===============================================");
-		
-		model.addAttribute("clzinfo", clzVO);
-		
-		return "/classinfo/classread" ;
-	}
 	
 	
 	
@@ -115,34 +139,6 @@ public class ClassInfoController {
 	
 	
 	
-	//수업등록폼
-	@RequestMapping(value="/classform", method=RequestMethod.GET)
-	public String classform(){
-		return "/classinfo/classform";
-	}
-
-	//수업등록
-	@RequestMapping(value="/classregister", method=RequestMethod.POST)
-	public String classregister(ClassVO vo, String[] mem_id){
-		System.out.println("@Controller:"+ vo.toString());	
-		System.out.println("@Controller:"+ mem_id[0]);	
-		System.out.println("@Controller:"+ mem_id[1]);	
-		System.out.println("@Controller:"+ mem_id[2]);	
-		classInfoService.makeClass(vo, mem_id);
-		
-		return "redirect:classmodify";
-	}
-	
-	
-	
-	
-	//도메인체크
-	@ResponseBody
-	@RequestMapping(value="/domaincheck", method= RequestMethod.POST)
-	public boolean canusedomain(String clz_domain) {
-		System.out.println(clz_domain);
-		return classInfoService.domainCheck(clz_domain);
-	}
 
 	
 }

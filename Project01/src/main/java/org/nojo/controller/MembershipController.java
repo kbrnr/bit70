@@ -30,20 +30,21 @@ public class MembershipController {
 
 	@Inject
 	private MemberService memberService;
+
+	@Inject
+	private MembershipService membershipService;
+	
 	@Inject
 	SeatService seatService;
 	
 	// 선생님리스트
 	@RequestMapping(value = "/teacherlist", method = RequestMethod.GET)
 	public String teacherlist(SearchCriteria cri, Model model) throws Exception {
-				
-		System.out.println("SearchType: " + cri.getSearchType());
-		System.out.println("Keyword: " + cri.getKeyword());
 		List<MemberVO> list;
 		PageMaker pageMaker;
 
-		list = memberService.getTeacherList(cri);
-		pageMaker = new PageMaker(cri, memberService.getTeacherTotalCnt(cri));
+		list = membershipService.getTeacherList(cri);
+		pageMaker = new PageMaker(cri, membershipService.getTeacherTotalCnt(cri));
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", pageMaker);
 		model.addAttribute("cri", cri);
@@ -60,8 +61,8 @@ public class MembershipController {
 		List<MemberVO> list;
 		PageMaker pagemaker;
 		cri.setPage(page);
-		list = memberService.getTeacherList(cri);
-		pagemaker = new PageMaker(cri, memberService.getTeacherTotalCnt(cri));
+		list = membershipService.getTeacherList(cri);
+		pagemaker = new PageMaker(cri, membershipService.getTeacherTotalCnt(cri));
 
 		map.put("poplist", list);
 		map.put("poppageMaker", pagemaker);
@@ -76,20 +77,7 @@ public class MembershipController {
 	}
 	
 	
-	// 수업참여인원
-	@RequestMapping(value = "/joinmemberlist/{domain}", method = RequestMethod.GET) 
-	public String joinlist(Criteria cri, @PathVariable("domain") String domain, Model model) {	
-		List<JoinMemberVO> list ;
-		PageMaker pagemaker;
 
-		list = memberService.getMemberByDomain(cri, domain);
-		pagemaker = new PageMaker(cri, memberService.getTotalCntByDomain(domain));
-
-		model.addAttribute("list", list);
-		model.addAttribute("pageMaker", pagemaker);
-		
-		return "/member/joinmemberlist";
-	}
 	//프로필 읽기
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public void personalInfo(Model model) throws Exception {
