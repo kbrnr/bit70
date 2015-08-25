@@ -34,4 +34,9 @@ public class NotificationController {
 		mapper.updateReadState(notiNo);
 	}
 	
+	@RequestMapping(value="/{notiNo}" ,method = RequestMethod.DELETE)
+	public void removeNotification(@PathVariable int notiNo) {
+		mapper.removeNotification(notiNo);
+	}
+	
 }

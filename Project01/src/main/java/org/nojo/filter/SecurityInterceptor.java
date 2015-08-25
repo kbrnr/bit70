@@ -2,7 +2,6 @@ package org.nojo.filter;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.nojo.mapper.SecurityMapper;
-import org.nojo.security.CustomUser;
+import org.nojo.security.Authority;
 import org.nojo.security.SecurityUtil;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -46,6 +45,9 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 		if(context==null){
 			res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "권한이 없습니다.");
 			return false;
+		}
+		if(SecurityUtil.hasAuthority(Authority.ROLE_ADMIN)){
+			return true;
 		}
 		Authentication auth  = context.getAuthentication();
 		String authority = securityMapper.getClassAuthority(domain, SecurityUtil.getUser().getId());

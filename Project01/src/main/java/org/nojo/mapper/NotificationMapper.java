@@ -2,6 +2,7 @@ package org.nojo.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -44,5 +45,8 @@ public interface NotificationMapper {
 			+ "	#{clz_domain}"
 			+ ")")
 	public void insert(NotificationVO vo);
+	
+	@Delete("delete from tbl_notification where noti_no = #{notiNo}")
+	public void removeNotification(int notiNo);
 	
 }

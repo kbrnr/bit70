@@ -4,6 +4,9 @@
 <!-- REQUIRED JS SCRIPTS -->
 <link href="/resources/nojo/css/bootstrap-treeview.min.css" rel="stylesheet" type="text/css" />
 <script src="/resources/nojo/script/bootstrap-treeview.min.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="/resources/nojo/css/context.bootstrap.css">
+<script src="/resources/nojo/script/context.js"></script>
+
 <!-- 배치도 CSS 추가-->
 <link rel="stylesheet" type="text/css" href="/resources/nojo/css/seatStyle.css">
 
@@ -161,10 +164,9 @@
 		parent.$("#sendQuestion").submit(function(e){
 			e.preventDefault();
 			var $this = $(this);
-			$.post("/${domain}/comprehension/question", $this.serialize(), function(data){
-				console.log(data.notiList);
+			$.post("/${domain}/comprehension/question", $this.serialize(), function(questionNo){
 				var question = $this.find("[name=teacherquestion_content]").val();
-				var obj = {teacherquestion_no: data.questionNo, teacherquestion_content: question};
+				var obj = {teacherquestion_no: questionNo, teacherquestion_content: question};
 				parent.socket.emit("understanding", obj);
 				parent.$('#myModal').modal('hide');
 			});
@@ -181,6 +183,7 @@
 		parent.$("#sendScore").submit(function(e){
 			e.preventDefault();
 			var $this = $(this);
+			console.log($this.serialize());
 			$.post("/${domain}/comprehension", $this.serialize(), function(data){
 				var obj = {
 					mem_id: "${user.id}", 
@@ -193,19 +196,16 @@
 		});
 	</c:if>
 	//----------------------------------------------- 알림 ----------------------------------------------------------
-	$("#notifications").on("click", ".notification", function(e){
-		e.preventDefault();
-		var $this = $(this);
-		if(!$this.hasClass("list-group-item-info"))
-			return;
-		$.ajax({
-			url: "/${domain}/notification/" + $this.data("noti_no"), 
-			method: "patch",
-			success: function(){
-				$this.removeClass("list-group-item-info");
-			}
-		});
+	context.init({
+	    fadeSpeed: 100,
+	    filter: function ($obj){},
+	    above: 'auto',
+	    preventDoubleContext: true,
+	    compress: false
 	});
+	getNotifications();
+	setInterval(getNotifications, 30000);
+	
 	function getNotifications(){
 		$.getJSON("/${domain}/notification", function(data){
 			if(data.length > 0)
@@ -220,10 +220,42 @@
 				}
 				$("#notifications").prepend($a);			
 			});
+			
+			context.attach('#notifications .notification', [
+           		new Menu("읽음", updateReadStatus),
+           		new Menu("삭제", removeNotification)
+           	]);
 		});
 	}
-	getNotifications();
-	setInterval(getNotifications, 30000);
+	
+	function Menu(text, action){
+		this.text = text;
+		this.action = action;
+	}
+	function updateReadStatus(e, target){
+		e.preventDefault();
+		target = $(target);
+		if(!target.hasClass("list-group-item-info"))
+			return;
+		$.ajax({
+			url: "/${domain}/notification/" + target.data("noti_no"), 
+			method: "patch",
+			success: function(){
+				target.removeClass("list-group-item-info");
+			}
+		});
+	}
+	function removeNotification(e, target){
+		e.preventDefault();
+		target = $(target);
+		$.ajax({
+			url: "/${domain}/notification/" + target.data("noti_no"), 
+			method: "delete",
+			success: function(){
+				target.remove();
+			}
+		});
+	}
 	
 	//----------------------------------------------- 배치도 -----------------------------------------------------
 	$.getJSON("/${domain}/seat/ajax", function(list){
