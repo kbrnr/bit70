@@ -58,6 +58,34 @@ public class CustomUser extends User {
 		return photo;
 	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
+	public void setLoginDate(Date loginDate) {
+		this.loginDate = loginDate;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
 	@Override
 	public String toString() {
 		return "CustomUser [id=" + id + ", name=" + name + ", email=" + email + ", tel=" + tel + ", regDate=" + regDate + ", loginDate=" + loginDate
