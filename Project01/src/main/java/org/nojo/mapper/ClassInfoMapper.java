@@ -10,7 +10,6 @@ import org.apache.ibatis.annotations.Update;
 import org.nojo.bizDomain.ClassListVO;
 import org.nojo.domain.ClassVO;
 import org.nojo.domain.CourseVO;
-import org.nojo.util.Criteria;
 import org.nojo.util.SearchCriteria;
 
 public interface ClassInfoMapper {
@@ -47,12 +46,12 @@ public interface ClassInfoMapper {
 	
 	
 	//아이디(담당자)별 수업리스트
-	@Select("select * from tbl_course join tbl_class on tbl_course.clz_domain = tbl_class.clz_domain where tbl_course.mem_id = #{mem_id} order by clz_reg_date desc limit #{cri.first}, #{cri.perPageNum}")
-	public List<ClassListVO> selectClassByID(@Param("mem_id") String mem_id, @Param("cri") Criteria cri);
+	//@Select("select * from tbl_course join tbl_class on tbl_course.clz_domain = tbl_class.clz_domain where tbl_course.mem_id = #{mem_id} order by clz_reg_date desc limit #{cri.first}, #{cri.perPageNum}")
+	public List<ClassListVO> selectClassByID(@Param("mem_id") String mem_id, @Param("cri") SearchCriteria cri);
 	
 	//아이디(담당자)별 수업 토탈갯수
-	@Select("select count(tbl_course.clz_domain) from tbl_course join tbl_class on tbl_course.clz_domain = tbl_class.clz_domain where tbl_course.mem_id = #{mem_id}")
-	public int selectClassTotalCntByID(String mem_id);
+	//@Select("select count(tbl_course.clz_domain) from tbl_course join tbl_class on tbl_course.clz_domain = tbl_class.clz_domain where tbl_course.mem_id = #{mem_id}")
+	public int selectClassTotalCntByID(@Param("mem_id") String mem_id, @Param("cri") SearchCriteria cri);
 	
 	
 	//수업전체리스트 가입(승인요청) 포함
