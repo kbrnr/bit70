@@ -2,14 +2,14 @@
 	display: none;
 }
 
-#container {
+ #seatContainer {
 	position: relative;
 	width: 100%;
 	height: 400px;
 	border: 2px solid black;
 }
 
-#wrapper {
+#seatWrapper {
 	width: 70%;
 	height: 400px;
 	float: left;
@@ -17,11 +17,10 @@
 #seat {
 	position: relative;
 	width: 100%;
-	height: 400px;
+	height: 396px;
 	float: left;
 	margin: 0 auto;
-	background-image: url("/resources/nojo/images/classRoom_background.png");
-	overflow: auto;
+	background-color: #F1EBDE;
 }
 
 #lobby {
@@ -29,15 +28,14 @@
 	min-width: 300px;
 	height: 400px;
 	float: left;
-	overflow: auto;
 }
 
 .chair {
 	position: absolute;
-	width: 85px;
-	height: 78px;
+	width: 60px;
+	height: 70px;
 	display: inline-block;
-	background-image: url("/resources/nojo/images/student.png");
+	background-color: #FFCC66;
 	border-radius: 3px;
 	margin-bottom: 10px;
 	margin-left: 5px;
@@ -45,32 +43,20 @@
 }
 
 .img {
-	width: 40px;
-	height: 40px;
+	width: 50px;
+	height: 50px;
 	display: inline-block;
 	border-radius: 18px;
-	margin-top: 40px;
-	margin-left: 20px;
 }
 
 .realImg {
-	width: 40px;
-	height: 40px;
+	width: 50px;
+	height: 50px;
 	border-radius: 18px;
-	margin-top: -67px;
 }
 .name {
 	font-size: 18px;
-	font-family: "나눔고딕";
-	margin-left: 13px;
-	margin-top: -40px;
-	background-color: white;
+	font-family: "나눔고딕", fantasy;
+	background-color: #FFD699;
+	margin-left: 3px;
 	}
-#content {
-	width: 100%;
-	height: 400px;
-	padding: 10px;
-	padding-bottom: 30px;
-	border: 1px solid #000;
-}
-
