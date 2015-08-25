@@ -214,8 +214,8 @@
 				var $a = $('<a href="#" class="notification list-group-item" data-noti_no="' + this.noti_no + '">'
 			    		+   '  <h4 class="list-group-item-heading">' + this.noti_service_name + '<small>[' + this.noti_sender_id + ']</small></h4>'
 			    		+   '  <p class="list-group-item-text">' + this.noti_summation + '</p>'
-						+   '</a>');
-				if(this.noti_read_gb){
+						+  '</a>');
+				if(this.noti_read_gb==0){
 					$a.addClass("list-group-item-info");
 				}
 				$("#notifications").prepend($a);			
