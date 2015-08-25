@@ -3,11 +3,8 @@
 
  <mapper namespace="org.nojo.mapper.CourseMapper">
 
-<!-- ///////////////////////////////////////////////////////////////////////////////////////// -->	
-<!-- 선생님 관련 -->
-<!-- ///////////////////////////////////////////////////////////////////////////////////////// -->	
 	
-	<!-- 수업별 참여인원 / 검색결과 포함 / 가입승인 -->
+	<!-- 수업별 참여인원 / 검색결과 포함 / (선생님)가입승인 -->
 	<select	id="selcetMemberByDomain" parameterType="map" resultType="org.nojo.bizDomain.JoinMemberVO" >
 	<![CDATA[
 		select * 
@@ -21,6 +18,9 @@
 		</if>
 		<if test="cri.searchType == 'name'">
 			and m.mem_name like CONCAT('%', #{cri.keyword}, '%')
+		</if>
+		<if test="cri.searchType == 'mem_gb'">
+			and m.mem_gb like CONCAT('%', #{cri.keyword}, '%')
 		</if>
 	</if>
 	<![CDATA[	 

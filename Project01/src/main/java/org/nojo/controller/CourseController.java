@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import org.nojo.bizDomain.JoinMemberVO;
 import org.nojo.domain.CourseVO;
 import org.nojo.service.CourseService;
-import org.nojo.util.Criteria;
 import org.nojo.util.PageMaker;
 import org.nojo.util.SearchCriteria;
 import org.springframework.stereotype.Controller;
@@ -31,6 +30,12 @@ public class CourseController {
 		List<JoinMemberVO> list;
 		PageMaker pageMaker;
 
+		System.out.println("*********************************************************");
+		System.out.println(cri.getSearchType());
+		System.out.println(cri.getKeyword());
+		System.out.println("*********************************************************");
+		
+		
 		list = courseService.getMemberByDomain(cri, domain);
 		pageMaker = new PageMaker(cri, courseService.getTotalCntByDomain(cri, domain));
 		model.addAttribute("list", list);

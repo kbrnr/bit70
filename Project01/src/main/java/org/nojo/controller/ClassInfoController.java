@@ -66,6 +66,16 @@ public class ClassInfoController {
 	public String classread(String domain, Model model){
 		ClassListVO clzVO ;
 		clzVO = classInfoService.getClassOne(domain);
+		model.addAttribute("clzinfo", clzVO);
+		
+		return "/classinfo/classread" ;
+	}
+
+	//수업수정 폼
+	@RequestMapping(value="/classmodify", method=RequestMethod.GET)
+	public String classmodify(String domain, Model model){
+		ClassListVO clzVO ;
+		clzVO = classInfoService.getClassOne(domain);
 		
 		System.out.println("===============================================");
 		System.out.println(clzVO.getTeacherlist().size());
@@ -73,9 +83,10 @@ public class ClassInfoController {
 		
 		model.addAttribute("clzinfo", clzVO);
 		
-		return "/classinfo/classread" ;
+		return "/classinfo/classmodify" ;
 	}
-
+	
+	
 
 
 	//my페이지 학생 전체수업리스트 수업신청 기능 포함

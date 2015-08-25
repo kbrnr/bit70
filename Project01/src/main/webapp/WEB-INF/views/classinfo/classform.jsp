@@ -39,7 +39,7 @@
                       <label for="inputPassword3" class="col-sm-2 control-label" >도메인</label>
                       <label for="inputPassword3" class="col-sm-2 control-label" >http://www.XXX.com/</label>
                       <div class="col-sm-2">
-                      	<input id="clz_domain" type="text" class="form-control" name='clz_domain' value=''>
+                      	<input id="clz_domain" type="text" class="form-control" name='clz_domain'>
                       </div>
                       <div class="col-sm-4">
                       	<div id="domainmsg"></div>
@@ -49,7 +49,7 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label">강사등록</label>
+                      <label for="inputPassword3" class="col-sm-2 control-label">선생님</label>
                       <div class="col-sm-8">
                  		<div id="choiceteacher" class="time-label"></div>
                       </div>
@@ -182,7 +182,7 @@ function popteacherlist(){
 			var listStr = "";
 			$(map.poplist).each(
 					function() {
-						listStr += "<tr role='row' class='userinfo'><td class='userid'>"+this.mem_id+"</td><td class='username'>"+this.mem_name+"</td><td>"+this.mem_email+"</td><td>"+this.mem_tel+"</td></tr>";
+						listStr += "<tr role='row' class='userinfo'><td class='userid'><a href='#'>"+this.mem_id+"</a></td><td class='username'>"+this.mem_name+"</td><td>"+this.mem_email+"</td><td>"+this.mem_tel+"</td></tr>";
 					}
 			);
 			$("#teacherinfo").html(listStr);
@@ -226,16 +226,27 @@ $("#teacherpaging").on("click", "li", function(event) {
 });
 //./모달 선생님 리스트//
 
-$("#teacherinfo").on("click", ".userinfo", function(){
+//모달창 선생님 선택시
+$("#teacherinfo").on("click", ".userid", function(){
 	var userid ;
 	var username ;
-	userid = $(this).children('td.userid').text();
-	username = $(this).children('td.username').text();
+	userid = $(this).text();
+	username = $(this).siblings('.username').text();
 	console.log(userid);
 	console.log(username);
-	$("#choiceteacher").append("<span class='bg-gray'>"+ username + "(" + userid + ") X </span>&nbsp;&nbsp;");
-	$("#hiddenid").append(" <input type='text' name='mem_id' value='"+userid+"' >");
+	$("#choiceteacher").append("<span data-vid='"+ userid +"' class='bg-gray'>"+ username + "(" + userid + ") X <input type='hidden' data-hid='mem_id' name='mem_id' value='"+userid+"' ></span>");
+	
 });
+
+
+//선택된 선생님 취소
+$("#choiceteacher").on("click", ".bg-gray", function(){
+	$this = $(this)
+	$this.remove();
+	
+});
+
+
 
 //도메인체크
 $("#btn_domaincheck").on("click", function() {
