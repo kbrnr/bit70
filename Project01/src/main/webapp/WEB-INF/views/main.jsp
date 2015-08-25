@@ -221,7 +221,7 @@
 				$("#notifications").prepend($a);			
 			});
 			
-			context.attach('#notifications .notification', [
+			context.attach('.notification', [
            		new Menu("읽음", updateReadStatus),
            		new Menu("삭제", removeNotification)
            	]);
