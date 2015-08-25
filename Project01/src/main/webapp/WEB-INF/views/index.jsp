@@ -20,7 +20,7 @@
     <!-- Sidebar Menu -->
     <ul class="sidebar-menu">
       <li class="header"></li>
-      <c:if test="${isAdmin || isTeacher}">
+      <c:if test="${isAdmin || isClassTeacher}">
 	      <li class="treeview active"><a href="/${domain}/main" target="inner"><i class="fa fa-link"></i> <span>홈</span></a></li>
 	      <li class="treeview"><a href="/classinfo/classread?domain=${domain}" target="inner"><i class="fa fa-link"></i> <span>${domain} 수업정보</span></a></li>
 	      <li class="treeview"><a href="/${domain}/curriculum/edit" target="inner"><i class="fa fa-link"></i> <span>커리큘럼</span></a></li>
@@ -30,7 +30,7 @@
 	      <li class="treeview"><a href="/${domain}/seat" target="inner"><i class="fa fa-link"></i>[반장메뉴:배치도]</a></li>
       </c:if>
       
-      <c:if test="${isStudent}">
+      <c:if test="${isClassStudent}">
 	  	  <li class="treeview active"><a href="/${domain}/main" target="inner"><i class="fa fa-link"></i> <span>홈</span></a></li>
      	  <li class="treeview"><a href="/classinfo/classread?domain=${domain}" target="inner"><i class="fa fa-link"></i> <span>${domain} 수업정보</span></a></li>
           <li class="treeview"><a href="/${domain}/qna/listpage" target="inner"><i class="fa fa-link"></i> <span>질문답변</span></a></li>
@@ -59,7 +59,7 @@
 			</div>
 			<div class="modal-body">
 				<%-- 선생님 --%>
-				<c:if test="${isTeacher}">
+				<c:if test="${isClassTeacher}">
 					<form id="sendQuestion" class="form-inline">
 						<input type="hidden" name="curri_no">
 						<input type="hidden" name="curri_gpno">
@@ -73,7 +73,7 @@
 			    </c:if>
 			    
 			    <%-- 학생 --%>
-			    <c:if test="${isStudent}">
+			    <c:if test="${isClassStudent}">
 			    	<p id="msg">이해되냐</p>
 					<div class="row">
 	  					<div class="col-md-3">

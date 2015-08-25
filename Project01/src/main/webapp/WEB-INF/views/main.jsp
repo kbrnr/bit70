@@ -45,7 +45,7 @@
 								<div class="panel panel-primary">
 									<div class="panel-heading">
 										<h1 id="curri_title" class="panel-title" style="display: inline;"></h1>
-										<c:if test="${isTeacher}">
+										<c:if test="${isClassTeacher}">
 											<a id="question" class="btn" style="color: white;"><span class="glyphicon glyphicon-question-sign"></span></a>
 										</c:if>
 									</div>
@@ -157,7 +157,7 @@
 	});
 	
 	//----------------------------------------------- 이해도 질문 -----------------------------------------------------
-	<c:if test="${isTeacher}">
+	<c:if test="${isClassTeacher}">
 		$("#question").click(function(){
 			parent.$('#myModal').modal('show');
 		});
@@ -173,7 +173,7 @@
 		});
 	</c:if>
 	
-	<c:if test="${isStudent}">
+	<c:if test="${isClassStudent}">
 		//seat에 이해도 부문 표시
 		parent.socket.on("understanding", function(msg){
 			parent.$("#sendScore [name=teacherquestion_no]").val(msg.teacherquestion_no);
