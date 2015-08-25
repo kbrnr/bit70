@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/membership")
@@ -84,8 +85,11 @@ public class MembershipController {
 	}
 	
 	//프로필 수정
-	public void personalInfoModify(MemberVO vo) {
-		
+	@RequestMapping(value = "/profile", method = RequestMethod.POST)
+	public void personalInfoModify(MemberVO vo, MultipartFile file, Model model) throws Exception {
+		vo.setMem_photo(file.getBytes());
+		memberService.personalInfoModify(vo);
+		model.addAttribute("profile", memberService.personalInfo(SecurityUtil.getUser().getId()));
 	}
 	
 	//이미지보기

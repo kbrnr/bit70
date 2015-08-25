@@ -18,61 +18,61 @@
     	</div><!-- /.box-header -->
   	
 		<!-- form start -->
-        <form id="profileModify" class="form-horizontal" action="profileModify" method="post">
+        <form id="profile" class="form-horizontal" method="post" action="/membership/profile" enctype="multipart/form-data">
                <div class="box-body">
                  <div class="form-group">
-                   <label for="inputEmail3" class="col-sm-2 control-label">아이디</label>
+                   <label for="inputId" class="col-sm-2 control-label">아이디</label>
+                   <input type="hidden" class="form-control" name="mem_id" value="${user.id}">
                    <div class="col-sm-6">
                    		${user.id}
                    </div>
                  </div>
   	             <div class="form-group">
-                   <label for="inputPassword3" class="col-sm-2 control-label" >새 비밀번호</label>
+                   <label for="inputPassword1" class="col-sm-2 control-label">새 비밀번호</label>
                       <div class="col-sm-4">
-                        <input type="password" class="form-control" id="inputEmail3" name='clz_name'">
+                        <input type="password" class="form-control" name="mem_pw">
                       </div>
-                   <label for="inputPassword3" class="col-sm-2 control-label" >비밀번호 확인</label>
+                      <label for="inputPassword2" class="col-sm-2 control-label" >비밀번호 확인</label>
                       <div class="col-sm-2">
                       </div>
                       <div class="col-sm-4">
-                        <input type="password" class="form-control" id="inputEmail3" name='clz_name'">
+                       <!--  <input type="password" class="form-control" name="mem_pw" > -->
                       </div>
                  </div>
                  <div class="form-group">
-                   <label for="inputPassword3" class="col-sm-2 control-label">이름</label>
+                   <label for="inputName" class="col-sm-2 control-label">이름</label>
                     <div class="col-sm-6">
                    		${user.name}
                    </div>
                  </div>
                  <div class="form-group">
-                   <label for="inputPassword3" class="col-sm-2 control-label">E-MAIL</label>
+                   <label for="inputEmail" class="col-sm-2 control-label">E-MAIL</label>
                     <div class="col-sm-4">
-                    	<input type="text" class="form-control" id="inputEmail3" name='clz_name'" value="${user.email}">
+                    	<input type="text" class="form-control" name="mem_email" value="${profile.mem_email}" />
                    </div>
-                                      <label for="inputPassword3" class="col-sm-2 control-label" >E-MAIL 확인</label>
+                   <label for="inputEmail" class="col-sm-2 control-label" >E-MAIL 확인</label>
                     <div class="col-sm-4">
-                   		<input type="text" class="form-control" id="inputEmail3" name='clz_name'" value="${user.tel}">
+                   		<!-- <input type="text" class="form-control" name='mem_email'  /> -->
                    </div>
                  </div>
                  <div class="form-group">
-                   <label for="inputPassword3" class="col-sm-2 control-label">TEL</label>
+                   <label for="inputTel" class="col-sm-2 control-label">TEL</label>
                     <div class="col-sm-4">
-                   		<input type="text" class="form-control" id="inputEmail3" name='clz_name'" value="${user.tel}">
+                   		<input type="text" class="form-control" name="mem_tel" value="${profile.mem_tel}" />
                    </div>
                  </div>
                                       
                  <div class="form-group">
-                   <label for="inputPassword3" class="col-sm-2 control-label">사진</label>
+                   <label for="inputPhoto" class="col-sm-2 control-label">사진</label>
                    <div class="col-sm-10">
                    	<div class="col-sm-5">
-                   		<img src="/membership/seatImg?userId=${profile.mem_id}">
+                   		<img src="/membership/seatImg?userId=${user.id}">
 			            <input type="file" class="form-control" name="file" />
                    	</div>
                    </div>
                  </div>
                 
                </div><!-- /.box-body -->
-               <div id="hiddenid"></div>
                <div class="box-footer">
                	<a href="profile" class="btn btn-default">취소</a>
                  
