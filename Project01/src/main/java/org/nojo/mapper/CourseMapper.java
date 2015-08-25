@@ -19,12 +19,16 @@ public interface CourseMapper {
 	public int selectTotalCntByDomain(@Param("cri") SearchCriteria cri, @Param("domain") String domain);	
 	
 	
-	//해당 수업의 학생 ID리스트
+	//해당 수업의 담당선생님 리스트 삭제
 	@Select("select mem_id from tbl_course "
 			+ "where course_gb in('member_student', 'member_clz_president') "
 			+ "and clz_domain = #{domain}"
 			)
 	public List<String> getStudentIdList(String domain);
+
+	
+	
+
 	
 	
 	//학생 수업참여(승인요청 ajax) 

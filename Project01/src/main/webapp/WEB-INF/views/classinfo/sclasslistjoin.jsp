@@ -163,10 +163,10 @@ $(".joincourse").on("click", function() {
 	$this=$(this);
 	console.log($this);
 	console.log($this.siblings("td.domain").text());
-	console.log("${userid}");
-
+	console.log("${user.id}");
 	
-	var url = '/course/joinclass';
+	
+	var url = '/'+$this.siblings("td.domain").text()+'/course/joinclass';
 	$.ajax({
 		type : 'POST',
 		url : url ,
@@ -182,10 +182,7 @@ $(".joincourse").on("click", function() {
 			alert("요청완료")
 			$this.text("[1]")
 		}
-		
 	});
-	
-	
 });	
 	
 
