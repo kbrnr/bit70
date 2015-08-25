@@ -76,7 +76,7 @@
 				<div class="box">
 	               	<div class="box-body">
 	               		<div id="container">
-		                  <div id="seat"></div>
+		                  <div id="seat" style="overflow-x: auto;"></div>
 						</div>
 	               	</div>
 				</div>
@@ -273,7 +273,7 @@
 					+ "<div class='name'>"+name + "</div>"
 					+ "</div>"
 				var chair = $(str);
-				chair.css( { "margin-left" : x+"px", "margin-top" : y+"px" });
+				chair.css( { "margin-left" : x+"px", "margin-top" : y+"px"});
 				$("#seat").append(str);
 			});
 			parent.socket.emit("seatReady");
