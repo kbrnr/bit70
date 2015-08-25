@@ -33,10 +33,7 @@ public class MembershipController {
 
 	@Inject
 	private MembershipService membershipService;
-	
-	@Inject
-	SeatService seatService;
-	
+
 	// 선생님리스트
 	@RequestMapping(value = "/teacherlist", method = RequestMethod.GET)
 	public String teacherlist(SearchCriteria cri, Model model) throws Exception {
@@ -80,22 +77,20 @@ public class MembershipController {
 
 	//프로필 읽기
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
-	public void personalInfo(Model model) throws Exception {
-		model.addAttribute("profile", memberService.personalInfo(SecurityUtil.getUser().getId()));
+	public void personalInfo() throws Exception {
 	}
 	
 	//프로필 수정
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
-	public void personalInfoModify(MemberVO vo, MultipartFile file, Model model) throws Exception {
+	public void personalInfoModify(MemberVO vo, MultipartFile file) throws Exception {
 		vo.setMem_photo(file.getBytes());
 		memberService.personalInfoModify(vo);
-		model.addAttribute("profile", memberService.personalInfo(SecurityUtil.getUser().getId()));
 	}
 	
 	//이미지보기
-	@RequestMapping(value = "/seatImg", method = RequestMethod.GET)
+	@RequestMapping(value = "/profileImg", method = RequestMethod.GET)
 	public void photo(HttpServletResponse res, Model model) throws IOException {
-		byte[] bytes = seatService.photo(SecurityUtil.getUser().getId());
+		byte[] bytes = SecurityUtil.getUser().getPhoto();
 		res.getOutputStream().write(bytes);
 	}
 

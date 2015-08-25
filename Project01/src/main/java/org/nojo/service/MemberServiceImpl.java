@@ -29,5 +29,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void personalInfoModify(MemberVO vo) throws Exception {
 		memberMapper.personalInfoModify(vo);
+		SecurityUtil.modifyPrincipal(vo);
 	}
 }
