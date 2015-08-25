@@ -265,7 +265,7 @@
 				var name = this.mem_name;
 				var id = this.mem_id;
 				var domain = "${domain}";
-				var str = "<div class='chair' data-mem_id='" + id + "' data-trigger='manual' data-placement='top' style='margin-left: " 
+				var str = "<div class='chair' data-mem_id='" + id + "' data-trigger='manual' data-placement='middle' style='margin-left: " 
 					+ x + "px; margin-top: " 
 					+ y + "px;'><div class='img'><img class='realImg' src='/" 
 					+ domain + "/seat/seatImg?userId=" 
@@ -281,12 +281,12 @@
 	//Seat에서 on/off표시
 	parent.socket.on("onlineUser", function(users){
 		for(var i in users){
-			$(".chair[data-mem_id='" + users[i] + "']").css( { "border" : "3px solid red"});
+			$(".chair[data-mem_id='" + users[i] + "']").children().children($(".realImg")[0]).css( { "border" : "3px solid red"});
 		}
 	});
 	parent.socket.on("offlineUser", function(user){
 		console.log("offlineUser" + user);
-		$(".chair[data-mem_id='" + user + "']").css( { "border" : "thin solid gray"});
+		$(".chair[data-mem_id='" + users[i] + "']").children().children($(".realImg")[0]).css( { "border" : "3px solid black"});
 	});
 	
 	//Seat에서 이해도 점수 표시
@@ -297,7 +297,7 @@
 		target.popover('show');
 		setTimeout(function(){
 			target.popover('destroy');
-		}, 30000);
+		}, 60000);
 	});
 	
 </script>
