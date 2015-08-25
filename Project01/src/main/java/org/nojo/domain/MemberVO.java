@@ -3,8 +3,6 @@ package org.nojo.domain;
 import java.util.Arrays;
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class MemberVO {
 	private String mem_id;
 	private String mem_pw;
