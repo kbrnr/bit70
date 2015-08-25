@@ -11,7 +11,6 @@ import org.nojo.domain.MemberVO;
 import org.nojo.mapper.ClassInfoMapper;
 import org.nojo.mapper.MembershipMapper;
 import org.nojo.mapper.SecurityMapper;
-import org.nojo.util.Criteria;
 import org.nojo.util.SearchCriteria;
 import org.springframework.stereotype.Service;
 
@@ -87,7 +86,7 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 	}
 	
 	
-	public List<ClassListVO> getClassListByID(String mem_id, Criteria cri) {		
+	public List<ClassListVO> getClassListByID(String mem_id, SearchCriteria cri) {		
 		List<ClassListVO> classlist;
 		List<MemberVO> teacherlist;
 		classlist = classinfoMapper.selectClassByID(mem_id, cri);
@@ -116,18 +115,11 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 	}
 	
 	
-
-	
-	
-	
-	public int getClassListTotalCntByID(String mem_id) {
-		return classinfoMapper.selectClassTotalCntByID(mem_id);
+	public int getClassListTotalCntByID(String mem_id, SearchCriteria cri) {
+		return classinfoMapper.selectClassTotalCntByID(mem_id,cri);
 	}
 
-	@Override
-	public int getClassListByID(String mem_id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-		
+
+
+
 }

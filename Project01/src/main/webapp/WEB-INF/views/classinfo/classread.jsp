@@ -22,7 +22,7 @@
 		<!-- ----------------------------------------- -->
 			<div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">■수업상세</h3>
+                  <h3 class="box-title">■수업상세FAFD</h3>
                 </div><!-- /.box-header -->
                
 				<!-- form start -->
@@ -82,25 +82,12 @@
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label" >상태</label>
                       <div class="col-sm-10">
-                        ${clzinfo.clz_state}    
+                        ${clzinfo.clz_state} 
                       </div>
                     </div>                         
                   </div><!-- /.box-body -->
                   <div id="hiddenid"></div>
-                  
-                  <c:if test="${isAdmin}">
-	                  <div class="box-footer">
-	                  	<a href="/classinfo/classlist/" class="btn btn-info pull-right">목록</a>        
-	                  </div><!-- /.box-footer -->
-                  </c:if>
-                  <c:if test="${isTeacher || isStudent}">
-	                  <div class="box-footer">
-	                  	<a href="/classinfo/myclasslist/" class="btn btn-info pull-right">목록</a>        
-	                  </div><!-- /.box-footer -->
-                  </c:if>
-                  
-                  
-                  
+                         
                   
                 </form>
 			</div><!-- /.box box-info -->		
@@ -167,91 +154,6 @@
 
 
 <script>
-//모달 선생님 리스트//
-var page = 1
-$("#btn_teachlist").on("click", function() {
-	popteacherlist(page)
-});
-
-function popteacherlist(){
-	$.ajax({
-		url: '/member/modalteacherlist/'+page,
-		type: 'post',
-		dataType:'json',
-		success: function(map){
-			var listStr = "";
-			$(map.poplist).each(
-					function() {
-						listStr += "<tr role='row' class='userinfo'><td class='userid'>"+this.mem_id+"</td><td class='username'>"+this.mem_name+"</td><td>"+this.mem_email+"</td><td>"+this.mem_tel+"</td></tr>";
-					}
-			);
-			$("#teacherinfo").html(listStr);
-			
-			
-			//페이징
-		    replypage = (map.poppageMaker.page);
-		var startPage = (map.poppageMaker.startPage);
-		var endPage = (map.poppageMaker.endPage);
-		var prevURL = (map.poppageMaker.startPage-1) ; 
-		var nextURL = (map.poppageMaker.endPage+1) ; 
-		var prev = (map.poppageMaker.prev);
-		var next = (map.poppageMaker.next);
-		var pageMakerList ="";
-			
-		if(prev === true){
-			pageMakerList +='<li id='+ prevURL +'><a href="#">prev</a></li>';
-		}
-		
-		for(var i=startPage; i<=endPage ; i++ ){
-			if(i==replypage){
-				pageMakerList += '<li id='+ i +'><a href="#"><b>  '+ i +' </a></b></li>';
-			}else {
-				pageMakerList += '<li id='+ i +'><a href="#">'+ i +'</a></li>';
-			}
-		}
-		
-		if(next === true){
-			pageMakerList +='<li id='+ nextURL +'><a href="#">next</a></li>';
-		}
-		
-		$("#teacherpaging").html(pageMakerList); 
-		}
-	});
-}
-
-$("#teacherpaging").on("click", "li", function(event) {
-	event.preventDefault();
-	page=$(this).attr("id");
-	popteacherlist(page)
-});
-//./모달 선생님 리스트//
-
-$("#teacherinfo").on("click", ".userinfo", function(){
-	var userid ;
-	var username ;
-	userid = $(this).children('td.userid').text();
-	username = $(this).children('td.username').text();
-	console.log(userid);
-	console.log(username);
-	$("#choiceteacher").append("<span class='bg-gray'>"+ username + "(" + userid + ") X </span>&nbsp;&nbsp;");
-	$("#hiddenid").append(" <input type='text' name='mem_id' value='"+userid+"' >");
-});
-
-//도메인체크
-$("#btn_domaincheck").on("click", function() {
-	console.log($("#clz_domain").val());
-	$.ajax({
-		url: '/classinfo/domaincheck',	
-		type: 'post',
-		data: "clz_domain=" + $("#clz_domain").val(),
-		dataType:'json',
-		success: function(data){
-			console.log(data);
-			var msg = data ? "사용할수 있는 도메인입니다." : "사용할수 없는 도메인입니다.";
-			$("#domainmsg").html(msg)
-		}
-	});
-});
 
 
 </script>

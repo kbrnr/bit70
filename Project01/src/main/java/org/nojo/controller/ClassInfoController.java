@@ -95,14 +95,14 @@ public class ClassInfoController {
 	}
 
 
-	//개인별(선생님 학생) 수업리스트
+	//개인별(선생님, 학생) 수업리스트
 	@RequestMapping(value="/myclasslist", method=RequestMethod.GET)
 	public String myclasslist(SearchCriteria cri, Model model){
 		List<ClassListVO> list;
 		PageMaker pagemaker;
 		
 		list = classInfoService.getClassListByID(SecurityUtil.getUser().getId(), cri); 
-		pagemaker = new PageMaker(cri, classInfoService.getClassListTotalCntByID(SecurityUtil.getUser().getId()));
+		pagemaker = new PageMaker(cri, classInfoService.getClassListTotalCntByID(SecurityUtil.getUser().getId(),cri));
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", pagemaker);
 		model.addAttribute("cri", cri);
@@ -130,7 +130,7 @@ public class ClassInfoController {
 		PageMaker pagemaker;
 		
 		list = classInfoService.getClassListByID(SecurityUtil.getUser().getId(), cri); 
-		pagemaker = new PageMaker(cri, classInfoService.getClassListTotalCntByID(SecurityUtil.getUser().getId()));
+		pagemaker = new PageMaker(cri, classInfoService.getClassListTotalCntByID(SecurityUtil.getUser().getId(),cri));
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", pagemaker);
 		

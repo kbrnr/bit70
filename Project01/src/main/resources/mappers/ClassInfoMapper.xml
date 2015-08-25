@@ -65,14 +65,14 @@
 			on l.clz_domain = r.clz_domain
 	]]>
 	<if test="cri.searchType != null">
-		<if test="searchType == 'className'">
-			where clz_name like CONCAT('%', #{cri.keyword}, '%')
+		<if test="cri.searchType == 'className'">
+			and clz_name like CONCAT('%', #{cri.keyword}, '%')
 		</if>
 		<if test="cri.searchType == 'domain'">
-			where clz_domain like CONCAT('%', #{cri.keyword}, '%')
+			and clz_domain like CONCAT('%', #{cri.keyword}, '%')
 		</if>
 		<if test="cri.searchType == 'state'">
-			where clz_state like CONCAT('%', #{cri.keyword}, '%')
+			and clz_state like CONCAT('%', #{cri.keyword}, '%')
 		</if>
 	</if>
 	<![CDATA[	 
@@ -80,4 +80,54 @@
 		limit #{cri.first}, #{cri.perPageNum};
 	]]>	
 	</select>
+	
+	
+	
+	<!-- 수업 리스트(특정아이디) / 수업결과 포함 -->
+	<select	id="selectClassByID" parameterType="map" resultType="org.nojo.bizDomain.ClassListVO" >
+	<![CDATA[
+		select * from tbl_course, tbl_class 
+		where tbl_course.clz_domain = tbl_class.clz_domain 
+		and tbl_course.mem_id = #{mem_id} 
+	]]>
+	<if test="cri.searchType != null">
+		<if test="cri.searchType == 'className'">
+			and clz_name like CONCAT('%', #{cri.keyword}, '%')
+		</if>
+		<if test="cri.searchType == 'domain'">
+			and tbl_class.clz_domain like CONCAT('%', #{cri.keyword}, '%')
+		</if>
+		<if test="cri.searchType == 'state'">
+			and clz_state like CONCAT('%', #{cri.keyword}, '%')
+		</if>
+	</if>
+	<![CDATA[	 
+		order by clz_reg_date desc
+		limit #{cri.first}, #{cri.perPageNum};
+	]]>	
+	</select>
+	
+	
+	<!-- 수업 토탈갯수(특정아이디) / 수업 검색결과 토탈갯수 포함 -->
+	<select	id="selectClassTotalCntByID" parameterType="map" resultType="java.lang.Integer" >
+	<![CDATA[
+		select count(tbl_course.clz_domain) from tbl_course, tbl_class 
+		where tbl_course.clz_domain = tbl_class.clz_domain 
+		and tbl_course.mem_id = #{mem_id} 
+	]]>
+	<if test="cri.searchType != null">
+		<if test="cri.searchType == 'className'">
+			and clz_name like CONCAT('%', #{cri.keyword}, '%')
+		</if>
+		<if test="cri.searchType == 'domain'">
+			and tbl_class.clz_domain like CONCAT('%', #{cri.keyword}, '%')
+		</if>
+		<if test="cri.searchType == 'state'">
+			and clz_state like CONCAT('%', #{cri.keyword}, '%')
+		</if>
+	</if>
+	</select>
+	
+	
+	
 </mapper>
