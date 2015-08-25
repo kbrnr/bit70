@@ -7,4 +7,6 @@ public interface MemberService {
 	public void signIn(MemberVO vo) throws Exception;
 	
 	public MemberVO personalInfo(String mem_id) throws Exception;
+	
+	public void personalInfoModify(MemberVO vo)throws Exception;
 }
