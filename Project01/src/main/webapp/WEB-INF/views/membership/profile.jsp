@@ -30,14 +30,14 @@
   	             <div class="form-group">
                    <label for="inputPassword1" class="col-sm-2 control-label">새 비밀번호</label>
                       <div class="col-sm-4">
-                        <input type="password" class="form-control" name="mem_pw">
+                        <input type="text" class="form-control" name="mem_pw">
                       </div>
-                      <label for="inputPassword2" class="col-sm-2 control-label" >비밀번호 확인</label>
+<!--                       <label for="inputPassword2" class="col-sm-2 control-label" >비밀번호 확인</label>
                       <div class="col-sm-2">
                       </div>
                       <div class="col-sm-4">
-                       <!--  <input type="password" class="form-control" name="mem_pw" > -->
-                      </div>
+                        <input type="text" class="form-control"> 
+                      </div> -->
                  </div>
                  <div class="form-group">
                    <label for="inputName" class="col-sm-2 control-label">이름</label>
@@ -48,17 +48,13 @@
                  <div class="form-group">
                    <label for="inputEmail" class="col-sm-2 control-label">E-MAIL</label>
                     <div class="col-sm-4">
-                    	<input type="text" class="form-control" name="mem_email" value="${profile.mem_email}" />
-                   </div>
-                   <label for="inputEmail" class="col-sm-2 control-label" >E-MAIL 확인</label>
-                    <div class="col-sm-4">
-                   		<!-- <input type="text" class="form-control" name='mem_email'  /> -->
+                    	<input type="text" class="form-control" name="mem_email" value="${user.email}" />
                    </div>
                  </div>
                  <div class="form-group">
                    <label for="inputTel" class="col-sm-2 control-label">TEL</label>
                     <div class="col-sm-4">
-                   		<input type="text" class="form-control" name="mem_tel" value="${profile.mem_tel}" />
+                   		<input type="text" class="form-control" name="mem_tel" value="${user.tel}" />
                    </div>
                  </div>
                                       
@@ -66,7 +62,7 @@
                    <label for="inputPhoto" class="col-sm-2 control-label">사진</label>
                    <div class="col-sm-10">
                    	<div class="col-sm-5">
-                   		<img src="/membership/seatImg?userId=${user.id}">
+                   		<img src="/membership/profileImg?userId=${user.id}">
 			            <input type="file" class="form-control" name="file" />
                    	</div>
                    </div>
