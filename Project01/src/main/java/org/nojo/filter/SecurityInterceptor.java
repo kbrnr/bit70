@@ -60,6 +60,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			auth.getCredentials(),
 			getGrantedAuthorities(auth.getAuthorities(), authority)
 		));
+		req.setAttribute("isClass", true);
 		return flag;
 	}
 
