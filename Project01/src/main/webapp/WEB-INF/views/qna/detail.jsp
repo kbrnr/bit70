@@ -43,10 +43,7 @@
 					</div>
 					<div class="box-header with-border ">
 
-						<div class="froala-view">
-							<h5 class="box-title">비밀글 입니다.</h5>
-							<br>
-							<br>${QuestionVO.question_content }</div>
+						<div class="froala-view">${QuestionVO.question_content }</div>
 
 						<div style="margin-top: 200px;">
 							<ul class='list-group'>
