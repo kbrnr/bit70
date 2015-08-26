@@ -192,7 +192,7 @@
 			if(data.length > 0)
 				$("#notifications").html("");
 			$(data).each(function(){
-				var $a = $('<a href="#" class="notification list-group-item" data-noti_no="' + this.noti_no + '">'
+				var $a = $('<a href="#" class="notification list-group-item" data-noti_no="' + this.noti_no + '" data-link="'+ this.noti_service_link +'">'
 			    		+   '  <h4 class="list-group-item-heading">' + this.noti_service_name + '<small>[' + this.noti_sender_id + ']</small></h4>'
 			    		+   '  <p class="list-group-item-text">' + this.noti_summation + '</p>'
 						+  '</a>');
@@ -203,7 +203,7 @@
 			});
 			
 			context.attach('.notification', [
-			    new Menu("보기", inquiry,
+			    new Menu("보기", inquiry),
            		new Menu("읽음", updateReadStatus),
            		new Menu("삭제", removeNotification)
            	]);
@@ -214,6 +214,13 @@
 		this.text = text;
 		this.action = action;
 	}
+	function inquiry(e, target){
+		e.preventDefault();
+		target = $(target);
+		var link = target.data("link");
+		location.href = link;
+	}
+	
 	function updateReadStatus(e, target){
 		e.preventDefault();
 		target = $(target);
