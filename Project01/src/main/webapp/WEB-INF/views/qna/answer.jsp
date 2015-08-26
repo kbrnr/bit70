@@ -29,9 +29,10 @@
 					<div class="panel box box-success">
 						<div class="box-header with-border">
 							<h5 class="box-title">${QuestionVO.question_title }</h5>
+							<h5 class="box-title" style="float: right;">${QuestionVO.mem_id }</h5>
 						</div>
 						<div class="box-header with-border ">
-							<div class="froala-view">${QuestionVO.question_content }</div>
+							<div class="froala-view" style="height: 200px;">${QuestionVO.question_content }</div>
 							<br/>
 						</div>
 						<ul id="fileAttach" class='list-group' >
@@ -45,17 +46,11 @@
 	<div class='row'>
 		<div class='col-md-12'>
 			<div class='box'>
-				<div class='box-header'>
-					<h3 class='box-title'>
-						Bootstrap WYSIHTML5 <small>Simple and fast</small>
-					</h3>
-				</div>
-				<!-- /.box-header -->
 				<div class='box-body pad'>
 					<section id="editor" style="width : 100%; margin: auto;">
 						<form id="ansForm" role="form" method="post" action="answer">
 							<div style="height: 150px;">
-								<input id="question_no" type="hidden" class="form-control" name="question_no" value= " ${QuestionVO.question_no }" placeholder="맴버아이디 히든으로 처리하자">
+								<input id="question_no" type="hidden" class="form-control" name="question_no" value= " ${QuestionVO.question_no }" >
 								<input id="title" type="text" class="form-control" value= "Re : ${QuestionVO.question_title }" name="answer_title" placeholder="title">
 								<!-- <input id="gb" type="text" class="form-control" name="question_gb" placeholder="구분은 히든으로 처리하자" > -->
 								<input id="answer_visible" type="radio" name="answer_visible" value = "1" checked> 공개
@@ -115,8 +110,7 @@
 		
 		var no = ${QuestionVO.question_no};
 		var domain = '${domain}';
-
-	
+		
 		$('#edit').editable({
 			inlineMode : false,
 			height : 500,
@@ -165,7 +159,7 @@
 				
 			});
 		});
-	
+		
 
 		function getFileInfo(filePath){
 			

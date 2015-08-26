@@ -33,7 +33,7 @@
 								<td><span><a href='detail?page=${pagemaker.page }&perPagerNum=${pagemaker.perPageNum }&no=${vo.question_no}'>${vo.question_title }</a></span></td>
 						    </c:when>
 							<c:when test="${v == false || memId != userId }" > 
-							 	<td>비밀글 입니다.</td>
+							 	<td>선생님만 봐주세요!!!</td>
 							</c:when>
 							</c:choose>
 							<td width = 120px>${vo.mem_id }</td>

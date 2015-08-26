@@ -5,7 +5,10 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.nojo.domain.AnswerVO;
+import org.nojo.domain.NotificationVO;
+import org.nojo.domain.QuestionVO;
 import org.nojo.mapper.AnswerMapper;
+import org.nojo.mapper.NotificationMapper;
 import org.nojo.util.Criteria;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +17,32 @@ public class AnswerServiceImpl implements AnswerService {
 
 	@Inject
 	private AnswerMapper mapper;
+	@Inject
+	private NotificationMapper notiMapper;
 
 	@Override
-	public void addAnswer(AnswerVO vo) throws Exception {
+	public NotificationVO addAnswer(AnswerVO vo, String reciver_id) throws Exception {
 
+		String link = "/"+vo.getClz_domain()+"/"+"qna/detail?no="+vo.getQuestion_no();
+				
 		mapper.create(vo);
+		NotificationVO nvo = new NotificationVO();
+		nvo.setNoti_service_name("답변등록");
+		nvo.setNoti_service_link(link);
+		nvo.setNoti_sender_id(vo.getMem_id());
+		nvo.setNoti_receiver_id(reciver_id);
+		
+		String title = vo.getAnswer_title();
+		if (title.length() > 30) {
+			nvo.setNoti_summation(vo.getAnswer_title().substring(0, 30));
+		}else {
+			nvo.setNoti_summation(title.substring(0, title.length()));
+		}
+		
+		nvo.setClz_domain(vo.getClz_domain());
+		
+		notiMapper.insert(nvo);
+		return nvo;
 	}
 
 	@Override

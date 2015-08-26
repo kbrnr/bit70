@@ -27,9 +27,10 @@
 					<div class="panel box box-success">
 						<div class="box-header with-border">
 							<h5 class="box-title">${QuestionVO.question_title }</h5>
+							<h5 class="box-title" style="float: right;">${QuestionVO.mem_id }</h5>
 						</div>
 						<div class="box-header with-border ">
-							<div class="froala-view">${QuestionVO.question_content }</div>
+							<div class="froala-view" style="height: 200px;">${QuestionVO.question_content }</div>
 							<ul id="fileAttach" class='list-group' >
 										<li id="attach" class="list-group-item"></li>
 									</ul>
@@ -52,12 +53,6 @@
 	<div class='row'>
 		<div class='col-md-12'>
 			<div class='box'>
-				<div class='box-header'>
-					<h3 class='box-title'>
-						Bootstrap WYSIHTML5 <small>Simple and fast</small>
-					</h3>
-				</div>
-				<!-- /.box-header -->
 				<div class='box-body pad'>
 					<section id="editor" style="width : 100%; margin: auto;">
 						<form role="form" method="post" action="answerModify">
@@ -67,8 +62,7 @@
 								<input id="title" type="text" class="form-control" value= "${vo.answer_title }" name="answer_title" placeholder="title">
 								<input id="answer_visible" type="radio" name="answer_visible" value = "1" checked> 공개
 								<input id="answer_visible" type="radio" name="answer_visible" value = "0" > 비공개
-								<!-- <input id="gb" type="text" class="form-control" name="question_gb" value= placeholder="구분은 히든으로 처리하자" > -->
-								<input id="mem_id" type="text" class="form-control" name="mem_id" value = '${user.id }' placeholder="맴버아이디 히든으로 처리하자">
+								<input id="mem_id" type="hidden" class="form-control" name="mem_id" value = '${user.id }' placeholder="맴버아이디 히든으로 처리하자">
 								<input id="clz_domain" type="hidden" class="form-control" name="clz_domain" value= "${vo.clz_domain }" } placeholder="도메인 히든으로 처리하자">
 							</div>
 							

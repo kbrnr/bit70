@@ -3,12 +3,14 @@ package org.nojo.service;
 import java.util.List;
 
 import org.nojo.domain.AnswerVO;
+import org.nojo.domain.NotificationVO;
+import org.nojo.domain.QuestionVO;
 import org.nojo.util.Criteria;
 
 public interface AnswerService {
 
 	//답변글 등록
-	public void addAnswer(AnswerVO vo) throws Exception;
+	public NotificationVO addAnswer(AnswerVO vo, String reciver_id) throws Exception;
 
 	//답변글 리스트 조회
 	public List<AnswerVO> getAllAnswers(String domain, Integer no, Criteria cri) throws Exception;

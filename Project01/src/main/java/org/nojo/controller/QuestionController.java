@@ -85,7 +85,7 @@ public class QuestionController {
 	@RequestMapping(value = "/questionRegist", method = RequestMethod.POST)
 	public String registQuestion(QuestionVO vo,
 			@RequestParam(value = "attachfile_no", required = false) Integer[] attachfile_no,@PathVariable("domain") String domain) throws Exception {
-		
+
 		service.addQuestion(vo);
 
 		 if (attachfile_no != null) {

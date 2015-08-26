@@ -2,8 +2,7 @@ package org.nojo.service;
 
 import java.util.List;
 
-import org.nojo.domain.AttachfileVO;
-import org.nojo.domain.FilemanagerVO;
+import org.nojo.domain.NotificationVO;
 import org.nojo.domain.QuestionVO;
 import org.nojo.util.Criteria;
 import org.nojo.util.Search;
@@ -11,7 +10,7 @@ import org.nojo.util.Search;
 public interface QuestionService {
 	
 	//질문추가
-	public void addQuestion(QuestionVO vo) throws Exception;
+	public NotificationVO addQuestion(QuestionVO vo) throws Exception;
 	
 	//질문리스트
 	public List<QuestionVO> listQuestion(String domain, Criteria cri) throws Exception;

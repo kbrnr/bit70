@@ -5,8 +5,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.builder.annotation.MapperAnnotationBuilder;
 import org.nojo.domain.AnswerVO;
 import org.nojo.domain.FilemanagerVO;
+import org.nojo.domain.QuestionVO;
 import org.nojo.service.AnswerService;
 import org.nojo.service.AttachFileService;
 import org.nojo.service.QuestionService;
@@ -43,20 +45,24 @@ public class AnswerController {
 	@Secured("")
 	@RequestMapping(value = "/answer", method = RequestMethod.GET)
 	public String regist(@PathVariable("domain") String domain, @RequestParam("no") int no, Model model) throws Exception {
-
+		
 		model.addAttribute("QuestionVO", questionService.getReadQuestion(no));
-
+		
 		return "qna/answer";
 	}
 
 	// 답변 글쓰기
 	@Transactional
 	@RequestMapping(value = "/answer", method = RequestMethod.POST)
-	public String resigtAnswer(@PathVariable("domain") String domain, AnswerVO vo, 
-							@RequestParam(value = "attachfile_no", required = false) Integer[] attachfile_no,Criteria cri, Model model)
+	public String resigtAnswer(@PathVariable("domain") String domain, AnswerVO vo, QuestionVO qvo, 
+							@RequestParam(value = "attachfile_no", required = false) Integer[] attachfile_no, Criteria cri, Model model)
 			throws Exception {
-
-		service.addAnswer(vo);
+		
+		int no = vo.getQuestion_no();
+		
+		qvo = questionService.getReadQuestion(no);
+		String reciver_id = qvo.getMem_id();
+		service.addAnswer(vo,reciver_id);
 		
 		if(attachfile_no != null){
 			

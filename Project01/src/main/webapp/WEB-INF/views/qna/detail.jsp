@@ -39,10 +39,11 @@
 					<div class="panel box box-success">
 						<div class="box-header with-border">
 							<h5 class="box-title">${QuestionVO.question_title }</h5>
+							<h5 class="box-title" style="float: right;">${QuestionVO.mem_id }</h5>
 						</div>
 						<div class="box-header with-border ">
 
-							<div class="froala-view">${QuestionVO.question_content }</div>
+							<div class="froala-view"><h5 class="box-title">비밀글 입니다.</h5><br><br>${QuestionVO.question_content }</div>
 									
 									<div style="margin-top: 200px;">
 									<ul class='list-group' >
@@ -78,10 +79,10 @@
 												<h4 class="box-title" style="display :none;">${vo.question_no }</h4>
 												<h4 id="answer_no" class="box-title" style="display :none;">${vo.answer_no }</h4>
 												<h5 class="box-title">${vo.answer_title }</h5>
-												<h4 class="box-title">${vo.mem_id }</h4>
+												<h4 class="box-title" style="float: right;">${vo.mem_id }</h4>
 											</div>
 											<div class="box-header with-border">
-											<div class="froala-view" style="height: 200px;">${vo.answer_content }</div>
+											<div class="froala-view" style="height: 200px;"><h5 class="box-title">비밀글 입니다.</h5><br><br>${vo.answer_content }</div>
 												<div id="recommend btn-group" style="width: 50px; margin: 0 auto;">
 												<button class="ddabong glyphicon glyphicon-thumbs-up btn btn-default btn-lg" style="size: 30px;" value="${vo.answer_no }">
 												<span class="recommendCnt">${vo.answer_recommend }</span>
