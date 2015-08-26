@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
 
-   <link href="/resources/froala_editor/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-	
+    <link href="/resources/froala_editor/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<!-- Include Editor style. -->
 	<link href="/resources/froala_editor/css/froala_editor.min.css" rel="stylesheet" type="text/css" />
 	<link href="/resources/froala_editor/css/froala_style.min.css" rel="stylesheet" type="text/css" />
 	   
-<!-- Content Wrapper. Contains page content -->
-	<!-- Content Header (Page header) -->
 	<section class="content-header">
 	    <h1>질문답변</h1>
 	    <ol class="breadcrumb">
@@ -19,8 +16,6 @@
 	</section>
 	<!-- Main content -->
 	<section class="content">
-	
-	<!-- /.box-header -->
 			<div class="box-body">
 				<div class="box-group" id="accordion">
 					<!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
@@ -38,8 +33,6 @@
 					</div>
 				</div>
 			</div>
-			<!-- /.box-body -->
-	
 	<div class='row'>
 		<div class='col-md-12'>
 			<div class='box'>
@@ -83,9 +76,6 @@
 <script type="text/javascript"
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="/resources/froala_editor/js/froala_editor.min.js"></script>
-<!--[if lt IE 9]>
-  <script src="../js/froala_editor_ie8.min.js"></script>
-<![endif]-->
 
 <script type="text/javascript">
 

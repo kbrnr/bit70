@@ -1,16 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
 
-<link href="/resources/froala_editor/css/font-awesome.min.css"
-	rel="stylesheet" type="text/css" />
+	<link href="/resources/froala_editor/css/font-awesome.min.css"
+		rel="stylesheet" type="text/css" />
+	
+	<link href="/resources/froala_editor/css/froala_editor.min.css"
+		rel="stylesheet" type="text/css" />
+	<link href="/resources/froala_editor/css/froala_style.min.css"
+		rel="stylesheet" type="text/css" />
 
-<link href="/resources/froala_editor/css/froala_editor.min.css"
-	rel="stylesheet" type="text/css" />
-<link href="/resources/froala_editor/css/froala_style.min.css"
-	rel="stylesheet" type="text/css" />
-
-	<!-- START ACCORDION & CAROUSEL-->
-	<!-- Content Header (Page header) -->
 		<section class="content-header">
 		    <h1>질문답변</h1>
 		    <ol class="breadcrumb">
@@ -32,19 +30,19 @@
 				</a>
 			</div>
 		</div>
-		<!-- /.box-header -->
 		<div class="box-body">
 			<div class="box-group" id="accordion">
-				<!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
 				<div class="panel box box-success">
 					<div class="box-header with-border">
-						<h5 class="box-title">${QuestionVO.question_title }</h5>
-						<h5 class="box-title" style="float: right;">${QuestionVO.mem_id }</h5>
+							<h5 class="box-title">
+								<c:if test="${QuestionVO.question_visible == false }">
+									<span class="glyphicon glyphicon-lock"></span>
+								</c:if>
+							${QuestionVO.question_title }</h5>
+							<h5 class="box-title" style="float: right;">${QuestionVO.mem_id }</h5>
 					</div>
 					<div class="box-header with-border ">
-
 						<div class="froala-view">${QuestionVO.question_content }</div>
-
 						<div style="margin-top: 200px;">
 							<ul class='list-group'>
 								<li id="attach" class="list-group-item"></li>
@@ -80,14 +78,15 @@
 								<div class="box-header with-border">
 									<h4 class="box-title" style="display: none;">${vo.question_no }</h4>
 									<h4 id="answer_no" class="box-title" style="display: none;">${vo.answer_no }</h4>
-									<h5 class="box-title">${vo.answer_title }</h5>
+									<h5 class="box-title">
+										<c:if test="${v == false }">
+										<span class="glyphicon glyphicon-lock"></span>
+										</c:if>${vo.answer_title }
+									</h5>
 									<h4 class="box-title" style="float: right;">${vo.mem_id }</h4>
 								</div>
 								<div class="box-header with-border">
-									<div class="froala-view" style="height: 200px;">
-										<h5 class="box-title">비밀글 입니다.</h5>
-										<br>
-										<br>${vo.answer_content }</div>
+									<div class="froala-view" style="height: 200px;">${vo.answer_content }</div>
 									<div id="recommend btn-group"
 										style="width: 50px; margin: 0 auto;">
 										<button
@@ -114,9 +113,9 @@
 							</c:when>
 							<c:when test="${v == false || memId != userId }">
 								<div class="box-header with-border">
-									<h4 class="box-title">비밀 답변 입니다.</h4>
+									<h4 class="box-title"><span class="glyphicon glyphicon-lock"></span>비밀 답변 입니다.</h4>
 								</div>
-								<div class="froala-view">비밀 글입니다.</div>
+								<div class="froala-view"><span class="glyphicon glyphicon-lock"></span>비밀 글입니다.</div>
 							</c:when>
 						</c:choose>
 					<script type="text/javascript">
@@ -135,7 +134,7 @@
 						</script>
 					</div>
 				</div>
-			</c:forEach>
+				</c:forEach>
 		</div>
 	</div>
 </div>
@@ -143,7 +142,6 @@
 <script type="text/javascript">
 	var no = ${QuestionVO.question_no};
 	var domain = '${domain}';
-	
 	$('#delQuestionBtn').on('click',function() {
 		$("img").each(function(idx) {
 				var query = "attachfile_no="
@@ -155,12 +153,9 @@
 				});
 			})
 		});
-
 	function getFileInfo(filePath) {
-
 		var path = filePath.attachfile_path;
 		var filename, fileLink, fileno;
-
 		fileno = filePath.attachfile_no;
 		filesrc = "/displayFile?fileName=" + path;
 		fileLink = path.substr(0, 14);
@@ -171,11 +166,8 @@
 			filePath : filePath,
 			fileno : fileno
 		};
-
 	}
-
 	$.get(domain + "/../getQuestionFile/" + no, function(list) {
-
 		$(list).each(
 				function() {
 					var fileInfo = getFileInfo(this);
@@ -186,7 +178,6 @@
 					$('#attach').append(file);
 				});
 	});
-
 	$(".ddabong").on("click", function(event) {
 		var $this = this;
 		var ano = $($this).val();
@@ -197,7 +188,6 @@
 				ano : ano
 			},
 			dataType : "text",
-
 			success : function(result) {
 				alert("추천!!");
 				location.reload();

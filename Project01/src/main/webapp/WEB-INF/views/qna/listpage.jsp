@@ -28,21 +28,22 @@
 							<c:set var = "memId" value= "${vo.mem_id }" />
 							<c:set var = "userId" value= "${user.id}" />
 							<c:set var = "t" value= "${isTeacher}" />
-							<c:choose>
-							<c:when test="${v == true || t == true || memId == userId}" > 
-								<td><span><a href='detail?page=${pagemaker.page }&perPagerNum=${pagemaker.perPageNum }&no=${vo.question_no}'>${vo.question_title }</a></span></td>
-						    </c:when>
-							<c:when test="${v == false || memId != userId }" > 
-							 	<td>선생님만 봐주세요!!!</td>
-							</c:when>
-							</c:choose>
+								<c:choose>
+									<c:when test="${v == true || t == true || memId == userId}" > 
+										<td><span><a href='detail?page=${pagemaker.page }&perPagerNum=${pagemaker.perPageNum }&no=${vo.question_no}'>
+										<c:if test="${v == false }"><span class="glyphicon glyphicon-lock"></span></c:if>
+										${vo.question_title }</a></span></td>
+								    </c:when>
+									<c:when test="${v == false || memId != userId }" > 
+									 	<td><span class="glyphicon glyphicon-lock"></span> 비밀글 입니다.</td>
+									</c:when>
+								</c:choose>
 							<td width = 120px>${vo.mem_id }</td>
 							<td width = 120px class="regDate">${vo.question_reg_date }</td>
 						</tr>
 					</c:forEach>
 				</table>
 			</div>
-			<!-- /.box-body -->
 			<!-- 페이징 -->
 			<div class="box-footer clearfix">
 				<ul class="pagination pagination-sm no-margin pull-left">
@@ -56,7 +57,6 @@
 									prev</a></li>
 						</c:if>
 					</c:if>
-
 					<!-- 페이징 -->
 					<c:forEach begin="${pagemaker.startPage }" end="${pagemaker.endPage }" var="idx">
 						<li <c:out value = "${pagemaker.page==idx?'class=active' :'' }"/>>
@@ -68,7 +68,6 @@
 							</c:if>
 						</li>
 					</c:forEach>
-
 					<!-- 다음페이지 -->
 					<c:if test="${pagemaker.next }">
 						<c:if test="${searchKey == null && searchValue == null }">
@@ -111,9 +110,6 @@
 							</div>
 					</form>
 				</div>
-				<!-- /btn-group -->
-
-				<!-- /input-group -->
 			</div>
 		</div>
 	</div>

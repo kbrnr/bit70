@@ -13,10 +13,8 @@
 	        <li class="active">질문답변</li>
 	    </ol>
 	</section>
-
 	<!-- Main content -->
 	<section class="content">
-
 	<div class='row'>
 		<div class='col-md-12'>
 			<div class='box'>
@@ -39,7 +37,6 @@
 								<input id="mem_id" type="hidden" class="form-control" value="${QuestionVO.mem_id }" name="mem_id"> 
 								<input id="clz_domain" type="hidden" class="form-control" value="${QuestionVO.clz_domain}" name="clz_domain">
 							</div>
-							
 							<textarea id='edit' name="question_content" style="margin-top: 30px;">${QuestionVO.question_content }</textarea>
 							<br />
 								<div>
@@ -61,18 +58,14 @@
 				</div>
 			</div>
 		</div>
-		<!-- /.col-->
 	</div>
   </section>
 <div class='control-sidebar-bg'></div>
 
-
 <!-- Text Editor -->
 <script type="text/javascript"	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="/resources/froala_editor/js/froala_editor.min.js"></script>
-<!--[if lt IE 9]>
-  <script src="../js/froala_editor_ie8.min.js"></script>
-<![endif]-->
+
 <script src="/resources/froala_editor/js/plugins/tables.min.js"></script>
 <script src="/resources/froala_editor/js/plugins/urls.min.js"></script>
 <script src="/resources/froala_editor/js/plugins/lists.min.js"></script>
@@ -86,14 +79,11 @@
 <script src="/resources/froala_editor/js/plugins/entities.min.js"></script>
 <script src="/resources/froala_editor/js/plugins/urls.min.js"></script>
 <script src="/resources/froala_editor/js/plugins/file_upload.min.js"></script>
-<!-- Text Editor -->
 </body>
 
 <script type="text/javascript">
-
 		var no = ${QuestionVO.question_no};
 		var domain = '${domain}';
-		
 		$('#edit').editable({
 			inlineMode : false,
 			height : 500,
@@ -106,35 +96,23 @@
 			imageUploadURL : "/upload",	
 			pastedImagesUploadURL : "/upload",
 			fileUploadURL: "/upload"
-			
 		});
-		
 		$('#edit').on('editable.afterImageUpload', function (e, editor, response) {
-			
 			var res = JSON.parse(response);
 			var str = "<img width ='300' name='attachfile_name' class='fr-fin fr-dib' data-fileNo='"+res.fileNo+"' data-src="+ res.filePath +" src='/displayFile?fileName="+ res.filePath +"' />";
 			var no = "<input class='fno' type='hidden' name='attachfile_no' value='"+res.fileNo+"' />";
-			
 			$(".froala-view").append(str);
 			$("#regForm").append($(no));
-			
 		});
-		
 		$('#edit').on('editable.beforeRemoveImage', function (e, editor, img) {
-			
 			var attachfile_no = img.context.dataset.fileno;
 			var attachfile_name = img.context.dataset.src;
-		
 			$.post("/deleteFile", { attachfile_name : attachfile_name ,
 									attachfile_no : attachfile_no }, function(){
-										
 				$(":hidden[value="+attachfile_no+"]").remove();
-				
 			});
 		});
-		
 		$('#edit').on('editable.afterFileUpload', function (e, editor, response) {
-			
 			var res = JSON.parse(response);
 			var str = "<div class='attach'><a href='/displayFile?fileName='"+res.filePath+"><span>"+res.fileName+"</span></a>"
 					+ "<a href='#' class='removeBtn' data-fileNo='"+res.fileNo+"' data-src="+res.fileName+"><span class='glyphicon glyphicon-remove-circle' style='float: right;'></span></a><br/></div>";
@@ -142,11 +120,8 @@
 			$(".list-group-item").append(str);
 			$("#regForm").append($(no));
 			});
-		
 		$('.list-group-item').on("click",".removeBtn",function(event){
-			
 			var $that = $(this);
-			
 			var attachfile_no =  $that.attr("data-fileNo")
 			var attachfile_name = $that.attr("data-src");
 			var $this = $(this);
@@ -166,12 +141,9 @@
 				}
 			}); 
 		});
-		
 		function getFileInfo(filePath){
-			
 			var path = filePath.attachfile_path;
 			var filename, fileLink, fileno;
-			
 			fileno = filePath.attachfile_no;
 			filesrc = "/displayFile?fileName="+path;
 			fileLink = path.substr(0,14);
@@ -179,13 +151,8 @@
 			return {filename:filename, filesrc:filesrc, filePath:filePath, fileno:fileno};
 			
 		}
-		
-		
 		$.get(domain+"/../getQuestionFile/"+no, function(list){
-			
 			$(list).each(function(){
-				
-				
 				var fileInfo = getFileInfo(this);
 				console.log(fileInfo);
 				var filePath = fileInfo.filePath.attachfile_path;
@@ -194,12 +161,8 @@
 				var file = "<div class='attach'><a href='"+filesrc+"'><span>"+filename+"</span></a>" 
 						+ "<a href='#' class='removeBtn' data-fileNo='"+fileno+"' data-src='"+filename+"'>"
 					 	+ "<span class='glyphicon glyphicon-remove-circle' style='float: right;'></span></a><br/></div>";
-				
-				
 				$('.list-group-item').append(file);
 			});	
 		});
-
 	</script>
-
 <%@include file="/WEB-INF/views/include/frameFooter.jsp"%>

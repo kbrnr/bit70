@@ -60,10 +60,6 @@
 	
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="/resources/froala_editor/js/froala_editor.min.js"></script>
-	<!--[if lt IE 9]>
-  <script src="../js/froala_editor_ie8.min.js"></script>
-  
-<![endif]-->
 	<script src="/resources/froala_editor/js/plugins/tables.min.js"></script>
 	<script src="/resources/froala_editor/js/plugins/urls.min.js"></script>
 	<script src="/resources/froala_editor/js/plugins/lists.min.js"></script>
@@ -77,10 +73,8 @@
 	<script src="/resources/froala_editor/js/plugins/entities.min.js"></script>
 	<script src="/resources/froala_editor/js/plugins/urls.min.js"></script>
 	<script src="/resources/froala_editor/js/plugins/file_upload.min.js"></script>
-	<!-- Text Editor -->
 
 	<script type="text/javascript">
-		
 	$('#edit').editable({
 		inlineMode : false,
 		height : 500,
@@ -93,22 +87,16 @@
 		imageUploadURL : "/upload",	
 		pastedImagesUploadURL : "/upload",
 		fileUploadURL: "/upload"
-		
 	});
-	
 	$('#edit').on('editable.afterImageUpload', function (e, editor, response) {
-		
 		var res = JSON.parse(response);
 		var str = "<img width ='300' name='attachfile_name' class='fr-fin fr-dib' data-fileNo='"+res.fileNo+"' data-src="+ res.filePath +" src='/displayFile?fileName="+ res.filePath +"' />";
 		var no = "<input class='fno' type='hidden' name='attachfile_no' value='"+res.fileNo+"' />";
 		
 		$(".froala-view").append(str);
 		$("#regForm").append($(no));
-		
 	});
-	
 	$('#edit').on('editable.afterFileUpload', function (e, editor, response) {
-		
 		var res = JSON.parse(response);
 		var str = "<div class='attach'><a href='/displayFile?fileName='"+res.filePath+"><span>"+res.fileName+"</span></a>"
 				+ "<a href='#' class='removeBtn' data-fileNo='"+res.fileNo+"' data-src="+res.fileName+"><span class='glyphicon glyphicon-remove-circle' style='float: right;'></span></a><br/></div>";
@@ -118,9 +106,7 @@
 		});
 	
 	$('.list-group-item').on("click",".removeBtn",function(event){
-		
 		var $that = $(this);
-		
 		var attachfile_no =  $that.attr("data-fileNo")
 		var attachfile_name = $that.attr("data-src");
 		var $this = $(this);
@@ -140,7 +126,6 @@
 			}
 		}); 
 	});
-	
 	$('#edit').on('editable.beforeRemoveImage', function (e, editor, img) {
 		
 		var attachfile_no = img.context.dataset.fileno;
@@ -153,7 +138,6 @@
 			
 		});
 	});
-	
 	 $('#regForm').on("submit", function(event){
 	     var userId = $("#mem_id").val();
 	     console.log(userId);
@@ -170,8 +154,6 @@
 	         dataType: "text"
 	      });
 	   });
-	
-	
 </script>
 
 <%@include file="/WEB-INF/views/include/frameFooter.jsp"%>
