@@ -86,26 +86,16 @@
 							</form>
 		        			<div id="curri"></div>
 		        		</div>
-		        		<div class="col-md-6">
+		        		<div class="col-md-9">
 		        			<div class="panel panel-primary">
 								<div class="panel-heading">
 									<h1 id="curri_title" class="panel-title" style="display: inline;">　</h1>
 								</div>
 								<div class="panel-body">
-									<textarea id="curri_content" class="form-control" rows="5"></textarea>
+									<textarea id="curri_content" class="form-control" rows="15"></textarea>
 								</div>
 							</div>
 		        		</div>
-		        		<div class="col-md-3">
-							<div class="panel panel-primary">
-								<div class="panel-heading">
-									<h1 class="panel-title">첨부파일</h1>
-								</div>
-								<div class="panel-body">
-									첨부파일 데스
-								</div>
-							</div>
-						</div>
 		        	</div>
 		        </div>
 		    </div>
@@ -182,7 +172,7 @@
 	      contentType : "application/json",
 	      data : JSON.stringify(list),
 	      success : function(data) {
-	        alert("가니?");
+	        alert("성공");
 			location.reload();
 	      }
 		});
@@ -200,7 +190,7 @@
 	  	li.prepend('<input class="node-name-input form-control" type="text" value="' + name + '">');
 	  	target.remove();
 	  }else{
-	    alert("수정할 타겟을 선택하십쇼");
+	    alert("수정할 타겟을 선택하세요");
 	  }
 	});
 
@@ -218,7 +208,7 @@
 		});
 		ul.css("display", "none");	    
 	  }else{
-	    alert("삭제할 타겟을 선택하십쇼");
+	    alert("삭제할 타겟을 선택하세요");
 	  }
 	});
 
@@ -301,6 +291,12 @@
     	}
     });
    
+   $("#searchTree").submit(function(e){
+	   e.preventDefault();
+	   
+	   
+   });
+   
    $("#excelUpload").change(handleFile);
  	function handleFile(e) {
          var file = e.target.files[0];
@@ -317,12 +313,18 @@
                  for (z in worksheet) {
                      if (z[0] === '!')
                          continue;
-                     var name = worksheet[z].v;
+                     var cell = worksheet[z];
+                     var name = cell.v;
+                     var content = "";
+                     if(cell.c){
+                     	content = cell.c[0].t;
+                     }
                      var depth = z.charCodeAt(0) - 64;
              		if(depth == 1){
 	             		var str = '<ul class="tree list-group">'
 		 			            + '<li class="tree-node list-group-item" data-mode="add" data-depth="' + depth + '">'
 		 			            + '<span class="node-name">' + name + '</span>'
+		 			           + '<span class="node-content">' + content + '</span>'
 		 			            + '</li>'
 		 			            + '</ul>';
 		 			    var root = $(str);
@@ -332,6 +334,7 @@
              		 	var str = '<ul class="tree" style="display: none;">'
 		 			            + '<li class="tree-node" data-mode="add" data-depth="' + depth + '">'
 		 			            + '<span class="node-name">' + name + '</span>'
+		 			            + '<span class="node-content">' + content + '</span>'
 		 			            + '</li>'
 		 			            + '</ul>';
 		     			var child = $(str);
@@ -358,6 +361,7 @@
 	    };
 	    reader.readAsBinaryString(file);
 	    $("#myModal").modal("hide");
+	    $(this).val("");
 	}
 </script>
 

@@ -41,7 +41,7 @@
 								</form>
 								<div id="tree"></div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-9">
 								<div class="panel panel-primary">
 									<div class="panel-heading">
 										<h1 id="curri_title" class="panel-title" style="display: inline;"></h1>
@@ -51,16 +51,6 @@
 									</div>
 									<div class="panel-body">
 										<p id="curriContent"></p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="panel panel-primary">
-									<div class="panel-heading">
-										<h1 class="panel-title">첨부파일</h1>
-									</div>
-									<div class="panel-body">
-										첨부파일 데스
 									</div>
 								</div>
 							</div>
