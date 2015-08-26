@@ -87,9 +87,15 @@
                     </div>                         
                   </div><!-- /.box-body -->
                   <div id="hiddenid"></div>
-                         
                   
                 </form>
+                  <div class="box-footer">
+                    <a href="/classinfo/classlist" class="btn btn-default">목록</a>
+  					<c:if test="${isAdmin}">
+                  		<a href="/classinfo/classmodifyform?domain=${clzinfo.clz_domain}" class="btn btn-info pull-right">수정</a>
+                    </c:if>
+                  </div><!-- /.box-footer -->
+
 			</div><!-- /.box box-info -->		
 		<!-- ----------------------------------------- -->
 			

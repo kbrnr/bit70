@@ -148,10 +148,6 @@
 		<!-- /.content -->
 
 
-
-  </body>
-</html>
-
 <script>
 
 /*-------수업승인하기---------*/
@@ -185,8 +181,5 @@ $(".joincourse").on("click", function() {
 	
 });
 </script>
-
-
-
 
 <%@include file="/WEB-INF/views/include/frameFooter.jsp"%>

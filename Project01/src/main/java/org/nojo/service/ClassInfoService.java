@@ -23,6 +23,8 @@ public interface ClassInfoService {
 	public int getClassListTotalCntByID(String mem_id, SearchCriteria cri) ;
 	
 	public ClassListVO getClassOne(String clz_no);
+
+	public void modifyClass(ClassVO vo, String[] mem_ids);
 	
 
 }

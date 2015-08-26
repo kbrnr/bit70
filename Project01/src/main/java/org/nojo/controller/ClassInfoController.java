@@ -80,8 +80,8 @@ public class ClassInfoController {
 	}
 
 	//수업수정 폼
-	@RequestMapping(value="/classmodify", method=RequestMethod.GET)
-	public String classmodify(String domain, Model model){
+	@RequestMapping(value="/classmodifyform", method=RequestMethod.GET)
+	public String classmodifyform(String domain, Model model){
 		ClassListVO clzVO ;
 		clzVO = classInfoService.getClassOne(domain);
 		
@@ -91,7 +91,20 @@ public class ClassInfoController {
 		
 		model.addAttribute("clzinfo", clzVO);
 		
-		return "/classinfo/classmodify" ;
+		return "/classinfo/classmodifyform" ;
+	}
+	
+	//수업수정 
+	@RequestMapping(value="/classmodify", method=RequestMethod.POST)
+	public String classremodify(ClassVO vo, String[] mem_id){
+		
+		System.out.println("===============================================");
+		System.out.println("controller:" + vo.toString());
+		
+		System.out.println("===============================================");
+		
+		classInfoService.modifyClass(vo, mem_id);
+		return "redirect:/classinfo/classread?domain=" + vo.getClz_domain();
 	}
 	
 	

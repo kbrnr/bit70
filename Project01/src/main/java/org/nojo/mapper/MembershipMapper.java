@@ -21,7 +21,7 @@ public int selectTeacherTotalCnt(SearchCriteria cri) throws Exception;
 
 
 //수업별(도메인별) 선생님 리스트
-@Select("select tbl_member.mem_id,tbl_member.mem_name from tbl_course join tbl_member on tbl_course.mem_id = tbl_member.mem_id where tbl_course.clz_domain=#{domain} and tbl_member.mem_gb='member_teacher'")
+@Select("select tbl_member.mem_id, tbl_member.mem_name from tbl_course join tbl_member on tbl_course.mem_id = tbl_member.mem_id where tbl_course.clz_domain=#{domain} and tbl_member.mem_gb='member_teacher'")
 public List<MemberVO> selectTeacherByDomain(String domain);	
 
 

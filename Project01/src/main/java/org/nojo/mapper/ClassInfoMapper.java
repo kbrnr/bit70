@@ -28,11 +28,11 @@ public interface ClassInfoMapper {
 	
 	//수업에 담당선생님 지정
 	@Insert("Insert into tbl_course (clz_domain, mem_id, course_state, course_gb) values (#{clz_domain}, #{mem_id}, #{course_state}, #{course_gb})")
-	public void insertCourse(CourseVO vo);
+	public void insertCourseTeacher(CourseVO vo);
 	
 	//수업에 담당선생님들 삭제
-	@Delete("Delete form tbl_course where clz_domain=domain and course_gb='member_teacher'")
-	public void deleteCourse(String domain);
+	@Delete("Delete from tbl_course where clz_domain=#{domain} and course_gb='member_teacher'")
+	public void deleteCourseTeacher(String domain);
 
 	//수정정보 상세정보
 	@Select("select * from tbl_class where tbl_class.clz_domain = #{domain}")

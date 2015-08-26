@@ -102,7 +102,7 @@
                   <div class="box-footer">
                   	<a href="classlist" class="btn btn-default">취소</a>
                     
-                    <button type="submi t" class="btn btn-info pull-right">등록</button>
+                    <button type="submit" class="btn btn-info pull-right">등록</button>
                     
                   </div><!-- /.box-footer -->
                 </form>

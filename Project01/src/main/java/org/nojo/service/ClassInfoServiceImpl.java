@@ -41,8 +41,28 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 			courseVO.setClz_domain(domain);
 			courseVO.setCourse_state(2); //가입여부(승인전0, 승인요청1, 가입완료2, 정지3)
 			courseVO.setCourse_gb("member_teacher");
-			classinfoMapper.insertCourse(courseVO);
+			classinfoMapper.insertCourseTeacher(courseVO);
 		}				
+	}
+	
+	
+	public void modifyClass(ClassVO classVO, String[] mem_ids) {
+		//특정반 선생님 정보삭제 tbl_course
+		String domain = classVO.getClz_domain();
+		classinfoMapper.deleteCourseTeacher(domain);
+		
+		//classVO 업데이트 tbl_class 수정
+		classinfoMapper.updateClass(classVO);
+
+		//선생님리스트 등록 tbl_course 등록
+		CourseVO courseVO = new CourseVO();
+		for(int i=0; i<mem_ids.length; i++){
+			courseVO.setMem_id(mem_ids[i]);
+			courseVO.setClz_domain(domain);
+			courseVO.setCourse_state(2); //가입여부(승인전0, 승인요청1, 가입완료2, 정지3)
+			courseVO.setCourse_gb("member_teacher");
+			classinfoMapper.insertCourseTeacher(courseVO);
+		}	
 	}
 	
 	

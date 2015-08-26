@@ -52,10 +52,7 @@ public class CourseController {
 	@ResponseBody
 	@RequestMapping(value="/joinclassOK", method=RequestMethod.PUT)
 	public void joinclassOK(@RequestBody CourseVO vo){
-		System.out.println("@joinclassOK:"+ vo.getClz_domain());	
-		System.out.println("@joinclassOK:"+ vo.getMem_id());	
-		
-		courseService.setCourseOK(vo);	
+		courseService.setCourseOK(vo);
 	}
 	
 	

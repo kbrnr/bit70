@@ -2,11 +2,10 @@ package org.nojo.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.type.JdbcType;
 import org.nojo.domain.SeatVO;
 
 
@@ -21,5 +20,7 @@ public interface SeatMapper {
 	
 	@Select("select mem_photo from tbl_member where mem_id=#{userId}")
 	public Object photo(String userId);
-	
+
+	@Insert("insert into tbl_seat(clz_domain, mem_id) values(#{clz_domain}, #{mem_id})")
+	public void insertSeat(SeatVO vo); 
 }

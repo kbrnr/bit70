@@ -66,7 +66,7 @@
 			                      <td>${vo.clz_end_date}</td>
 			                      <td>${vo.clz_state}</td>
 			                      <td class="domain"><a href="/${vo.clz_domain}" target=_blank>${vo.clz_domain}</a></td>
-			                      <td ><a href="/classinfo//joinform?domain=${vo.clz_domain}">[${vo.course_state}]</a></td>
+			                      <td ><a href="/classinfo/joinform?domain=${vo.clz_domain}">[${vo.course_state}]</a></td>
 			                    </tr>
 		                      </c:forEach>
 		                    </tbody>

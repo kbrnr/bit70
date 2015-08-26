@@ -6,7 +6,9 @@ import javax.inject.Inject;
 
 import org.nojo.bizDomain.JoinMemberVO;
 import org.nojo.domain.CourseVO;
+import org.nojo.domain.SeatVO;
 import org.nojo.mapper.CourseMapper;
+import org.nojo.mapper.SeatMapper;
 import org.nojo.util.SearchCriteria;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,9 @@ public class CourseServiceImpl implements CourseService {
 	
 	@Inject
 	private CourseMapper courseMapper;
+	
+	@Inject
+	private SeatMapper seatMapper;
 	
 	
 	public List<JoinMemberVO> getMemberByDomain(SearchCriteria cri, String domain){
@@ -27,30 +32,24 @@ public class CourseServiceImpl implements CourseService {
 	
 	
 	public void setCourse(CourseVO vo){
-		System.out.println("##############################################");
-		System.out.println("##before Service######################################");
-		System.out.println(vo.getClz_domain());
-		System.out.println(vo.getMem_id());
-		System.out.println(vo.toString());
-		System.out.println("##############################################");	
-		
 		vo.setCourse_state(1); //[승인대기]
 		vo.setCourse_gb("member_student");
-		
-		System.out.println("##############################################");
-		System.out.println("##before Service######################################");
-		System.out.println(vo.getClz_domain());
-		System.out.println(vo.getMem_id());
-		System.out.println(vo.toString());
-		System.out.println("##############################################");	
-		
 		courseMapper.insertCourseStudent(vo);
 	}
 	
 	
 	public void setCourseOK(CourseVO vo){
+	
+		SeatVO svo = new SeatVO();
+		
 		vo.setCourse_state(2); //[가입완료]
+		
+		svo.setClz_domain(vo.getClz_domain());
+		svo.setMem_id(vo.getMem_id());
+		
 		courseMapper.updateCourse(vo);
+		seatMapper.insertSeat(svo);
+		//시트에 정보넣어주기
 	}
 	
 }

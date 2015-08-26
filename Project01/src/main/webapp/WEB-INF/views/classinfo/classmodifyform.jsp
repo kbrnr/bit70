@@ -27,7 +27,7 @@
                 </div><!-- /.box-header -->
                
 				<!-- form start -->
-                <form id="classinputform" class="form-horizontal" action="/classinfo/classregister" method="post">
+                <form id="classinputform" class="form-horizontal" action="/classinfo/classmodify" method="post">
                   <div class="box-body">
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">수업명</label>
@@ -38,7 +38,7 @@
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label" >도메인</label>
                       <label for="inputPassword3" class="col-sm-2 control-label" >http://www.XXX.com/</label>
-                      <div class="col-sm-2">
+                      <div class="col-sm-2"><input id="clz_domain" type="text" class="form-control" name="clz_domain" value="${clzinfo.clz_domain}" >
                       	${clzinfo.clz_domain}
                       </div>
                       <div class="col-sm-4">
@@ -53,12 +53,12 @@
                       <div class="col-sm-8">
                  		<div id="choiceteacher" class="time-label">
                  		<c:forEach items="${clzinfo.teacherlist}" var="teacher">
-                 			<div data-vid='${teacher.mem_id}' class='bg-gray'>${teacher.mem_name}(${teacher.mem_id})X <input type='text' data-hid='${teacher.mem_id}' name='${teacher.mem_id}' value='${teacher.mem_id}' ></div>
+                 			<div data-vid='${teacher.mem_id}' class='bg-gray'>${teacher.mem_name}(${teacher.mem_id})X <input type='text' data-hid='${teacher.mem_id}' name='mem_id' value='${teacher.mem_id}' ></div>
                  		</c:forEach>                 		
                       	</div>
                       </div>
                       <div class="col-sm-2">
-                 		<button id="btn_teachlist" type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#teacherModal">강사찾기</button>	
+                 		<button id="btn_teachlist" type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#teacherModal">선생님찾기</button>	
                       </div>
                     </div>
 
@@ -103,10 +103,12 @@
                       </div>
                     </div>                         
                   </div><!-- /.box-body -->
-                  <div id="hiddenid"></div>
-                         
-                     
-                  
+                  <div class="box-footer">
+                  	<a href="/classinfo/classlist" class="btn btn-default">목록</a>
+                    <c:if test="${isAdmin}">
+                    	<button type="submit" class="btn btn-info pull-right">수정</button>
+                    </c:if>
+                  </div><!-- /.box-footer -->
                 </form>
 			</div><!-- /.box box-info -->		
 		<!-- ----------------------------------------- -->
@@ -251,7 +253,6 @@ $("#teacherinfo").on("click", ".userid", function(){
 $("#choiceteacher").on("click", ".bg-gray", function(){
 	$this = $(this)
 	$this.remove();
-	
 });
 
 
