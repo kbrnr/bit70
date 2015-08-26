@@ -33,7 +33,7 @@ public interface CourseMapper {
 	
 	//학생 수업참여(승인요청 ajax) 
 	@Insert("Insert into tbl_course (clz_domain, mem_id, course_state, course_gb) values (#{clz_domain}, #{mem_id}, #{course_state}, #{course_gb})")
-	public void insertCourse(CourseVO vo);
+	public void insertCourseStudent(CourseVO vo);
 	
 	
 	//선생님-->학생승인(가입승인ajax) 

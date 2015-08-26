@@ -27,9 +27,24 @@ public class CourseServiceImpl implements CourseService {
 	
 	
 	public void setCourse(CourseVO vo){
+		System.out.println("##############################################");
+		System.out.println("##before Service######################################");
+		System.out.println(vo.getClz_domain());
+		System.out.println(vo.getMem_id());
+		System.out.println(vo.toString());
+		System.out.println("##############################################");	
+		
 		vo.setCourse_state(1); //[승인대기]
 		vo.setCourse_gb("member_student");
-		courseMapper.insertCourse(vo);
+		
+		System.out.println("##############################################");
+		System.out.println("##before Service######################################");
+		System.out.println(vo.getClz_domain());
+		System.out.println(vo.getMem_id());
+		System.out.println(vo.toString());
+		System.out.println("##############################################");	
+		
+		courseMapper.insertCourseStudent(vo);
 	}
 	
 	

@@ -46,16 +46,7 @@ public class CourseController {
 	}
 	
 	
-	
-	//학생 수업 참여 
-	@ResponseBody
-	@RequestMapping(value="/joinclass", method=RequestMethod.POST)
-	public void joinclass(@RequestBody CourseVO vo){
-		System.out.println("@Controller:"+ vo.getClz_domain());	
-		System.out.println("@Controller:"+ vo.getMem_id());	
-		
-		courseService.setCourse(vo);	
-	}
+
 	
 	//학생 수업 승인 
 	@ResponseBody
