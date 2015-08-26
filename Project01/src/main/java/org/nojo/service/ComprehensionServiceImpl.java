@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.nojo.bizDomain.ScoreVO;
+import org.nojo.bizDomain.TQuestionScoreByIDVO;
 import org.nojo.bizDomain.TQuestionScoreListVO;
 import org.nojo.domain.ComprehensionVO;
 import org.nojo.domain.NotificationVO;
@@ -105,22 +106,26 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 	////tmp///////////////////////////
 	@Override
 	public List<TQuestionScoreListVO> getComprehension(String domain) throws Exception {
-		
 		List<TQuestionScoreListVO> tqscorelist ; //bit70의 특정 선생님 질문하나에 학생들의 점수들  의  리스트  
 		List<ScoreVO> scorelist ; 
-		
 		//특정반의 선생님 질문 리스트
 		tqscorelist = mapper.selectQuestion(domain);  //질문들을 가져옴
-		
 
 		for(int i=0; i<tqscorelist.size(); i ++ ){ //질문수만큼 반복
 			scorelist = mapper.selectScore(domain, tqscorelist.get(i).getTeacherquestion_no()); //특정 질문의 점수들
 			tqscorelist.get(i).setScorelist(scorelist); //질문에 학생들 점수 리스트 추가  --> 특정질문에 학생들 점수들이 리스트로 있음
 		}
-		
-		
 		return tqscorelist;	
 	}
+	
+	@Override
+	public List<TQuestionScoreByIDVO> getComprehensionByID(String domain, String mem_id) throws Exception {
+		List<TQuestionScoreByIDVO> tqscorebyidlist ; 
+		tqscorebyidlist = mapper.selectScoreByID(domain, mem_id);
+		
+		return tqscorebyidlist;	
+	}
+	
 	
 	
 

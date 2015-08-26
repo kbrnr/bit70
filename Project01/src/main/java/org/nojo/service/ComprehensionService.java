@@ -1,8 +1,8 @@
 package org.nojo.service;
 
 import java.util.List;
-import java.util.Map;
 
+import org.nojo.bizDomain.TQuestionScoreByIDVO;
 import org.nojo.bizDomain.TQuestionScoreListVO;
 import org.nojo.domain.ComprehensionVO;
 import org.nojo.domain.TeacherquestionVO;
@@ -19,8 +19,8 @@ public interface ComprehensionService {
 
 	public int registComprehension(ComprehensionVO vo) throws Exception;
 
-	/////tmp
-	//public HashMap<String, Object> getComprehension(String domain) throws Exception;
 
 	public List<TQuestionScoreListVO> getComprehension(String domain) throws Exception;
+
+	public List<TQuestionScoreByIDVO> getComprehensionByID(String domain, String mem_id) throws Exception ;
 }

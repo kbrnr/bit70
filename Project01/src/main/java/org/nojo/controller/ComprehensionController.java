@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.nojo.bizDomain.TQuestionScoreByIDVO;
 import org.nojo.bizDomain.TQuestionScoreListVO;
 import org.nojo.domain.ComprehensionVO;
 import org.nojo.domain.TeacherquestionVO;
+import org.nojo.security.SecurityUtil;
 import org.nojo.service.ComprehensionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,6 +52,26 @@ public class ComprehensionController {
 		model.addAttribute("tqscorelist",tqscorelist);
 		return "/comprehension/comprehensionlist";
 	}
+	
+	@RequestMapping(value="/byid", method=RequestMethod.GET)
+	public String comprehensionListByID(@PathVariable("domain") String domain, Model model) throws Exception{
+		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+		System.out.println(domain);
+		System.out.println(SecurityUtil.getUser().getId());
+		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+		
+		
+		
+		List<TQuestionScoreByIDVO> tqscorelistbyID ; 
+		tqscorelistbyID = service.getComprehensionByID(domain, SecurityUtil.getUser().getId());
+		System.out.println(tqscorelistbyID.get(0).getTeacherquestion_content());
+		
+		
+		model.addAttribute("scorelist", tqscorelistbyID);
+		return "/comprehension/comprehensionID";
+	}
+	
+	
 	
 	@ResponseBody
 	@RequestMapping(value="/question", method=RequestMethod.POST)

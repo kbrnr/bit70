@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 import org.nojo.bizDomain.JoinMemberVO;
 import org.nojo.bizDomain.ScoreVO;
+import org.nojo.bizDomain.TQuestionScoreByIDVO;
 import org.nojo.bizDomain.TQuestionScoreListVO;
 import org.nojo.domain.ComprehensionVO;
 import org.nojo.domain.TeacherquestionVO;
@@ -82,7 +83,7 @@ public interface ComprehensionMapper {
 	
 	
 	//특정반 특정ID 의 이해도
-	@Select("select l.teacherquestion_no, l.teacherquestion_content, r.comprehension_score, r.mem_id, l.clz_domain"
+	@Select("select l.teacherquestion_no, l.teacherquestion_content, r.comprehension_score, r.mem_id, l.clz_domain "
 	+ "from "
 	+ "(select t.teacherquestion_no, t.teacherquestion_content, clz_domain "
 	+ "from tbl_teacherquestion t, tbl_curriculum c "
@@ -96,7 +97,7 @@ public interface ComprehensionMapper {
 	+ "and c.mem_id = #{mem_id}) r "
 	+ "on l.teacherquestion_no = r.teacherquestion_no "
 	+ "order by l.teacherquestion_no")
-	public List<ScoreVO> selectScoreByID(@Param("domain") String domain, @Param("mem_id") String mem_id) throws Exception;
+	public List<TQuestionScoreByIDVO> selectScoreByID(@Param("domain") String domain, @Param("mem_id") String mem_id) throws Exception;
 	
 	
 	
