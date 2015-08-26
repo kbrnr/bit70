@@ -71,6 +71,7 @@ public class QuestionController {
 	@RequestMapping(value = "/questionRegist", method = RequestMethod.GET)
 	public String regist(@PathVariable("domain") String domain) { return "qna/questionRegist"; }
 
+	@Transactional
 	@ResponseBody
 	@RequestMapping(value = "/questionRegist", method = RequestMethod.POST)
 	public int registQuestion(QuestionVO vo,
