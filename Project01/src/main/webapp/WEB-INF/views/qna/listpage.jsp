@@ -119,10 +119,6 @@
 	</div>
 	<!-- /.col -->
 </div>
-<!-- /.row -->
-<div class="row">
-	<div class="col-xs-12"></div>
-</div>
 </section>
 
 <%@include file="/WEB-INF/views/include/frameFooter.jsp"%>

@@ -28,7 +28,6 @@ public class QuestionServiceImpl implements QuestionService {
 	public int addQuestion(QuestionVO vo) throws Exception {
 
 		NotificationVO nvo = new NotificationVO();
-
 		mapper.create(vo);
 		
 		if(vo.isQuestion_visible() == false)
@@ -57,7 +56,8 @@ public class QuestionServiceImpl implements QuestionService {
 				notiMapper.insert(nvo);
 			}
 		}
-		return vo.getQuestion_no();
+		int qno = vo.getQuestion_no();
+		return qno;
 		
 	}
 
