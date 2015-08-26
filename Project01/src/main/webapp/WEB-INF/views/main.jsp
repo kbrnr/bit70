@@ -203,6 +203,7 @@
 			});
 			
 			context.attach('.notification', [
+			    new Menu("보기", inquiry,
            		new Menu("읽음", updateReadStatus),
            		new Menu("삭제", removeNotification)
            	]);
@@ -262,7 +263,7 @@
 				var name = this.mem_name;
 				var id = this.mem_id;
 				var domain = "${domain}";
-				var str = "<div class='chair' data-mem_id='" + id + "' data-trigger='manual' data-placement='middle' style='margin-left: " 
+				var str = "<div class='chair' data-mem_id='" + id + "' data-trigger='manual' data-placement='middle' data-html='true' style='margin-left: " 
 					+ x + "px; margin-top: " 
 					+ y + "px;'><div class='img'><img class='realImg' src='/" 
 					+ domain + "/seat/seatImg?userId=" 
@@ -290,7 +291,6 @@
 	parent.socket.on("seatScore", function(data){
 		var target = $(".chair[data-mem_id='"+data.mem_id+"']");
 		target.attr("data-content", data.comprehension_score);
-		//data-container='body' data-toggle='popover' data-placement='bottom
 		target.popover('show');
 		setTimeout(function(){
 			target.popover('destroy');
@@ -303,7 +303,6 @@
 		var qno = no.qno;
 		var href = "<a href='/${domain}/qna/detail?no="+qno+"'><img src='/resources/nojo/images/questionMark.gif' /></a>";
 		qtarget.attr("data-content", href);
-		qtarget.attr("data-html", true);
 		qtarget.popover('show');
 		setTimeout(function(){
 			target.popover('destroy');
