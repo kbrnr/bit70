@@ -40,7 +40,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			res.sendError(HttpServletResponse.SC_NOT_FOUND, "존재하지 않는 도메인 입니다");
 			return false;
 		}
-		
+		req.setAttribute("domain", domain);
 		SecurityContext context =  SecurityContextHolder.getContext();
 		if(context==null){
 			res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "권한이 없습니다.");
@@ -60,7 +60,6 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 			auth.getCredentials(),
 			getGrantedAuthorities(auth.getAuthorities(), authority)
 		));
-		req.setAttribute("isClass", true);
 		return flag;
 	}
 
