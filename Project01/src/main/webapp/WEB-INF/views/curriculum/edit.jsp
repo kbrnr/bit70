@@ -275,7 +275,7 @@
     			temp.push(root);
     		}else{
     			var parent = work[depth-2];
-    			var str = '<ul class="tree" style="display: none;">'
+    			var str = '<ul class="tree">'
 			            + '<li class="tree-node" data-no="' + no + '" data-depth="' + depth + '" data-pno="' + this.curri_pno + '">'
 			            + '<span class="node-name">' + name + '</span>'
 			            + '<span class="node-content">' + content + '</span>'
@@ -289,12 +289,22 @@
     	for(var i in temp){
     		$("#curri").append(temp[i]);
     	}
+    	$(".tree .tree").slideUp(0);
     });
    
    $("#searchTree").submit(function(e){
-	   e.preventDefault();
-	   
-	   
+		e.preventDefault();
+		var searchText = $("#treeSearchText").val();
+		var target = $("#curri .node-name:contains("+searchText+"):last");
+		target.parents(".tree").each(function(){
+			$(this).find(".tree").slideDown();
+		});
+		if(! target.hasClass("active")){
+			$(".node-name.active").removeClass("active");
+		}
+		target.toggleClass("active");
+		$("#curri_title").text(target.text());
+		$("#curri_content").val(target.next().text());
    });
    
    $("#excelUpload").change(handleFile);
@@ -331,7 +341,7 @@
              			work = [root];
              			temp.push(root);
              		}else{
-             		 	var str = '<ul class="tree" style="display: none;">'
+             		 	var str = '<ul class="tree">'
 		 			            + '<li class="tree-node" data-mode="add" data-depth="' + depth + '">'
 		 			            + '<span class="node-name">' + name + '</span>'
 		 			            + '<span class="node-content">' + content + '</span>'
@@ -357,6 +367,7 @@
 		        for ( var i in temp) {
 		          $("#curri").append(temp[i]);
 		        }
+                $(".tree .tree").slideUp(0);
 	      	});
 	    };
 	    reader.readAsBinaryString(file);
