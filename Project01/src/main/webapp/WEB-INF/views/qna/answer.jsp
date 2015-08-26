@@ -36,8 +36,8 @@
 							<br/>
 						</div>
 						<ul id="fileAttach" class='list-group' >
-										<li id="question_attachfile" class="list-group-item"></li>
-									</ul>
+							<li id="question_attachfile" class="list-group-item"></li>
+						</ul>
 					</div>
 				</div>
 			</div>

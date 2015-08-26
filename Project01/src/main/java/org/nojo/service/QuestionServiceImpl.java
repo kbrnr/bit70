@@ -25,7 +25,7 @@ public class QuestionServiceImpl implements QuestionService {
 	private MembershipMapper memberMapper;
 	
 	@Override
-	public NotificationVO addQuestion(QuestionVO vo) throws Exception {
+	public int addQuestion(QuestionVO vo) throws Exception {
 
 		NotificationVO nvo = new NotificationVO();
 
@@ -57,7 +57,7 @@ public class QuestionServiceImpl implements QuestionService {
 				notiMapper.insert(nvo);
 			}
 		}
-		return nvo;
+		return vo.getQuestion_no();
 		
 	}
 

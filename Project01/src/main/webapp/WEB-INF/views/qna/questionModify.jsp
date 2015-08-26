@@ -48,9 +48,11 @@
 									</ul>
 								</div>
 							<div class="box-footer">
+								<c:if test="${QuestionVO.mem_id == user.id }">
 								<button type="submit" class="btn btn-info">Modify</button>
 								<a href="remove/${QuestionVO.question_no }" method="POST">
 								<button	type="button" id="delBtn" class="btn btn">Delete</button> </a>
+								</c:if>
 								<a href="listpage?page=${cri.page }&perPageNum=${cri.perPageNum}">
 								<button	type="button" class="btn btn-info">Go List</button> </a>
 							</div>

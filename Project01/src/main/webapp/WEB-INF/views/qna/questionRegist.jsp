@@ -154,11 +154,20 @@
 		});
 	});
 	
-	$('#RegBoard').on("click", function(){
-		
-		
-		
-	});
+	 $('#regForm').on("submit", function(event){
+	      event.preventDefault();
+	      $.ajax({
+	         url: "questionRegist",
+	         type: "post",
+	         data: $(this).serialize(),
+	         success: function(no){
+	            console.log(no);
+	            parent.socket.emit("seatQuestion", { userId: $("#mem_id").val(), qno: no});
+	            location.href = "/${domain}/qna/listpage"; 
+	         },
+	         dataType: "text"
+	      });
+	   });
 	
 	
 </script>

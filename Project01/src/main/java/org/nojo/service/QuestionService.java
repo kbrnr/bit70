@@ -10,7 +10,7 @@ import org.nojo.util.Search;
 public interface QuestionService {
 	
 	//질문추가
-	public NotificationVO addQuestion(QuestionVO vo) throws Exception;
+	public int addQuestion(QuestionVO vo) throws Exception;
 	
 	//질문리스트
 	public List<QuestionVO> listQuestion(String domain, Criteria cri) throws Exception;

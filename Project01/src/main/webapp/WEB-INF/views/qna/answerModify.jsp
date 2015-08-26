@@ -32,18 +32,8 @@
 						<div class="box-header with-border ">
 							<div class="froala-view" style="height: 200px;">${QuestionVO.question_content }</div>
 							<ul id="fileAttach" class='list-group' >
-										<li id="attach" class="list-group-item"></li>
-									</ul>
-							<div>
-								<a href="regist">
-									<button style="float: left;" id="ResBoard" type="submit"
-										class="btn btn-primary">Write</button>
-								</a> <a href="modify?no=${QuestionVO.question_no } ">
-									<button type="submit" class="btn btn-info">Modify</button>
-								</a> <a href="remove/${QuestionVO.question_no }">
-									<button type="submit" id="delBtn" class="btn btn">Delete</button>
-								</a>
-							</div>
+								<li id="attach" class="list-group-item"></li>
+							</ul>
 						</div>
 					</div>
 				</div>
