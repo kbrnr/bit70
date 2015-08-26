@@ -173,7 +173,6 @@
 		parent.$("#sendScore").submit(function(e){
 			e.preventDefault();
 			var $this = $(this);
-			console.log($this.serialize());
 			$.post("/${domain}/comprehension", $this.serialize(), function(data){
 				var obj = {
 					mem_id: "${user.id}", 
@@ -282,7 +281,6 @@
 		}
 	});
 	parent.socket.on("offlineUser", function(user){
-		console.log("offlineUser" + user);
 		$(".chair[data-mem_id='" + users[i] + "']").children().children($(".realImg")[0]).css( { "border" : "3px solid black"});
 	});
 	
