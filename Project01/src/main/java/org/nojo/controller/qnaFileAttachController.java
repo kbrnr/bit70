@@ -117,7 +117,6 @@ public class qnaFileAttachController {
 		try {
 
 			final HttpHeaders headers = new HttpHeaders();
-		
 
 			MediaType mimeType = null;
 
@@ -138,22 +137,12 @@ public class qnaFileAttachController {
 					"attachment; fileName=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
 			
 			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
-		} catch (
-
-		Exception e)
-
-		{
-
+			
+		} catch (Exception e){
 			e.printStackTrace();
 			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
-
-		} finally
-
-		{
-
-			in.close();
-
-		}
+			
+		} finally{ in.close(); }
 
 		return entity;
 
@@ -164,11 +153,9 @@ public class qnaFileAttachController {
 			@RequestParam("attachfile_no") Integer attachfile_no) throws Exception {
 
 		new File(uploadPath + attachfile_name.replace('/', File.pathSeparatorChar)).delete();
-
 		service.removeAttach(attachfile_no);
 
 		return new ResponseEntity<String>("deleted", HttpStatus.OK);
-
 	}
 
 }

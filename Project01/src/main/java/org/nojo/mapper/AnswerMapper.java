@@ -24,7 +24,6 @@ public interface AnswerMapper {
 	public List<AnswerVO> listAns(@Param("domain") String domain, @Param("no") Integer bno, @Param("cri") Criteria cri) throws Exception;
 
 	
-	
 	//답변글 수정
 	@Update("update tbl_answer set "
 								+ "answer_title = #{answer_title}, "
@@ -53,10 +52,8 @@ public interface AnswerMapper {
 	public AnswerVO readAns(@Param("no") Integer no, @Param("domain") String domain, @Param("rno") Integer rno) throws Exception;
 	
 	
-	
 	//추천
-	@Update("update tbl_answer "
-								+ "set "
+	@Update("update tbl_answer set "
 								+ "answer_recommend = answer_recommend +1 "
 								+ "where answer_no = #{no}")
 	public void UpdateReCommend(Integer no) throws Exception;

@@ -161,7 +161,6 @@
 	         type: "post",
 	         data: $(this).serialize(),
 	         success: function(no){
-	            console.log(no);
 	            parent.socket.emit("seatQuestion", { userId: $("#mem_id").val(), qno: no});
 	            location.href = "/${domain}/qna/listpage"; 
 	         },

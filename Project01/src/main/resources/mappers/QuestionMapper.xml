@@ -24,7 +24,6 @@
 
 	</select>
 
-
 	<select id="getSearchCnt" parameterType="map" resultType="int">
 		<bind name="search" value= "search" />
 		
@@ -38,9 +37,6 @@
 		</where>
 
 	</select>
-
-
-
 
 	<select id="listPage" parameterType="map" resultType="org.nojo.domain.QuestionVO">
 
@@ -68,5 +64,4 @@
 		]]>
 		</where>
 	</select>
-
 </mapper>

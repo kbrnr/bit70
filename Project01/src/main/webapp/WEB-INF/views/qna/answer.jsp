@@ -123,11 +123,9 @@
 			imageUploadURL : "/upload",	
 			pastedImagesUploadURL : "/upload",		
 			fileUploadURL: "/upload"
-					
 		});
 		
 		$('#edit').on('editable.afterFileUpload', function (e, editor, response) {
-			
 			var res = JSON.parse(response);
 			var str = "<a href='/displayFile?fileName="+res.filePath+"'<span>"+res.fileName+"</span></a>"
 				 + "<a href='#' class='removeBtn' data-fileNo='"+res.fileNo+"' data-src="+res.fileName+"><span class='glyphicon glyphicon-remove-circle' style='float: right;'></span></a><br/></div>";
@@ -137,32 +135,26 @@
 			});
 		
 		$('#edit').on('editable.afterImageUpload', function (e, editor, response) {
-			
 			var res = JSON.parse(response);
 			var str = "<img width ='300' name='attachfile_name' class='fr-fin fr-dib' data-fileNo='"+res.fileNo+"' data-src="+ res.filePath +" src='/displayFile?fileName="+ res.filePath +"' />";
 			var no = "<input class='fno' type='hidden' name='attachfile_no' value='"+res.fileNo+"' />";
 			var view = $(".f-placeholder.froala-view.froala-element.not-msie.f-basic");
 			view.append(str);
 			$("#ansForm").append($(no));
-			
 		});
 		
 		$('#edit').on('editable.beforeRemoveImage', function (e, editor, img) {
-			
 			var attachfile_no = img.context.dataset.fileno;
 			var attachfile_name = img.context.dataset.src;
-		
 			$.post("/deleteFile", { attachfile_name : attachfile_name ,
 									attachfile_no : attachfile_no }, function(){
 										
 				$(":hidden[value="+attachfile_no+"]").remove();
-				
 			});
 		});
 		
 
 		function getFileInfo(filePath){
-			
 			var path = filePath.attachfile_path;
 			var filename, fileLink, fileno;
 			
@@ -171,13 +163,10 @@
 			filename = fileLink.substr(path.indexOf("_") + 1);
 			fileno = filePath.attachfile_no;
 			return {filename:filename, filesrc:filesrc, filePath:filePath, fileno:fileno};
-			
 		}
 		
 		$.get(domain+"../qna/getQuestionFile/"+no, function(list){
-			
 			$(list).each(function(){
-				
 				var fileInfo = getFileInfo(this);
 				var filePath = fileInfo.filePath.attachfile_path;
 				var filename = fileInfo.filePath.attachfile_name;
@@ -187,13 +176,10 @@
 		});
 		
 		$('#ansAttach').on("click",".removeBtn",function(event){
-			
 			var $that = $(this);
-			
 			var attachfile_no =  $that.attr("data-fileNo")
 			var attachfile_name = $that.attr("data-src");
 			var $this = $(this);
-			
 			 $.ajax({
 				url: "/deleteFile",
 				type: "post",

@@ -22,26 +22,26 @@ public class AnswerServiceImpl implements AnswerService {
 
 	@Override
 	public NotificationVO addAnswer(AnswerVO vo, String reciver_id) throws Exception {
-
-		String link = "/"+vo.getClz_domain()+"/"+"qna/detail?no="+vo.getQuestion_no();
-				
+		
 		mapper.create(vo);
+		
+		String link = "/"+vo.getClz_domain()+"/"+"qna/detail?no="+vo.getQuestion_no();
+		String title = vo.getAnswer_title();
+
 		NotificationVO nvo = new NotificationVO();
 		nvo.setNoti_service_name("답변등록");
 		nvo.setNoti_service_link(link);
 		nvo.setNoti_sender_id(vo.getMem_id());
 		nvo.setNoti_receiver_id(reciver_id);
+		nvo.setClz_domain(vo.getClz_domain());
 		
-		String title = vo.getAnswer_title();
 		if (title.length() > 30) {
 			nvo.setNoti_summation(vo.getAnswer_title().substring(0, 30));
 		}else {
 			nvo.setNoti_summation(title.substring(0, title.length()));
 		}
-		
-		nvo.setClz_domain(vo.getClz_domain());
-		
 		notiMapper.insert(nvo);
+		
 		return nvo;
 	}
 
