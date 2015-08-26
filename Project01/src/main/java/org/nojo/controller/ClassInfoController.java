@@ -6,12 +6,17 @@ import javax.inject.Inject;
 
 import org.nojo.bizDomain.ClassListVO;
 import org.nojo.domain.ClassVO;
+import org.nojo.domain.CourseVO;
 import org.nojo.security.SecurityUtil;
 import org.nojo.service.ClassInfoService;
+import org.nojo.service.CourseService;
 import org.nojo.util.PageMaker;
 import org.nojo.util.SearchCriteria;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +27,9 @@ public class ClassInfoController {
 
 	@Inject
 	private ClassInfoService classInfoService;
+	
+	@Inject
+	private CourseService courseService;
 
 	
 	//전체수업리스트
@@ -66,6 +74,16 @@ public class ClassInfoController {
 	public String classread(String domain, Model model){
 		ClassListVO clzVO ;
 		clzVO = classInfoService.getClassOne(domain);
+		model.addAttribute("clzinfo", clzVO);
+		
+		return "/classinfo/classread" ;
+	}
+
+	//수업수정 폼
+	@RequestMapping(value="/classmodify", method=RequestMethod.GET)
+	public String classmodify(String domain, Model model){
+		ClassListVO clzVO ;
+		clzVO = classInfoService.getClassOne(domain);
 		
 		System.out.println("===============================================");
 		System.out.println(clzVO.getTeacherlist().size());
@@ -73,9 +91,10 @@ public class ClassInfoController {
 		
 		model.addAttribute("clzinfo", clzVO);
 		
-		return "/classinfo/classread" ;
+		return "/classinfo/classmodify" ;
 	}
-
+	
+	
 
 
 	//my페이지 학생 전체수업리스트 수업신청 기능 포함
@@ -113,11 +132,37 @@ public class ClassInfoController {
 	
 	
 	
+	//수업신청폼 로딩
+	@RequestMapping(value="/joinform", method=RequestMethod.GET)
+	public String joinform(String domain, Model model){
+		ClassListVO clzVO ;
+		clzVO = classInfoService.getClassOne(domain);
+		model.addAttribute("clzinfo", clzVO);
+		
+		return "/classinfo/joinform" ;
+	}
 	
-
 	
 	
-	
+	//학생 수업 신청
+	@ResponseBody
+	@RequestMapping(value="/joinexe", method= RequestMethod.POST)
+	public ResponseEntity<String> join(@RequestBody CourseVO vo){
+		System.out.println("##############################################");
+		System.out.println("##joinexe Controller######################################");
+		System.out.println(vo.getClz_domain());
+		System.out.println(vo.getMem_id());
+		System.out.println(vo.toString());
+		System.out.println("##############################################");		
+		ResponseEntity<String> entity = null;
+		try {
+			courseService.setCourse(vo);
+			entity = new ResponseEntity<String>("ok", HttpStatus.OK);
+		}catch(Exception e){
+		    entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);				
+		}
+		return entity;
+	}
 	
 	
 

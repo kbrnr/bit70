@@ -49,9 +49,3 @@ public class SeatController {
 	}
 }
 
-/*BufferedImage sourceImg = ImageIO.read(new File(userId));
-BufferedImage destImg = Scalr.resize(sourceImg, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 25);
-String thumbnailName = userId;
-File newFile = new File(thumbnailName);
-String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
-ImageIO.write(destImg, formatName.toUpperCase(), newFile);*/

@@ -357,6 +357,7 @@
 	      	});
 	    };
 	    reader.readAsBinaryString(file);
+	    $("#myModal").modal("hide");
 	}
 </script>
 

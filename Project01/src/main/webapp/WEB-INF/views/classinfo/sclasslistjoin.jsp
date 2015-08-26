@@ -66,7 +66,7 @@
 			                      <td>${vo.clz_end_date}</td>
 			                      <td>${vo.clz_state}</td>
 			                      <td class="domain"><a href="/${vo.clz_domain}" target=_blank>${vo.clz_domain}</a></td>
-			                      <td class="joincourse"><a href="#">[${vo.course_state}]</a></td>
+			                      <td ><a href="/classinfo//joinform?domain=${vo.clz_domain}">[${vo.course_state}]</a></td>
 			                    </tr>
 		                      </c:forEach>
 		                    </tbody>
@@ -156,40 +156,6 @@
 
 
 
-<script>
-/*--------수업신청하기---------*/
-$(".joincourse").on("click", function() {
-	event.preventDefault();
-	$this=$(this);
-	console.log($this);
-	console.log($this.siblings("td.domain").text());
-	console.log("${userid}");
-
-	
-	var url = '/course/joinclass';
-	$.ajax({
-		type : 'POST',
-		url : url ,
-		headers : {
-			"Content-Type" : "application/json",
-			"X-HTTP-Method-Override" : "POST"
-		},
-		data : JSON.stringify({
-				clz_domain: $this.siblings("td.domain").text(),
-				mem_id: "${user.id}"
-				}),
-		success : function(result) {
-			alert("요청완료")
-			$this.text("[1]")
-		}
-		
-	});
-	
-	
-});	
-	
-
-</script>
 
 
 

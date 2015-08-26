@@ -29,7 +29,12 @@
                   	
                   	
                   	<div class="row">
-                  	
+						<div class="col-sm-12">
+	                   			<a href="/${domain}/course/joinmemberlist?searchType=mem_gb&keyword=member_teacher" class=" pull-right margin-bottom">선생님</a>
+	 							<p class=" pull-right margin-bottom">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</p>                 	
+	                  			<a href="/${domain}/course/joinmemberlist?searchType=mem_gb&keyword=member_student" class=" pull-right margin-bottom">학생</a>
+		                </div>
+	                  	                  	
 	                  	<div class="col-sm-12">
 	                  
 		                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
@@ -113,6 +118,9 @@
 										</option>	
 										<option value="name" <c:out value="${cri.searchType == 'name'?'selected':'' }" />>
 										성명	
+										</option>
+										<option value="mem_gb" <c:out value="${cri.searchType == 'mem_gb'?'selected':'' }" />>
+										구분
 										</option>
 									</select>
 									<div class="input-group">

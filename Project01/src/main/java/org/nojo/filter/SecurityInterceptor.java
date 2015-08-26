@@ -52,7 +52,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 		Authentication auth  = context.getAuthentication();
 		String authority = securityMapper.getClassAuthority(domain, SecurityUtil.getUser().getId());
 		if(authority == null){
-			res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "권한이 없습니다.");
+			res.sendRedirect("/classinfo/joinform?domain" + domain);
 			return false;
 		}
 		context.setAuthentication(new UsernamePasswordAuthenticationToken(
