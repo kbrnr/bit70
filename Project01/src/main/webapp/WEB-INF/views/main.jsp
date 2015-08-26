@@ -300,6 +300,20 @@
 		}, 60000);
 	});
 	
+	//Seat에 질문 표시
+	parent.socket.on("seatQuestion", function(no){
+		var qtarget = $(".chair[data-mem_id='"+no.userId+"']");
+		var qno = no.qno;
+		var href = "<a href='/${domain}/qna/detail?no="+qno+"'><img src='/resources/nojo/images/questionMark.gif' /></a>";
+		qtarget.attr("data-content", href);
+		qtarget.attr("data-html", true);
+		qtarget.popover('show');
+		setTimeout(function(){
+			target.popover('destroy');
+		}, 60000);
+		
+	});
+	
 </script>
 
 <%@include file="/WEB-INF/views/include/frameFooter.jsp"%>
