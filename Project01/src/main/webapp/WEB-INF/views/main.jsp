@@ -173,6 +173,7 @@
 		parent.$("#sendScore").submit(function(e){
 			e.preventDefault();
 			var $this = $(this);
+			console.log($this.serialize());
 			$.post("/${domain}/comprehension", $this.serialize(), function(data){
 				var obj = {
 					mem_id: "${user.id}", 
@@ -281,7 +282,8 @@
 		}
 	});
 	parent.socket.on("offlineUser", function(user){
-		$(".chair[data-mem_id='" + users[i] + "']").children().children($(".realImg")[0]).css( { "border" : "3px solid black"});
+		console.log("offlineUser" + user);
+		$(".chair[data-mem_id='" + user + "']").children().children($(".realImg")[0]).css( { "border" : "1px solid black"});
 	});
 	
 	//Seat에서 이해도 점수 표시
