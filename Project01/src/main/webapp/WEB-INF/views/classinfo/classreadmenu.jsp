@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
-
   
   
 		<!-- Content Header (Page header) -->
@@ -23,7 +22,7 @@
 		<!-- ----------------------------------------- -->
 			<div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">■수업등록</h3>
+                  <h3 class="box-title">■수업상세FAFD</h3>
                 </div><!-- /.box-header -->
                
 				<!-- form start -->
@@ -32,80 +31,68 @@
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">수업명</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputEmail3" name='clz_name'">
+                        ${clzinfo.clz_name}
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label" >도메인</label>
                       <label for="inputPassword3" class="col-sm-2 control-label" >http://www.XXX.com/</label>
                       <div class="col-sm-2">
-                      	<input id="clz_domain" type="text" class="form-control" name='clz_domain'>
+                      	${clzinfo.clz_domain}
                       </div>
                       <div class="col-sm-4">
                       	<div id="domainmsg"></div>
                       </div>
                       <div class="col-sm-2">
-                      	<button id="btn_domaincheck" type="button" class="btn btn-info pull-right">도메인검사</button>
+                      	
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">선생님</label>
                       <div class="col-sm-8">
-                 		<div id="choiceteacher" class="time-label"></div>
+                 		<div id="choiceteacher" class="time-label">
+                 		<c:forEach items="${clzinfo.teacherlist}" var="teacher">
+                 				${teacher.mem_name}(${teacher.mem_id})&nbsp;&nbsp;&nbsp;
+                 			</c:forEach>
+                 		</div>
                       </div>
                       <div class="col-sm-2">
-                 		<button id="btn_teachlist" type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#teacherModal">선생님찾기</button>	
+                 			
                       </div>
                     </div>
                                          
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">강의실</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputEmail3" name='clz_room'>
+                        ${clzinfo.clz_room}
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">시작일</label>
                       <div class="col-sm-10">
-                        <input type="date" class="form-control" id="inputEmail3" name='clz_start_date'>
+                        ${clzinfo.clz_start_date}
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">종료일</label>
                       <div class="col-sm-10">
-                        <input type="date" class="form-control" id="inputEmail3" name='clz_end_date'>
+                        ${clzinfo.clz_end_date}
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label" >상태</label>
                       <div class="col-sm-10">
-                        <label>
-                              준비중
-                          <input type="radio" name="clz_state" id="optionsRadios1" value="1">
-                        </label>
-                        <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                              강의중
-                          <input type="radio" name="clz_state" id="optionsRadios2" value="2">
-                        </label>
-                        <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                              종료
-                          <input type="radio" name="clz_state" id="optionsRadios3" value="3">
-                        </label>
-                        <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                              일시정지
-                          <input type="radio" name="clz_state" id="optionsRadios4" value="4">
-                        </label>
+                        ${clzinfo.clz_state} 
                       </div>
                     </div>                         
                   </div><!-- /.box-body -->
                   <div id="hiddenid"></div>
-                  <div class="box-footer">
-                  	<a href="classlist" class="btn btn-default">취소</a>
-                    
-                    <button type="submit" class="btn btn-info pull-right">등록</button>
-                    
-                  </div><!-- /.box-footer -->
+                  
                 </form>
+                  <div class="box-footer">
+                   	<a href="/classinfo/classlist" class="btn btn-default">목록</a>
+                  	<a href="/classinfo/classmodifyform?domain=${clzinfo.clz_domain}" class="btn btn-info pull-right">수정</a>
+                  </div><!-- /.box-footer -->
 			</div><!-- /.box box-info -->		
 		<!-- ----------------------------------------- -->
 			
@@ -165,107 +152,13 @@
 <!-- ****************************************************************************** -->
 <!-- ****************************************************************************** -->
 
+  </body>
+</html>
+
 
 <script>
-//모달 선생님 리스트//
-var page = 1
-$("#btn_teachlist").on("click", function() {
-	popteacherlist(page)
-});
-
-function popteacherlist(){
-	$.ajax({
-		url: '/membership/modalteacherlist/'+page,
-		type: 'post',
-		dataType:'json',
-		success: function(map){
-			var listStr = "";
-			$(map.poplist).each(
-					function() {
-						listStr += "<tr role='row' class='userinfo'><td class='userid'><a href='#'>"+this.mem_id+"</a></td><td class='username'>"+this.mem_name+"</td><td>"+this.mem_email+"</td><td>"+this.mem_tel+"</td></tr>";
-					}
-			);
-			$("#teacherinfo").html(listStr);
-			
-			
-			//페이징
-		    replypage = (map.poppageMaker.page);
-		var startPage = (map.poppageMaker.startPage);
-		var endPage = (map.poppageMaker.endPage);
-		var prevURL = (map.poppageMaker.startPage-1) ; 
-		var nextURL = (map.poppageMaker.endPage+1) ; 
-		var prev = (map.poppageMaker.prev);
-		var next = (map.poppageMaker.next);
-		var pageMakerList ="";
-			
-		if(prev === true){
-			pageMakerList +='<li id='+ prevURL +'><a href="#">prev</a></li>';
-		}
-		
-		for(var i=startPage; i<=endPage ; i++ ){
-			if(i==replypage){
-				pageMakerList += '<li id='+ i +'><a href="#"><b>  '+ i +' </a></b></li>';
-			}else {
-				pageMakerList += '<li id='+ i +'><a href="#">'+ i +'</a></li>';
-			}
-		}
-		
-		if(next === true){
-			pageMakerList +='<li id='+ nextURL +'><a href="#">next</a></li>';
-		}
-		
-		$("#teacherpaging").html(pageMakerList); 
-		}
-	});
-}
-
-$("#teacherpaging").on("click", "li", function(event) {
-	event.preventDefault();
-	page=$(this).attr("id");
-	popteacherlist(page)
-});
-//./모달 선생님 리스트//
-
-//모달창 선생님 선택시
-$("#teacherinfo").on("click", ".userid", function(){
-	var userid ;
-	var username ;
-	userid = $(this).text();
-	username = $(this).siblings('.username').text();
-	console.log(userid);
-	console.log(username);
-	$("#choiceteacher").append("<span data-vid='"+ userid +"' class='bg-gray'>"+ username + "(" + userid + ") X <input type='hidden' data-hid='mem_id' name='mem_id' value='"+userid+"' ></span>");
-	
-});
-
-
-//선택된 선생님 취소
-$("#choiceteacher").on("click", ".bg-gray", function(){
-	$this = $(this)
-	$this.remove();
-	
-});
-
-
-
-//도메인체크
-$("#btn_domaincheck").on("click", function() {
-	console.log($("#clz_domain").val());
-	$.ajax({
-		url: '/classinfo/domaincheck',	
-		type: 'post',
-		data: "clz_domain=" + $("#clz_domain").val(),
-		dataType:'json',
-		success: function(data){
-			console.log(data);
-			var msg = data ? "사용할수 있는 도메인입니다." : "사용할수 없는 도메인입니다.";
-			$("#domainmsg").html(msg)
-		}
-	});
-});
 
 
 </script>
-
 
 <%@include file="/WEB-INF/views/include/frameFooter.jsp"%>

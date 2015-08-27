@@ -69,7 +69,16 @@
 	</div>
 </c:if>
 
-
 <!-- /.content-wrapper -->
+
+
+<!-- 선택메뉴 활성화 -->
+<script>
+$(".treeview").on('click', function(){
+	$('.treeview').attr('class','treeview')
+	$(this).attr('class', 'treeview active')	
+});
+</script>
+
  
 <%@include file="/WEB-INF/views/include/footer.jsp"%>

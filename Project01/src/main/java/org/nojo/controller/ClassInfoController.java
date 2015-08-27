@@ -74,9 +74,17 @@ public class ClassInfoController {
 	public String classread(String domain, Model model){
 		ClassListVO clzVO ;
 		clzVO = classInfoService.getClassOne(domain);
-		model.addAttribute("clzinfo", clzVO);
-		
+		model.addAttribute("clzinfo", clzVO);	
 		return "/classinfo/classread" ;
+	}
+	
+	//수업상세 위드 메뉴
+	@RequestMapping(value="/classreadmenu", method=RequestMethod.GET)
+	public String classreadmenu(String domain, Model model){
+		ClassListVO clzVO ;
+		clzVO = classInfoService.getClassOne(domain);
+		model.addAttribute("clzinfo", clzVO);	
+		return "/classinfo/classreadmenu" ;
 	}
 
 	//수업수정 폼
