@@ -40,7 +40,6 @@ public class AnswerController {
 	
 	//답변 글쓰기
 	//원문 글 가져오기
-	@Secured("")
 	@RequestMapping(value = "/answer", method = RequestMethod.GET)
 	public String regist(@PathVariable("domain") String domain, @RequestParam("no") int no, Model model) throws Exception {
 		model.addAttribute("QuestionVO", questionService.getReadQuestion(no));
