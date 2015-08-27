@@ -34,12 +34,18 @@
 			<div class="box-group" id="accordion">
 				<div class="panel box box-success">
 					<div class="box-header with-border">
-							<h5 class="box-title">
+					<div style="float: left;"><span class="glyphicon glyphicon-question-sign" style="font-size: 40px;"></span>
+					</div>
+					<div style="margin-left: 70px;">
+							<h2 class="box-title">
 								<c:if test="${QuestionVO.question_visible == false }">
 									<span class="glyphicon glyphicon-lock"></span>
 								</c:if>
-							${QuestionVO.question_title }</h5>
-							<h5 class="box-title" style="float: right;">${QuestionVO.mem_id }</h5>
+							${QuestionVO.question_title }</h2>
+						<dl>
+							<dt style="display: inline;"><span class="glyphicon glyphicon-user"></span> ${QuestionVO.mem_id }</dt>
+							<dd style="display: inline;">${QuestionVO.question_reg_date}</dd>
+						</dl>
 					</div>
 					<div class="box-header with-border ">
 						<div class="froala-view">${QuestionVO.question_content }</div>
@@ -73,8 +79,9 @@
 						<c:set var="memId" value="${vo.mem_id }" />
 						<c:set var="userId" value="${user.id}" />
 						<c:set var="t" value="${isTeacher}" />
+						<c:set var="qId" value="${QuestionVO.mem_id }"/>
 						<c:choose>
-							<c:when test="${v == true || t == true || memId == userId}">
+							<c:when test="${v == true || t == true || memId == userId || userId == qId}">
 								<div class="box-header with-border">
 									<h4 class="box-title" style="display: none;">${vo.question_no }</h4>
 									<h4 id="answer_no" class="box-title" style="display: none;">${vo.answer_no }</h4>
@@ -115,7 +122,8 @@
 								<div class="box-header with-border">
 									<h4 class="box-title"><span class="glyphicon glyphicon-lock"></span>비밀 답변 입니다.</h4>
 								</div>
-								<div class="froala-view"><span class="glyphicon glyphicon-lock"></span>비밀 글입니다.</div>
+								<br>
+								<div class="froala-view" style="height: 200px;"><span class="glyphicon glyphicon-lock"></span>비밀 글입니다.</div>
 							</c:when>
 						</c:choose>
 					<script type="text/javascript">

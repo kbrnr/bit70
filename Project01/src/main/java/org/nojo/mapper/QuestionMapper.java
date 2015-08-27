@@ -55,7 +55,7 @@ public interface QuestionMapper {
 	public int getTotalCnt(String domain) throws Exception;
 
 	//게시글 조회
-	@Select("select question_no, question_title, question_content, question_visible, mem_id, clz_domain "
+	@Select("select question_no, question_title, question_content, question_visible, mem_id, clz_domain, question_reg_date "
 								+ "from tbl_question "
 								+ "where question_no = #{no}")
 	public QuestionVO readBoard(int no) throws Exception;
