@@ -48,6 +48,10 @@
             <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
+            <input type="radio" class="form-control" name="mem_gb" value="member_teacher" required/>선생님 
+            <input type="radio" class="form-control" name="mem_gb" value="member_student" required/> 학생
+          </div>
+          <div class="form-group has-feedback">
             <input type="file" class="form-control" name="file" />
           </div>
           <div class="row">

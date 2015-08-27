@@ -11,7 +11,7 @@ public interface MemberMapper {
 	public MemberVO findUserById(String name);
 	
 	//회원가입
-	@Insert("insert into tbl_member(mem_id, mem_name, mem_pw, mem_photo) values(#{mem_id}, #{mem_name}, #{mem_pw}, #{mem_photo})")
+	@Insert("insert into tbl_member(mem_id, mem_name, mem_pw, mem_gb, mem_photo) values(#{mem_id}, #{mem_name}, #{mem_pw}, #{mem_gb},#{mem_photo})")
 	public void signIn(MemberVO vo) throws Exception;
 	
 	//회원정보보기
