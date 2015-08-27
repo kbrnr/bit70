@@ -215,7 +215,7 @@
 		this.action = action;
 	}
 	function inquiry(e, target){
-		e.preventDefault();
+		updateReadStatus(e, target);
 		target = $(target);
 		var link = target.data("link");
 		location.href = link;
