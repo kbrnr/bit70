@@ -27,9 +27,9 @@
 							<c:if test="${vo.seat_x != 0}">
 								<div class="chair" data-mem_id="${vo.mem_id}" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">
 									<div class="img">
-										<img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}" onerror="javascript:this.src='/resources/nojo/images/noImage.png'" />
+										<img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}" onerror="imgError(this);" />
 									</div>
-									<span class="hidden memId">${vo.mem_id}</span> <span class="name">${vo.mem_name}</span>
+									<div class="name">${vo.mem_name}<span class="hidden memId">${vo.mem_id}</span></div>
 								</div>
 							</c:if>
 						</c:forEach>
@@ -104,6 +104,13 @@
 			}
         }
     });
+    
+	//seat 이미지 on 이벤트
+	function imgError(image) {
+    image.onerror = "";
+    image.src = "/resources/nojo/images/noImage.png";
+    return true;
+	}
 
 </script>
 

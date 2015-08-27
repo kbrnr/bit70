@@ -62,7 +62,7 @@
                    <label for="inputPhoto" class="col-sm-2 control-label">사진</label>
                    <div class="col-sm-10">
                    	<div class="col-sm-5">
-                   		<img src="/membership/profileImg?userId=${user.id}" onerror="javascript:this.src='/resources/nojo/images/noImage.png'">
+                   		<img src="/membership/profileImg?userId=${user.id}" onerror='imgError(this);'">
 			            <input type="file" class="form-control" name="file" />
                    	</div>
                    </div>
@@ -83,4 +83,12 @@
 		
 	</div>
 </section>
+<script>
+	//seat 이미지 on 이벤트
+	function imgError(image) {
+	image.onerror = "";
+	image.src = "/resources/nojo/images/noImage.png";
+	return true;
+	}
+</script>
 <%@include file="/WEB-INF/views/include/frameFooter.jsp"%>

@@ -270,13 +270,13 @@
 				var name = this.mem_name;
 				var id = this.mem_id;
 				var domain = "${domain}";
-				var str = "<div class='chair' data-mem_id='" + id + "' data-trigger='manual' data-placement='middle' data-html='true' style='margin-left: " 
-					+ x + "px; margin-top: " 
-					+ y + "px;'><div class='img'><img class='realImg' src='/" 
-					+ domain + "/seat/seatImg?userId=" 
-					+ id + "' onerror=\"javascript:this.src='/resources/nojo/images/noImage.png'\" /></div>"
-					+ "<div class='name'>"+name + "</div>"
-					+ "</div>"
+				var str = "<div class='chair' style='margin-left: "	+ x + "px; margin-top: " + y + "px;'>"
+						+ "  <div class='img'>"
+						+ "	    <img class='realImg' src='/" + domain + "/seat/seatImg?userId=" + id + "' onerror='imgError(this);'/>"
+						+ "  </div>"
+						+ "  <div class='name' data-mem_id='" + id + "' data-trigger='manual' data-placement='bottom' data-html='true' >"+name + "</div>"
+						+ "</div>";
+
 				var chair = $(str);
 				chair.css( { "margin-left" : x+"px", "margin-top" : y+"px"});
 				$("#seat").append(str);
@@ -286,17 +286,24 @@
 	//Seat에서 on/off표시
 	parent.socket.on("onlineUser", function(users){
 		for(var i in users){
-			$(".chair[data-mem_id='" + users[i] + "']").children().children($(".realImg")[0]).css( { "border" : "3px solid red"});
+			console.log("onlineUser" + users);
+			$(".name[data-mem_id='" + users[i] + "']").parent().css( { "background-color" : "#D6F7FE"});
+			//$(".chair[data-mem_id='" + users[i] + "']").children().children($(".realImg")[0]).css( { "border" : "3px solid red"});
 		}
 	});
 	parent.socket.on("offlineUser", function(user){
 		console.log("offlineUser" + user);
-		$(".chair[data-mem_id='" + user + "']").children().children($(".realImg")[0]).css( { "border" : "1px solid black"});
+		$(".name[data-mem_id='" + user + "']").parent().css( { "background-color" : "white"});
 	});
-	
+	//seat 이미지 on 이벤트
+	function imgError(image) {
+    image.onerror = "";
+    image.src = "/resources/nojo/images/noImage.png";
+    return true;
+	}
 	//Seat에서 이해도 점수 표시
 	parent.socket.on("seatScore", function(data){
-		var target = $(".chair[data-mem_id='"+data.mem_id+"']");
+		var target = $(".name[data-mem_id='"+data.mem_id+"']");
 		target.attr("data-content", data.comprehension_score);
 		target.popover('show');
 		setTimeout(function(){
@@ -306,7 +313,7 @@
 	
 	//Seat에 질문 표시
 	parent.socket.on("seatQuestion", function(no){
-		var qtarget = $(".chair[data-mem_id='"+no.userId+"']");
+		var qtarget = $(".name[data-mem_id='"+no.userId+"']");
 		var qno = no.qno;
 		var href = "<a href='/${domain}/qna/detail?no="+qno+"'><img src='/resources/nojo/images/questionMark.gif' /></a>";
 		qtarget.attr("data-content", href);
