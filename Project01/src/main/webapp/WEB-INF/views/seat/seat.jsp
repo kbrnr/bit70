@@ -27,7 +27,7 @@
 							<c:if test="${vo.seat_x != 0}">
 								<div class="chair" data-mem_id="${vo.mem_id}" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">
 									<div class="img">
-										<img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}" />
+										<img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}" onerror="javascript:this.src='/resources/nojo/images/noImage.png'" />
 									</div>
 									<span class="hidden memId">${vo.mem_id}</span> <span class="name">${vo.mem_name}</span>
 								</div>
@@ -40,7 +40,7 @@
 						<c:if test="${vo.seat_x == 0}">
 							<div class="chair" data-mem_id="${vo.mem_id}" style="position: relative;">
 								<div class="img">
-									<img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}" />
+									<img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}" onerror="javascript:this.src='/resources/nojo/images/noImage.png'" />
 								</div>
 								<div class="name">${vo.mem_name}</div>
 							</div>

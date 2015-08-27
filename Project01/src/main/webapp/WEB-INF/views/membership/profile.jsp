@@ -62,7 +62,7 @@
                    <label for="inputPhoto" class="col-sm-2 control-label">사진</label>
                    <div class="col-sm-10">
                    	<div class="col-sm-5">
-                   		<img src="/membership/profileImg?userId=${user.id}">
+                   		<img src="/membership/profileImg?userId=${user.id}" onerror="javascript:this.src='/resources/nojo/images/noImage.png'">
 			            <input type="file" class="form-control" name="file" />
                    	</div>
                    </div>

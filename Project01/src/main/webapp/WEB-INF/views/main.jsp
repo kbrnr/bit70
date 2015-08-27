@@ -274,7 +274,7 @@
 					+ x + "px; margin-top: " 
 					+ y + "px;'><div class='img'><img class='realImg' src='/" 
 					+ domain + "/seat/seatImg?userId=" 
-					+ id + "' '/></div>"
+					+ id + "' onerror=\"javascript:this.src='/resources/nojo/images/noImage.png'\" /></div>"
 					+ "<div class='name'>"+name + "</div>"
 					+ "</div>"
 				var chair = $(str);
