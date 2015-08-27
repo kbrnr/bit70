@@ -30,7 +30,7 @@
 				<div class="box box-primary">
 					<div class="box-body">
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<form id="searchTree">
 									<div class="input-group">
 								      <input id="treeSearchText" type="text" class="form-control" placeholder="커리큘럼 검색">
@@ -41,7 +41,7 @@
 								</form>
 								<div id="tree"></div>
 							</div>
-							<div class="col-md-9">
+							<div class="col-md-8">
 								<div class="panel panel-primary">
 									<div class="panel-heading">
 										<h1 id="curri_title" class="panel-title" style="display: inline;"></h1>
@@ -50,7 +50,7 @@
 										</c:if>
 									</div>
 									<div class="panel-body">
-										<p id="curriContent"></p>
+										<pre id="curriContent" style="background-color: white; border: none; padding: 0px;"></pre>
 									</div>
 								</div>
 							</div>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.nojo.domain.SeatVO;
 import org.nojo.service.SeatService;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +36,7 @@ public class SeatController {
 		return seatService.listMember(domain, "seat");
 	}
 
+	@Secured("ROLE_ADMIN, ROLE_TEACHER, ROLE_CLASS_PRESIDENT")
 	@RequestMapping(method = RequestMethod.POST)
 	public void seatPage(@RequestBody List<SeatVO> list, @PathVariable String domain) throws Exception {
 		seatService.addSeat(list, domain);
