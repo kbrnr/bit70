@@ -5,7 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.nojo.bizDomain.ScoreVO;
-import org.nojo.bizDomain.TQuestionScoreByIDVO;
 import org.nojo.bizDomain.TQuestionScoreListVO;
 import org.nojo.domain.ComprehensionVO;
 import org.nojo.domain.NotificationVO;
@@ -119,8 +118,8 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 	}
 	
 	@Override
-	public List<TQuestionScoreByIDVO> getComprehensionByID(String domain, String mem_id) throws Exception {
-		List<TQuestionScoreByIDVO> tqscorebyidlist ; 
+	public List<ScoreVO> getComprehensionByID(String domain, String mem_id) throws Exception {
+		List<ScoreVO> tqscorebyidlist ; 
 		tqscorebyidlist = mapper.selectScoreByID(domain, mem_id);
 		
 		return tqscorebyidlist;	

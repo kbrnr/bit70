@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.nojo.bizDomain.TQuestionScoreByIDVO;
+import org.nojo.bizDomain.ScoreVO;
 import org.nojo.bizDomain.TQuestionScoreListVO;
 import org.nojo.domain.ComprehensionVO;
 import org.nojo.domain.TeacherquestionVO;
@@ -60,12 +60,9 @@ public class ComprehensionController {
 		System.out.println(SecurityUtil.getUser().getId());
 		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 		
-		
-		
-		List<TQuestionScoreByIDVO> tqscorelistbyID ; 
+		List<ScoreVO> tqscorelistbyID ; 
 		tqscorelistbyID = service.getComprehensionByID(domain, SecurityUtil.getUser().getId());
 		System.out.println(tqscorelistbyID.get(0).getTeacherquestion_content());
-		
 		
 		model.addAttribute("scorelist", tqscorelistbyID);
 		return "/comprehension/comprehensionID";

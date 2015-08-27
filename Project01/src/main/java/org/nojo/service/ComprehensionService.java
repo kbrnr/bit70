@@ -2,7 +2,7 @@ package org.nojo.service;
 
 import java.util.List;
 
-import org.nojo.bizDomain.TQuestionScoreByIDVO;
+import org.nojo.bizDomain.ScoreVO;
 import org.nojo.bizDomain.TQuestionScoreListVO;
 import org.nojo.domain.ComprehensionVO;
 import org.nojo.domain.TeacherquestionVO;
@@ -22,5 +22,5 @@ public interface ComprehensionService {
 
 	public List<TQuestionScoreListVO> getComprehension(String domain) throws Exception;
 
-	public List<TQuestionScoreByIDVO> getComprehensionByID(String domain, String mem_id) throws Exception ;
+	public List<ScoreVO> getComprehensionByID(String domain, String mem_id) throws Exception ;
 }

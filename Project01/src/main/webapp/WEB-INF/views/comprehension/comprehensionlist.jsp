@@ -29,33 +29,53 @@
                   	
                   	<div class="row">
 	                  	<div class="col-sm-12">
-	                  	<div class="table-responsive">
-		                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+	                  	<div class="box-body table-responsive no-padding">
+		                  <table class="table table-hover">
 		                    <thead>
-		                      <tr role="row">
-		                      	 <th>&nbsp;</th>
+		                      <tr>
+		                      	 <th width="142px" >&nbsp;</th>
 		                      	 <c:forEach items="${tqscorelist[0].scorelist}" var="namelist">
-			                     	<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 142px;">
-			                     	(${namelist.mem_id})${namelist.mem_name}
+			                     	<th width="80px" style="table-layout:fixed" >
+			                     	${namelist.mem_name}
 			                     	</th>
 			                     </c:forEach>
 			                  </tr>
 							</thead>
 							<tbody>							  
-  								<c:forEach items="${tqscorelist}" var="tqlist" varStatus="status">
+  							  <c:forEach items="${tqscorelist}" var="tqlist" varStatus="status">
 							  <tr>
-							  	<td>(${tqlist.teacherquestion_no})${tqlist.teacherquestion_content}
-							  	</td>
-							  		<c:forEach items="${tqlist.scorelist}" var="scorelist">
-								  		<c:if test = "${scorelist.comprehension_score == 0}">
-									  		<td>&nbsp;
-									  		</td>
-								  		</c:if>
-							  			<c:if test = "${scorelist.comprehension_score != 0}">
-							  		 		<td>(${scorelist.teacherquestion_no})(${scorelist.mem_id})${scorelist.comprehension_score}
-							  		 		</td>
-							  			</c:if>
-							  		</c:forEach>
+							  	<td>${tqlist.teacherquestion_content}</td>
+							  	
+							  	<c:forEach items="${tqlist.scorelist}" var="scorelist">
+								
+								<c:choose>
+									
+									<c:when test="${scorelist.comprehension_score >= 9}">
+										<td><p class="lead"><span class="label label-success">${scorelist.comprehension_score}</span></p></td>
+									</c:when>
+									
+									<c:when test="${scorelist.comprehension_score >= 7}">
+										<td><p class="lead "><span class="label label-info">${scorelist.comprehension_score}</span></p></td>
+									</c:when>
+									
+									<c:when test="${scorelist.comprehension_score >= 5}">
+										<td><p class="lead "><span class="label label-primary">${scorelist.comprehension_score}</span></p></td>
+									</c:when>
+									
+									<c:when test="${scorelist.comprehension_score >= 3}">
+										<td><p class="lead"><span class="label label-warning">${scorelist.comprehension_score}</span></p></td>
+									</c:when>
+									
+									<c:when test="${scorelist.comprehension_score >= 1}">
+										<td><p class="lead"><span class="label label-danger">${scorelist.comprehension_score}</span></p></td>
+									</c:when>
+									
+									<c:otherwise >
+										<td class="btn"><span data-qno="${tqlist.teacherquestion_no}" class="label label-default" >입력</span></td>
+									</c:otherwise>
+								</c:choose>
+							  
+							  	</c:forEach>
 							  </tr>
 							  </c:forEach>
 			                </tbody>   
@@ -63,8 +83,6 @@
 		                  </div>
 	                  	</div><!-- /.grid -->
                   	</div><!-- /.row -->
-                  	
-                
                     	
                   </div><!-- /.example1_wrapper -->
                 </div><!-- /.box-body -->
@@ -72,5 +90,13 @@
 		
 		<!-- ----------------------------------------- -->
 	</section>
+
+<script>
+$(".btn").on('click', function(){
+	parent.$("#myModal [name=teacherquestion_no]").val($(this).data("qno"));
+	parent.$("#myModal").modal("show");		
+});
+
+</script>
 
 <%@include file="/WEB-INF/views/include/frameFooter.jsp"%>

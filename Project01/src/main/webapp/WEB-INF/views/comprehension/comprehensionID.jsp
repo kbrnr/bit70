@@ -33,12 +33,12 @@
 		                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
 		                    <thead>
 		                      <tr role="row">
-		                      	 <th>이해도질문</th>
+		                      	 <th style="width: 350px">이해도질문</th>
 			                     <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 142px;">
 			                     	${user.id} 이해도
 			                     </th>
 			                     <th>그래프</th>
-			                   
+			                   	 <th>댓글</th>
 			                  </tr>
 							</thead>
 							<tbody>							  
@@ -52,17 +52,23 @@
 									</td>
 									<td>&nbsp;
 									</td>
-									
 								</c:if>
 							  	<c:if test = "${tqlist.comprehension_score != 0}">
 								  	<td>(${tqlist.teacherquestion_no})(${tqlist.mem_id})${tqlist.comprehension_score}
 								  	</td>
 								  	<td><div class="progress progress-xs progress-striped active">
-                          					<div class="progress-bar progress-bar-success" style="width: 90%;"></div>
+                          				<div class="progress-bar progress-bar-success" style="width: 30%"></div>
+                          				</div>
 							  		</td>
-							  		
 							  	</c:if>
-							  		
+							  	<c:if test = "${tqlist.comprehension_replycnt == 0}">
+								  	<td>&nbsp;
+								  	</td>
+							  	</c:if>	
+							  	<c:if test = "${tqlist.comprehension_replycnt != 0}">
+								  	<td>댓글수(${tqlist.comprehension_replycnt})
+								  	</td>
+							  	</c:if>	
 							  </tr>	
 							</c:forEach>
 							  

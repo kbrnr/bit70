@@ -54,7 +54,11 @@
 		                      <c:forEach items="${list}" var="vo">
 			                    <tr role="row">
 			                      <td class="userid">${vo.mem_id}</td>
-			                      <td>${vo.mem_name}</td>
+			                      <td>
+			                      	<div class='img'><img class='realImg' src='/${domain}/seat/seatImg?userId=${vo.mem_id}' onerror="javascript:this.src='/resources/nojo/images/noImage.png'" />
+									${vo.mem_name}
+									</div>
+			                      </td>
 			                      <td>${vo.mem_email}</td>
 			                      <td>${vo.mem_tel}</td>
 			                      <c:if test="${isTeacher}">
