@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@Secured({"ROLE_CLASS_TEACHER","ROLE_CLASS_PRESIDENT","ROLE_CLASS_STUDENT","ROLE_ADMIN"})
 @Controller
 @RequestMapping("/{domain}/qna")
 public class AnswerController {

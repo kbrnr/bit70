@@ -4,15 +4,19 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
 import org.nojo.domain.AnswerVO;
 import org.nojo.domain.FilemanagerVO;
 import org.nojo.domain.QuestionVO;
+import org.nojo.security.Authority;
+import org.nojo.security.SecurityUtil;
 import org.nojo.service.AnswerService;
 import org.nojo.service.AttachFileService;
 import org.nojo.service.QuestionService;
 import org.nojo.util.Criteria;
 import org.nojo.util.PageMaker;
 import org.nojo.util.Search;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -23,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@Secured({"ROLE_CLASS_TEACHER","ROLE_CLASS_PRESIDENT","ROLE_CLASS_STUDENT","ROLE_ADMIN"})
 @Controller
 @RequestMapping("/{domain}/qna")
 public class QuestionController {
@@ -96,17 +101,31 @@ public class QuestionController {
 	@RequestMapping("/detail")
 	public String readBoard(@PathVariable("domain") String domain, @RequestParam("no") int no,
 			@ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+
 		PageMaker pagemaker = null;
 		List<AnswerVO> list = null;
 
+		
 		pagemaker = new PageMaker(cri, ansService.getCntList(no));
 		list = ansService.getAllAnswers(domain, no, cri);
 
 		for (AnswerVO vo : list) { vo.getAnswer_no(); }
 		
+		QuestionVO qvo = service.getReadQuestion(no);
+		
 		model.addAttribute("ansList", list);
-		model.addAttribute("QuestionVO", service.getReadQuestion(no));
-
+		model.addAttribute("QuestionVO", qvo);
+		
+		String user = SecurityUtil.getUser().getId();
+		boolean t = SecurityUtil.hasAuthority(Authority.ROLE_TEACHER);
+		
+		if(qvo.isQuestion_visible() == false){
+			if(t == true){
+				return "qna/detail";			
+			}else if(!user.equals(qvo.getMem_id())){
+				return "redirect:listpage";
+			}
+		}	
 		return "qna/detail";
 	}
 	
@@ -135,8 +154,13 @@ public class QuestionController {
 	public String modifyBoard(QuestionVO vo,
 			@RequestParam(value = "attachfile_no", required = false) Integer[] attachfile_no,
 			@PathVariable("domain") String domain) throws Exception {
-
+		
 		Integer question_no = vo.getQuestion_no();
+		
+		String user = SecurityUtil.getUser().getId();
+			if(!user.equals(vo.getMem_id())){
+				return "redirect:detail?no=" + question_no;
+			}
 		
 		if (attachfile_no != null) {
 			for (Integer files : attachfile_no) {
@@ -158,6 +182,7 @@ public class QuestionController {
 	// 글삭제
 	@RequestMapping(value = "/questionRemove/{no}")
 	public String removeBoard(@PathVariable("no") int no) throws Exception {
+		
 		fileService.removeAttachQuestionBoard(no);
 		service.removeQuestion(no);
 
