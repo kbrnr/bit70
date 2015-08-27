@@ -33,14 +33,14 @@ public class QuestionVO {
 	
 
 
-	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	/*private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	@Override
 	public String toString() {
 		return "QuestionVO [question_no=" + question_no + ", question_title=" + question_title + ", question_content="
 				+ question_content + ", question_reg_date=" + question_reg_date + ", question_gb=" + question_gb
 				+ ", question_visible=" + question_visible + ", clz_domain=" + clz_domain + ", mem_id=" + mem_id + "]";
-	}
+	}*/
 
 	
 	
@@ -65,8 +65,8 @@ public class QuestionVO {
 	}
 
 
-	public String getQuestion_reg_date() {
-		return sdf.format(question_reg_date);
+	public Date getQuestion_reg_date() {
+		return question_reg_date;
 	}
 
 

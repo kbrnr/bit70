@@ -28,7 +28,7 @@ public class CurriculumController {
     return "/curriculum/list";
   }
   
-  @Secured("ROLE_CLASS_TEACHER")
+  @Secured({"ROLE_ADMIN", "ROLE_CLASS_TEACHER"})
   @RequestMapping(value = "/edit", method = RequestMethod.GET)
   public String editForm(@PathVariable String domain) {
     return "/curriculum/edit";
