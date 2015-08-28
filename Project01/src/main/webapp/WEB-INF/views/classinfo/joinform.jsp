@@ -121,7 +121,7 @@ $("#btn_join").on("click", function() {
 			if (result == 'ok') {
 				alert("가입되었습니다. 선생님의 승인후 사용가능합니다.");
 			}
-			$(location).attr('href', '/')
+			parent.location.href = "/";
 		}
 	});
 });	
