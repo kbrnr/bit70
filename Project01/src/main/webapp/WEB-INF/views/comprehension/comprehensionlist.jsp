@@ -71,7 +71,7 @@
 									</c:when>
 									
 									<c:otherwise >
-										<td class="btn"><span data-qno="${tqlist.teacherquestion_no}" class="label label-default" >입력</span></td>
+										<td >&nbsp;</td>
 									</c:otherwise>
 								</c:choose>
 							  
