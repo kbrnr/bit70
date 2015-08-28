@@ -60,7 +60,7 @@
 			                      		${teacherlist.mem_name}(${teacherlist.mem_id})<br> 
 			                        </c:forEach>
 			                      </td>
-			                      <td>${vo.clz_room}${grade}${isStudent}</td>
+			                      <td>${vo.clz_room}</td>
 			                      <td>${vo.clz_start_date}</td>
 			                      <td>${vo.clz_end_date}</td>
 			                      <td>${vo.clz_state}</td>

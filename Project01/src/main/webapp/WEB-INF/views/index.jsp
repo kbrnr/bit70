@@ -27,7 +27,7 @@
 	      <li class="treeview"><a href="/${domain}/qna/listpage" target="inner"><i class="fa fa-link"></i> <span>질문답변</span></a></li>
 	      <li class="treeview"><a href="/${domain}/comprehension" target="inner"><i class="fa fa-link"></i> <span>이해도통계</span></a></li>
 	      <li class="treeview"><a href="/${domain}/course/joinmemberlist" target="inner"><i class="fa fa-link"></i> <span>우리반식구(가입승인)</span></a></li>
-	      <li class="treeview"><a href="/${domain}/seat" target="inner"><i class="fa fa-link"></i>[반장메뉴:배치도]</a></li>
+	      <li class="treeview"><a href="/${domain}/seat" target="inner"><i class="fa fa-link"></i><span>[반장메뉴:배치도]</span></a></li>
       </c:if>
       
       <c:if test="${isClassStudent || isClassPresident}">
@@ -37,7 +37,7 @@
           <li class="treeview"><a href="/${domain}/comprehension" target="inner"><i class="fa fa-link"></i> <span>이해도통계</span></a></li>
           <li class="treeview"><a href="/${domain}/course/joinmemberlist" target="inner"><i class="fa fa-link"></i> <span>우리반식구</span></a></li>
           <c:if test="${isClassPresident}">
-          	<li class="treeview"><a href="/${domain}/seat" target="inner"><i class="fa fa-link"></i>[반장메뉴:배치도]</a></li>
+          	<li class="treeview"><a href="/${domain}/seat" target="inner"><i class="fa fa-link"></i> <span>[반장메뉴:배치도]</span></a></li>
           </c:if>
       </c:if>
       
