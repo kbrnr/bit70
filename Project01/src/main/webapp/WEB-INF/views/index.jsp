@@ -10,7 +10,7 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel">
       <div class="pull-left image">
-        <img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+        <img width='48px' height='48px' style='border-radius: 24px;' src='/" + domain + "/seat/seatImg?userId=" + id + "' onerror='imgError(this);'/>
       </div>
       <div class="pull-left info">
         <h4>카페설정(Setting)</h4>
@@ -116,6 +116,16 @@ $(".treeview").on('click', function(){
 	$('.treeview').attr('class','treeview')
 	$(this).attr('class', 'treeview active')	
 });
+</script>
+
+
+<script>
+//seat 이미지 on 이벤트
+function imgError(image) {
+   image.onerror = "";
+   image.src = "/resources/nojo/images/noImage.png";
+   return true;
+}
 </script>
 
 <%@include file="/WEB-INF/views/include/footer.jsp"%>

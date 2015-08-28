@@ -72,8 +72,9 @@
 <!-- Font Awesome Icons -->
 <link href="/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
 <!-- favicon -->
-<link rel="" href="/resources/nojo/images/favicon.ico">
-
+ <link href="/favicon.ico" rel="icon" type="image/x-icon" />
+<!-- 배치도 CSS 추가-->
+<link rel="stylesheet" type="text/css" href="/resources/nojo/css/seatStyle.css">
 
 <style>
 html, body, .wrapper, .wrapper .content-wrapper, .content-wrapper *{
@@ -156,14 +157,14 @@ html, body, .wrapper, .wrapper .content-wrapper, .content-wrapper *{
                 <!-- Menu Toggle Button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <!-- The user image in the navbar-->
-                  <img src="/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image" />
+                  <img width='26px' height='26px' style='border-radius: 13px;' src='/" + domain + "/seat/seatImg?userId=" + id + "' onerror='imgError(this);'/>
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
                   <span class="hidden-xs">[${user.name} ${grade}]</span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- The user image in the menu -->
                   <li class="user-header">
-                    <img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+                  	<img width='84px' height='84px' style='border-radius: 42px;' src='/" + domain + "/seat/seatImg?userId=" + id + "' onerror='imgError(this);'/>
                     <p>
                       ${user.name} ${grade}
                       <small>Member since Nov. 2012</small>
@@ -196,3 +197,12 @@ html, body, .wrapper, .wrapper .content-wrapper, .content-wrapper *{
           </div>
         </nav>
       </header>
+
+<script>
+//seat 이미지 on 이벤트
+function imgError(image) {
+   image.onerror = "";
+   image.src = "/resources/nojo/images/noImage.png";
+   return true;
+}
+</script>
