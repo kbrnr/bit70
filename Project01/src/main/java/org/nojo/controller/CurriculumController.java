@@ -40,6 +40,7 @@ public class CurriculumController {
     return curriculumService.list(domain);
   }
 
+  @Secured({"ROLE_ADMIN", "ROLE_CLASS_TEACHER"})
   @RequestMapping(method = RequestMethod.POST)
   @ResponseStatus(HttpStatus.OK)
   public void test(@RequestBody List<CurriculumVO> list, @PathVariable String domain) {

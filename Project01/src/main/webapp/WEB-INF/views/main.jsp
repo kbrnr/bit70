@@ -76,8 +76,7 @@
 			<div class="col-sm-3">
 				<div class="box">
 	               	<div class="box-body">
-	               		<div id="notifications" class="list-group" style="overflow-y: hidden; height: 396px; margin-bottom: 0px;">
-	               		</div>
+	               		<div id="notifications" class="list-group" style="overflow-y: hidden; height: 396px; margin-bottom: 0px;"></div>
 	               	</div>
 				</div>
 			</div>
@@ -319,7 +318,7 @@
 		qtarget.attr("data-content", href);
 		qtarget.popover('show');
 		setTimeout(function(){
-			target.popover('destroy');
+			qtarget.popover('destroy');
 		}, 60000);
 		
 	});
