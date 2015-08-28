@@ -21,7 +21,8 @@ public interface CurriculumMapper {
           +"WHERE @id is not null "
           +") func "
           +"Join tbl_curriculum d "
-          +"ON func.id = d.curri_no ")
+          +"ON func.id = d.curri_no "
+          +"AND d.clz_domain = #{domain}")
 	public List<CurriculumVO> list(String domain);
 
 	public void insert(@Param("vo") CurriculumVO vo, @Param("domain") String domain);
