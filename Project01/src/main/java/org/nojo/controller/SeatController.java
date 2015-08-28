@@ -51,7 +51,9 @@ public class SeatController {
 	@RequestMapping(value = "/seatImg", method = RequestMethod.GET)
 	public void photo(String userId, HttpServletResponse res, Model model) throws IOException {
 		byte[] bytes = seatService.photo(userId);
-		res.getOutputStream().write(bytes);
+		if(bytes != null){
+			res.getOutputStream().write(bytes);
+		}
 	}
 }
 
