@@ -314,7 +314,9 @@
 	parent.socket.on("seatQuestion", function(no){
 		var qtarget = $(".name[data-mem_id='"+no.userId+"']");
 		var qno = no.qno;
-		var href = "<a href='/${domain}/qna/detail?no="+qno+"'><img src='/resources/nojo/images/questionMark.gif' /></a>";
+		//var href = "<a href='/${domain}/qna/detail?no="+qno+"'><img src='/resources/nojo/images/questionMark.gif' /></a>";
+//		var href = "<i class='icon fa fa-question'></i>";
+	var href = "<a href='/${domain}/qna/detail?no="+qno+"'><img src='/resources/nojo/images/questionMark.png' /></a>";
 		qtarget.attr("data-content", href);
 		qtarget.popover('show');
 		setTimeout(function(){

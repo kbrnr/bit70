@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
+<%@page import="java.util.*" %>
+
+<c:set var="regDate" value="${QuestionVO.question_reg_date }"/>
+
 
     <link href="/resources/froala_editor/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<!-- Include Editor style. -->
@@ -21,8 +26,16 @@
 					<!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
 					<div class="panel box box-success">
 						<div class="box-header with-border">
-							<h5 class="box-title">${QuestionVO.question_title }</h5>
-							<h5 class="box-title" style="float: right;">${QuestionVO.mem_id }</h5>
+						<div style="float: left;"><span class="glyphicon glyphicon-question-sign" style="font-size: 40px;"></span></div>
+							<div style="margin-left: 70px;">
+								<h5 class="box-title">${QuestionVO.question_title }</h5>
+								<dl>
+									<dt style="display: inline;"><span class="glyphicon glyphicon-user"></span> ${QuestionVO.mem_id }</dt>
+										<dd style="display: inline;">
+												<fmt:formatDate value="${regDate }" type="date" pattern="yyyy.MM.dd hh:mm:ss"/>
+										</dd>
+								</dl>
+							</div>
 						</div>
 						<div class="box-header with-border ">
 							<div class="froala-view" style="height: 200px;">${QuestionVO.question_content }</div>

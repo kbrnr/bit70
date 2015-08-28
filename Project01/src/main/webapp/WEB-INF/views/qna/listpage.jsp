@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
+<%@page import="java.util.*" %>
+<c:set var="date" value="<%=new Date() %>"/>
 
 <!-- Main content -->
 <section class="content">
@@ -39,7 +42,7 @@
 									</c:when>
 								</c:choose>
 							<td width = 120px>${vo.mem_id }</td>
-							<td width = 120px class="regDate">${vo.question_reg_date }</td>
+							<td width = 120px class="regDate"><fmt:formatDate value="${vo.question_reg_date }" type="date" pattern="yyyy-MM-dd"/></td>
 						</tr>
 					</c:forEach>
 				</table>

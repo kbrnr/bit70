@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
+<%@page import="java.util.*" %>
+
+<c:set var="regDate" value="${QuestionVO.question_reg_date }"/>
 
 	<link href="/resources/froala_editor/css/font-awesome.min.css"
 		rel="stylesheet" type="text/css" />
@@ -44,7 +48,9 @@
 							${QuestionVO.question_title }</h2>
 						<dl>
 							<dt style="display: inline;"><span class="glyphicon glyphicon-user"></span> ${QuestionVO.mem_id }</dt>
-							<dd style="display: inline;">${QuestionVO.question_reg_date}</dd>
+							<dd style="display: inline;">
+									<fmt:formatDate value="${regDate }" type="date" pattern="yyyy.MM.dd hh:mm:ss"/>
+							</dd>
 						</dl>
 					</div>
 					<div class="box-header with-border ">
@@ -84,13 +90,19 @@
 							<c:when test="${v == true || t == true || memId == userId || userId == qId}">
 								<div class="box-header with-border">
 									<h4 class="box-title" style="display: none;">${vo.question_no }</h4>
+									<div style="float: left;"><span class="glyphicon glyphicon-exclamation-sign" style="font-size: 40px;"></span></div>
+									<div style="margin-left: 70px;">
 									<h4 id="answer_no" class="box-title" style="display: none;">${vo.answer_no }</h4>
 									<h5 class="box-title">
 										<c:if test="${v == false }">
 										<span class="glyphicon glyphicon-lock"></span>
 										</c:if>${vo.answer_title }
 									</h5>
-									<h4 class="box-title" style="float: right;">${vo.mem_id }</h4>
+									<dl>
+										<dt style="display: inline;"><span class="glyphicon glyphicon-user"></span> ${vo.mem_id }</dt>
+										<dd style="display: inline;"><fmt:formatDate value="${vo.answer_reg_date}" type="both" pattern="yyyy.MM.dd hh:mm:ss"/></dd>
+									</dl>
+									</div>
 								</div>
 								<div class="box-header with-border">
 									<div class="froala-view" style="height: 200px;">${vo.answer_content }</div>
@@ -146,7 +158,7 @@
 		</div>
 	</div>
 </div>
-	
+</div>	
 <script type="text/javascript">
 	var no = ${QuestionVO.question_no};
 	var domain = '${domain}';

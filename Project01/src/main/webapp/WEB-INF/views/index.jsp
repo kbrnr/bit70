@@ -30,13 +30,15 @@
 	      <li class="treeview"><a href="/${domain}/seat" target="inner"><i class="fa fa-link"></i>[반장메뉴:배치도]</a></li>
       </c:if>
       
-      <c:if test="${isClassStudent}">
+      <c:if test="${isClassStudent || isClassPresident}">
 	  	  <li class="treeview active"><a href="/${domain}/main" target="inner"><i class="fa fa-link"></i> <span>홈</span></a></li>
      	  <li class="treeview"><a href="/classinfo/classread?domain=${domain}" target="inner"><i class="fa fa-link"></i> <span>${domain} 수업정보</span></a></li>
           <li class="treeview"><a href="/${domain}/qna/listpage" target="inner"><i class="fa fa-link"></i> <span>질문답변</span></a></li>
           <li class="treeview"><a href="/${domain}/comprehension" target="inner"><i class="fa fa-link"></i> <span>이해도통계</span></a></li>
           <li class="treeview"><a href="/${domain}/course/joinmemberlist" target="inner"><i class="fa fa-link"></i> <span>우리반식구</span></a></li>
-          <li class="treeview"><a href="/${domain}/seat" target="inner"><i class="fa fa-link"></i>[반장메뉴:배치도]</a></li>
+          <c:if test="${isClassPresident}">
+          	<li class="treeview"><a href="/${domain}/seat" target="inner"><i class="fa fa-link"></i>[반장메뉴:배치도]</a></li>
+          </c:if>
       </c:if>
       
     </ul><!-- /.sidebar-menu -->
