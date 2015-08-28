@@ -71,7 +71,8 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 <!-- Font Awesome Icons -->
 <link href="/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
-
+<!-- favicon -->
+ <link href="/favicon.ico" rel="icon" type="image/x-icon" />
 
 
 <style>
