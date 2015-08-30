@@ -5,6 +5,7 @@ public class ScoreVO {
 	private String clz_domain;
 	private String mem_id;
 	private String mem_name;
+	private int comprehension_no;
 	private int comprehension_score;
 	private int teacherquestion_no;
 	private String teacherquestion_content;
@@ -32,6 +33,14 @@ public class ScoreVO {
 
 	public void setMem_name(String mem_name) {
 		this.mem_name = mem_name;
+	}
+
+	public int getComprehension_no() {
+		return comprehension_no;
+	}
+
+	public void setComprehension_no(int comprehension_no) {
+		this.comprehension_no = comprehension_no;
 	}
 
 	public int getComprehension_score() {
@@ -68,9 +77,12 @@ public class ScoreVO {
 
 	@Override
 	public String toString() {
-		return "ScoreVO [clz_domain=" + clz_domain + ", mem_id=" + mem_id + ", mem_name=" + mem_name
-				+ ", comprehension_score=" + comprehension_score + ", teacherquestion_no=" + teacherquestion_no
-				+ ", teacherquestion_content=" + teacherquestion_content + ", comprehension_replycnt="
+		return "ScoreVO [clz_domain=" + clz_domain + ", mem_id=" + mem_id
+				+ ", mem_name=" + mem_name + ", comprehension_no="
+				+ comprehension_no + ", comprehension_score="
+				+ comprehension_score + ", teacherquestion_no="
+				+ teacherquestion_no + ", teacherquestion_content="
+				+ teacherquestion_content + ", comprehension_replycnt="
 				+ comprehension_replycnt + "]";
 	}
 

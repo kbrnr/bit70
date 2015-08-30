@@ -23,4 +23,6 @@ public interface ComprehensionService {
 	public List<TQuestionScoreListVO> getComprehension(String domain) throws Exception;
 
 	public List<ScoreVO> getComprehensionByID(String domain, String mem_id) throws Exception ;
+
+
 }

@@ -45,10 +45,12 @@ public class ComprehensionController {
 //		return "/comprehension/comprehension";
 //	}	
 
+	
 	@RequestMapping(method=RequestMethod.GET)
 	public String comprehensionList(@PathVariable("domain") String domain, Model model) throws Exception{
 		List<TQuestionScoreListVO> tqscorelist ; 
 		tqscorelist = service.getComprehension(domain);
+		
 		model.addAttribute("tqscorelist",tqscorelist);
 		return "/comprehension/comprehensionlist";
 	}
@@ -77,6 +79,7 @@ public class ComprehensionController {
 		return service.registQuestion(domain, vo);
 	}	
 
+	
 	@ResponseBody
 	@RequestMapping(method=RequestMethod.POST)
 	public int registComprehension(ComprehensionVO vo) throws Exception{

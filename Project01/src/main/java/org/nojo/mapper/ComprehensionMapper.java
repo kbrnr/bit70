@@ -63,7 +63,7 @@ public interface ComprehensionMapper {
 			+ "order by t.teacherquestion_no")
 	public List<TQuestionScoreListVO> selectQuestion(String domain) throws Exception;
 	
-	@Select("select l.mem_id, mem_name, comprehension_score, teacherquestion_no, comprehension_replycnt "
+	@Select("select l.mem_id, mem_name, comprehension_score, teacherquestion_no, comprehension_replycnt, r.comprehension_no  "
 			+ "from "
 			+ "(select m.mem_id, m.mem_name from tbl_member m, "
 			+ "(select * from tbl_course "
@@ -71,7 +71,7 @@ public interface ComprehensionMapper {
 			+ "and course_gb = 'member_student' ) temp "
 			+ "where m.mem_id = temp.mem_id order by m.mem_id) l "
 			+ "left join "
-			+ "(select c.mem_id, c.comprehension_score, c.teacherquestion_no, c.comprehension_replycnt "
+			+ "(select c.mem_id, c.comprehension_score, c.teacherquestion_no, c.comprehension_replycnt, c.comprehension_no "
 			+ "from tbl_comprehension c, tbl_teacherquestion t "
 			+ "where c.teacherquestion_no = t.teacherquestion_no "
 			+ "and c.teacherquestion_no = #{teacherqno} order by mem_id) r "
@@ -81,7 +81,7 @@ public interface ComprehensionMapper {
 	
 	
 	//특정반 특정ID 의 이해도
-	@Select("select l.teacherquestion_no, l.teacherquestion_content, r.comprehension_score, r.mem_id, l.clz_domain, r.comprehension_replycnt "
+	@Select("select l.teacherquestion_no, l.teacherquestion_content, r.comprehension_score, r.mem_id, l.clz_domain"
 	+ "from "
 	+ "(select t.teacherquestion_no, t.teacherquestion_content, clz_domain "
 	+ "from tbl_teacherquestion t, tbl_curriculum c "
@@ -96,6 +96,7 @@ public interface ComprehensionMapper {
 	+ "on l.teacherquestion_no = r.teacherquestion_no "
 	+ "order by l.teacherquestion_no")
 	public List<ScoreVO> selectScoreByID(@Param("domain") String domain, @Param("mem_id") String mem_id) throws Exception;
+	
 	
 	
 	

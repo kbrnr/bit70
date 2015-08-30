@@ -28,7 +28,8 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 	@Inject
 	private NotificationMapper notiMapper;
 	
-	
+
+		
 	@Override
 	public List<String> listName(String name) throws Exception {
 		return mapper.listName(name);
@@ -126,7 +127,5 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 	}
 	
 	
-	
-
 	
 }

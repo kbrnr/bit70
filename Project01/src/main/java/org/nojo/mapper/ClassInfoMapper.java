@@ -42,8 +42,7 @@ public interface ClassInfoMapper {
 	@Update("update tbl_class set clz_name=#{clz_name}, clz_room=#{clz_room}, clz_start_date=#{clz_start_date}, clz_end_date=#{clz_end_date}, clz_state=#{clz_state} where clz_domain=#{clz_domain}")
 	public void updateClass(ClassVO vo);
 	
-	
-	
+		
 	
 	//아이디(담당자)별 수업리스트
 	//@Select("select * from tbl_course join tbl_class on tbl_course.clz_domain = tbl_class.clz_domain where tbl_course.mem_id = #{mem_id} order by clz_reg_date desc limit #{cri.first}, #{cri.perPageNum}")

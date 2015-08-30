@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.nojo.bizDomain.ClassListVO;
 import org.nojo.domain.ClassVO;
 import org.nojo.domain.CourseVO;
+import org.nojo.domain.ReplyVO;
 import org.nojo.security.SecurityUtil;
 import org.nojo.service.ClassInfoService;
 import org.nojo.service.CourseService;
@@ -204,7 +205,14 @@ public class ClassInfoController {
 	}
 	
 	
-	
 
+	//이해도 메세지저장
+	@ResponseBody
+	@RequestMapping(value="/comreply", method= RequestMethod.POST)
+	public void comreply(ReplyVO replyvo) {
+		System.out.println(replyvo.getComprehension_no());
+		System.out.println(replyvo.getReply_content());
+	}
 	
+		
 }

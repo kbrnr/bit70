@@ -2,17 +2,33 @@
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
 
 <style>
-table td{
-	padding: 0px;
+
+.cont-box { 
+		width:0px; height:0px;
+		border-right:10px solid cornflowerblue;
+		border-bottom:10px solid transparent;
+		float:right;
+	}
+
+.table>tbody>tr>td {
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-left: 18px;
+    vertical-align: middle;
+  }
+
+.lead {
+	margin-bottom: 0px;
+    margin-right: 0px;
+    margin-left: 2px;
+    vertical-align: middle;
 }
 
-.cont-box{ 
-	width:0px; height:0px;
-	border-right:10px solid cornflowerblue;
-	border-bottom:10px solid transparent;
-	float:right;
-	 
-}
+.ahand { cursor: pointer; }
+
+
+
+
 
 </style>
 
@@ -64,20 +80,21 @@ table td{
 							  	<c:forEach items="${tqlist.scorelist}" var="scorelist">
 								
 								<c:choose>
-									
 									<c:when test="${scorelist.comprehension_score >= 9}">
-										<td><p class="lead"><span class="label label-success">${scorelist.comprehension_score}</span></p></td>
+										<td data-com_no="${scorelist.comprehension_no}">
+											<c:if test="${scorelist.comprehension_replycnt >= 1}">
+													<span class="cont-box"></span>
+											</c:if>
+											<p class="lead"><a href="#" ><span class="label label-success">${scorelist.comprehension_score}</span></a></p>
+										</td>
 									</c:when>
 									
 									<c:when test="${scorelist.comprehension_score >= 7}">
-										<td>
-										<div class="cont-box"></div>
-										<p class="lead ">
-										<c:if test="${scorelist.comprehension_replycnt >= 1}">
-										<span class="label label-info">${scorelist.comprehension_score}</span>
-										</c:if>
-										</p>
-										
+										<td data-com_no="${scorelist.comprehension_no}">
+											<c:if test="${scorelist.comprehension_replycnt >= 1}">
+													<span class="cont-box"></span>
+											</c:if>
+											<p class="lead "><a href="#" ><span class="label label-info">${scorelist.comprehension_score}</span></a></p>
 										</td>
 									</c:when>
 									
@@ -94,13 +111,12 @@ table td{
 									</c:when>
 									
 									<c:otherwise >
-										<c:if test="${scorelist.mem_id == user.id}">
-											<td ><span data-qno="${tqlist.teacherquestion_no}" class="label label-default" >입력</span></td>
+										<c:if test="${scorelist.mem_id == user.id}">										
+											<td ><a href="#"><span data-qno="${tqlist.teacherquestion_no}" class="label label-default" >입력</span></a></td>
 										</c:if>
-										<c:if test="${scorelist.mem_id != user.id}">
-											<td><span>&nbsp;</span></td>
+										<c:if test="${scorelist.mem_id != user.id}">										
+											<td >&nbsp;</td>
 										</c:if>
-											
 									</c:otherwise>
 								</c:choose>
 							  
@@ -123,85 +139,122 @@ table td{
 		<!-- ----------------------------------------- -->
 	</section>
 
-<div class="row">                 	
-                    	<div class="col-md-3">
-              <!-- DIRECT CHAT PRIMARY -->
-              <div class="box box-primary direct-chat direct-chat-primary">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Direct Chat</h3>
-                  <div class="box-tools pull-right">
-                    <span data-toggle="tooltip" title="3 New Messages" class="badge bg-light-blue">3</span>
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-box-tool" data-toggle="tooltip" title="Contacts" data-widget="chat-pane-toggle"><i class="fa fa-comments"></i></button>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  <!-- Conversations are loaded here -->
-                  <div class="direct-chat-messages">
-                    <!-- Message. Default to the left -->
-                    <div class="direct-chat-msg">
-                      <div class="direct-chat-info clearfix">
-                        <span class="direct-chat-name pull-left">Alexander Pierce</span>
-                        <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
-                      </div><!-- /.direct-chat-info -->
-                      <img class="direct-chat-img" src="../dist/img/user1-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-                      <div class="direct-chat-text">
-                        Is this template really for free? That's unbelievable!
-                      </div><!-- /.direct-chat-text -->
-                    </div><!-- /.direct-chat-msg -->
+	<!-- 이해도 메세지 기록 Modal -->
+	<div class="modal fade" id="scoreMsgModal" role="dialog">
+		<div class="modal-dialog">
 
-                    <!-- Message to the right -->
-                    <div class="direct-chat-msg right">
-                      <div class="direct-chat-info clearfix">
-                        <span class="direct-chat-name pull-right">Sarah Bullock</span>
-                        <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
-                      </div><!-- /.direct-chat-info -->
-                      <img class="direct-chat-img" src="../dist/img/user3-128x128.jpg" alt="message user image"><!-- /.direct-chat-img -->
-                      <div class="direct-chat-text">
-                        You better believe it!
-                      </div><!-- /.direct-chat-text -->
-                    </div><!-- /.direct-chat-msg -->
-                  </div><!--/.direct-chat-messages-->
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">이해도 메세지 기록</h4>
+				</div>
+				<div class="modal-body">
 
-                  <!-- Contacts are loaded here -->
-                  <div class="direct-chat-contacts">
-                    <ul class="contacts-list">
-                      <li>
-                        <a href="#">
-                          <img class="contacts-list-img" src="../dist/img/user1-128x128.jpg">
-                          <div class="contacts-list-info">
-                            <span class="contacts-list-name">
-                              Count Dracula
-                              <small class="contacts-list-date pull-right">2/28/2015</small>
-                            </span>
-                            <span class="contacts-list-msg">How have you been? I was...</span>
-                          </div><!-- /.contacts-list-info -->
-                        </a>
-                      </li><!-- End Contact Item -->
-                    </ul><!-- /.contatcts-list -->
-                  </div><!-- /.direct-chat-pane -->
-                </div><!-- /.box-body -->
-                <div class="box-footer">
-                  <form action="#" method="post">
-                    <div class="input-group">
-                      <input type="text" name="message" placeholder="Type Message ..." class="form-control">
-                      <span class="input-group-btn">
-                        <button type="button" class="btn btn-primary btn-flat">Send</button>
-                      </span>
-                    </div>
-                  </form>
-                </div><!-- /.box-footer-->
-              </div><!--/.direct-chat -->
-            </div>
-     </div>     
+
+					<div class="box-body">
+						<!-- Conversations are loaded here -->
+						<div class="direct-chat-messages">
+							<!-- Message. Default to the left -->
+							<div class="direct-chat-msg">
+								<div class="direct-chat-info clearfix">
+									<span class="direct-chat-name pull-left">Alexander
+										Pierce</span> <span class="direct-chat-timestamp pull-right">23
+										Jan 2:00 pm</span>
+								</div>
+								<!-- /.direct-chat-info -->
+								<img class="direct-chat-img" src="../dist/img/user1-128x128.jpg"
+									alt="message user image">
+								<!-- /.direct-chat-img -->
+								<div class="direct-chat-text">Is this template really for
+									free? That's unbelievable!</div>
+								<!-- /.direct-chat-text -->
+							</div>
+							<!-- /.direct-chat-msg -->
+
+
+						</div>
+						<!--/.direct-chat-messages-->
+
+
+					</div>
+					<!-- /.box-body -->
+					<div class="box-footer">
+						<form id="reply" action="">
+							<div class="input-group">
+								<input id="replymsg" type="text" name="replymsg" placeholder="Type Message ..." class="form-control"> 
+								<input id="com_no" type="text" name="com_no" value="">
+								<span class="input-group-btn">
+									<button id="btn_sendreply" type="button" class="btn btn-primary btn-flat">Send</button>
+								</span>
+							</div>
+						</form>
+					</div>
+					<!-- /.box-footer-->
+
+				</div>
+				<div class="modal-footer">
+					<button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<!-- /이해도 메세지 기록 Modal -->	
 
 
 
 <script>
+//이해도 댓글 팝업 호출
+$(".lead").on("click", function(){
+	var com_no = $(this).parents().data("com_no");
+	$("#scoreMsgModal [name=com_no]").val(com_no);
+	$("#scoreMsgModal").modal();
+});
+
+//이해도 댓글 추가
+$("#btn_sendreply").on("click", function(){
+	var url = '/${domain}/reply';
+	
+	$.ajax({
+		type : 'POST',
+		url : url,
+		headers : {
+			"Content-Type" : "application/json",
+			"X-HTTP-Method-Override" : "POST"
+		},
+		data : JSON.stringify({
+			comprehension_no: $("#com_no").val(),
+			reply_content: $("#replymsg").val()
+		}),
+		success : function(result) {
+			replyAll($("#com_no").val());
+		}
+	});
+});
+
+function replyAll(comprehension_no){
+	
+	url
+	ajax 
+	
+	
+	succeess :
+		
+	
+	
+}
+
+
+$("#btn_close").on("click", function(){
+	$(location).attr('href','/${domain}/comprehension'); 
+});
+
+//이해도 점수 모달 관련//
 $(".label.label-default").on('click', function(){
 	parent.$("#myModal [name=teacherquestion_no]").val($(this).data("qno"));
 	parent.$("#myModal #msg").text($(this).parents().siblings(":first").data("content"));	
+	parent.$("#myModal [name=comprehension_score").val("");
 	parent.$("#myModal").modal("show");	
 });
 
@@ -217,6 +270,7 @@ parent.$("#sendScore").submit(function(e){
 		parent.socket.emit("seatScore", obj);
 	});
 	parent.$('#myModal').modal('hide');
+	$(location).attr('href','/${domain}/comprehension'); 
 	return false;
 });
 </script>
