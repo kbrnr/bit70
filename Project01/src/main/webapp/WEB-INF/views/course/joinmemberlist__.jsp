@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
-<style>
-
-</style>
-
 
 
 		<!-- Content Header (Page header) -->
@@ -19,21 +15,38 @@
 			</ol>
 		</section>
 
-
+<div class="row">
+            <div class="col-md-4">
+              <!-- Widget: user widget style 1 -->
+              <div class="box box-widget widget-user-2">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-yellow">
+                  <div class="widget-user-image">
+                    <img class="img-circle" src="../dist/img/user7-128x128.jpg" alt="User Avatar">
+                  </div><!-- /.widget-user-image -->
+                  <h3 class="widget-user-username">Nadia Carmichael</h3>
+                  <h5 class="widget-user-desc">Lead Developer</h5>
+                </div>
+                <div class="box-footer no-padding">
+                  <ul class="nav nav-stacked">
+                    <li><a href="#">Projects <span class="pull-right badge bg-blue">31</span></a></li>
+                    <li><a href="#">Tasks <span class="pull-right badge bg-aqua">5</span></a></li>
+                    <li><a href="#">Completed Projects <span class="pull-right badge bg-green">12</span></a></li>
+                    <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
+                  </ul>
+                </div>
+              </div><!-- /.widget-user -->
+            </div><!-- /.col -->
+</div>
 
 		<!-- Main content -->
 		<section class="content">
 		<!-- ----------------------------------------- -->
-
-
 		<div class="box">
                 <div class="box-header">
                   <h3 class="box-title">■${domain} 인원</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-
- 
- 
                   <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                   	
                   	
@@ -43,43 +56,45 @@
 	 							<p class=" pull-right margin-bottom">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</p>                 	
 	                  			<a href="/${domain}/course/joinmemberlist?searchType=mem_gb&keyword=member_student" class=" pull-right margin-bottom">학생</a>
 		                </div>
-	                  	 
-	              <c:forEach items="${list}" var="vo">    	 
-          <div class="col-md-3">
-              <!-- Widget: user widget style 1 -->
-              <div class="box box-widget widget-user-2">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-aqua-active">
-                  <div class="widget-user-image">
-                    <img class="img-circle" src="/resources/dist/img/user7-128x128.jpg" alt="User Avatar">
-                  </div><!-- /.widget-user-image -->
-                  <h3 class="widget-user-username">${vo.mem_name}</h3>
-                  <h5 class="widget-user-desc">Lead Developer</h5>
-                </div>
-                <div class="box-footer no-padding">
-                  <ul class="nav nav-stacked">
-                    <li>email<span class="pull-right badge bg-blue">${vo.mem_email}</span></li>
-                    <li>${vo.mem_tel}<span class="pull-right badge bg-aqua">5</span></li>
-                    <li>${vo.course_gb}<span class="pull-right badge bg-green">12</span></li>
-                    <c:if test="${isTeacher}">
-			        	<li class="joincourse"><a href="#">[ ${vo.course_state} ]<span class="pull-right badge bg-red">842</span></a></li>
-			        </c:if>
-                    
-                    
-                  </ul>
-                </div>
-              </div><!-- /.widget-user -->
-            </div><!-- /.col -->
-	                  	  </c:forEach>
-	                  	 
-	                  	 
-	                  	 
-	                  	 
-	                  	 
-	                  	 
-	                  	 
-	                  	 
-	   
+	                  	                  	
+	                  	<div class="col-sm-12">
+	                  
+		                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+		                    <thead>
+		                      <tr role="row">
+		                      	  <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 109px;">아이디</th>
+			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 142px;">이름</th>
+			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 129px;">이메일</th>
+			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 92px;">전화번호</th>
+			                      <c:if test="${isTeacher}">
+			                      	<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">가입상태(승인전0, 승인요청1, 가입완료2, 정지3)</th>			                   
+		                          </c:if>
+		                          <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">구분</th>
+		                      </tr>
+		                    </thead>
+		                    <tbody>
+		                      <c:forEach items="${list}" var="vo">
+			                    <tr role="row">
+			                      <td class="userid">${vo.mem_id}</td>
+			                      <td>
+			                      	<div class='img'><img class='realImg' src='/${domain}/seat/seatImg?userId=${vo.mem_id}' onerror="javascript:this.src='/resources/nojo/images/noImage.png'" />
+									${vo.mem_name}
+									</div>
+			                      </td>
+			                      <td>${vo.mem_email}</td>
+			                      <td>${vo.mem_tel}</td>
+			                      <c:if test="${isTeacher}">
+			                      	<td class="joincourse"><a href=#>[ ${vo.course_state} ]</a></td>
+			                      </c:if>
+			                      <td>${vo.course_gb}</td>
+			                    </tr>
+		                      </c:forEach>
+		                    </tbody>
+		                  </table>
+		                  
+	                  	</div><!-- /.grid -->
+	                  	
+                  	</div><!-- /.row -->
                   	
                   	<div class="row">
             		

@@ -1,5 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<style>
+.table>thead>tr>th {
+		text-align: center;
+		vertical-align: middle;
+		font-size: 17px;
+}
+	
+.td-center {
+	text-align: center;
+}
+
+.td-left {
+	text-align: left;
+}
+
+.teacherul {
+    padding-left: 0px;
+	float:left;
+}
+
+.teacherli { 
+	width:130px; 
+	float:left; 
+	margin:5px; 
+	display:inline; 
+}
+
+.td-domain {
+	font-size: 18px;
+	font-weight: bold;>
+}
+
+.space {
+	height:50px; 
+}
+
+
+
+</style>
 
 		<section class="content-header">
 			<h1>
@@ -32,16 +73,16 @@
 	                  	</div>
 	                  	<div class="col-sm-12">
 		        		  
-		                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+		                  <table id="example1" class="table table-bordered" role="grid" aria-describedby="example1_info">
 		                    <thead>
 		                      <tr role="row">
-		                      	  <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 109px;">강의명</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 142px;">선생님</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 129px;">강의실</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 92px;">시작일</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">종료일</th>			                   
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">상태</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">주소</th>
+		                      	  <th width="250px">강의명</th>
+			                      <th>선생님</th>
+			                      <th width="100px">강의실</th>
+			                      <th width="120px">시작일</th>
+			                      <th width="120px">종료일</th>			                   
+			                      <th width="100px">상태</th>
+			                      <th width="250px">주소</th>
 		                      </tr>
 		                    </thead>
 		                    
@@ -49,16 +90,32 @@
 		                      <c:forEach items="${list}" var="vo">
 			                    <tr role="row">
 			                      <td><a href="/classinfo/classread?domain=${vo.clz_domain}">${vo.clz_name}</a></td>
-			                      <td>
+			                      <td class="td-left">
+			                      	<ul class="teacherul">
 			                      	<c:forEach items="${vo.teacherlist}" var="teacherlist">
-			                      		${teacherlist.mem_name}(${teacherlist.mem_id})<br> 
+			                      		<li class="teacherli">${teacherlist.mem_name}(${teacherlist.mem_id})</li>
 			                        </c:forEach>
+			                        </ul>
 			                      </td>
 			                      <td>${vo.clz_room}</td>
-			                      <td>${vo.clz_start_date}</td>
-			                      <td>${vo.clz_end_date}</td>
-			                      <td>${vo.clz_state}</td>
-			                      <td><a href="/${vo.clz_domain}" target=_blank>${vo.clz_domain}</a></td>
+			                      <td class="td-center"><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.clz_start_date}"/></td>
+			                      <td class="td-center"><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.clz_end_date}"/></td>
+			                      <td class="td-center">
+			                      	<c:choose>
+			                      		<c:when test="${vo.clz_state=='1'}">
+			                      			준비중
+			                      		</c:when>
+			                      		<c:when test="${vo.clz_state=='2'}">
+			                      			강의중
+			                      		</c:when>
+			                      		<c:when test="${vo.clz_state=='3'}">
+			                      			종료
+			                      		</c:when>
+			                      		<c:when test="${vo.clz_state=='4'}">
+			                      			일시정지
+			                      		</c:when>
+			                      	</c:choose>
+			                      <td><a href="/${vo.clz_domain}" target=_blank>http://www.forcus.com/<span class="td-domain">${vo.clz_domain}</span></a></td>
 			                    </tr>
 		                      </c:forEach>
 		                    </tbody>
@@ -129,7 +186,7 @@
 								</div>
 							</form>
                   			
-                  			
+                  			<div class="space"></div>
                   		</div><!-- /.grid -->
                   	</div><!-- /.row -->
                   	

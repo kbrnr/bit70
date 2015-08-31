@@ -10,6 +10,12 @@
 		float:right;
 	}
 
+.table>thead>tr>th {
+		text-align: center;
+		vertical-align: middle;
+		font-size: 15px;
+	}
+
 .table>tbody>tr>td {
     padding-right: 0px;
     padding-top: 0px;
@@ -27,6 +33,7 @@
 .ahand { cursor: pointer; }
 
 table {table-layout:fixed; word-break:break-all;}
+
 
 
 
