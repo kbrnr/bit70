@@ -50,6 +50,7 @@ public class SeatController {
 	//이미지 보기 
 	@RequestMapping(value = "/seatImg", method = RequestMethod.GET)
 	public void photo(String userId, HttpServletResponse res, Model model) throws IOException {
+		System.out.println(userId);
 		byte[] bytes = seatService.photo(userId);
 		if(bytes != null){
 			res.getOutputStream().write(bytes);

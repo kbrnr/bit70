@@ -4,10 +4,7 @@ import javax.inject.Inject;
 
 import org.nojo.domain.MemberVO;
 import org.nojo.mapper.MemberMapper;
-import org.nojo.security.CustomUser;
 import org.nojo.security.SecurityUtil;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service

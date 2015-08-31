@@ -26,7 +26,7 @@
 
 .ahand { cursor: pointer; }
 
-
+table {table-layout:fixed; word-break:break-all;}
 
 
 
@@ -66,7 +66,7 @@
 		                      <tr>
 		                      	 <th width="142px" >&nbsp;</th>
 		                      	 <c:forEach items="${tqscorelist[0].scorelist}" var="namelist">
-			                     	<th width="80px" style="table-layout:fixed" >
+			                     	<th width="70px" >
 			                     	${namelist.mem_name}
 			                     	</th>
 			                     </c:forEach>
@@ -75,7 +75,7 @@
 							<tbody>							  
   							  <c:forEach items="${tqscorelist}" var="tqlist" varStatus="status">
 							  <tr>
-							  	<td data-content="${tqlist.teacherquestion_content}">${tqlist.teacherquestion_content}</td>
+							  	<td data-content="${tqlist.teacherquestion_content}"><span class="glyphicon glyphicon-question-sign">&nbsp;${tqlist.teacherquestion_content}</span></td>
 							  	
 							  	<c:forEach items="${tqlist.scorelist}" var="scorelist">
 								
@@ -99,15 +99,30 @@
 									</c:when>
 									
 									<c:when test="${scorelist.comprehension_score >= 5}">
-										<td><p class="lead "><span class="label label-primary">${scorelist.comprehension_score}</span></p></td>
+										<td data-com_no="${scorelist.comprehension_no}">
+											<c:if test="${scorelist.comprehension_replycnt >= 1}">
+													<span class="cont-box"></span>
+											</c:if>
+											<p class="lead "><a href="#" ><span class="label label-primary">${scorelist.comprehension_score}</span></a></p>
+										</td>
 									</c:when>
 									
 									<c:when test="${scorelist.comprehension_score >= 3}">
-										<td><p class="lead"><span class="label label-warning">${scorelist.comprehension_score}</span></p></td>
+										<td data-com_no="${scorelist.comprehension_no}">
+											<c:if test="${scorelist.comprehension_replycnt >= 1}">
+													<span class="cont-box"></span>
+											</c:if>
+											<p class="lead"><a href="#" ><span class="label label-warning">${scorelist.comprehension_score}</span></a></p>
+										</td>
 									</c:when>
 									
 									<c:when test="${scorelist.comprehension_score >= 1}">
-										<td><p class="lead"><span class="label label-danger">${scorelist.comprehension_score}</span></p></td>
+										<td data-com_no="${scorelist.comprehension_no}">
+											<c:if test="${scorelist.comprehension_replycnt >= 1}">
+													<span class="cont-box"></span>
+											</c:if>
+											<p class="lead"><a href="#" ><span class="label label-danger">${scorelist.comprehension_score}</span></a></p>
+										</td>
 									</c:when>
 									
 									<c:otherwise >
@@ -141,60 +156,39 @@
 
 	<!-- 이해도 메세지 기록 Modal -->
 	<div class="modal fade" id="scoreMsgModal" role="dialog">
-		<div class="modal-dialog">
+		<div class="modal-dialog box-solid">
 
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<button id="btn_close" type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">이해도 메세지 기록</h4>
 				</div>
 				<div class="modal-body">
-
-
-					<div class="box-body">
+				
+					
 						<!-- Conversations are loaded here -->
-						<div class="direct-chat-messages">
+						<div id="msg" class="direct-chat-messages direct-chat-primary">
 							<!-- Message. Default to the left -->
-							<div class="direct-chat-msg">
-								<div class="direct-chat-info clearfix">
-									<span class="direct-chat-name pull-left">Alexander
-										Pierce</span> <span class="direct-chat-timestamp pull-right">23
-										Jan 2:00 pm</span>
-								</div>
-								<!-- /.direct-chat-info -->
-								<img class="direct-chat-img" src="../dist/img/user1-128x128.jpg"
-									alt="message user image">
-								<!-- /.direct-chat-img -->
-								<div class="direct-chat-text">Is this template really for
-									free? That's unbelievable!</div>
-								<!-- /.direct-chat-text -->
-							</div>
-							<!-- /.direct-chat-msg -->
-
-
+								<!-- 댓글내용 -->
+								<!-- /댓글내용 -->
 						</div>
 						<!--/.direct-chat-messages-->
 
-
-					</div>
-					<!-- /.box-body -->
-					<div class="box-footer">
+					
+					
 						<form id="reply" action="">
 							<div class="input-group">
 								<input id="replymsg" type="text" name="replymsg" placeholder="Type Message ..." class="form-control"> 
-								<input id="com_no" type="text" name="com_no" value="">
+								<input id="com_no" type="hidden" name="com_no" value="">
 								<span class="input-group-btn">
 									<button id="btn_sendreply" type="button" class="btn btn-primary btn-flat">Send</button>
 								</span>
 							</div>
 						</form>
-					</div>
+					
 					<!-- /.box-footer-->
 
-				</div>
-				<div class="modal-footer">
-					<button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</div>
 			</div>
 
@@ -205,16 +199,23 @@
 
 
 <script>
+
+
+
 //이해도 댓글 팝업 호출
 $(".lead").on("click", function(){
 	var com_no = $(this).parents().data("com_no");
 	$("#scoreMsgModal [name=com_no]").val(com_no);
 	$("#scoreMsgModal").modal();
+	replyAll(com_no);
 });
 
-//이해도 댓글 추가
+//이해도팝업에서 댓글 추가
 $("#btn_sendreply").on("click", function(){
 	var url = '/${domain}/reply';
+	var comprehension_no = $("#com_no").val();
+	var reply_content = $("#replymsg").val();
+	
 	
 	$.ajax({
 		type : 'POST',
@@ -224,31 +225,72 @@ $("#btn_sendreply").on("click", function(){
 			"X-HTTP-Method-Override" : "POST"
 		},
 		data : JSON.stringify({
-			comprehension_no: $("#com_no").val(),
-			reply_content: $("#replymsg").val()
+			comprehension_no: comprehension_no,
+			reply_content: reply_content,
+			reply_writer: "${user.id}"
 		}),
 		success : function(result) {
-			replyAll($("#com_no").val());
+			replyAll(comprehension_no);
 		}
 	});
+	
+	
+	
 });
 
+
 function replyAll(comprehension_no){
+	var url = '/${domain}/reply/replyall';
+	console.log("replyall " + comprehension_no);
+	console.log("callback " + comprehension_no);
 	
-	url
-	ajax 
-	
-	
-	succeess :
-		
-	
-	
+	$.ajax({
+		type : 'GET',
+		url : url + "?comprehension_no=" + comprehension_no,
+		dataType: "JSON", 
+		success : function(msglist) {
+			var listStr = "";
+			$(msglist).each(
+					function(){
+						
+						if(this.reply_writer== "${user.id}"){
+							listStr += "<div class='direct-chat-msg right'>"+
+					                    	"<div class='direct-chat-info clearfix'>"+
+					                        	"<span class='direct-chat-name pull-right'>"+ this.reply_writer+ "</span>"+
+					                        	"<span class='direct-chat-timestamp pull-left'>"+ this.reply_reg_date +"</span>"+
+					                      	"</div>"+
+					                      	"<img class='direct-chat-img' src='/${domain}/seat/seatImg?userId="+ this.reply_writer +"' alt='message user image' />"+
+					                      	"<div class='direct-chat-text'>" + this.reply_content + "</div>"+
+					                   "</div>" ;	
+							
+						}
+						else{
+							listStr += "<div class='direct-chat-msg'>"+
+			                      			"<div class='direct-chat-info clearfix'>"+
+			                        			"<span class='direct-chat-name pull-left'>"+ this.reply_writer+ "</span>"+
+			                        			"<span class='direct-chat-timestamp pull-right'>"+ this.reply_reg_date +"</span>"+
+			                      			"</div>"+
+			                      			"<img class='direct-chat-img' src='/${domain}/seat/seatImg?userId="+ this.reply_writer +"' alt='message user image' />"+
+			                      			"<div class='direct-chat-text'>" + this.reply_content + "</div>"+
+			                    		"</div>" ;	
+						}
+					}
+			);
+			$("#msg").html(listStr);
+			$("#msg").scrollTop(1000);
+		}
+	});	
 }
+
+
+
 
 
 $("#btn_close").on("click", function(){
 	$(location).attr('href','/${domain}/comprehension'); 
 });
+
+
 
 //이해도 점수 모달 관련//
 $(".label.label-default").on('click', function(){

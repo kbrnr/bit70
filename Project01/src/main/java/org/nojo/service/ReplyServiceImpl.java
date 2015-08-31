@@ -1,7 +1,10 @@
 package org.nojo.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import org.nojo.bizDomain.ReplypopVO;
 import org.nojo.domain.ReplyVO;
 import org.nojo.mapper.ReplyMapper;
 import org.springframework.stereotype.Service;
@@ -20,5 +23,7 @@ public class ReplyServiceImpl implements ReplyService{
 		replyMapper.updateReplyCnt(vo);
 	}
 
-
+	public List<ReplypopVO> getReply(int comprehension_no) {
+		return replyMapper.selectReply(comprehension_no) ;
+	}
 }
