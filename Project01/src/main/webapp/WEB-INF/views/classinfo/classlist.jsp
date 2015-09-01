@@ -3,13 +3,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <style>
-.table>thead>tr>th {
+
+th {
 		text-align: center;
 		vertical-align: middle;
-		font-size: 17px;
+		background-color: #E0E0E0 ;
 }
 	
-.td-center {
+td {
 	text-align: center;
 }
 
@@ -18,8 +19,9 @@
 }
 
 .teacherul {
+    margin: 0px;
     padding-left: 0px;
-	float:left;
+	float: left;
 }
 
 .teacherli { 
@@ -44,13 +46,13 @@
 
 		<section class="content-header">
 			<h1>
-				Top Navigation <small>Example 2.0</small>
+				수업관리 <small></small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#">
-						<i class="fa fa-dashboard"></i> Home
+						<i class="fa fa-dashboard"></i> 홈
 					</a></li>
-				<li class="active">Dashboard</li>
+				<li class="active">수업관리</li>
 			</ol>
 		</section>
 
@@ -60,7 +62,7 @@
 		<section class="content">
 		<!-- ----------------------------------------- -->
 		<div class="box">
-                <div class="box-header">
+                <div class="box-header with-border">
                   <h3 class="box-title">■수업리스트</h3>
                 </div><!-- /.box-header -->
                 
@@ -73,7 +75,7 @@
 	                  	</div>
 	                  	<div class="col-sm-12">
 		        		  
-		                  <table id="example1" class="table table-bordered" role="grid" aria-describedby="example1_info">
+		                  <table id="example1" class="table table-hover" role="grid" aria-describedby="example1_info">
 		                    <thead>
 		                      <tr role="row">
 		                      	  <th width="250px">강의명</th>
@@ -89,7 +91,7 @@
 		                    <tbody>
 		                      <c:forEach items="${list}" var="vo">
 			                    <tr role="row">
-			                      <td><a href="/classinfo/classread?domain=${vo.clz_domain}">${vo.clz_name}</a></td>
+			                      <td class="td-left"><a href="/classinfo/classread?domain=${vo.clz_domain}">${vo.clz_name}</a></td>
 			                      <td class="td-left">
 			                      	<ul class="teacherul">
 			                      	<c:forEach items="${vo.teacherlist}" var="teacherlist">
@@ -97,10 +99,10 @@
 			                        </c:forEach>
 			                        </ul>
 			                      </td>
-			                      <td>${vo.clz_room}</td>
-			                      <td class="td-center"><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.clz_start_date}"/></td>
-			                      <td class="td-center"><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.clz_end_date}"/></td>
-			                      <td class="td-center">
+			                      <td >${vo.clz_room}</td>
+			                      <td ><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.clz_start_date}"/></td>
+			                      <td ><fmt:formatDate pattern="yyyy-MM-dd" value="${vo.clz_end_date}"/></td>
+			                      <td >
 			                      	<c:choose>
 			                      		<c:when test="${vo.clz_state=='1'}">
 			                      			준비중
@@ -115,7 +117,7 @@
 			                      			일시정지
 			                      		</c:when>
 			                      	</c:choose>
-			                      <td><a href="/${vo.clz_domain}" target=_blank>http://www.forcus.com/<span class="td-domain">${vo.clz_domain}</span></a></td>
+			                      <td class="td-left"><a href="/${vo.clz_domain}" target=_blank>http://www.forcus.com/<span class="td-domain">${vo.clz_domain}</span></a></td>
 			                    </tr>
 		                      </c:forEach>
 		                    </tbody>
@@ -124,72 +126,72 @@
 	                  	</div><!-- /.grid -->
 	                  	
                   	</div><!-- /.row -->
-                  	
-                  	<div class="row">
-            		
-                  		<div class="col-sm-12">
-                  			<div class="dataTables_paginate paging_simple_numbers text-center" id="example1_paginate">
-                  				<ul class="pagination">
-								  <!--이전페이지 -->	
-                  				  <c:if test="${pageMaker.prev}">
-                  				  		<c:if test="${cri.searchType == null && cri.keyword == null }">
-                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/classlist?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
-                  				  		</c:if>
-                  				  		<c:if test="${cri.searchType != null && cri.keyword != null }">
-                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/classlist?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
-                  				  		</c:if>
-                  				  </c:if>
-                  				  
-                  				  <!-- 페이징 -->
-                  				  <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
-									<li <c:out value = "${pageMaker.page==idx?'class=active' :'' }"/>>
-										<c:if test="${cri.searchType == null && cri.keyword == null }">
-											<a href="/classinfo/classlist?page=${idx }&perPageNum=${pageMaker.perPageNum}">${idx }</a>
-										</c:if>
-										<c:if test="${cri.searchType != null && cri.keyword != null }">
-											<a href="/classinfo/classlist?page=${idx }&perPageNum=${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}">${idx }</a>
-										</c:if>
-									</li>
-                  				  </c:forEach>
-								  
-								  <!--다음페이지 -->
-								  <c:if test="${pageMaker.next}">
-                  						<c:if test="${cri.searchType == null && cri.keyword == null }">
-                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/classlist?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
-                  				  		</c:if>
-                  				  		<c:if test="${cri.searchType != null && cri.keyword != null }">
-                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/classlist?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
-                  				  		</c:if>
-                  				  </c:if>
-                  				</ul>
-                  			</div>
-                  			
-                  			<form name="searchFrom" action="/classinfo/classlist" method="get">
-								<div id="select_board" class="text-center" >
-									<select name="searchType" class="form-control" style="width: 150px; margin-right: 10px;">
-										<option value="className" <c:out value="${cri.searchType == 'className'?'selected':'' }" />>
-										강의명
-										</option>	
-										<option value="domain" <c:out value="${cri.searchType == 'domain'?'selected':'' }" />>
-										도메인(주소)	
-										</option>
-										<option value="state" <c:out value="${cri.searchType == 'state'?'selected':'' }" />>
-										상태	
-										</option>
-									</select>
-									<div class="input-group">
-	   								   <input type="text" class="form-control" name="keyword" value="${cri.keyword}" style="width: 200px;">
-									      <span class="input-group-btn">
-									        <button class="btn btn-default" type="Submit">검색</button>
-									      </span>
-			                 	 	</div><!-- /input-group -->
-								</div>
-							</form>
-                  			
-                  			<div class="space"></div>
-                  		</div><!-- /.grid -->
-                  	</div><!-- /.row -->
-                  	
+                  	<div class="box-footer">
+	                  	<div class="row">
+	            		
+	                  		<div class="col-sm-12">
+	                  			<div class="dataTables_paginate paging_simple_numbers text-center" id="example1_paginate">
+	                  				<ul class="pagination">
+									  <!--이전페이지 -->	
+	                  				  <c:if test="${pageMaker.prev}">
+	                  				  		<c:if test="${cri.searchType == null && cri.keyword == null }">
+	                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/classlist?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
+	                  				  		</c:if>
+	                  				  		<c:if test="${cri.searchType != null && cri.keyword != null }">
+	                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/classlist?page=${pageMaker.startPage-1}&perPageNum${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}" aria-controls="example1" data-dt-idx="0" tabindex="0">Previous</a></li>
+	                  				  		</c:if>
+	                  				  </c:if>
+	                  				  
+	                  				  <!-- 페이징 -->
+	                  				  <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+										<li <c:out value = "${pageMaker.page==idx?'class=active' :'' }"/>>
+											<c:if test="${cri.searchType == null && cri.keyword == null }">
+												<a href="/classinfo/classlist?page=${idx }&perPageNum=${pageMaker.perPageNum}">${idx }</a>
+											</c:if>
+											<c:if test="${cri.searchType != null && cri.keyword != null }">
+												<a href="/classinfo/classlist?page=${idx }&perPageNum=${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}">${idx }</a>
+											</c:if>
+										</li>
+	                  				  </c:forEach>
+									  
+									  <!--다음페이지 -->
+									  <c:if test="${pageMaker.next}">
+	                  						<c:if test="${cri.searchType == null && cri.keyword == null }">
+	                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/classlist?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
+	                  				  		</c:if>
+	                  				  		<c:if test="${cri.searchType != null && cri.keyword != null }">
+	                  							<li class="paginate_button previous" id="example1_previous"><a href="/classinfo/classlist?page=${pageMaker.endPage+1}&perPageNum${pageMaker.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}" aria-controls="example1" data-dt-idx="0" tabindex="0">Next</a></li>
+	                  				  		</c:if>
+	                  				  </c:if>
+	                  				</ul>
+	                  			</div>
+	                  			
+	                  			<form name="searchFrom" action="/classinfo/classlist" method="get">
+									<div id="select_board" class="text-center" >
+										<select name="searchType" class="form-control" style="width: 150px; margin-right: 10px;">
+											<option value="className" <c:out value="${cri.searchType == 'className'?'selected':'' }" />>
+											강의명
+											</option>	
+											<option value="domain" <c:out value="${cri.searchType == 'domain'?'selected':'' }" />>
+											도메인(주소)	
+											</option>
+											<option value="state" <c:out value="${cri.searchType == 'state'?'selected':'' }" />>
+											상태	
+											</option>
+										</select>
+										<div class="input-group">
+		   								   <input type="text" class="form-control" name="keyword" value="${cri.keyword}" style="width: 200px;">
+										      <span class="input-group-btn">
+										        <button class="btn btn-default" type="Submit">검색</button>
+										      </span>
+				                 	 	</div><!-- /input-group -->
+									</div>
+								</form>
+	                  			
+	                  			<div class="space"></div>
+	                  		</div><!-- /.grid -->
+	                  	</div><!-- /.row -->
+                  	</div>
  
    
    

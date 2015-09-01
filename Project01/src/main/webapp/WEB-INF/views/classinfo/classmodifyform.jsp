@@ -21,7 +21,7 @@
 		<!-- Main content -->
 		<section class="content">
 		<!-- ----------------------------------------- -->
-			<div class="box box-info">
+			<div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title">■수업상세FAFD</h3>
                 </div><!-- /.box-header -->

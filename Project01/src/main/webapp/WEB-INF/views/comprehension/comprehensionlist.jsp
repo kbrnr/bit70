@@ -56,14 +56,10 @@ table {table-layout:fixed; word-break:break-all;}
 		<!-- Main content -->
 		<section class="content">
 		<!-- ----------------------------------------- -->
-		<div class="box">
-                <div class="box-header">
-                  <h3 class="box-title">■${domain} 이해도</h3>
-                </div><!-- /.box-header -->
+		<div class="box box-solid">
                 
                 <div class="box-body">
                   <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-                  	
                   	
                   	<div class="row">
 	                  	<div class="col-sm-12">

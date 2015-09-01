@@ -35,6 +35,7 @@ public class CourseController {
 		System.out.println(cri.getKeyword());
 		System.out.println("*********************************************************");
 		
+		cri.setPerPageNum(12);
 		
 		list = courseService.getMemberByDomain(cri, domain);
 		pageMaker = new PageMaker(cri, courseService.getTotalCntByDomain(cri, domain));

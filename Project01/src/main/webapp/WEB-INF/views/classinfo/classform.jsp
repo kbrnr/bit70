@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
+<style>
 
-  
+.ahand { cursor: pointer; }
+
+</style>
+
   
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
@@ -21,7 +25,7 @@
 		<!-- Main content -->
 		<section class="content">
 		<!-- ----------------------------------------- -->
-			<div class="box box-info">
+			<div class="box">
                 <div class="box-header with-border">
                   <h3 class="box-title">■수업등록</h3>
                 </div><!-- /.box-header -->
@@ -31,48 +35,48 @@
                   <div class="box-body">
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">수업명</label>
-                      <div class="col-sm-10">
+                      <div class="col-sm-7">
                         <input type="text" class="form-control" id="inputEmail3" name='clz_name'">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label" >도메인</label>
-                      <label for="inputPassword3" class="col-sm-2 control-label" >http://www.XXX.com/</label>
+                      <label for="inputPassword3" class="col-sm-2 control-label" >http://www.focus.com/</label>
                       <div class="col-sm-2">
                       	<input id="clz_domain" type="text" class="form-control" name='clz_domain'>
                       </div>
-                      <div class="col-sm-4">
-                      	<div id="domainmsg"></div>
+                      <div class="col-sm-1">
+                      	<button id="btn_domaincheck" type="button" class="btn btn btn-default btn-sm">도메인검사</button>
                       </div>
                       <div class="col-sm-2">
-                      	<button id="btn_domaincheck" type="button" class="btn btn-info pull-right">도메인검사</button>
+                      	<div id="domainmsg"></div>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">선생님</label>
-                      <div class="col-sm-8">
+                      <div class="col-sm-4">
                  		<div id="choiceteacher" class="time-label"></div>
                       </div>
                       <div class="col-sm-2">
-                 		<button id="btn_teachlist" type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#teacherModal">선생님찾기</button>	
+                 		<button id="btn_teachlist" type="button" class="btn btn btn-default btn-sm" data-toggle="modal" data-target="#teacherModal">선생님찾기</button>	
                       </div>
                     </div>
                                          
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">강의실</label>
-                      <div class="col-sm-10">
+                      <div class="col-sm-2">
                         <input type="text" class="form-control" id="inputEmail3" name='clz_room'>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">시작일</label>
-                      <div class="col-sm-10">
+                      <div class="col-sm-3">
                         <input type="date" class="form-control" id="inputEmail3" name='clz_start_date'>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">종료일</label>
-                      <div class="col-sm-10">
+                      <div class="col-sm-3">
                         <input type="date" class="form-control" id="inputEmail3" name='clz_end_date'>
                       </div>
                     </div>
@@ -81,7 +85,7 @@
                       <div class="col-sm-10">
                         <label>
                               준비중
-                          <input type="radio" name="clz_state" id="optionsRadios1" value="1">
+                          <input type="radio" name="clz_state" id="optionsRadios1"  value="1">
                         </label>
                         <label>&nbsp;&nbsp;&nbsp;&nbsp;
                               강의중
@@ -99,10 +103,10 @@
                     </div>                         
                   </div><!-- /.box-body -->
                   <div id="hiddenid"></div>
-                  <div class="box-footer">
-                  	<a href="classlist" class="btn btn-default">취소</a>
+                  <div class="box-footer text-center ">
+                  	<a href="classlist" class="btn btn-default pull-right">취소</a>
                     
-                    <button type="submit" class="btn btn-info pull-right">등록</button>
+                    <button type="submit" class="btn btn-primary btn-lg ">등록</button>
                     
                   </div><!-- /.box-footer -->
                 </form>
@@ -234,13 +238,12 @@ $("#teacherinfo").on("click", ".userid", function(){
 	username = $(this).siblings('.username').text();
 	console.log(userid);
 	console.log(username);
-	$("#choiceteacher").append("<span data-vid='"+ userid +"' class='bg-gray'>"+ username + "(" + userid + ") X <input type='hidden' data-hid='mem_id' name='mem_id' value='"+userid+"' ></span>");
-	
+	$("#choiceteacher").append("<div data-vid='"+ userid +"' class='tremove'>"+ username + "(" + userid + ") <span class='badge ahand'>X</span> <input type='hidden' data-hid='mem_id' name='mem_id' value='"+userid+"' ></div>");
 });
 
 
 //선택된 선생님 취소
-$("#choiceteacher").on("click", ".bg-gray", function(){
+$("#choiceteacher").on("click", ".tremove", function(){
 	$this = $(this)
 	$this.remove();
 	
@@ -258,7 +261,7 @@ $("#btn_domaincheck").on("click", function() {
 		dataType:'json',
 		success: function(data){
 			console.log(data);
-			var msg = data ? "사용할수 있는 도메인입니다." : "사용할수 없는 도메인입니다.";
+			var msg = data ? "<span style='color:blue'>사용가능 합니다." : "<span style='color:red'>사용할 수 없습니다.";
 			$("#domainmsg").html(msg)
 		}
 	});

@@ -1,5 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<style>
+
+th {
+		text-align: center;
+		vertical-align: middle;
+		background-color: #E0E0E0 ;
+}
+	
+td {
+	text-align: center;
+}
+
+.td-left {
+	text-align: left;
+}
+
+.teacherul {
+    margin: 0px;
+    padding-left: 0px;
+	float: left;
+}
+
+.teacherli { 
+	width:130px; 
+	float:left; 
+	margin:5px; 
+	display:inline; 
+}
+
+.td-domain {
+	font-size: 18px;
+	font-weight: bold;>
+}
+
+.space {
+	height:50px; 
+}
+
+
+
+</style>
+
 
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
@@ -18,7 +62,7 @@
 		<section class="content">
 		<!-- ----------------------------------------- -->
 		<div class="box">
-                <div class="box-header">
+                <div class="box-header with-border">
                   <h3 class="box-title">■선생님리스트</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
@@ -29,25 +73,25 @@
                   	
 	                  	<div class="col-sm-12">
 	                  
-		                  <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+		                  <table id="example1" class="table table-hover" role="grid" aria-describedby="example1_info">
 		                    <thead>
 		                      <tr role="row">
-		                      	  <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 109px;">아이디</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 142px;">성명</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 129px;">가입일</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 92px;">이메일</th>
-			                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">연락처</th>			                   
-		                      	  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">구분</th>		
+		                      	  <th >성명</th>
+			                      <th >아이디</th>
+			                      <th >가입일</th>
+			                      <th >이메일</th>
+			                      <th width="120px">연락처</th>			                   
+		                      	  <th >구분</th>		
 		                      </tr>
 		                    </thead>
 		                    <tbody>
 		                      <c:forEach items="${list}" var="vo">
 			                    <tr role="row">
-			                      <td>${vo.mem_id}</td>
 			                      <td>${vo.mem_name}</td>
-			                      <td>${vo.mem_reg_date}</td>
+			                      <td>${vo.mem_id}</td>
+			                      <td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${vo.mem_reg_date}"/></td>
 			                      <td>${vo.mem_email}</td>
-			                      <td>${vo.mem_tel}</td>
+			                      <td >${vo.mem_tel}</td>
 			                      <td>${vo.mem_gb}</td>
 			                    </tr>
 		                      </c:forEach>
@@ -57,7 +101,7 @@
 	                  	</div><!-- /.grid -->
 	                  	
                   	</div><!-- /.row -->
-                  	
+                  	<div class="box-footer">
                   	<div class="row">
             		
                   		<div class="col-sm-12">
@@ -117,7 +161,9 @@
 								</div>
 							</form>
                   			
-                  		</div><!-- /.grid -->
+                  			<div class="space"></div>
+                  		</div>
+                  	</div><!-- /.grid -->
                   	</div><!-- /.row -->
                   	
                   	
