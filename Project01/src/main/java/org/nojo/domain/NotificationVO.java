@@ -13,6 +13,7 @@ public class NotificationVO {
 	private boolean noti_read_gb;
 	private Date noti_regdate;
 	private String clz_domain;
+	private int screen_gb;
 
 	public int getNoti_no() {
 		return noti_no;
@@ -91,6 +92,14 @@ public class NotificationVO {
 		return "NotificationVO [noti_no=" + noti_no + ", noti_service_name=" + noti_service_name + ", noti_service_link=" + noti_service_link
 				+ ", noti_sender_id=" + noti_sender_id + ", noti_receiver_id=" + noti_receiver_id + ", noti_summation=" + noti_summation
 				+ ", noti_read_gb=" + noti_read_gb + ", noti_regdate=" + noti_regdate + ", clz_domain=" + clz_domain + "]";
+	}
+
+	public int getScreen_gb() {
+		return screen_gb;
+	}
+
+	public void setScreen_gb(int screen_gb) {
+		this.screen_gb = screen_gb;
 	}
 
 }

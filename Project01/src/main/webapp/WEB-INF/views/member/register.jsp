@@ -25,11 +25,11 @@
   <body class="register-page">
     <div class="register-box">
       <div class="register-logo">
-        <a href="/resources/index2.html"><b>Admin</b>LTE</a>
+        <a href="/resources/index2.html"><b>회원</b>가입</a>
       </div>
 
       <div class="register-box-body">
-        <p class="login-box-msg">Register a new membership</p>
+        <p class="login-box-msg">Project01 회원가입</p>
         <form method="post" action="/member/signIn" enctype="multipart/form-data">
           <div class="form-group has-feedback">
             <input type="text" class="form-control" placeholder="아이디" name="mem_id" required/>

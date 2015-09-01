@@ -14,6 +14,7 @@ public interface NotificationMapper {
 	@Select("select * from tbl_notification "
 			+ "where clz_domain = #{domain} "
 			+ "and noti_receiver_id = #{id} "
+			+ "and noti_summation = 0 "
 			+ "order by noti_regdate")
 	public List<NotificationVO> getNotifications(@Param("domain") String domain, @Param("id") String id);
 	
