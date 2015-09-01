@@ -89,11 +89,11 @@
                   <div id="hiddenid"></div>
                   
                 </form>
-                  <div class="box-footer">
+                  <div class="box-footer text-center ">
                   <!-- 학원일때 -->
                   <c:if test="${isAdmin}">
-                  	<a href="/classinfo/classlist" class="btn btn-default">목록 </a>
-                  	<a href="/classinfo/classmodifyform?domain=${clzinfo.clz_domain}" class="btn btn-info pull-right">수정</a>
+                  	<a href="/classinfo/classlist" class="btn btn-default btn-lg ">목록 </a>
+                  	<a href="/classinfo/classmodifyform?domain=${clzinfo.clz_domain}" class="btn btn-primary  pull-right">수정</a>
                   </c:if>
                   
                   
