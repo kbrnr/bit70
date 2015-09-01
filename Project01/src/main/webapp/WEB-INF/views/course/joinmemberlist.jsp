@@ -4,6 +4,9 @@
 
 
 <style>
+.badge{
+	font-size: 15px;
+}
 
 .widget-user-header {
 	padding : 10px 10px 10px 20px ;
@@ -18,6 +21,10 @@
 }
 
 .ahand { cursor: pointer; }
+
+.space {
+	height:50px; 
+}
 
 </style>
 
@@ -66,9 +73,10 @@
 						<!-- Widget: user widget style 1 -->
 						<div class="box box-widget widget-user-2 ">
 							<!-- Add the bg color to the header using any of the bg-* classes -->
-							<div class="widget-user-header bg-aqua-active">
+							<div class="bg-aqua-active widget-user-header">
 								<div class="widget-user-image">
 									<img class="img-circle" src="/resources/dist/img/user7-128x128.jpg" alt="User Avatar">
+									<!--  <img class='img-circle' src='/${domain}/seat/seatImg?userId=${vo.mem_id}' onerror="javascript:this.src='/resources/nojo/images/noImage.png" alt='User Avatar'>-->
 								</div>
 								<!-- /.widget-user-image -->
 								<h3 class="widget-user-username">${vo.mem_name}</h3>
@@ -184,7 +192,7 @@
 								</div>
 							</form>
 
-
+	                  			<div class="space"></div>
 
 						</div>
 						<!-- /.grid -->

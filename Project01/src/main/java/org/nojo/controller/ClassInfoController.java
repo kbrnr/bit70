@@ -59,6 +59,7 @@ public class ClassInfoController {
 	@RequestMapping(value="/classregister", method=RequestMethod.POST)
 	public String classregister(ClassVO vo, String[] mem_id){
 		classInfoService.makeClass(vo, mem_id);
+		System.out.println(vo.getClz_name());
 		return "redirect:/classinfo/classread?domain=" + vo.getClz_domain();
 	}
 	

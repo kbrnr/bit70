@@ -4,6 +4,41 @@
 
 .ahand { cursor: pointer; }
 
+th {
+		text-align: center;
+		vertical-align: middle;
+		background-color: #E0E0E0 ;
+}
+	
+td {
+	text-align: center;
+}
+
+.td-left {
+	text-align: left;
+}
+
+.input-classname{
+	width: 400px;
+}
+
+.input-domain{
+	width: 50px;
+}
+
+.btn-tmodal{
+	padding: 0px 15px 0px 47px;
+}
+
+.choiceteacher{
+	width: 315px;
+	padding: 8px 15px 0px 15px;
+}
+
+.classstate {
+	padding: 5px 15px 0px 15px;
+}
+
 </style>
 
   
@@ -35,36 +70,31 @@
                   <div class="box-body">
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">수업명</label>
-                      <div class="col-sm-7">
-                        <input type="text" class="form-control" id="inputEmail3" name='clz_name'">
+                      <div class="col-sm-4">
+                        <input type="text" class="form-control input-classname" id="inputEmail3" name="clz_name">
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="inputPassword3" class="col-sm-2 control-label" >도메인</label>
-                      <label for="inputPassword3" class="col-sm-2 control-label" >http://www.focus.com/</label>
-                      <div class="col-sm-2">
-                      	<input id="clz_domain" type="text" class="form-control" name='clz_domain'>
-                      </div>
-                      <div class="col-sm-1">
+					  <label for="inputPassword3" class="col-sm-2 control-label" >도메인</label>
+                      <div class="col-sm-7 form-inline">
+                      	<span class="url">http://www.focus.com/</span>
+                      	<input type="text" id="clz_domain" class="input-domain form-control" name='clz_domain' >
                       	<button id="btn_domaincheck" type="button" class="btn btn btn-default btn-sm">도메인검사</button>
+                      	<span id="domainmsg" ></span>
                       </div>
-                      <div class="col-sm-2">
-                      	<div id="domainmsg"></div>
-                      </div>
+                  	  
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">선생님</label>
-                      <div class="col-sm-4">
-                 		<div id="choiceteacher" class="time-label"></div>
-                      </div>
-                      <div class="col-sm-2">
-                 		<button id="btn_teachlist" type="button" class="btn btn btn-default btn-sm" data-toggle="modal" data-target="#teacherModal">선생님찾기</button>	
+                      <div id="choiceteacher" class="choiceteacher col-sm-3"></div>
+                      <div class="col-sm-1">
+                 		<button id="btn_teachlist" type="button" class="btn btn btn-default btn-sm" data-toggle="modal" data-target="#teacherModal">선생님찾기</button>
                       </div>
                     </div>
                                          
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">강의실</label>
-                      <div class="col-sm-2">
+                      <div class="col-sm-2 ">
                         <input type="text" class="form-control" id="inputEmail3" name='clz_room'>
                       </div>
                     </div>
@@ -82,7 +112,7 @@
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label" >상태</label>
-                      <div class="col-sm-10">
+                      <div class="col-sm-5 classstate">
                         <label>
                               준비중
                           <input type="radio" name="clz_state" id="optionsRadios1"  value="1">
@@ -102,13 +132,16 @@
                       </div>
                     </div>                         
                   </div><!-- /.box-body -->
-                  <div id="hiddenid"></div>
-                  <div class="box-footer text-center ">
+                  
+                  
+                  <div class="box-footer text-center">
+                  	<div class="col-sm-8">
                   	<a href="classlist" class="btn btn-default pull-right">취소</a>
                     
                     <button type="submit" class="btn btn-primary btn-lg ">등록</button>
-                    
+                    </div>
                   </div><!-- /.box-footer -->
+                  
                 </form>
 			</div><!-- /.box box-info -->		
 		<!-- ----------------------------------------- -->
@@ -136,13 +169,13 @@
       </div>
       <div class="modal-body">    
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-        	<table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+        	<table id="example1" class="table table-hover" role="grid">
 		    <thead>
 		    	<tr role="row">
-		        	<th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 109px;">아이디</th>
-			        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 142px;">성명</th>
-			        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 92px;">이메일</th>
-			        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">연락처</th>			                   
+		        	<th width="100px">아이디</th>
+			        <th >성명</th>
+			        <th width="150px">이메일</th>
+			        <th width="150px">연락처</th>			                   
 		        </tr>
 		    </thead>
 		    <tbody id="teacherinfo">
@@ -261,7 +294,7 @@ $("#btn_domaincheck").on("click", function() {
 		dataType:'json',
 		success: function(data){
 			console.log(data);
-			var msg = data ? "<span style='color:blue'>사용가능 합니다." : "<span style='color:red'>사용할 수 없습니다.";
+			var msg = data ? "<span style='color:blue'>사용가능한 도메인 입니다." : "<span style='color:red'>사용중인 도메인 입니다.";
 			$("#domainmsg").html(msg)
 		}
 	});

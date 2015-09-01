@@ -1,7 +1,48 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
- 
+
+<style>
+.ahand { cursor: pointer; }
+
+.domain {
+	font-size: 18px;
+	font-weight: bold;>
+}
+
+.url {
+	padding: 2px 0px 0px 0px;
+}
+
+.input-classname{
+	width: 400px;
+}
+
+
+.choiceteacher{
+	width: 315px;
+	padding: 8px 15px 0px 15px;
+}
+
+.classstate {
+	padding: 6px 15px 0px 15px;
+}
+
+th {
+		text-align: center;
+		vertical-align: middle;
+		background-color: #E0E0E0 ;
+}
+	
+td {
+	text-align: center;
+}
+
+.td-left {
+	text-align: left;
+}
+
+</style>
   
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
@@ -23,7 +64,7 @@
 		<!-- ----------------------------------------- -->
 			<div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">■수업상세FAFD</h3>
+                  <h3 class="box-title">■수업수정</h3>
                 </div><!-- /.box-header -->
                
 				<!-- form start -->
@@ -31,83 +72,80 @@
                   <div class="box-body">
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">수업명</label>
-                      <div class="col-sm-10">
-                        <input type="text" class="form-control" id="inputEmail3" name='clz_name'" value="${clzinfo.clz_name}">
+                      <div class="col-sm-6">
+                        <input type="text" class="form-control input-classname" id="inputEmail3" name='clz_name' value="${clzinfo.clz_name}">
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label" >도메인</label>
-                      <label for="inputPassword3" class="col-sm-2 control-label" >http://www.XXX.com/</label>
-                      <div class="col-sm-2"><input id="clz_domain" type="text" class="form-control" name="clz_domain" value="${clzinfo.clz_domain}" >
-                      	${clzinfo.clz_domain}
-                      </div>
+                      <div class="col-sm-5">
+                      	<span class="url">http://www.focus.com/</span><span class="domain">${clzinfo.clz_domain}</span>
+                      	<input type='text' data-hname='${clzinfo.clz_domain}' name='clz_domain' value='${clzinfo.clz_domain}'>
+                      </div>                      
                       <div class="col-sm-4">
                       	<div id="domainmsg"></div>
-                      </div>
-                      <div class="col-sm-2">
-                      	
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">선생님</label>
-                      <div class="col-sm-8">
-                 		<div id="choiceteacher" class="time-label">
+                	  <div id="choiceteacher" class="choiceteacher col-sm-3">
                  		<c:forEach items="${clzinfo.teacherlist}" var="teacher">
-                 			<div data-vid='${teacher.mem_id}' class='bg-gray'>${teacher.mem_name}(${teacher.mem_id})X <input type='text' data-hid='${teacher.mem_id}' name='mem_id' value='${teacher.mem_id}' ></div>
+                 			<div data-vid='${teacher.mem_id}' class='tremove'>${teacher.mem_name}(${teacher.mem_id})<span class='badge ahand'>X</span> <input type='text' data-hid='${teacher.mem_id}' name='mem_id' value='${teacher.mem_id}' ></div>
                  		</c:forEach>                 		
-                      	</div>
+                   	  </div>
+                      <div class="col-sm-1">
+   	             		<button id="btn_teachlist" type="button" class="btn btn btn-default btn-sm" data-toggle="modal" data-target="#teacherModal">선생님찾기</button>
                       </div>
-                      <div class="col-sm-2">
-                 		<button id="btn_teachlist" type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#teacherModal">선생님찾기</button>	
-                      </div>
-                    </div>
-
-                                         
+					</div>                    
+                    
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">강의실</label>
-                      <div class="col-sm-10">
+                      <div class="col-sm-2">
                         <input type="text" class="form-control" id="inputEmail3" name='clz_room' value='${clzinfo.clz_room}'>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">시작일</label>
-                      <div class="col-sm-10">
+                      <div class="col-sm-3">
                         <input type="date" class="form-control" id="inputEmail3" name='clz_start_date' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${clzinfo.clz_start_date}"/>'>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">종료일</label>
-                      <div class="col-sm-10">
+                      <div class="col-sm-3">
                         <input type="date" class="form-control" id="inputEmail3" name='clz_end_date' value='<fmt:formatDate pattern="yyyy-MM-dd" value="${clzinfo.clz_end_date}"/>'>
                       </div>
                     </div>
                     <div class="form-group">
 					  <label for="inputPassword3" class="col-sm-2 control-label" >상태</label>
-                      <div class="col-sm-10">
+                      <div class="col-sm-5 classstate" >
                         <label>
-                              준비중
-                          <input type="radio" name="clz_state" id="optionsRadios1" value="1" <c:out value="${clzinfo.clz_state == '1'?'checked=checked':''}" />>
+                          준비중
+                          <input type="radio" name="clz_state" id="optionsRadios1" value="1" >
                         </label>
                         <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                              강의중
+                          강의중
                           <input type="radio" name="clz_state" id="optionsRadios2" value="2" >
                         </label>
                         <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                              종료
+                          종료
                           <input type="radio" name="clz_state" id="optionsRadios3" value="3" >
                         </label>
                         <label>&nbsp;&nbsp;&nbsp;&nbsp;
-                              일시정지
+                          일시정지
                           <input type="radio" name="clz_state" id="optionsRadios4" value="4" >
                         </label>
                       </div>
                     </div>                         
                   </div><!-- /.box-body -->
-                  <div class="box-footer">
-                  	<a href="/classinfo/classlist" class="btn btn-default">목록</a>
+                  
+                  <div class="box-footer text-center">
+                  	<div class="col-sm-8">
+                  	<a href="classlist" class="btn btn-default pull-right">취소</a>
                     <c:if test="${isAdmin}">
-                    	<button type="submit" class="btn btn-info pull-right">수정</button>
+                    	<button type="submit" class="btn btn-primary btn-lg ">저장</button>
                     </c:if>
+                    </div>
                   </div><!-- /.box-footer -->
                 </form>
 			</div><!-- /.box box-info -->		
@@ -136,13 +174,13 @@
       </div>
       <div class="modal-body">    
         <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-        	<table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+        	<table id="example1" class="table table-hover" role="grid">
 		    <thead>
 		    	<tr role="row">
-		        	<th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 109px;">아이디</th>
-			        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 142px;">성명</th>
-			        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 92px;">이메일</th>
-			        <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 64px;">연락처</th>			                   
+		        	<th width="100px">아이디</th>
+			        <th >성명</th>
+			        <th width="150px">이메일</th>
+			        <th width="150px">연락처</th>			                   
 		        </tr>
 		    </thead>
 		    <tbody id="teacherinfo">
@@ -244,17 +282,16 @@ $("#teacherinfo").on("click", ".userid", function(){
 	username = $(this).siblings('.username').text();
 	console.log(userid);
 	console.log(username);
-	$("#choiceteacher").append("<div data-vid='"+ userid +"' class='bg-gray'>"+ username + "(" + userid + ") X <input type='text' data-hid='mem_id' name='mem_id' value='"+userid+"' ></div>");
-	
+	$("#choiceteacher").append("<div data-vid='"+ userid +"' class='tremove'>"+ username + "(" + userid + ") <span class='badge ahand'>X</span> <input type='text' data-hid='mem_id' name='mem_id' value='"+userid+"' ></div>");
 });
 
 
 //선택된 선생님 취소
-$("#choiceteacher").on("click", ".bg-gray", function(){
+$("#choiceteacher").on("click", ".tremove", function(){
 	$this = $(this)
 	$this.remove();
+	
 });
-
 
 
 
