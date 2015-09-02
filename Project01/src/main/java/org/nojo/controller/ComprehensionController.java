@@ -44,7 +44,6 @@ public class ComprehensionController {
 //		
 //		return "/comprehension/comprehension";
 //	}	
-
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public String comprehensionList(@PathVariable("domain") String domain, Model model) throws Exception{
@@ -54,6 +53,7 @@ public class ComprehensionController {
 		model.addAttribute("tqscorelist",tqscorelist);
 		return "/comprehension/comprehensionlist";
 	}
+
 	
 	@RequestMapping(value="/byid", method=RequestMethod.GET)
 	public String comprehensionListByID(@PathVariable("domain") String domain, Model model) throws Exception{
@@ -84,6 +84,24 @@ public class ComprehensionController {
 	@RequestMapping(method=RequestMethod.POST)
 	public int registComprehension(ComprehensionVO vo) throws Exception{
 		return service.registComprehension(vo);
+	}	
+	
+
+	//////////////////////////////////////////////////////////////////
+	@RequestMapping(value="/_", method=RequestMethod.GET)
+	public String _comprehensionList(@PathVariable("domain") String domain, Model model) throws Exception{
+		List<TQuestionScoreListVO> tqscorelist ; 
+		tqscorelist = service.getComprehension(domain);
+		
+		model.addAttribute("tqscorelist",tqscorelist);
+		return "/comprehension/_comprehensionlist";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/ajax", method=RequestMethod.POST)
+	public List<TQuestionScoreListVO> comprehensionListAjax(@PathVariable("domain") String domain) throws Exception{
+		return service.getComprehension(domain);
 	}	
 	
 }

@@ -4,9 +4,12 @@
 .div-text-valign{
 	font-size: 22px;
 	padding: 0px 15px 0px 15px;
+	
 }
 
-
+.div-left{
+	padding: 0px 0px 0px 0px;
+}
 
 
 </style>
@@ -46,7 +49,7 @@
                  </div>
   	             <div class="form-group">
                    <label for="inputPassword1" class="col-sm-2 control-label">새 비밀번호</label>
-                      <div class="col-sm-4">
+                      <div class="col-sm-5">
                         <input type="text" class="form-control" name="mem_pw">
                       </div>
 <!--                       <label for="inputPassword2" class="col-sm-2 control-label" >비밀번호 확인</label>
@@ -64,13 +67,13 @@
                  </div>
                  <div class="form-group">
                    <label for="inputEmail" class="col-sm-2 control-label">E-MAIL</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                     	<input type="text" class="form-control" name="mem_email" value="${user.email}" />
                    </div>
                  </div>
                  <div class="form-group">
                    <label for="inputTel" class="col-sm-2 control-label">TEL</label>
-                    <div class="col-sm-4">
+                    <div class="col-sm-5">
                    		<input type="text" class="form-control" name="mem_tel" value="${user.tel}" />
                    </div>
                  </div>
@@ -78,21 +81,24 @@
                  <div class="form-group">
                    <label for="inputPhoto" class="col-sm-2 control-label">사진</label>
                    <div class="col-sm-10">
-                   	<div class="col-sm-5">
-                   		<div>
-                   			<img sec ="/resources">
+                   	<div class="col-sm-6 div-left ">
+                   		<div class="form-inline">
+                   			<img class="profileimg" src="/membership/profileImg?userId=${user.id}" onerror='imgError(this);'" width="100px" height="100px">
+                   			<span>자신의 사진을 넣어주세요(160 X 160)</span>
                    		</div>
-                   		<img class="profileimg" src="/membership/profileImg?userId=${user.id}" onerror='imgError(this);'">
+                   		
 			            <input type="file" class="form-control" name="file" />
                    	</div>
                    </div>
                  </div>
                 
                </div><!-- /.box-body -->
-               <div class="box-footer">
-               	<a href="profile" class="btn btn-default">취소</a>
-                 
-                 <button type="submit" class="btn btn-info pull-right">등록</button>
+                 <div class="box-footer text-center">
+                  	<div class="col-sm-8">
+                  	<a href="/membership/profile" class="btn btn-default pull-right">취소</a>
+                    
+                    <button type="submit" class="btn btn-primary btn-lg ">등록</button>
+                 </div>
                  
                </div><!-- /.box-footer -->
              </form>
