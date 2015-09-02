@@ -1,0 +1,73 @@
+.noti-outer {
+	width: 100px;
+	height: 100px;
+	background-color: rgba(222, 30, 66, 0.5);
+	border: 2px solid rgb(245, 104, 140);
+	border-radius: 50%;
+	animation-duration: 1.5s;
+	z-index: 2;
+	position: absolute;
+	left: 90%;
+	top: 10%;
+	opacity: 0.6;
+}
+
+.noti-inner {
+	height: 90%;
+	width: 90%;
+	background-color: rgb(233, 37, 88);
+	border: thin dashed rgb(255, 255, 255);
+	border-radius: 50%;
+	position: relative;
+	top: 5%;
+	left: 5%;
+}
+
+.noti-header {
+	position: relative;
+	font-weight: bold;
+	font-size: x-small;
+	padding: 5px 3px 3px 3px;
+	text-align: center;
+	word-break: break-all;
+}
+
+.noti-body {
+	position: relative;
+	padding: 0px 2px 0px 2px;
+	font-size: xx-small;
+	font-weight: lighter;
+	text-align: center;
+	word-break: break-all;
+color:#fff;
+text-shadow:#fff 0 -1px 4px, #ff0 0 -2px 10px, #ff8000 0 -10px 20px, red 0 -18px 40px;
+}
+
+
+
+.noti-outer *{
+	cursor: pointer;
+}
+
+.test{
+	animation: animationFrames linear 1s;
+	transform:  translate(-600%, 200%) scale(5,5);
+	opacity: 0.9;
+}
+
+.test2{
+	transform:  translate(-600%, 200%) scale(5,5);
+	opacity: 0.9;
+}
+
+@keyframes animationFrames{
+	0% {
+		transform:  rotate(180deg) ;
+	}
+	50%{
+		transform: translate(-250%,150%);
+	}
+	100% {
+		transform:  translate(-600%, 200%)  rotate(0deg) scale(5,5);
+	}
+}
