@@ -66,13 +66,13 @@
 	]]>
 	<if test="cri.searchType != null">
 		<if test="cri.searchType == 'className'">
-			and clz_name like CONCAT('%', #{cri.keyword}, '%')
+			where clz_name like CONCAT('%', #{cri.keyword}, '%')
 		</if>
 		<if test="cri.searchType == 'domain'">
-			and clz_domain like CONCAT('%', #{cri.keyword}, '%')
+			where clz_domain like CONCAT('%', #{cri.keyword}, '%')
 		</if>
 		<if test="cri.searchType == 'state'">
-			and clz_state like CONCAT('%', #{cri.keyword}, '%')
+			where clz_state like CONCAT('%', #{cri.keyword}, '%')
 		</if>
 	</if>
 	<![CDATA[	 

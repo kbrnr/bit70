@@ -119,11 +119,11 @@ td {
 			                      		</c:when>
 			                      </c:choose>
 			                      </td>
-			                      <td class="td-left"><a href="/${vo.clz_domain}" target=_blank>http://www.focus.com/<span class="td-domain">${vo.clz_domain}</span></a></td>
+			                      <td class="td-left"><a href="/${vo.clz_domain}">http://www.focus.com/<span class="td-domain">${vo.clz_domain}</span></a></td>
 			                       <td>
 			                      <c:choose>
 			                      		<c:when test="${vo.course_state=='0'}">
-			                      			승인전
+			                      			미가입
 			                      		</c:when>
 			                      		<c:when test="${vo.course_state=='1'}">
 			                      			승인대기
@@ -205,7 +205,7 @@ td {
 			                 	 	</div><!-- /input-group -->
 								</div>
 							</form>
-                  			
+                  			<div class="space"></div>
                   			
                   		</div><!-- /.grid -->
                   	</div><!-- /.row -->

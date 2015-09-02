@@ -127,6 +127,9 @@ public class ClassInfoController {
 		PageMaker pagemaker;
 		
 		list = classInfoService.getClassListJoin(cri, SecurityUtil.getUser().getId());
+		
+		System.out.println(list.size());
+		
 		pagemaker = new PageMaker(cri, classInfoService.getClassTotalCnt(cri));
 
 		model.addAttribute("list", list);

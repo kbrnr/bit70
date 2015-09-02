@@ -12,6 +12,12 @@
 	padding : 10px 10px 10px 20px ;
 }
 
+.bg-userimg{
+	background-image:url(/resources/nojo/images/namecardbg.jpg);
+}
+
+
+
 .info {
 	padding : 5px 15px 5px 15px ;
 }
@@ -25,6 +31,31 @@
 .space {
 	height:50px; 
 }
+
+
+.boxShake {
+   animation-name: boxShake;
+   animation: animationFrames linear 0.7s;
+}
+
+@keyframes shake {
+    from, to {
+        transform: translate3d(0, 0, 0);
+    }
+
+    10%, 30%, 50%, 70%, 90% {
+        transform: translate3d(-10px, 0, 0);
+    }
+
+    20%, 40%, 60%, 80% {
+        transform: translate3d(10px, 0, 0);
+    }
+}
+
+.shake {
+    animation-name: shake;
+}
+
 
 </style>
 
@@ -69,11 +100,11 @@
 
 					<!-- -- -->
 					<c:forEach items="${list}" var="vo">  
-					<div class="col-sm-3 ">
+					<div class="col-sm-3 boxShake">
 						<!-- Widget: user widget style 1 -->
 						<div class="box box-widget widget-user-2 ">
 							<!-- Add the bg color to the header using any of the bg-* classes -->
-							<div class="bg-aqua-active widget-user-header">
+							<div class="bg-userimg widget-user-header">
 								<div class="widget-user-image">
 									<img class="img-circle" src="/resources/dist/img/user7-128x128.jpg" alt="User Avatar">
 									<!--  <img class='img-circle' src='/${domain}/seat/seatImg?userId=${vo.mem_id}' onerror="javascript:this.src='/resources/nojo/images/noImage.png" alt='User Avatar'>-->
@@ -88,7 +119,7 @@
 									<li class="info">전화 <span class="pull-right badge bg-aqua">${vo.mem_tel}</span></li>
 									<li class="info">구분 <span class="pull-right badge bg-green">${vo.course_gb}</span></li>
 									<c:if test="${vo.course_state == 1}">
-										<li class="text-center info ahand"><span class="badge bg-red joincourse" data-userid="${vo.mem_id}" >승인요청</span></li>
+										<li class="text-center info ahand shake"><span class="badge bg-red joincourse" data-userid="${vo.mem_id}" >승인요청</span></li>
 									</c:if>
 									<c:if test="${vo.course_state != 1}">
 										<li class="text-center info"><span class="badge bg-gray">승인완료</span></li>
@@ -199,7 +230,7 @@
 					</div>
 					<!-- /.row -->
 
-
+		
 				</div>
 				<!-- /.example1_wrapper -->
 			</div>
@@ -239,6 +270,23 @@
 		});
 				
 	});
+	
+	
+	
+	
+    function animate(target, className, visible) {
+        target.show();
+        target.addClass(className).one('animationend', function () {
+            target.removeClass(className);
+            if (!visible) {
+                target.hide();
+            }
+        });
+    }
+   
+    $(".shake").on("click", function(){
+        animate($(this).parents(":nth(3)"),"shake", true);
+    });	
 </script>
 
 <%@include file="/WEB-INF/views/include/frameFooter.jsp"%>
