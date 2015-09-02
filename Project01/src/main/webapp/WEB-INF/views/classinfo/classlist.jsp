@@ -19,7 +19,6 @@ td {
 }
 
 .teacherul {
-    margin: 0px;
     padding-left: 0px;
 	float: left;
 }
@@ -29,6 +28,7 @@ td {
 	float:left; 
 	margin:5px; 
 	display:inline; 
+	margin: 0px 5px 0px 5px;
 }
 
 .td-domain {
@@ -117,7 +117,7 @@ td {
 			                      			일시정지
 			                      		</c:when>
 			                      	</c:choose>
-			                      <td class="td-left"><a href="/${vo.clz_domain}" target=_blank>http://www.forcus.com/<span class="td-domain">${vo.clz_domain}</span></a></td>
+			                      <td class="td-left"><a href="/${vo.clz_domain}" target=_blank>http://www.focus.com/<span class="td-domain">${vo.clz_domain}</span></a></td>
 			                    </tr>
 		                      </c:forEach>
 		                    </tbody>

@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
-  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+ 
+<style>
+.div-text-valign{
+	font-size: 22px;
+	padding: 0px 15px 0px 15px;
+}
+
+
+</style> 
   
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
@@ -20,9 +29,9 @@
 		<!-- Main content -->
 		<section class="content">
 		<!-- ----------------------------------------- -->
-			<div class="box box-info">
+			<div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">■수업상세FAFD</h3>
+                  <h3 class="box-title">■수업신청</h3>
                 </div><!-- /.box-header -->
                
 				<!-- form start -->
@@ -30,64 +39,59 @@
                   <div class="box-body">
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">수업명</label>
-                      <div class="col-sm-10">
+                      <div class="col-sm-10 div-text-valign">
                         ${clzinfo.clz_name}
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label" >도메인</label>
-                      <label for="inputPassword3" class="col-sm-2 control-label" >http://www.XXX.com/</label>
-                      <div class="col-sm-2">
-                      	${clzinfo.clz_domain}
-                      </div>
-                      <div class="col-sm-4">
-                      	<div id="domainmsg"></div>
-                      </div>
-                      <div class="col-sm-2">
-                      	
-                      </div>
+                      <div class="col-sm-10 div-text-valign">http://www.focus.com/${clzinfo.clz_domain}</div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">선생님</label>
-                      <div class="col-sm-8">
+                      <div class="col-sm-8 div-text-valign">
                  		<div id="choiceteacher" class="time-label">
                  		<c:forEach items="${clzinfo.teacherlist}" var="teacher">
                  				${teacher.mem_name}(${teacher.mem_id})&nbsp;&nbsp;&nbsp;
                  			</c:forEach>
                  		</div>
                       </div>
-                      <div class="col-sm-2">
-                 			
-                      </div>
                     </div>
-                                         
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">강의실</label>
-                      <div class="col-sm-10">
+                      <div class="col-sm-10 div-text-valign">
                         ${clzinfo.clz_room}
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">시작일</label>
-                      <div class="col-sm-10">
-                        ${clzinfo.clz_start_date}
+                      <div class="col-sm-10 div-text-valign">
+                        <fmt:formatDate pattern="yyyy-MM-dd" value="${clzinfo.clz_start_date}"/>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">종료일</label>
-                      <div class="col-sm-10">
-                        ${clzinfo.clz_end_date}
+                      <div class="col-sm-10 div-text-valign">
+                        <fmt:formatDate pattern="yyyy-MM-dd" value="${clzinfo.clz_end_date}"/>
                       </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label" >상태</label>
-                      <div class="col-sm-10">
-                        ${clzinfo.clz_state} 
+                      <div class="col-sm-10 div-text-valign">
+                      <c:choose>
+			          	<c:when test="${clzinfo.clz_state=='1'}">준비중</c:when>
+			            <c:when test="${clzinfo.clz_state=='2'}">강의중</c:when>
+			            <c:when test="${clzinfo.clz_state=='3'}">종료</c:when>
+			            <c:when test="${clzinfo.clz_state=='4'}">일시정지</c:when>
+			          </c:choose>
                       </div>
                     </div>
-                    <div class="text-center">
-				  		<button id="btn_join" class="btn btn-info text-center" >join</button>   
-					</div>                         
+					
+					<div class="box-footer text-center ">
+						<div class="col-sm-7">
+					  		<button id="btn_join" class="btn btn-primary btn-lg" >join</button> 
+						</div>
+					</div>	                         
                   </div><!-- /.box-body -->
 					
                 </div>

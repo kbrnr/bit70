@@ -30,7 +30,7 @@
 		<!-- ----------------------------------------- -->
 			<div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">■수업상세 ${isClass}</h3>
+                  <h3 class="box-title">■수업신청</h3>
                 </div><!-- /.box-header -->
                
 				<!-- form start -->
@@ -45,9 +45,6 @@
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label" >도메인</label>
                       <div class="col-sm-10 div-text-valign">http://www.focus.com/${clzinfo.clz_domain}</div>
-                      <div class="col-sm-2">
-                      	
-                      </div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">선생님</label>
