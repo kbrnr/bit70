@@ -1,18 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
+<style>
+.div-text-valign{
+	font-size: 22px;
+	padding: 0px 15px 0px 15px;
+}
 
+
+
+
+</style>
+		
 <!-- Content Header (Page header) -->
 <section class="content-header">
+	<h1>
+		Top Navigation <small>Example 2.0</small>
+	</h1>
 	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class="active">개인정보관리</li>
+		<li>
+			<a href="#">
+			<i class="fa fa-dashboard"></i> Home
+			</a>
+		</li>
+		<li class="active">Dashboard</li>
 	</ol>
 </section>
 
 
 <!-- Main content -->
 <section class="content">
-    <div class="box box-primary">
+    <div class="box">
     	<div class="box-header with-border">
     		<h3 class="box-title">■${user.id}님의 기본정보</h3>
     	</div><!-- /.box-header -->
@@ -23,7 +40,7 @@
                  <div class="form-group">
                    <label for="inputId" class="col-sm-2 control-label">아이디</label>
                    <input type="hidden" class="form-control" name="mem_id" value="${user.id}">
-                   <div class="col-sm-6">
+                   <div class="col-sm-6 div-text-valign">
                    		${user.id}
                    </div>
                  </div>
@@ -41,7 +58,7 @@
                  </div>
                  <div class="form-group">
                    <label for="inputName" class="col-sm-2 control-label">이름</label>
-                    <div class="col-sm-6">
+                    <div class="col-sm-6 div-text-valign">
                    		${user.name}
                    </div>
                  </div>
@@ -62,7 +79,10 @@
                    <label for="inputPhoto" class="col-sm-2 control-label">사진</label>
                    <div class="col-sm-10">
                    	<div class="col-sm-5">
-                   		<img src="/membership/profileImg?userId=${user.id}" onerror='imgError(this);'">
+                   		<div>
+                   			<img sec ="/resources">
+                   		</div>
+                   		<img class="profileimg" src="/membership/profileImg?userId=${user.id}" onerror='imgError(this);'">
 			            <input type="file" class="form-control" name="file" />
                    	</div>
                    </div>

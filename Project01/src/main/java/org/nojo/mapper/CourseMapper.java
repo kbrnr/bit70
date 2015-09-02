@@ -27,6 +27,8 @@ public interface CourseMapper {
 	public List<String> getStudentIdList(String domain);
 
 	
+	@Select("select * from tbl_course where clz_domain = #{domain} and mem_id = #{mem_id}")
+	public CourseVO getCourse(@Param("domain") String domain, @Param("mem_id") String mem_id);
 
 	
 	//학생 수업참여(승인요청 ajax) 

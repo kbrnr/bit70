@@ -3,6 +3,21 @@
 
 <style>
 
+th {
+		text-align: center;
+		vertical-align: middle;
+		background-color: #E0E0E0 ;
+}
+	
+td {
+	text-align: center;
+}
+
+.td-left {
+	text-align: left;
+}
+
+
 .cont-box { 
 		width:0px; height:0px;
 		border-right:10px solid cornflowerblue;
@@ -10,18 +25,7 @@
 		float:right;
 	}
 
-.table>thead>tr>th {
-		text-align: center;
-		vertical-align: middle;
-		font-size: 15px;
-	}
 
-.table>tbody>tr>td {
-    padding-right: 0px;
-    padding-top: 0px;
-    padding-left: 18px;
-    vertical-align: middle;
-  }
 
 .lead {
 	margin-bottom: 0px;
@@ -78,7 +82,7 @@ table {table-layout:fixed; word-break:break-all;}
 							<tbody>							  
   							  <c:forEach items="${tqscorelist}" var="tqlist" varStatus="status">
 							  <tr>
-							  	<td data-content="${tqlist.teacherquestion_content}"><span class="glyphicon glyphicon-question-sign">&nbsp;${tqlist.teacherquestion_content}</span></td>
+							  	<td data-content="${tqlist.teacherquestion_content}">${tqlist.teacherquestion_content}</span></td>
 							  	
 							  	<c:forEach items="${tqlist.scorelist}" var="scorelist">
 								

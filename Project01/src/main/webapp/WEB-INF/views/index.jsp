@@ -48,7 +48,9 @@
 
 
 <div class="content-wrapper">
-	<iframe name="inner" src="/${domain}/main" width="100%" height="100%" style="border:none;"></iframe>
+	<div class="container">
+		<iframe name="inner" src="/${domain}/main" width="100%" height="100%" style="border:none;"></iframe>
+	</div>
 </div>
 <!-- /.content-wrapper -->
 

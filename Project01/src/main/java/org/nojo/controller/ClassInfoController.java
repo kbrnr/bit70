@@ -162,8 +162,15 @@ public class ClassInfoController {
 	@RequestMapping(value="/joinform", method=RequestMethod.GET)
 	public String joinform(String domain, Model model){
 		ClassListVO clzVO ;
+		CourseVO courseVO ;
+		
 		clzVO = classInfoService.getClassOne(domain);
+		courseVO = courseService.getCourse(domain, SecurityUtil.getUser().getId());
+				
 		model.addAttribute("clzinfo", clzVO);
+		model.addAttribute("courseinfo", courseVO);
+		
+
 		
 		return "/classinfo/joinform" ;
 	}

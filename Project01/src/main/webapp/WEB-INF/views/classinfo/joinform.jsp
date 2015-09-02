@@ -37,6 +37,19 @@
 				<!-- form start -->
                 <div id="classinputform" class="form-horizontal" >
                   <div class="box-body">
+                  
+                   	<c:if test="${courseinfo.course_state==1}">
+					<div class="form-group">
+						<div class="col-sm-6 text-center ">
+					  		<div class="alert alert-info alert-dismissable">
+                    			<h4><i class="icon fa fa-info"></i> 가입진행중!</h4>
+                    			선생님의 승인후 사용가능합니다.
+                  			</div>
+						</div>
+					</div>
+                  	</c:if>     
+                  
+                  
                     <div class="form-group">
                       <label for="inputEmail3" class="col-sm-2 control-label">수업명</label>
                       <div class="col-sm-10 div-text-valign">
@@ -86,12 +99,23 @@
 			          </c:choose>
                       </div>
                     </div>
-					
+		
+		          	<c:if test="${courseinfo.course_state==null}">
 					<div class="box-footer text-center ">
 						<div class="col-sm-7">
 					  		<button id="btn_join" class="btn btn-primary btn-lg" >join</button> 
 						</div>
 					</div>	                         
+                  	</c:if>
+                  	
+                  	<c:if test="${courseinfo.course_state==1}">
+					<div class="box-footer text-center ">
+						<div class="col-sm-6">
+					  		<a href="/classinfo/classlist" class="btn btn-default btn-lg ">목록 </a>
+						</div>
+					</div>	                         
+                  	</c:if>
+                  
                   </div><!-- /.box-body -->
 					
                 </div>
@@ -130,11 +154,6 @@ $("#btn_join").on("click", function() {
 	});
 });	
 
-
-
-
-
-	
 
 </script>
 

@@ -16,5 +16,6 @@ public interface CourseService {
 	
 	public void setCourseOK(CourseVO vo);
 
+	public CourseVO getCourse(String domain, String mem_id);
 	
 }

@@ -37,7 +37,6 @@ public class CourseServiceImpl implements CourseService {
 		courseMapper.insertCourseStudent(vo);
 	}
 	
-	
 	public void setCourseOK(CourseVO vo){
 	
 		SeatVO svo = new SeatVO();
@@ -52,4 +51,8 @@ public class CourseServiceImpl implements CourseService {
 		//시트에 정보넣어주기
 	}
 	
+	public CourseVO getCourse(String domain, String mem_id){
+		
+		return courseMapper.getCourse(domain, mem_id);
+	}
 }

@@ -103,7 +103,7 @@ html, body, .wrapper, .wrapper .content-wrapper, .content-wrapper *{
   |               | sidebar-mini                            |
   |---------------------------------------------------------|
   -->
-  <body class="skin-blue sidebar-mini">
+  <body class="skin-blue sidebar-collapse">
     <div class="wrapper">
 
       <!-- Main Header -->
