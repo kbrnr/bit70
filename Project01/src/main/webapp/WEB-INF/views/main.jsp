@@ -83,7 +83,88 @@
 		
 		</div>
 	</section>
-	<!-- /.content -->
+	
+	
+<link rel="stylesheet" href="/resources/nojo/css/animate.css">
+<link rel="stylesheet" href="/resources/nojo/css/notification.css">
+
+
+<script>
+$("body").on("click", ".noti-outer", function(){
+    var $this = $(this);
+    if($this.hasClass("test2")){
+    	$.ajax({
+			url: "/${domain}/notification/setAside/" + $this.data("notino"),
+			method: "patch",
+			success: function(){
+		    	$this.removeClass("test2");
+			}		
+		});
+    }else{
+    	if($this.hasClass("test")){
+    		$.ajax({
+    			url: "/${domain}/notification/setAside/" + $this.data("notino"),
+    			method: "patch",
+    			success: function(){
+    		    	$this.removeClass("test");
+    			}		
+    		});
+    	}else{
+    		$.ajax({
+				url: "/${domain}/notification/setInside/" + $this.data("notino"),
+				method: "patch",
+				success: function(){
+					$this.addClass("test");
+				}		
+			});
+    	}
+    }
+});
+
+function showNoti(){
+	$.getJSON("/${domain}/notification", function(data){
+		if(data.length < 1){ return; }
+		$(".noti-outer").remove();
+		var top = 10;
+		$(data).each(function(){
+			var str = '<div class="noti-outer" data-notino=' + this.noti_no + '>'
+			    	+   '<div class="noti-inner">'
+			    	+     '<div class="noti-header">'
+			    	+        this.noti_service_name  + '<br>'
+			    	+       '<small>[' + this.noti_sender_id + ']</small>'
+			    	+     '</div>'
+			    	+     '<div class="noti-body">'
+			    	+        this.noti_summation
+			    	+     '</div>'
+			    	+   '</div>'
+			    	+ '</div>';
+			var tag = $(str);
+			tag.css("top", top + "%");
+			top += 15;
+			var screen = this.screen_gb;
+			if(screen == 2){ tag.addClass("test2"); }
+			$("body").append(tag);
+			if(screen == 1){ 
+				$.ajax({
+					url: "/${domain}/notification/setInside/" + this.noti_no,
+					method: "patch",
+					success: function(){
+						tag.addClass("test");
+					}		
+				});
+			}
+		});
+	});
+	
+}
+showNoti();
+setInterval(function(){ showNoti(); }, 30000);
+
+
+</script>
+
+
+
 
 <script>
 //----------------------------------------------- 커리큘럼 -----------------------------------------------------
