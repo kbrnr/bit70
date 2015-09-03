@@ -1,73 +1,132 @@
-.noti-outer {
-	width: 100px;
-	height: 100px;
-	background-color: rgba(222, 30, 66, 0.5);
-	border: 2px solid rgb(245, 104, 140);
-	border-radius: 50%;
-	animation-duration: 1.5s;
-	z-index: 2;
-	position: absolute;
-	left: 90%;
-	top: 10%;
-	opacity: 0.6;
+body {
+    background: url("bgbgbg.png");
+    background-size: cover;
+    /*    background-color: #222222;
+        background: repeating-linear-gradient(45deg, #2b2b2b 0%, #2b2b2b 10%, #222222 0%, #222222 50%) 0 / 15px 15px;*/
 }
 
-.noti-inner {
-	height: 90%;
-	width: 90%;
-	background-color: rgb(233, 37, 88);
-	border: thin dashed rgb(255, 255, 255);
-	border-radius: 50%;
-	position: relative;
-	top: 5%;
-	left: 5%;
+.noti {
+    width: 450px;
+    height: 300px;
+    overflow: hidden;
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    font-family: 'Jeju Gothic', sans-serif;
+    cursor: pointer;
+    z-index: 300;
+    animation-duration: 1s;
+}
+.noti:before {
+    content: '';
+    position: absolute;
+    left: -100px; /*-half buffer -left border*/
+    height: 288px;
+    width: 640px;
+    background-color: rgba(34, 34, 34, 0.6);
+    background: repeating-linear-gradient(45deg, rgba(43, 43, 43, 0.6) 0%, rgba(43, 43, 43, 0.6) 10%, rgba(34, 34, 34, 0.6) 0%, rgba(34, 34, 34, 0.6) 50%) 0 / 15px 15px;
+    -webkit-transform: skewX(45deg);
+    -moz-transform: skewX(45deg);
+    transform: skewX(45deg);
+
 }
 
-.noti-header {
-	position: relative;
-	font-weight: bold;
-	font-size: x-small;
-	padding: 5px 3px 3px 3px;
-	text-align: center;
-	word-break: break-all;
+.noti-content {
+    color: white;
+    margin: 10px 40px 40px 40px;
+    position: relative;
+    transition: all 0.5s;
 }
 
-.noti-body {
-	position: relative;
-	padding: 0px 2px 0px 2px;
-	font-size: xx-small;
-	font-weight: lighter;
-	text-align: center;
-	word-break: break-all;
-color:#fff;
-text-shadow:#fff 0 -1px 4px, #ff0 0 -2px 10px, #ff8000 0 -10px 20px, red 0 -18px 40px;
+.neon{
+    animation: neon 0.7s ease-in-out infinite alternate;
 }
 
-
-
-.noti-outer *{
-	cursor: pointer;
+.noti-header{
+	font-family: 'Jeju Gothic', sans-serif;
 }
 
-.test{
-	animation: animationFrames linear 1s;
-	transform:  translate(-600%, 200%) scale(5,5);
-	opacity: 0.9;
+/* .noti:hover .noti-header{
+    animation: none;
+} */
+
+.noti-name {
+    display: inline-block;
+    float: right;
+    margin-top: 10px;
+    margin-right: 30px;
 }
 
-.test2{
-	transform:  translate(-600%, 200%) scale(5,5);
-	opacity: 0.9;
+.noti-body{
+    font-size: 25px;
+    margin:20px 0 20px 0;
 }
 
-@keyframes animationFrames{
-	0% {
-		transform:  rotate(180deg) ;
+@keyframes neon {
+    from {
+        text-shadow: 0 0 10px #fff,
+        0 0 20px #fff,
+        0 0 30px #fff,
+        0 0 40px #228DFF,
+        0 0 70px #228DFF,
+        0 0 80px #228DFF,
+        0 0 100px #228DFF,
+        0 0 150px #228DFF;
+    }
+    to {
+        text-shadow: 0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 15px #fff,
+        0 0 20px #228DFF,
+        0 0 35px #228DFF,
+        0 0 40px #228DFF,
+        0 0 50px #228DFF,
+        0 0 75px #228DFF;
+    }
+}
+
+.jokbal-wrapper {
+    position: absolute;
+    width: 135px;
+    height: 35px;
+    right: -5%;
+    top:10%;
+    box-shadow: -5px 5px 9px 0px rgba(50, 50, 50, 0.75);
+    cursor: pointer;
+    z-index: 1000;
+    animation-duration: 1s;
+}
+.jokbal {
+    position: relative;
+    width: 100px;
+    height: 35px;
+    background-color: white;
+    line-height: 35px;
+    text-align: center;
+    float: right;
+    font-family: 'Jeju Gothic', sans-serif;
+}
+.jokbal-label {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background-color: red;
+    float: left;
+}
+
+.jokbal-wrapper:HOVER {
+    animation-name: slide;
+    right: 0%
+}
+
+@keyframes slide{
+	from{
+		right: -5%
 	}
-	50%{
-		transform: translate(-250%,150%);
-	}
-	100% {
-		transform:  translate(-600%, 200%)  rotate(0deg) scale(5,5);
+	
+	to{
+		right: 0%
 	}
 }

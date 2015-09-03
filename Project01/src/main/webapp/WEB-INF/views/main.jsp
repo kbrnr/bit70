@@ -1,15 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/earlyaccess/jejugothic.css">
 
-<!-- REQUIRED JS SCRIPTS -->
+<!-- 커리큘럼 -->
 <link href="/resources/nojo/css/bootstrap-treeview.min.css" rel="stylesheet" type="text/css" />
 <script src="/resources/nojo/script/bootstrap-treeview.min.js" type="text/javascript"></script>
+
+<!-- 알림 -->
 <link rel="stylesheet" type="text/css" href="/resources/nojo/css/context.bootstrap.css">
 <script src="/resources/nojo/script/context.js"></script>
+<link rel="stylesheet" href="/resources/nojo/css/notification.css">
+<link rel="stylesheet" href="/resources/nojo/css/animate.css">
 
-<!-- 배치도 CSS 추가-->
+<!-- 배치도 -->
 <link rel="stylesheet" type="text/css" href="/resources/nojo/css/seatStyle.css">
 
+
+<div class="container">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
@@ -62,7 +69,7 @@
 	
 		<div class="row">
 			<%------------- 배치도 -------------%>
-			<div class="col-sm-9">
+			<div class="col-sm-12">
 				<div class="box">
 	               	<div class="box-body">
 	               		<div id="container">
@@ -71,101 +78,11 @@
 	               	</div>
 				</div>
 			</div>	
-		
-			<%------------- 알림 -------------%>
-			<div class="col-sm-3">
-				<div class="box">
-	               	<div class="box-body">
-	               		<div id="notifications" class="list-group" style="overflow-y: hidden; height: 396px; margin-bottom: 0px;"></div>
-	               	</div>
-				</div>
-			</div>
-		
 		</div>
+		
 	</section>
+</div>
 	
-	
-<link rel="stylesheet" href="/resources/nojo/css/animate.css">
-<link rel="stylesheet" href="/resources/nojo/css/notification.css">
-
-
-<script>
-$("body").on("click", ".noti-outer", function(){
-    var $this = $(this);
-    if($this.hasClass("test2")){
-    	$.ajax({
-			url: "/${domain}/notification/setAside/" + $this.data("notino"),
-			method: "patch",
-			success: function(){
-		    	$this.removeClass("test2");
-			}		
-		});
-    }else{
-    	if($this.hasClass("test")){
-    		$.ajax({
-    			url: "/${domain}/notification/setAside/" + $this.data("notino"),
-    			method: "patch",
-    			success: function(){
-    		    	$this.removeClass("test");
-    			}		
-    		});
-    	}else{
-    		$.ajax({
-				url: "/${domain}/notification/setInside/" + $this.data("notino"),
-				method: "patch",
-				success: function(){
-					$this.addClass("test");
-				}		
-			});
-    	}
-    }
-});
-
-function showNoti(){
-	$.getJSON("/${domain}/notification", function(data){
-		if(data.length < 1){ return; }
-		$(".noti-outer").remove();
-		var top = 10;
-		$(data).each(function(){
-			var str = '<div class="noti-outer" data-notino=' + this.noti_no + '>'
-			    	+   '<div class="noti-inner">'
-			    	+     '<div class="noti-header">'
-			    	+        this.noti_service_name  + '<br>'
-			    	+       '<small>[' + this.noti_sender_id + ']</small>'
-			    	+     '</div>'
-			    	+     '<div class="noti-body">'
-			    	+        this.noti_summation
-			    	+     '</div>'
-			    	+   '</div>'
-			    	+ '</div>';
-			var tag = $(str);
-			tag.css("top", top + "%");
-			top += 15;
-			var screen = this.screen_gb;
-			if(screen == 2){ tag.addClass("test2"); }
-			$("body").append(tag);
-			if(screen == 1){ 
-				$.ajax({
-					url: "/${domain}/notification/setInside/" + this.noti_no,
-					method: "patch",
-					success: function(){
-						tag.addClass("test");
-					}		
-				});
-			}
-		});
-	});
-	
-}
-showNoti();
-setInterval(function(){ showNoti(); }, 30000);
-
-
-</script>
-
-
-
-
 <script>
 //----------------------------------------------- 커리큘럼 -----------------------------------------------------
 	function Node(text, href, content) {
@@ -253,7 +170,6 @@ setInterval(function(){ showNoti(); }, 30000);
 		parent.$("#sendScore").submit(function(e){
 			e.preventDefault();
 			var $this = $(this);
-			console.log($this.serialize());
 			$.post("/${domain}/comprehension", $this.serialize(), function(data){
 				var obj = {
 					mem_id: "${user.id}", 
@@ -266,82 +182,90 @@ setInterval(function(){ showNoti(); }, 30000);
 		});
 	</c:if>
 	
-	//----------------------------------------------- 알림 ----------------------------------------------------------
-	function getNotifications(){
+	//----------------------------------------------- 알림 -----------------------------------------------------
+	$.fn.animate = function(className, callback){
+		var $this = this;
+		$this.addClass(className);
+		$this.one("animationend", function(){
+		    $this.removeClass(className);
+		    if(callback){
+		    	callback($this);
+		    }
+	    });
+	}
+	
+	function showNoti(target, fadeIn){
+        var $last = $(".noti:last");
+        var notiTop =  $last.css("top") || 30;
+        var notiLeft =  $last.css("left") || 30;
+        var str = '<div class="noti" data-notino="' + target.data("notino") + '" data-idx="' + target.data("idx") + '" style="top:' + (notiTop-3) + '%; left:' + (notiLeft-1) + '%;">'
+	            +   '<div class="noti-content">'
+	            +     '<div class="noti-name">' + target.data("name") + '</div>'
+	            +     '<h1 class="noti-header neon">' + target.data("header") + '</h1>'
+	            +     '<p class="noti-body">' + target.data("body") + '</p>'
+	            +   '</div>'
+	            +'</div>';
+	    var tag = $(str);
+	    if(fadeIn){
+	    	tag.addClass("fadeIn");
+	    }
+        target.hide();
+        $("body").append(tag);
+    }
+
+	$("body").on("click", ".jokbal-wrapper", function(e){
+		var $this = $(this);
+		$.get("/${domain}/notification/setInside/" + $this.data("notino"), function(){
+			showNoti($this, true);	    	
+	    });
+	});
+
+	$("body").on("click", ".noti", function(){
+	    var $this = $(this);
+	    var idx = $this.data("idx");
+	    $.get("/${domain}/notification/setAside/" + $this.data("notino"), function(){
+	    	$this.animate("fadeOut", function(){
+		    	$this.remove();
+		    });
+		    $(".jokbal-wrapper:nth(" +idx+ ")").show().animate("bounceInRight");	    	
+	    });
+	});
+
+	function getNoti(){
 		$.getJSON("/${domain}/notification", function(data){
-			if(data.length > 0)
-				$("#notifications").html("");
-			$(data).each(function(){
-				var $a = $('<a href="#" class="notification list-group-item" data-noti_no="' + this.noti_no + '" data-link="'+ this.noti_service_link +'">'
-			    		+   '  <h4 class="list-group-item-heading">' + this.noti_service_name + '<small>[' + this.noti_sender_id + ']</small></h4>'
-			    		+   '  <p class="list-group-item-text">' + this.noti_summation + '</p>'
-						+  '</a>');
-				if(this.noti_read_gb==0){
-					$a.addClass("list-group-item-info");
+			if(data.length < 1){ return; }
+			$(".noti").remove();
+			$(".jokbal-wrapper").remove();
+			$(data).each(function(idx){
+				var state = this.screen_gb;
+				var header = this.noti_service_name;
+				var name = this.noti_sender_id;
+				var notiTop = 10 * (idx + 1);
+				var str = '<div class="jokbal-wrapper" data-notino="' + this.noti_no + '" data-idx="' + idx + '" data-header="' + header + '" data-name="' + name + '" data-body="' + this.noti_summation + '" style="top: ' + notiTop + '%">'
+						+ 	'<div class="jokbal">'
+						+ 		header + '<small>[' + name + ']</small>'
+						+ 	'</div>'
+						+ 	'<div class="jokbal-label"></div>'
+						+ '</div>';
+				
+				var tag = $(str);
+				$("body").append(tag);
+				
+				switch(state){
+				case 1: 
+					showNoti(tag, true);
+					break;
+				case 2: 
+					showNoti(tag, false);
 				}
-				$("#notifications").prepend($a);			
 			});
-			
-			context.attach('.notification', [
-			    new Menu("보기", inquiry),
-           		new Menu("읽음", updateReadStatus),
-           		new Menu("삭제", removeNotification)
-           	]);
 		});
+		
 	}
+	getNoti();
+	setInterval(function(){ getNoti(); }, 30000);
+
 	
-	function Menu(text, action){
-		this.text = text;
-		this.action = action;
-	}
-	function inquiry(e, target){
-		updateReadStatus(e, target);
-		target = $(target);
-		var link = target.data("link");
-		location.href = link;
-	}
-	
-	function updateReadStatus(e, target){
-		e.preventDefault();
-		target = $(target);
-		if(!target.hasClass("list-group-item-info"))
-			return;
-		$.ajax({
-			url: "/${domain}/notification/" + target.data("noti_no"), 
-			method: "patch",
-			success: function(){
-				target.removeClass("list-group-item-info");
-			}
-		});
-	}
-	function removeNotification(e, target){
-		e.preventDefault();
-		target = $(target);
-		$.ajax({
-			url: "/${domain}/notification/" + target.data("noti_no"), 
-			method: "delete",
-			success: function(){
-				target.remove();
-			}
-		});
-	}
-	$("#notifications").on("mousewheel wheel", function (e) {
-		e.preventDefault();
-	    var event = e.originalEvent;
-	    var delta = event.wheelDelta || -event.deltaY; 
-	    this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-	});
-	
-	context.init({
-	    fadeSpeed: 100,
-	    filter: function ($obj){},
-	    above: 'auto',
-	    preventDoubleContext: true,
-	    compress: false
-	});
-	
-	getNotifications();
-	setInterval(getNotifications, 5000);
 	//----------------------------------------------- 배치도 -----------------------------------------------------
 	$.getJSON("/${domain}/seat/ajax", function(list){
 			$(list).each(function(){
@@ -366,13 +290,11 @@ setInterval(function(){ showNoti(); }, 30000);
 	//Seat에서 on/off표시
 	parent.socket.on("onlineUser", function(users){
 		for(var i in users){
-			console.log("onlineUser" + users);
 			$(".name[data-mem_id='" + users[i] + "']").parent().css( { "background-color" : "#D6F7FE"});
 			//$(".chair[data-mem_id='" + users[i] + "']").children().children($(".realImg")[0]).css( { "border" : "3px solid red"});
 		}
 	});
 	parent.socket.on("offlineUser", function(user){
-		console.log("offlineUser" + user);
 		$(".name[data-mem_id='" + user + "']").parent().css( { "background-color" : "white"});
 	});
 	//seat 이미지 on 이벤트

@@ -34,12 +34,12 @@ public class NotificationController {
 		mapper.updateReadState(notiNo);
 	}
 	
-	@RequestMapping(value="/setInside/{notiNo}" ,method = RequestMethod.PATCH)
+	@RequestMapping(value="/setInside/{notiNo}" ,method = RequestMethod.GET)
 	public void setInside(@PathVariable int notiNo) {
 		mapper.setInside(notiNo);
 	}
 	
-	@RequestMapping(value="/setAside/{notiNo}" ,method = RequestMethod.PATCH)
+	@RequestMapping(value="/setAside/{notiNo}" ,method = RequestMethod.GET)
 	public void setAside(@PathVariable int notiNo) {
 		mapper.setAside(notiNo);
 	}
