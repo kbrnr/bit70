@@ -93,7 +93,7 @@ body {
     top:10%;
     box-shadow: -5px 5px 9px 0px rgba(50, 50, 50, 0.75);
     cursor: pointer;
-    z-index: 1000;
+    z-index: 500;
     animation-duration: 1s;
 }
 .jokbal {

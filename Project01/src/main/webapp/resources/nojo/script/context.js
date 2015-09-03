@@ -143,7 +143,7 @@ context = (function () {
                 $('body').append($menu);
         }
 
-		$(selector).on('click', function (e) {
+		$(selector).on('contextmenu', function (e) {
 			e.preventDefault();
 			e.stopPropagation();
 

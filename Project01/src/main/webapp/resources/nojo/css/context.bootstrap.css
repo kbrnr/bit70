@@ -169,7 +169,7 @@
 .dropdown-context:before, .dropdown-context-up:before {
 	position: absolute;
 	top: -7px;
-	left: 9px;
+	right: 9px;
 	display: inline-block;
 	border-right: 7px solid transparent;
 	border-bottom: 7px solid #ccc;
@@ -180,7 +180,7 @@
 .dropdown-context:after, .dropdown-context-up:after {
 	position: absolute;
 	top: -6px;
-	left: 10px;
+	right: 10px;
 	display: inline-block;
 	border-right: 6px solid transparent;
 	border-bottom: 6px solid #ffffff;
