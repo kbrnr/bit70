@@ -3,6 +3,22 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>   
 <%@page import="java.util.*" %>
 
+<style>
+	.qnatitle{
+		font-size: 28px;
+	}
+	
+	.btnmargin{
+		margin: 0px 0px 0px 10px;
+	}
+	
+	.space {
+		height:20px; 
+	}
+	
+
+</style>
+
 <c:set var="regDate" value="${QuestionVO.question_reg_date }"/>
 
 	<!-- Text Editor -->
@@ -13,85 +29,105 @@
 	<link href="/resources/froala_editor/css/froala_style.min.css" rel="stylesheet" type="text/css" />   
 
 <!-- Content Wrapper. Contains page content -->
-	<!-- Content Header (Page header) -->
-	<section class="content-header">
-	    <h1>질문답변</h1>
-	    <ol class="breadcrumb">
-	        <li><a href="#"><i class="fa fa-fw fa-home"></i>Home</a></li>
-	        <li><a href="#">${domain }</a></li>
-	        <li class="active">질문답변</li>
-	    </ol>
-	</section>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>질문답변</h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-fw fa-home"></i>Home</a></li>
+        <li><a href="#">${domain }</a></li>
+        <li class="active">질문답변</li>
+    </ol>
+</section>
 
-	<!-- Main content -->
-	<section class="content">
+
+<!-- Main content -->
+<section class="content">
+<div class="box">
+	<div class="box-header with-border">
+		<div style="float: left">
+			<h3 class="box-title">Q&A</h3>
+		</div>
+		<div >
+			<a href="listpage">
+				<button type="button" class="btn btn-default pull-right" >목록</button>
+			</a>
+		</div>
+	</div>
 	
-	<!-- /.box-header -->
-			<div class="box-body">
-				<div class="box-group" id="accordion">
-					<!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-					<div class="panel box box-success">
-						<div class="box-header with-border">
-						<div style="float: left;"><span class="glyphicon glyphicon-question-sign" style="font-size: 40px;"></span></div>
-							<div style="margin-left: 70px;">
-							<h5 class="box-title">${QuestionVO.question_title }</h5>
-							<dl>
-							<dt style="display: inline;"><span class="glyphicon glyphicon-user"></span> ${QuestionVO.mem_id }</dt>
-							<dd style="display: inline;">
-									<fmt:formatDate value="${regDate }" type="date" pattern="yyyy.MM.dd hh:mm:ss"/>
-							</dd>
+	<div class="box-body">
+		<div class="box-group" id="accordion">
+			<!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+			<div class="panel box box-primary">
+				<div class="box-header">
+				<div style="float: left;"><span class="glyphicon glyphicon-question-sign" style="font-size: 40px;"></span></div>
+					<div style="margin-left: 70px;">
+						<h5 class="box-title"><span class="qnatitle">${QuestionVO.question_title }</span></h5>
+						<dl>
+						<dt style="display: inline;"><span class="glyphicon glyphicon-user"></span> ${QuestionVO.mem_id }</dt>
+						<dd style="display: inline;">
+								<fmt:formatDate value="${regDate }" type="date" pattern="yyyy.MM.dd hh:mm:ss"/>
+						</dd>
 						</dl>
-							</div>
-						</div>
-						<div class="box-header with-border ">
-							<div class="froala-view" style="height: 200px;">${QuestionVO.question_content }</div>
-							<br/>
-						</div>
-						<ul id="fileAttach" class='list-group' >
-							<li id="question_attachfile" class="list-group-item"></li>
-						</ul>
 					</div>
 				</div>
+				<div class="box-header ">
+					<div class="froala-view" style="height: 200px;">${QuestionVO.question_content }</div>
+					<br/>
+				</div>
+				<ul id="fileAttach" class='list-group' >
+					<li id="question_attachfile" class="list-group-item"></li>
+				</ul>
 			</div>
-			<!-- /.box-body -->
+		</div>
+	</div>
+	<div class="space"></div><div class="space"></div>
 	
-	<div class='row'>
-		<div class='col-md-12'>
-			<div class='box'>
-				<div class='box-body pad'>
-					<section id="editor" style="width : 100%; margin: auto;">
+	<!-- /.box-body -->
+	
+	<div class="box-body">
+		<div class="box-group" id="accordion">	
+			<div class='box box-success'>
+				<div class="space"></div>
+					<section id="editor" style="width: 100%; margin: auto;">
 						<form id="ansForm" role="form" method="post" action="answer">
-							<div style="height: 150px;">
+							<div style="height: 100px;">
 								<input id="question_no" type="hidden" class="form-control" name="question_no" value= " ${QuestionVO.question_no }" >
 								<input id="title" type="text" class="form-control" value= "Re : ${QuestionVO.question_title }" name="answer_title" placeholder="title">
+								<div class="space"></div>
 								<!-- <input id="gb" type="text" class="form-control" name="question_gb" placeholder="구분은 히든으로 처리하자" > -->
 								<input id="answer_visible" type="radio" name="answer_visible" value = "1" checked> 공개
 								<input id="answer_visible" type="radio" name="answer_visible" value = "0" > 비공개
 								<input id="mem_id" type="hidden" class="form-control" name="mem_id" value="${user.id}">
 								<input id="clz_domain" type="hidden" class="form-control" name="clz_domain" value="${domain }">
 							</div>
-							<textarea id='edit' name="answer_content" style="margin-top: 30px;"></textarea>
+							
 							<br/>
+							<textarea id='edit' name="answer_content" style="margin-top: 30px;"></textarea>
+							
 							<div>
 									<ul class='list-group' >
 										<li id="ansAttach" class="list-group-item"></li>
 									</ul>
 							</div>
-						<div class="box-footer">
-							<button id="answerRegist" type="submit" class="btn btn-primary">Submit</button>
+						<div class="box-footer text-center">
+							<button id="answerRegist" type="submit" class="btn btn-primary btn-lg">저 장</button>
 							<a href="listpage">
-								<button type="button" class="btn btn-info" style="float: right;">Go	List</button>
+								<button type="button" class="btn btn-default pull-right">취소</button>
 							</a>
 						</div>
+												
 						</form>
 					</section>
-				</div>
 			</div>
-		</div>
-		<!-- /.col-->
-	</div>
-	<!-- ./row --> </section>
-	<!-- /.content -->
+		</div><!-- /.box -->		
+	</div><!-- /.box-body -->	
+
+
+</div><!-- /.box -->
+</section>
+<!-- /.content -->
+
+
 <!-- /.content-wrapper -->
 <!-- Add the sidebar's background. This div must be placed
            immediately after the control sidebar -->

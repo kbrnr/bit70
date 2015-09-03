@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
 
-    <link href="/resources/froala_editor/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-	<link href="/resources/froala_editor/css/froala_editor.min.css" rel="stylesheet" type="text/css" />
-	<link href="/resources/froala_editor/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+<style>
+	.space {
+		height:10px; 
+	}
+</style>
+
+<link href="/resources/froala_editor/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link href="/resources/froala_editor/css/froala_editor.min.css" rel="stylesheet" type="text/css" />
+<link href="/resources/froala_editor/css/froala_style.min.css" rel="stylesheet" type="text/css" />
 	   
 	<section class="content-header">
 	    <h1>질문답변</h1>
@@ -13,23 +19,26 @@
 	        <li class="active">질문답변</li>
 	    </ol>
 	</section>
-	<!-- Main content -->
+
+<!-- Main content -->
 	<section class="content">
 	<div class='row'>
 		<div class='col-md-12'>
 			<div class='box'>
-				<div class='box-header'>
+				<div class='box-header with-border'>
 					<h3 class='box-title'>
-						Bootstrap WYSIHTML5 <small>Simple and fast</small>
+						<h3 class="box-title">■질문수정</h3>
 					</h3>
 				</div>
 				<!-- /.box-header -->
+				
 				<div class='box-body pad'>
 					<section id="editor" style="width : 100%; margin: auto;">
 						<form role="form" method="post">
-							<div style="height: 150px;">
+							<div style="height: 100px;">
 								<input id="no" type="hidden" class="form-control" value="${QuestionVO.question_no}" name="question_no" > 
 								<input id="title" type="text" class="form-control" value="${QuestionVO.question_title }" name="question_title">
+								<div class="space"></div>
 								<!-- if 공개&비공개 -->
 								<input id="question_visible" type="radio" name="question_visible" value = "1" checked> 공개
 								<input id="question_visible" type="radio" name="question_visible" value = "0" > 비공개 
@@ -44,22 +53,25 @@
 										<li class="list-group-item"></li>
 									</ul>
 								</div>
-							<div class="box-footer">
+							<div class="box-footer text-center">
 								<c:if test="${QuestionVO.mem_id == user.id }">
-								<button type="submit" class="btn btn-info">Modify</button>
+								<button type="submit" class="btn btn-primary btn-lg">수정</button>
 								<a href="remove/${QuestionVO.question_no }" method="POST">
-								<button	type="button" id="delBtn" class="btn btn">Delete</button> </a>
 								</c:if>
 								<a href="listpage?page=${cri.page }&perPageNum=${cri.perPageNum}">
-								<button	type="button" class="btn btn-info">Go List</button> </a>
+								<button	type="button" class="btn btnmargin btn-default pull-right">취소</button> </a>
 							</div>
+							
+								
+							
+							
 						</form>
 					</section>
 				</div>
 			</div>
 		</div>
 	</div>
-  </section>
+</section>
 <div class='control-sidebar-bg'></div>
 
 <!-- Text Editor -->

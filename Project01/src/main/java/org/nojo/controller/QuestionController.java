@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
 import org.nojo.domain.AnswerVO;
 import org.nojo.domain.FilemanagerVO;
 import org.nojo.domain.QuestionVO;

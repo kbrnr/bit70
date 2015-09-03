@@ -10,6 +10,21 @@
 	<!-- Include Editor style. -->
 	<link href="/resources/froala_editor/css/froala_editor.min.css" rel="stylesheet" type="text/css" />
 	<link href="/resources/froala_editor/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+
+<style>
+	.qnatitle{
+		font-size: 28px;
+	}
+	
+	.btnmargin{
+		margin: 0px 0px 0px 10px;
+	}
+	
+	.space {
+		height:10px; 
+	}
+</style>
+
 	   
 	<section class="content-header">
 	    <h1>질문답변</h1>
@@ -19,69 +34,97 @@
 	        <li class="active">질문답변</li>
 	    </ol>
 	</section>
+
 	<!-- Main content -->
 	<section class="content">
-			<div class="box-body">
-				<div class="box-group" id="accordion">
-					<!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
-					<div class="panel box box-success">
-						<div class="box-header with-border">
-						<div style="float: left;"><span class="glyphicon glyphicon-question-sign" style="font-size: 40px;"></span></div>
-							<div style="margin-left: 70px;">
-								<h5 class="box-title">${QuestionVO.question_title }</h5>
-								<dl>
-									<dt style="display: inline;"><span class="glyphicon glyphicon-user"></span> ${QuestionVO.mem_id }</dt>
-										<dd style="display: inline;">
-												<fmt:formatDate value="${regDate }" type="date" pattern="yyyy.MM.dd hh:mm:ss"/>
-										</dd>
-								</dl>
-							</div>
-						</div>
-						<div class="box-header with-border ">
-							<div class="froala-view" style="height: 200px;">${QuestionVO.question_content }</div>
-							<ul id="fileAttach" class='list-group' >
-								<li id="attach" class="list-group-item"></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
 	<div class='row'>
 		<div class='col-md-12'>
 			<div class='box'>
-				<div class='box-body pad'>
-					<section id="editor" style="width : 100%; margin: auto;">
-						<form role="form" method="post" action="answerModify">
-							<div style="height: 150px;">
-								<input id="answer_no" type="hidden" class="form-control" value= "${vo.answer_no }" name="answer_no" >	
-								<input id="question_no" type="hidden" class="form-control" value= "${vo.question_no }" name="question_no" >							
-								<input id="title" type="text" class="form-control" value= "${vo.answer_title }" name="answer_title" placeholder="title">
-								<input id="answer_visible" type="radio" name="answer_visible" value = "1" checked> 공개
-								<input id="answer_visible" type="radio" name="answer_visible" value = "0" > 비공개
-								<input id="mem_id" type="hidden" class="form-control" name="mem_id" value = '${user.id }' placeholder="맴버아이디 히든으로 처리하자">
-								<input id="clz_domain" type="hidden" class="form-control" name="clz_domain" value= "${vo.clz_domain }" } placeholder="도메인 히든으로 처리하자">
+				<div class='box-header with-border'>
+					<h3 class='box-title'>■질문수정
+					</h3>
+				</div>
+				<!-- /.box-header -->
+		
+	
+				<div class='box-body'>
+					<div class="box-group" id="accordion">
+						<!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+						<div class="panel box box-primary">
+							<div class="box-header ">
+							<div style="float: left;"><span class="glyphicon glyphicon-question-sign" style="font-size: 40px;"></span></div>
+								<div style="margin-left: 70px;">
+									<span class="qnatitle">${QuestionVO.question_title }</span>
+									<dl>
+										<dt style="display: inline;"><span class="glyphicon glyphicon-user"></span> ${QuestionVO.mem_id }</dt>
+											<dd style="display: inline;">
+													<fmt:formatDate value="${regDate }" type="date" pattern="yyyy.MM.dd hh:mm:ss"/>
+											</dd>
+									</dl>
+								</div>
+								<hr>
+							</div>
+							<div class="box-header ">
+								<div class="froala-view" style="height: 200px;">${QuestionVO.question_content }</div>
+								<ul id="fileAttach" class='list-group' >
+									<li id="attach" class="list-group-item"></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="space"></div>
+								
+				</div>
+			
+			
+				<div class='box-body'>
+					<div class="box-group" id="accordion">
+						<div class="panel box box-success">
+				
+						<section id="editor" style="width : 100%; margin: auto;">
+							<form role="form" method="post" action="answerModify">
+								<div style="height: 100px;">
+									<div class="space"></div>
+									<input id="answer_no" type="hidden" class="form-control" value= "${vo.answer_no }" name="answer_no" >	
+									<input id="question_no" type="hidden" class="form-control" value= "${vo.question_no }" name="question_no" >							
+									<input id="title" type="text" class="form-control" value= "${vo.answer_title }" name="answer_title" placeholder="title">
+									<div class="space"></div>
+									<input id="answer_visible" type="radio" name="answer_visible" value = "1" checked> 공개
+									<input id="answer_visible" type="radio" name="answer_visible" value = "0" > 비공개
+									<input id="mem_id" type="hidden" class="form-control" name="mem_id" value = '${user.id }' placeholder="맴버아이디 히든으로 처리하자">
+									<input id="clz_domain" type="hidden" class="form-control" name="clz_domain" value= "${vo.clz_domain }" } placeholder="도메인 히든으로 처리하자">
+								</div>
+								<div class="space"></div>
+								<textarea id='edit' name="answer_content" style="margin-top: 30px;">${vo.answer_content }</textarea>
+								<br/>
+								<div>
+										<ul class='list-group' >
+											<li id="ansAttach" class="list-group-item"></li>
+										</ul>
+								</div>
+							<div class="box-footer text-center">
+								<button id="ansModify" type="submit" class="btn btn-primary btn-lg">수정</button>
+								<a href="listpage">
+									<button type="button" class="btn btnmargin btn-default pull-right">목록</button>
+								</a>
 							</div>
 							
-							<textarea id='edit' name="answer_content" style="margin-top: 30px;">${vo.answer_content }</textarea>
-							<br/>
-							<div>
-									<ul class='list-group' >
-										<li id="ansAttach" class="list-group-item"></li>
-									</ul>
-							</div>
-						<div class="box-footer">
-							<button id="ansModify" type="submit" class="btn btn-primary">Submit</button>
-							<a href="listpage">
-								<button type="button" class="btn btn-info" style="float: right;">Go	List</button>
-							</a>
+							
+							
+							
+							</form>
+						</section>
+						
 						</div>
-						</form>
-					</section>
+					
+					</div>
 				</div>
-			</div>
-		</div>
-	</div>
- </section>
+				
+				
+			</div>		
+		</div>		
+ 	</div>
+	</section>
 <div class='control-sidebar-bg'></div>
 
 

@@ -5,6 +5,18 @@
 <link href="/resources/froala_editor/css/froala_editor.min.css" rel="stylesheet" type="text/css" />
 <link href="/resources/froala_editor/css/froala_style.min.css" rel="stylesheet" type="text/css" />
 
+<style>
+	.inputtitle {
+		padding: 0px 0px 0px 0px;
+	}
+	
+	.space {
+		height:40px; 
+	}
+	
+	
+</style>
+
 	<section class="content-header">
 	    <h1>질문답변</h1>
 	    <ol class="breadcrumb">
@@ -19,23 +31,29 @@
 
 		<div class='row'>
 			<div class='col-md-12'>
+			
 				<div class='box'>
-					<div class='box-header'>
-						<h3 class='box-title'>
-							<small>Simple and fast</small>
-						</h3>
-					</div>
-					<!-- /.box-header -->
+					<div class="box-header with-border">
+	                  <h3 class="box-title">■질문하기</h3>
+	                </div><!-- /.box-header -->
+                
 					<div class='box-body pad'>
-						<section id="editor" style="width: 100%; margin: auto;">
+						<section id="editor" >
 							<form id='regForm' role="form" method="post" action="questionRegist">
-								<div style="height: 150px;">
-									<input id="title" type="text" class="form-control" value="${vo.question_title }" name="question_title" placeholder="title"> 
+								<div class="form-group">
+                      				<div class="col-sm-12 inputtitle">
+			                        	<input id="title" type="text" class="form-control input-classname" value="${vo.question_title }" name="question_title" placeholder="title">
+            				        </div>
+                    			</div>
+								<div class="space"></div>
+								<div >
 									<input id="mem_id" type="hidden" class="form-control" name="mem_id" value="${user.id}"> 
 									<input id="question_visible" type="radio" name="question_visible" value = "1" checked> 공개
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<input id="question_visible" type="radio" name="question_visible" value = "0" > 비공개
 									<input id="clz_domain" type="hidden" class="form-control" name="clz_domain" value="${domain }">
 								</div>
+								<div class="space"></div>
 								<textarea id='edit' name="question_content" style="margin-top: 30px;"></textarea>
 								<br/>
 								<div>
@@ -43,19 +61,23 @@
 										<li class="list-group-item"></li>
 									</ul>
 								</div>
-								<div class="box-footer">
-									<button id="RegBoard" type="submit" class="btn btn-primary">Submit</button>
+								<div class="box-footer text-center">
+									<button id="RegBoard" type="submit" class="btn btn-primary btn-lg">저 장</button>
 									<a href="listpage">
-										<button type="button" class="btn btn-info" style="float: right;">Go List</button>
+										<button type="button" class="btn btn-default pull-right">취소</button>
 									</a>
 								</div>
 							</form>
 						</section>
+							<div class="space"></div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+
+	
+	
 	<div class='control-sidebar-bg'></div>
 	
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
