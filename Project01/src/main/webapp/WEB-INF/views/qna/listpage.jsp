@@ -4,20 +4,81 @@
 <%@page import="java.util.*" %>
 <c:set var="date" value="<%=new Date() %>"/>
 
+<style>
+
+th {
+		text-align: center;
+		vertical-align: middle;
+		background-color: #E0E0E0 ;
+}
+	
+td {
+	text-align: center;
+}
+
+.td-left {
+	text-align: left;
+}
+
+.teacherul {
+    padding-left: 0px;
+	float: left;
+}
+
+.teacherli { 
+	width:130px; 
+	float:left; 
+	margin:5px; 
+	display:inline; 
+	margin: 0px 5px 0px 5px;
+}
+
+.td-domain {
+	font-size: 18px;
+	font-weight: bold;>
+}
+
+.space {
+	height:50px; 
+}
+
+
+</style>
+
+
 <!-- Main content -->
+
+		<section class="content-header">
+			<h1>
+				질문 답변 <small></small>
+			</h1>
+			<ol class="breadcrumb">
+				<li><a href="#">
+						<i class="fa fa-dashboard"></i> 홈
+					</a></li>
+				<li class="active">수업관리</li>
+			</ol>
+		</section>
+
+
 <section class="content">
 <div class="row">
 	<div class="col-md-12">
 		<div class="box">
 			<div class="box-header with-border">
-				<h3 class="box-title">${domain} Table</h3>
-				<a href="listpage">
+				<h3 class="box-title">■질문리스트</h3>
+			<!-- <a href="listpage">
 					<button type="button" class="btn btn-info" style="float: right;">Go List</button>
-				</a>
+				</a> -->
 			</div>
 			<!-- /.box-header -->
 			<div class="box-body">
-				<table class="table table-bordered">
+			
+				<div><!-- 글쓰기 버튼 -->
+					<a href="questionRegist"><button id="ResBoard"
+							type="submit" class="btn btn-primary pull-right margin-bottom">질문등록</button></a>
+				</div>
+				<table class="table table-hover">
 					<tr>
 						<th>번호</th>
 						<th>제목</th>
@@ -33,12 +94,12 @@
 							<c:set var = "t" value= "${isTeacher}" />
 								<c:choose>
 									<c:when test="${v == true || t == true || memId == userId}" > 
-										<td><span><a href='detail?page=${pagemaker.page }&perPagerNum=${pagemaker.perPageNum }&no=${vo.question_no}'>
+										<td class="td-left" ><span><a href='detail?page=${pagemaker.page }&perPagerNum=${pagemaker.perPageNum }&no=${vo.question_no}'>
 										<c:if test="${v == false }"><span class="glyphicon glyphicon-lock"></span></c:if>
 										${vo.question_title }</a></span></td>
 								    </c:when>
 									<c:when test="${v == false || memId != userId }" > 
-									 	<td><span class="glyphicon glyphicon-lock"></span> 비밀글 입니다.</td>
+									 	<td class="td-left"><span class="glyphicon glyphicon-lock"></span> 비밀글 입니다.</td>
 									</c:when>
 								</c:choose>
 							<td width = 120px>${vo.mem_id }</td>
@@ -48,8 +109,9 @@
 				</table>
 			</div>
 			<!-- 페이징 -->
-			<div class="box-footer clearfix">
-				<ul class="pagination pagination-sm no-margin pull-left">
+			<div class="box-footer clearfix text-center">
+			<div class="dataTables_paginate paging_simple_numbers text-center" id="example1_paginate">
+				<ul class="pagination" style="margin: 20px 0 10px 0;">
 					<!-- 이전페이지 -->
 					<c:if test="${pagemaker.prev }">
 						<c:if test="${searchKey == null && searchValue == null }">
@@ -83,16 +145,15 @@
 						</c:if>
 					</c:if>
 				</ul>
-
-				<!-- 글쓰기 버튼 -->
-				<a href="questionRegist"><button style="float: right;" id="ResBoard"
-						type="submit" class="btn btn-primary">Write</button></a>
 			</div>
+				
+			
 
 			<!-- 검색 -->
-			<p class="margin"></p>
-			<div class="input-group input-group-lg">
+			
+			
 				<div class="box-body">
+					<div class="input-group input-group-lg text-center" style="margin: 0px auto;">
 					<form name="searchFrom">
 							<div id="select_board">
 								<select name="searchKey" class="form-control" style="width: 150px; margin-right: 10px;">
@@ -112,8 +173,11 @@
 		                 	 </div><!-- /input-group -->
 							</div>
 					</form>
+					</div>
 				</div>
-			</div>
+				
+				<div class="space"></div>
+				
 		</div>
 	</div>
 	<!-- /.col -->

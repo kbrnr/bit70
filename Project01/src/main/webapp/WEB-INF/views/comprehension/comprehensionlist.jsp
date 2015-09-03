@@ -36,7 +36,7 @@ td {
 
 .ahand { cursor: pointer; }
 
-table {table-layout:fixed; word-break:break-all;}
+table {word-break:break-all;}
 
 
 

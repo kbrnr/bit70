@@ -90,7 +90,9 @@ public class MembershipController {
 	@RequestMapping(value = "/profileImg", method = RequestMethod.GET)
 	public void photo(HttpServletResponse res, Model model) throws IOException {
 		byte[] bytes = SecurityUtil.getUser().getPhoto();
-		res.getOutputStream().write(bytes);
+		if(bytes != null){
+			res.getOutputStream().write(bytes);
+		}
 	}
 
 	
