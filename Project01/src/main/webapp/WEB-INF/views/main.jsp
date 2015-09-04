@@ -195,8 +195,6 @@
  	function updateReadStatus(e, target){
  		e.preventDefault();
  		target = $(target);
- 		if(!target.hasClass("list-group-item-info"))
- 			return;
  		$.ajax({
  			url: "/${domain}/notification/updateReadState/" + target.data("notino"), 
  			method: "patch",
