@@ -20,7 +20,7 @@
 	height: 396px;
 	float: left;
 	margin: 0 auto;
-	background-color: #F1EBDE;
+	background-color: white;
 }
 
 #lobby {
@@ -31,32 +31,59 @@
 }
 
 .chair {
-	position: absolute;
+    position: absolute;
+    width: 130px;
+    height: 66px;
+/* 	position: absolute;
 	width: 120px;
 	height: 70px;
 	display: inline-block;
-	background-image:url(/resources/nojo/images/bg01.png);
-	
+	background-color: white;
 	border: 1px solid #C4C7D1;
 	margin-bottom: 10px;
 	margin-left: 5px;
-	margin-top: 3px;
+	margin-top: 3px; */
 }
 
 .img {
-	width: 55px;
+    position: relative;
+    width: 100px;
+    height: 50px;
+    background: -webkit-linear-gradient(top, rgb(255, 255, 255) 25%, rgb(210, 210, 210) 50%, rgb(141, 141, 141) 70%, rgb(84, 84, 84) 100%);
+    border: 2px solid dodgerblue;
+    border-radius: 30px;
+    box-shadow: 1px 1px 2px 1px #4b4949;
+    text-align: center;
+    padding-left: 50px;
+    padding-right: 5px;
+    line-height: 50px;
+    cursor: default;
+    font-family: 'Jeju Gothic', sans-serif;
+    left: 14px;
+    top: 11px;
+    opacity: 0.9;
+/* 	width: 55px;
 	height: 55px;
 	display: inline-block;
-	border-radius: 18px;
+	border-radius: 18px; */
 }
 
 .realImg {
-	width: 55px;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    left: -11px;
+    top: -11px;
+    float: left;
+    border : 1px solid white;
+    box-shadow: 1px 1px 2px 1px #4b4949;
+/* 	width: 55px;
 	height: 55px;
 	border-radius: 8px;
 	border : 1px solid #C4C4C4;
 	margin-top: 7px;
-	margin-left: 8px;
+	margin-left: 8px; */
 }
 .name {
 	color: #2F3743;
@@ -65,9 +92,15 @@
 	margin-top: -50px;
 	padding: 1px 0px 0px 4px;
 	font-weight: bold;
+	display: none;
 	}
 	
 .marginImg {
-	margin-left: 65px;
-	margin-top: 5px;
+	position: absolute;
+	width: 52px;
+	height: 52px;
+	margin-left: 9px;
+	margin-top: -44px;
+	z-index: 200;
+	border-radius: 30px;
 }

@@ -5,7 +5,6 @@ function imgError(image) {
     return true;
 }
 
-
 (function (domain){
 	$.getJSON(domain + "/seat/ajax", function(list){
 			$(list).each(function(){
@@ -15,9 +14,10 @@ function imgError(image) {
 				var id = this.mem_id;
 				var str = "<div class='chair' style='margin-left: "	+ x + "px; margin-top: " + y + "px;'>"
 						+ "  <div class='img'>"
+						+			name
 						+ "	    <img class='realImg' src='" + domain + "/seat/seatImg?userId=" + id + "' onerror='imgError(this);'/>"
 						+ "  </div>"
-						+ "  <div class='name' data-mem_id='" + id + "' data-trigger='manual' data-placement='bottom' data-html='true' >"+name + "</div>"
+						+ "  <div class='name' data-mem_id='" + id + "' data-trigger='manual' data-placement='left' data-html='true' ></div>"
 						+ "</div>";
 
 				var chair = $(str);
@@ -29,12 +29,13 @@ function imgError(image) {
 	//Seat에서 on/off표시
 	parent.socket.on("onlineUser", function(users){
 		for(var i in users){
-			$(".name[data-mem_id='" + users[i] + "']").parent().css( { "background-color" : "#D6F7FE"});
-			//$(".chair[data-mem_id='" + users[i] + "']").children().children($(".realImg")[0]).css( { "border" : "3px solid red"});
+			console.log("onlineUser: " + users[i]);
+			$(".name[data-mem_id='" + users[i] + "']").parent().children().children($(".realImg")).css( { "border" : "4px solid #34ff57"});
 		}
 	});
 	parent.socket.on("offlineUser", function(user){
-		$(".name[data-mem_id='" + user + "']").parent().css( { "background-color" : "white"});
+		console.log("offlineUser: " + user);
+		$(".name[data-mem_id='" + user + "']").parent().children().children($(".realImg")).css( {"border" : "2px solid white", "border-radius" : "30px"});
 	});
 	
 	//Seat에서 이해도 점수 표시

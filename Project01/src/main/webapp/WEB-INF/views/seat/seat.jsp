@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/earlyaccess/jejugothic.css">
 <!-- seat Style -->
 <link rel="stylesheet" type="text/css" href="/resources/nojo/css/seatStyle.css">
-<script src="/resources/plugins/jQueryUI/jquery-ui-1.10.3.min.js"></script>
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -26,10 +26,9 @@
 						<c:forEach items="${list }" var="vo">
 							<c:if test="${vo.seat_x != 0}">
 								<div class="chair" data-mem_id="${vo.mem_id}" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">
-									<div class="img">
+									<div class="img">${vo.mem_name}<div class="name"></div><span class="hidden memId">${vo.mem_id}</span>
 										<img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}" onerror="imgError(this);" />
 									</div>
-									<div class="name">${vo.mem_name}<span class="hidden memId">${vo.mem_id}</span></div>
 								</div>
 							</c:if>
 						</c:forEach>
@@ -38,11 +37,10 @@
 				<div id="lobby">
 					<c:forEach items="${list }" var="vo">
 						<c:if test="${vo.seat_x == 0}">
-							<div class="chair" data-mem_id="${vo.mem_id}" style="position: relative;">
-								<div class="img">
-									<img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}" onerror="javascript:this.src='/resources/nojo/images/noImage.png'" />
+							<div class="chair" data-mem_id="${vo.mem_id}" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">
+								<div class="img">${vo.mem_name}<div class="name"></div><span class="hidden memId">${vo.mem_id}</span>
+									<img class="realImg" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}" onerror="imgError(this);" />
 								</div>
-								<div class="name">${vo.mem_name}</div>
 							</div>
 						</c:if>
 					</c:forEach>
