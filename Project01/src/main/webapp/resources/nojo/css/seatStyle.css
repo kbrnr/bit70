@@ -35,7 +35,8 @@
 	width: 120px;
 	height: 70px;
 	display: inline-block;
-	background-color: white;
+	background-image:url(/resources/nojo/images/bg01.png);
+	
 	border: 1px solid #C4C7D1;
 	margin-bottom: 10px;
 	margin-left: 5px;

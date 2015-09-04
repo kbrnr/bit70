@@ -3,20 +3,21 @@
 
 <style>
 
-th {
-		text-align: center;
-		vertical-align: middle;
-		background-color: #E0E0E0 ;
+
+table * {
+	border: none !important;
 }
-	
-td {
+
+table {
+	table-layout: fixed ;
+	word-break: break-all;
+}
+
+
+
+.score_center {
 	text-align: center;
 }
-
-.td-left {
-	text-align: left;
-}
-
 
 .cont-box { 
 		width:0px; height:0px;
@@ -24,7 +25,6 @@ td {
 		border-bottom:10px solid transparent;
 		float:right;
 	}
-
 
 
 .lead {
@@ -36,9 +36,36 @@ td {
 
 .ahand { cursor: pointer; }
 
-table {word-break:break-all;}
 
 
+.space {
+	height:50px; 
+}
+
+
+.bg-top01{
+	background-image:url(/resources/nojo/images/top01.png);
+}
+
+.bg-top02{
+	background-image:url(/resources/nojo/images/top02.png);
+}
+
+.bg-mid01{
+	background-image:url(/resources/nojo/images/mid01.png);
+}
+
+.bg-mid02{
+	background-image:url(/resources/nojo/images/mid02.png);
+}
+
+.bg-end01{
+	background-image:url(/resources/nojo/images/end01.png);
+}
+
+.bg-end02{
+	background-image:url(/resources/nojo/images/end02.png);
+}
 
 
 </style>
@@ -60,84 +87,89 @@ table {word-break:break-all;}
 		<!-- Main content -->
 		<section class="content">
 		<!-- ----------------------------------------- -->
-		<div class="box box-solid">
+		<div class="box ">
+				<div class="box-header ">
+                  <h3 class="box-title">■이해도</h3>
+                </div><!-- /.box-header -->
                 
                 <div class="box-body">
-                  <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                  <div id="example1_wrapper" >
                   	
                   	<div class="row">
 	                  	<div class="col-sm-12">
 	                  	<div class="box-body table-responsive no-padding">
-		                  <table class="table table-hover table-bordered">
+		                  <table class="table">
 		                    <thead>
 		                      <tr>
-		                      	 <th width="142px" >&nbsp;</th>
+		                      	 <th width="130px"></th>
 		                      	 <c:forEach items="${tqscorelist[0].scorelist}" var="namelist">
-			                     	<th width="70px" >
-			                     	${namelist.mem_name}
+			                     	<th class="bg-top02" width="84px" height="84px" style="vertical-align: top; text-align: center;">
+			                     	${namelist.mem_name}<br>
+			 						<img class="img-circle" alt="" src="/${domain}/seat/seatImg?userId=${namelist.mem_id}" onerror="javascript:this.src='/resources/nojo/images/noImage.png'" width="40" height="40" />
 			                     	</th>
 			                     </c:forEach>
 			                  </tr>
 							</thead>
-							<tbody>							  
+
+ 							<tbody>							  
   							  <c:forEach items="${tqscorelist}" var="tqlist" varStatus="status">
 							  <tr>
-							  	<td data-content="${tqlist.teacherquestion_content}">${tqlist.teacherquestion_content}</span></td>
+							  	<td data-content="${tqlist.teacherquestion_content}">${tqlist.teacherquestion_content}</td>
 							  	
 							  	<c:forEach items="${tqlist.scorelist}" var="scorelist">
 								
 								<c:choose>
 									<c:when test="${scorelist.comprehension_score >= 9}">
-										<td data-com_no="${scorelist.comprehension_no}">
+										<td class="bg-mid02 score_center" data-com_no="${scorelist.comprehension_no}">
 											<c:if test="${scorelist.comprehension_replycnt >= 1}">
-													<span class="cont-box"></span>
+													<!-- <span class="cont-box"></span> -->
 											</c:if>
-											<p class="lead"><a href="#" ><span class="label label-success">${scorelist.comprehension_score}</span></a></p>
+											<p class="lead"><a class="ahand"><span class="label label-success">${scorelist.comprehension_score}</span></a></p>
 										</td>
 									</c:when>
 									
 									<c:when test="${scorelist.comprehension_score >= 7}">
-										<td data-com_no="${scorelist.comprehension_no}">
+										<td class="bg-mid02 score_center" data-com_no="${scorelist.comprehension_no}">
 											<c:if test="${scorelist.comprehension_replycnt >= 1}">
-													<span class="cont-box"></span>
+													<!-- <span class="cont-box"></span> -->
 											</c:if>
-											<p class="lead "><a href="#" ><span class="label label-info">${scorelist.comprehension_score}</span></a></p>
+											<p class="lead "><a class="ahand"><span class="label label-info">${scorelist.comprehension_score}</span></a></p>
 										</td>
 									</c:when>
 									
 									<c:when test="${scorelist.comprehension_score >= 5}">
-										<td data-com_no="${scorelist.comprehension_no}">
+										<td class="bg-mid02 score_center" data-com_no="${scorelist.comprehension_no}">
 											<c:if test="${scorelist.comprehension_replycnt >= 1}">
-													<span class="cont-box"></span>
+													<!-- <span class="cont-box"></span> -->
 											</c:if>
-											<p class="lead "><a href="#" ><span class="label label-primary">${scorelist.comprehension_score}</span></a></p>
+											<p class="lead "><a class="ahand"><span class="label label-primary">${scorelist.comprehension_score}</span></a></p>
 										</td>
 									</c:when>
 									
 									<c:when test="${scorelist.comprehension_score >= 3}">
-										<td data-com_no="${scorelist.comprehension_no}">
+										<td class="bg-mid02 score_center" data-com_no="${scorelist.comprehension_no}">
 											<c:if test="${scorelist.comprehension_replycnt >= 1}">
-													<span class="cont-box"></span>
+													<!-- <span class="cont-box"></span> -->
 											</c:if>
-											<p class="lead"><a href="#" ><span class="label label-warning">${scorelist.comprehension_score}</span></a></p>
+											<p class="lead"><a class="ahand"><span class="label label-warning">${scorelist.comprehension_score}</span></a></p>
 										</td>
 									</c:when>
 									
 									<c:when test="${scorelist.comprehension_score >= 1}">
-										<td data-com_no="${scorelist.comprehension_no}">
+										<td class="bg-mid02 score_center" data-com_no="${scorelist.comprehension_no}">
 											<c:if test="${scorelist.comprehension_replycnt >= 1}">
-													<span class="cont-box"></span>
+													<!-- <span class="cont-box"></span> -->
 											</c:if>
-											<p class="lead"><a href="#" ><span class="label label-danger">${scorelist.comprehension_score}</span></a></p>
+											<p class="lead"><a class="ahand"><span class="label label-danger">${scorelist.comprehension_score}</span></a></p>
 										</td>
 									</c:when>
 									
 									<c:otherwise >
 										<c:if test="${scorelist.mem_id == user.id}">										
-											<td ><a href="#"><span data-qno="${tqlist.teacherquestion_no}" class="label label-default" >입력</span></a></td>
+											<td class="bg-mid01 score_center" ><a class="ahand"><span data-qno="${tqlist.teacherquestion_no}" class="label label-default" >입력</span></a></td>
 										</c:if>
 										<c:if test="${scorelist.mem_id != user.id}">										
-											<td >&nbsp;</td>
+											<td class="bg-mid01 score_center">&nbsp;</td>
 										</c:if>
 									</c:otherwise>
 								</c:choose>
@@ -145,8 +177,92 @@ table {word-break:break-all;}
 							  	</c:forEach>
 							  </tr>
 							  </c:forEach>
-			                </tbody>   
+			                </tbody>  
+							  <tr>
+		                      	 <th width="130px"></th>
+		                      	 <c:forEach items="${tqscorelist[0].scorelist}" var="namelist">
+			                     	<th class="bg-end02" width="84px" height="42px" style="vertical-align: top; text-align: center;">
+			                     	&nbsp;
+			                     	</th>
+			                     </c:forEach>
+			                  </tr>
+							
+							
+							
+							
+							
+							
+							
+<%-- 							<tbody>							  
+  							  <c:forEach items="${tqscorelist}" var="tqlist" varStatus="status">
+							  <tr>
+							  	<td data-content="${tqlist.teacherquestion_content}">${tqlist.teacherquestion_content}</td>
+							  	
+							  	<c:forEach items="${tqlist.scorelist}" var="scorelist">
+								
+								<c:choose>
+									<c:when test="${scorelist.comprehension_score >= 9}">
+										<td class="bg-mid02 score_center" data-com_no="${scorelist.comprehension_no}">
+											<c:if test="${scorelist.comprehension_replycnt >= 1}">
+													<!-- <span class="cont-box"></span> -->
+											</c:if>
+											<p class="lead"><a class="ahand"><span class="label label-success">${scorelist.comprehension_score}</span></a></p>
+										</td>
+									</c:when>
+									
+									<c:when test="${scorelist.comprehension_score >= 7}">
+										<td class="bg-mid02 score_center" data-com_no="${scorelist.comprehension_no}">
+											<c:if test="${scorelist.comprehension_replycnt >= 1}">
+													<!-- <span class="cont-box"></span> -->
+											</c:if>
+											<p class="lead "><a class="ahand"><span class="label label-info">${scorelist.comprehension_score}</span></a></p>
+										</td>
+									</c:when>
+									
+									<c:when test="${scorelist.comprehension_score >= 5}">
+										<td class="bg-mid02 score_center" data-com_no="${scorelist.comprehension_no}">
+											<c:if test="${scorelist.comprehension_replycnt >= 1}">
+													<!-- <span class="cont-box"></span> -->
+											</c:if>
+											<p class="lead "><a class="ahand"><span class="label label-primary">${scorelist.comprehension_score}</span></a></p>
+										</td>
+									</c:when>
+									
+									<c:when test="${scorelist.comprehension_score >= 3}">
+										<td class="bg-mid02 score_center" data-com_no="${scorelist.comprehension_no}">
+											<c:if test="${scorelist.comprehension_replycnt >= 1}">
+													<!-- <span class="cont-box"></span> -->
+											</c:if>
+											<p class="lead"><a class="ahand"><span class="label label-warning">${scorelist.comprehension_score}</span></a></p>
+										</td>
+									</c:when>
+									
+									<c:when test="${scorelist.comprehension_score >= 1}">
+										<td class="bg-mid02 score_center" data-com_no="${scorelist.comprehension_no}">
+											<c:if test="${scorelist.comprehension_replycnt >= 1}">
+													<!-- <span class="cont-box"></span> -->
+											</c:if>
+											<p class="lead"><a class="ahand"><span class="label label-danger">${scorelist.comprehension_score}</span></a></p>
+										</td>
+									</c:when>
+									
+									<c:otherwise >
+										<c:if test="${scorelist.mem_id == user.id}">										
+											<td class="bg-mid02 score_center" ><a class="ahand"><span data-qno="${tqlist.teacherquestion_no}" class="label label-default" >입력</span></a></td>
+										</c:if>
+										<c:if test="${scorelist.mem_id != user.id}">										
+											<td class="bg-mid02 score_center">&nbsp;</td>
+										</c:if>
+									</c:otherwise>
+								</c:choose>
+							  
+							  	</c:forEach>
+							  </tr>
+							  </c:forEach>
+			                </tbody>  --%>  
 		                  </table>
+		                  
+		                  	<div class="space"></div>
 		                  </div>
 	                  	</div><!-- /.grid -->
                   	</div><!-- /.row -->

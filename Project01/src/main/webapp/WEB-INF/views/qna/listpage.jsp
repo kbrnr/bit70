@@ -168,7 +168,7 @@ td {
 								<div class="input-group">
    								   <input type="text" class="form-control" name="searchValue" style="width: 200px;">
 								      <span class="input-group-btn">
-								        <button class="btn btn-default" type="Submit">Go!</button>
+								        <button class="btn btn-default" type="Submit">검색</button>
 								      </span>
 		                 	 </div><!-- /input-group -->
 							</div>
