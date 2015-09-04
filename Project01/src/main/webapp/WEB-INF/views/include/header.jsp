@@ -40,7 +40,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Project01</title>
+<title>이해했니</title>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 <!-- Bootstrap 3.3.4 -->
 <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -112,9 +112,9 @@ html, body, .wrapper, .wrapper .content-wrapper, .content-wrapper *{
         <!-- Logo -->
         <a href="/" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>focus</b></span>
+          <span class="logo-mini"><b>이해했니</b></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>Project</b>01</span>
+          <span class="logo-lg"><b>이해</b>했니</span>
         </a>
 
         <!-- Header Navbar -->
