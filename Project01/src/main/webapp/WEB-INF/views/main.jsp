@@ -20,7 +20,7 @@
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 		<h1>
-			수업명: ${domain} <small>(${user.id}${grade})</small>
+			　<%-- 수업명: ${domain} <small>(${user.id}${grade})</small> --%>
 		</h1>
 		<ol class="breadcrumb">
 			<li><a href="/" target="parent"><i class="fa fa-dashboard"></i>Home</a></li>
