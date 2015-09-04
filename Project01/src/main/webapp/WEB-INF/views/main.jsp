@@ -198,7 +198,7 @@
  		if(!target.hasClass("list-group-item-info"))
  			return;
  		$.ajax({
- 			url: "/${domain}/notification/" + target.data("notino"), 
+ 			url: "/${domain}/notification/updateReadState/" + target.data("notino"), 
  			method: "patch",
  			success: function(){
  				var idx = target.data("idx");
