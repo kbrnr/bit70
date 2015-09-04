@@ -29,17 +29,17 @@ public class NotificationController {
 		return mapper.getNotification(domain, SecurityUtil.getUser().getId(), notiNo);
 	}
 	
-	@RequestMapping(value="/{notiNo}" ,method = RequestMethod.PATCH)
+	@RequestMapping(value="/updateReadState/{notiNo}" ,method = RequestMethod.PATCH)
 	public void updateReadState(@PathVariable int notiNo) {
 		mapper.updateReadState(notiNo);
 	}
 	
-	@RequestMapping(value="/setInside/{notiNo}" ,method = RequestMethod.GET)
+	@RequestMapping(value="/setInside/{notiNo}" ,method = RequestMethod.PATCH)
 	public void setInside(@PathVariable int notiNo) {
 		mapper.setInside(notiNo);
 	}
 	
-	@RequestMapping(value="/setAside/{notiNo}" ,method = RequestMethod.GET)
+	@RequestMapping(value="/setAside/{notiNo}" ,method = RequestMethod.PATCH)
 	public void setAside(@PathVariable int notiNo) {
 		mapper.setAside(notiNo);
 	}
