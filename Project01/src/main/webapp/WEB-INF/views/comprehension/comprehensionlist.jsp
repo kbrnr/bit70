@@ -13,7 +13,9 @@ table {
 	word-break: break-all;
 }
 
-
+.td {
+	padding: 0px 4px 0px 4px ;
+}
 
 .score_center {
 	text-align: center;
@@ -36,11 +38,15 @@ table {
 
 .ahand { cursor: pointer; }
 
-
-
 .space {
 	height:50px; 
 }
+
+.comquestion {
+	padding: 10px 10px 10px 10px;
+	background-color: #d2d6de;
+}
+
 
 
 .bg-top01{
@@ -65,6 +71,10 @@ table {
 
 .bg-end02{
 	background-image:url(/resources/nojo/images/end02.png);
+}
+
+.bg-compre{
+	background-image:url(/resources/nojo/images/compreh.gif);
 }
 
 
@@ -101,7 +111,7 @@ table {
 		                  <table class="table">
 		                    <thead>
 		                      <tr>
-		                      	 <th width="130px"></th>
+		                      	 <th width="170px" class="bg-top01"></th>
 		                      	 <c:forEach items="${tqscorelist[0].scorelist}" var="namelist">
 			                     	<th class="bg-top02" width="84px" height="84px" style="vertical-align: top; text-align: center;">
 			                     	${namelist.mem_name}<br>
@@ -114,7 +124,9 @@ table {
  							<tbody>							  
   							  <c:forEach items="${tqscorelist}" var="tqlist" varStatus="status">
 							  <tr>
-							  	<td data-content="${tqlist.teacherquestion_content}">${tqlist.teacherquestion_content}</td>
+							  	<td data-content="${tqlist.teacherquestion_content}" class="bg-mid01 td">
+							  		<div class="bg-gray disabled color-palette comquestion">${tqlist.teacherquestion_content}</div>
+                      		  	</td>
 							  	
 							  	<c:forEach items="${tqlist.scorelist}" var="scorelist">
 								
@@ -166,7 +178,7 @@ table {
 									
 									<c:otherwise >
 										<c:if test="${scorelist.mem_id == user.id}">										
-											<td class="bg-mid01 score_center" ><a class="ahand"><span data-qno="${tqlist.teacherquestion_no}" class="label label-default" >입력</span></a></td>
+											<td class="bg-compre score_center" ><a class="ahand"><span data-qno="${tqlist.teacherquestion_no}" class="label label-default" >입력</span></a></td>
 										</c:if>
 										<c:if test="${scorelist.mem_id != user.id}">										
 											<td class="bg-mid01 score_center">&nbsp;</td>
@@ -179,12 +191,15 @@ table {
 							  </c:forEach>
 			                </tbody>  
 							  <tr>
-		                      	 <th width="130px"></th>
+		                      	 <td class="bg-end01"></td>
 		                      	 <c:forEach items="${tqscorelist[0].scorelist}" var="namelist">
-			                     	<th class="bg-end02" width="84px" height="42px" style="vertical-align: top; text-align: center;">
-			                     	&nbsp;
-			                     	</th>
-			                     </c:forEach>
+			                      	 <c:if test="${namelist.mem_id == user.id}">										
+    									<td class="bg-end02" height="36px"></td>
+									 </c:if>
+									 <c:if test="${scorelist.mem_id != user.id}">										
+										<td class="bg-end01" height="36px"></td>
+									 </c:if>	
+		                      	 </c:forEach>
 			                  </tr>
 							
 							
