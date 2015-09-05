@@ -123,15 +123,17 @@ public class ClassInfoController {
 	//my페이지 학생 전체수업리스트 수업신청 기능 포함
 	@RequestMapping(value="/sclasslistjoin", method=RequestMethod.GET)
 	public String classlistjoin(SearchCriteria cri, Model model){
+		List<ClassListVO> mylist;
 		List<ClassListVO> list;
 		PageMaker pagemaker;
 		
-		list = classInfoService.getClassListJoin(cri, SecurityUtil.getUser().getId());
+		mylist = classInfoService.getClassListByID(SecurityUtil.getUser().getId(), cri); 
 		
-		System.out.println(list.size());
-		
+		list = classInfoService.getClassListJoin(cri, SecurityUtil.getUser().getId());		
 		pagemaker = new PageMaker(cri, classInfoService.getClassTotalCnt(cri));
 
+		model.addAttribute("mylist", mylist);
+		
 		model.addAttribute("list", list);
 		model.addAttribute("pageMaker", pagemaker);
 		model.addAttribute("cri", cri);
@@ -214,6 +216,18 @@ public class ClassInfoController {
 		
 		return "/classinfo/sclasslist" ;
 	}
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 

@@ -103,7 +103,7 @@
 	</if>
 	<![CDATA[	 
 		order by clz_reg_date desc
-		limit #{cri.first}, #{cri.perPageNum};
+		
 	]]>	
 	</select>
 	

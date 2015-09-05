@@ -64,7 +64,7 @@
 <%-- 학생 --%>
 <c:if test="${isStudent}">
 	<div class="content-wrapper">
-		<iframe name="inner" src="/classinfo/myclasslist" width="100%" height="100%" style="border:none;"></iframe>
+		<iframe name="inner" src="/classinfo/sclasslistjoin" width="100%" height="100%" style="border:none;"></iframe>
 	</div>
 </c:if>
 

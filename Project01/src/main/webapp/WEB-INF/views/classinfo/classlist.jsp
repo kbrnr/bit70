@@ -40,7 +40,7 @@ td {
 	height:50px; 
 }
 
-
+.smallmenu {}
 
 </style>
 
@@ -62,8 +62,15 @@ td {
 		<section class="content">
 		<!-- ----------------------------------------- -->
 		<div class="box">
-                <div class="box-header with-border">
-                  <h3 class="box-title">■수업리스트</h3>
+				<div class="box-header with-border">
+                	<span><h3 class="box-title">■수업리스트</h3></span>
+                  	<span class=" pull-right">
+	                  	<div class="col-sm-12">
+			                <a href="/membership/teacherlist" class=" pull-right ">선생님리스트 </a>
+			 					<p class=" pull-right">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</p>                 	
+				            <a href="/classinfo/classlist" class=" pull-right"><b>수업리스트</b> </a>
+			            </div>
+                  	</span>
                 </div><!-- /.box-header -->
                 
                 <div class="box-body">
