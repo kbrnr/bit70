@@ -10,23 +10,23 @@
     <ul class="sidebar-menu">
       <li class="header"></li>
       <c:if test="${isAdmin || isClassTeacher}">
-	      <li class="treeview active"><a href="/${domain}/main" target="inner"><i class="fa fa-link"></i> <span>홈</span></a></li>
-	      <li class="treeview"><a href="/classinfo/classread?domain=${domain}" target="inner"><i class="fa fa-link"></i> <span>${domain} 수업정보</span></a></li>
-	      <li class="treeview"><a href="/${domain}/curriculum/edit" target="inner"><i class="fa fa-link"></i> <span>커리큘럼</span></a></li>
-	      <li class="treeview"><a href="/${domain}/qna/listpage" target="inner"><i class="fa fa-link"></i> <span>질문답변</span></a></li>
-	      <li class="treeview"><a href="/${domain}/comprehension" target="inner"><i class="fa fa-link"></i> <span>이해도통계</span></a></li>
-	      <li class="treeview"><a href="/${domain}/course/joinmemberlist" target="inner"><i class="fa fa-link"></i> <span>우리반식구(가입승인)</span></a></li>
-	      <li class="treeview"><a href="/${domain}/seat" target="inner"><i class="fa fa-link"></i><span>[반장메뉴:배치도]</span></a></li>
+	      <li class="treeview active"><a href="/${domain}/main" target="inner"><i class="fa fa-home"></i> <span>홈</span></a></li>
+	      <li class="treeview"><a href="/classinfo/classread?domain=${domain}" target="inner"><i class="fa fa-info"></i> <span>${domain} 수업정보</span></a></li>
+	      <li class="treeview"><a href="/${domain}/curriculum/edit" target="inner"><i class="fa fa-book"></i> <span>커리큘럼</span></a></li>
+	      <li class="treeview"><a href="/${domain}/qna/listpage" target="inner"><i class="fa fa-question"></i> <span>질문답변</span></a></li>
+	      <li class="treeview"><a href="/${domain}/comprehension" target="inner"><i class="fa fa-line-chart"></i> <span>이해도통계</span></a></li>
+	      <li class="treeview"><a href="/${domain}/course/joinmemberlist" target="inner"><i class="fa fa-users"></i> <span>우리반식구들</span></a></li>
+	      <li class="treeview"><a href="/${domain}/seat" target="inner"><i class="fa fa-street-view"></i><span>학생 배치</span></a></li>
       </c:if>
       
       <c:if test="${isClassStudent || isClassPresident}">
-	  	  <li class="treeview active"><a href="/${domain}/main" target="inner"><i class="fa fa-link"></i> <span>홈</span></a></li>
-     	  <li class="treeview"><a href="/classinfo/classread?domain=${domain}" target="inner"><i class="fa fa-link"></i> <span>${domain} 수업정보</span></a></li>
-          <li class="treeview"><a href="/${domain}/qna/listpage" target="inner"><i class="fa fa-link"></i> <span>질문답변</span></a></li>
-          <li class="treeview"><a href="/${domain}/comprehension" target="inner"><i class="fa fa-link"></i> <span>이해도통계</span></a></li>
-          <li class="treeview"><a href="/${domain}/course/joinmemberlist" target="inner"><i class="fa fa-link"></i> <span>우리반식구</span></a></li>
+	  	  <li class="treeview active"><a href="/${domain}/main" target="inner"><i class="fa fa-home"></i> <span>홈</span></a></li>
+     	  <li class="treeview"><a href="/classinfo/classread?domain=${domain}" target="inner"><i class="fa fa-info"></i> <span>${domain} 수업정보</span></a></li>
+          <li class="treeview"><a href="/${domain}/qna/listpage" target="inner"><i class="fa fa-question"></i> <span>질문답변</span></a></li>
+          <li class="treeview"><a href="/${domain}/comprehension" target="inner"><i class="fa fa-line-chart"></i> <span>이해도통계</span></a></li>
+          <li class="treeview"><a href="/${domain}/course/joinmemberlist" target="inner"><i class="fa fa-users"></i> <span>우리반식구들</span></a></li>
           <c:if test="${isClassPresident}">
-          	<li class="treeview"><a href="/${domain}/seat" target="inner"><i class="fa fa-link"></i> <span>[반장메뉴:배치도]</span></a></li>
+          	<li class="treeview"><a href="/${domain}/seat" target="inner"><i class="fa fa-street-view"></i> <span>학생 배치</span></a></li>
           </c:if>
       </c:if>
       
