@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/earlyaccess/jejugothic.css">
+<!-- 폰트 -->
+<link rel="stylesheet" type="text/css" href="/resources/nojo/fonts/jejuGothic.css">
 
 <!-- 커리큘럼 -->
 <link href="/resources/nojo/css/bootstrap-treeview.min.css" rel="stylesheet" type="text/css" />
@@ -14,7 +15,6 @@
 
 <!-- 배치도 -->
 <link rel="stylesheet" type="text/css" href="/resources/nojo/css/seatStyle.css">
-
 
 <div class="container">
 	<!-- Content Header (Page header) -->
