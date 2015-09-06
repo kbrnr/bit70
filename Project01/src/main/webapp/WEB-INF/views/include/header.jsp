@@ -42,6 +42,12 @@
 <meta charset="UTF-8">
 <title>이해했니</title>
 <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+<!-- 폰트 -->
+<link rel="stylesheet" type="text/css" href="/resources/nojo/fonts/BMDOHYEON.css">
+<link rel="stylesheet" type="text/css" href="/resources/nojo/fonts/BMHANNA.css">
+<link rel="stylesheet" type="text/css" href="/resources/nojo/fonts/BMJUA.css">
+<link rel="stylesheet" type="text/css" href="/resources/nojo/fonts/NANUMGOTHIC.css">
+<link rel="stylesheet" type="text/css" href="/resources/nojo/fonts/jejuGothic.css">
 <!-- Bootstrap 3.3.4 -->
 <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <!-- Font Awesome Icons -->
@@ -73,11 +79,14 @@
 <link href="/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
 <!-- favicon -->
  <link href="/favicon.ico" rel="icon" type="image/x-icon" />
+ <!-- 멤버 이미지 로드 -->
+ <script src="/resources/nojo/script/seat.js"></script>
 
 
 <style>
 html, body, .wrapper, .wrapper .content-wrapper, .content-wrapper *{
 	height: 100%;
+	font-family: NANUMGOTHIC, sans-serif;
 } 
 </style>
 
@@ -107,14 +116,14 @@ html, body, .wrapper, .wrapper .content-wrapper, .content-wrapper *{
     <div class="wrapper">
 
       <!-- Main Header -->
-      <header class="main-header">
+      <header class="main-header" style="box-shadow: 0px 3px 16px 0px rgba(50, 50, 50, 0.87);">
 
         <!-- Logo -->
-        <a href="/" class="logo">
+        <a href="#" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>이해했니</b></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>이해</b>했니</span>
+          <span class="logo-lg" style="font-family: BMDOHYEON;"><b>이해</b>했니</span>
         </a>
 
         <!-- Header Navbar -->
@@ -156,35 +165,22 @@ html, body, .wrapper, .wrapper .content-wrapper, .content-wrapper *{
                 <!-- Menu Toggle Button -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <!-- The user image in the navbar-->
-                  <img src="/resources/dist/img/user2-160x160.jpg" class="user-image" alt="User Image" />
+                  <img src="/membership/profileImg" class="user-image" alt="User Image" onerror="imgError(this);"/>
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
                   <span class="hidden-xs">[${user.name} ${grade}]</span>
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu"  style="border: 1px solid #FFB89B;">
                   <!-- The user image in the menu -->
                   <li class="user-header">
-                    <img src="/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
-                    <p>
+                    <img src="/membership/profileImg" class="img-circle" alt="User Image" onerror="imgError(this);"/>
+                    <p style="color: #FF8878; font-family: BMJUA; font-size: x-large; text-shadow: 1px 1px 2px rgba(150, 150, 150, 0.80);">
                       ${user.name} ${grade}
-                      <small>Member since Nov. 2012</small>
                     </p>
-                  </li>
-                  <!-- Menu Body -->
-                  <li class="user-body">
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Followers</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Sales</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Friends</a>
-                    </div>
                   </li>
                   <!-- Menu Footer-->
                   <li class="user-footer">
                     <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
+                      <a href="/membership/profile" target="inner" class="btn btn-default btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
                       <a href="/member/logout" class="btn btn-default btn-flat">로그아웃</a>

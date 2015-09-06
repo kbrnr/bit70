@@ -26,14 +26,15 @@
 #lobby {
 	width: 29%;
 	min-width: 300px;
-	height: 400px;
+	height: 396px;
 	float: left;
+	background-color: #FFB89B;
 }
 
 .chair {
     position: absolute;
-    width: 130px;
-    height: 66px;
+    width: 115px;
+    height: 65px;
 /* 	position: absolute;
 	width: 120px;
 	height: 70px;

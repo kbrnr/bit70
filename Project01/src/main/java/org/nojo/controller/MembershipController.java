@@ -88,7 +88,7 @@ public class MembershipController {
 	
 	//이미지보기
 	@RequestMapping(value = "/profileImg", method = RequestMethod.GET)
-	public void photo(HttpServletResponse res, Model model) throws IOException {
+	public void photo(HttpServletResponse res) throws IOException {
 		byte[] bytes = SecurityUtil.getUser().getPhoto();
 		if(bytes != null){
 			res.getOutputStream().write(bytes);

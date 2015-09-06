@@ -3,9 +3,30 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
   
 <style>
+
+label {
+	font-family: NANUMGOTHIC;
+}
+
+.box * {
+	font-family: NANUMGOTHIC;
+}
+
+.box {
+	background: white;
+	border-top: 3px solid #19BDC4;
+}
 .div-text-valign{
-	font-size: 22px;
+	font-size: medium;
 	padding: 0px 15px 0px 15px;
+	line-height: 34px;
+}
+.div-left{
+	padding: 0px 0px 0px 0px;
+}
+.align {
+	margin-left: 45%;
+	width: 110px;
 }
 
 
@@ -13,13 +34,13 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
-				Top Navigation <small>Example 2.0</small>
+				　
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#">
-						<i class="fa fa-dashboard"></i> Home
+						<i class="fa fa-fw fa-home"></i> Home
 					</a></li>
-				<li class="active">Dashboard</li>
+				<li class="active">수업관리</li>
 			</ol>
 		</section>
 
@@ -30,7 +51,7 @@
 		<!-- ----------------------------------------- -->
 			<div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">■수업신청</h3>
+                  <h3 class="box-title"><i class="fa fa-fw  fa-info-circle"></i>수업정보</h3>
                 </div><!-- /.box-header -->
                
 				<!-- form start -->
@@ -44,7 +65,7 @@
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label" >도메인</label>
-                      <div class="col-sm-10 div-text-valign">http://www.focus.com/${clzinfo.clz_domain}</div>
+                      <div class="col-sm-10 div-text-valign">http://www.understand.com/${clzinfo.clz_domain}</div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">선생님</label>
@@ -93,9 +114,9 @@
                   <div class="box-footer text-center ">
                   <!-- 학원일때 -->
                   <c:if test="${isAdmin}">
-                  <div class="col-sm-7">
-                  	<a href="/classinfo/classlist" class="btn btn-default btn-lg ">목록 </a>
-                  	<a href="/classinfo/classmodifyform?domain=${clzinfo.clz_domain}" class="btn btn-primary  pull-right">수정</a>
+                  <div class="align">
+                  	<a href="/classinfo/classmodifyform?domain=${clzinfo.clz_domain}" class="btn btn-primary">수정</a>
+                  	<a href="/classinfo/classlist" class="btn btn-default pull-right">목록 </a>
                   </c:if>
                   </div>
                   

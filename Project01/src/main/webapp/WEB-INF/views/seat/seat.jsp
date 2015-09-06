@@ -1,24 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
-<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/earlyaccess/jejugothic.css">
+<!-- 폰트 -->
+<link rel="stylesheet" type="text/css" href="/resources/nojo/fonts/jejuGothic.css">
 <!-- seat Style -->
 <link rel="stylesheet" type="text/css" href="/resources/nojo/css/seatStyle.css">
+<script src="/resources/nojo/script/jquery-ui.min.js"></script>
+
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-	<h1>${domain}좌석배치표</h1>
+	<h1>
+		　
+	</h1>
 	<ol class="breadcrumb">
 		<li><a href="#">
-				<i class="fa fa-fw fa-home"></i>Home
+				<i class="fa fa-fw fa-home"></i> Home
 			</a></li>
-		<li><a href="#">${domain}</a></li>
+		<li class="active">${domain}</li>
 		<li class="active">배치도</li>
 	</ol>
 </section>
+
 <!-- Main content -->
 <section class="content">
-	<div class="box box-primary">
-		<div class="box-header with-border"></div>
+	<div class="box">
+		<div class="box-header with-border">
+			<h3 class="box-title"><i class="fa fa-fw  fa-line-chart"></i>${domain} 배치도</h3>
+		</div>
 		<div class="box-body">
 			<div id="seatContainer">
 				<div id="seatWrapper">
@@ -46,7 +54,9 @@
 					</c:forEach>
 				</div>
 			</div>
-			<button id="save" type="button">저장하기</button>
+			
+			<button id="save" type="button" class="btn btn-primary btn-lg" >저장하기</button>
+			
 		</div>
 	</div>
 </section>

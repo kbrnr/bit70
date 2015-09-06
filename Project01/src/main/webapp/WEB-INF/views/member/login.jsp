@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
+<!-- 폰트 -->
+<link rel="stylesheet" type="text/css" href="/resources/nojo/fonts/BMHANNA.css">
+<link rel="stylesheet" type="text/css" href="/resources/nojo/fonts/NANUMGOTHIC.css">
+
 <html>
   <head>
     <meta charset="UTF-8">
@@ -14,11 +18,16 @@
     <link href="/resources/dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
     <link href="/resources/plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />
+    <style>
+    	body {
+		background-color:#FFF6EE;
+	}
+    </style>
   </head>
   <body class="login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="/resources/index2.html"><b>이해</b>했니</a>
+        <a href="#" style="BMHANNA; color: #E8396E; text-shadow: 1px 1px 1px rgba(150, 150, 150, 0.80);"><b>이해</b>했니</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <form method="post">

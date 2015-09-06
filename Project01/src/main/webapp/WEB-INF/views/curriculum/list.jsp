@@ -38,7 +38,6 @@
     <link href="/resources/nojo/css/dropzone.css" rel="stylesheet" type="text/css"/>
     <script src="/resources/nojo/script/dropzone.js"></script>
     <script src="/resources/nojo/script/xlsx.core.min.js"></script>
-	
 	<style>
 	    .list-group-item {
 	        padding: 5px;

@@ -70,7 +70,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<!-- Font Awesome Icons -->
 	<link href="/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
-	<style>body{background-color:#ecf0f5;}</style>
+	<style>body{background-color:#FFF6EE;}</style>
 </head>
 <body>
 

@@ -1,31 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
 <style>
-.div-text-valign{
-	font-size: 22px;
-	padding: 0px 15px 0px 15px;
-	
+label {
+	font-family: NANUMGOTHIC;
 }
 
+.box * {
+	font-family: NANUMGOTHIC;
+}
+
+.box {
+	background: white;
+	border-top: 3px solid #19BDC4;
+}
+.div-text-valign{
+	font-size: medium;
+	font-weight: bold;
+	padding: 0px 15px 0px 15px;
+	line-height: 34px;
+}
 .div-left{
 	padding: 0px 0px 0px 0px;
 }
-
 
 </style>
 		
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		Top Navigation <small>Example 2.0</small>
+		　
 	</h1>
 	<ol class="breadcrumb">
-		<li>
-			<a href="#">
-			<i class="fa fa-dashboard"></i> Home
-			</a>
-		</li>
-		<li class="active">Dashboard</li>
+		<li><a href="#">
+				<i class="fa fa-fw fa-home"></i> Home
+			</a></li>
+		<li class="active">개인정보</li>
 	</ol>
 </section>
 
@@ -34,7 +43,7 @@
 <section class="content">
     <div class="box">
     	<div class="box-header with-border">
-    		<h3 class="box-title">■${user.id}님의 기본정보</h3>
+    		<h3 class="box-title"><i class="fa fa-fw  fa-user"></i>${user.id}님의 개인정보</h3>
     	</div><!-- /.box-header -->
   	
 		<!-- form start -->
@@ -83,7 +92,7 @@
                    <div class="col-sm-10">
                    	<div class="col-sm-6 div-left ">
                    		<div class="form-inline">
-                   			<img class="profileimg" src="/membership/profileImg?userId=${user.id}" onerror='imgError(this);'" width="100px" height="100px">
+                   			<img class="profileimg" src="/membership/profileImg" onerror='imgError(this);'" width="100px" height="100px">
                    			<span>자신의 사진을 넣어주세요(160 X 160)</span>
                    		</div>
                    		
@@ -94,9 +103,18 @@
                 
                </div><!-- /.box-body -->
                  <div class="box-footer text-center">
-                  	<div class="col-sm-8">
-                  	<a href="/membership/profile" class="btn btn-default pull-right">취소</a>
-                    
+                  	<c:if test="${isTeacher}">
+	                  	<div class="col-sm-8">
+	                  	<a href="/classinfo/myclasslist" class="btn btn-default pull-right">취소</a>
+					</c:if>  
+					<c:if test="${isStudent}">
+	                  	<div class="col-sm-8">
+	                  	<a href="/classinfo/sclasslistjoin" class="btn btn-default pull-right">취소</a>
+					</c:if>  
+					
+					
+					
+					                  
                     <button type="submit" class="btn btn-primary btn-lg ">등록</button>
                  </div>
                  

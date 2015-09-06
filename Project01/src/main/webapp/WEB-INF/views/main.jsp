@@ -2,9 +2,9 @@
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
 <!-- 폰트 -->
 <link rel="stylesheet" type="text/css" href="/resources/nojo/fonts/jejuGothic.css">
-
 <!-- 커리큘럼 -->
 <link href="/resources/nojo/css/bootstrap-treeview.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/resources/nojo/css/curriculum.css">
 <script src="/resources/nojo/script/bootstrap-treeview.min.js"></script>
 
 <!-- 알림 -->
@@ -16,6 +16,11 @@
 <!-- 배치도 -->
 <link rel="stylesheet" type="text/css" href="/resources/nojo/css/seatStyle.css">
 
+<style>
+.box {
+	border-top: 3px solid #19BDC4;
+}
+</style>
 <div class="container">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
@@ -35,7 +40,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="box box-primary">
-					<div class="box-body">
+					<div class="box-body" id="setBoxCss">
 						<div class="row">
 							<div class="col-md-4">
 								<form id="searchTree">
@@ -49,11 +54,11 @@
 								<div id="tree"></div>
 							</div>
 							<div class="col-md-8">
-								<div class="panel panel-primary">
-									<div class="panel-heading">
-										<h1 id="curri_title" class="panel-title" style="display: inline;"></h1>
+								<div class="panel panel-primary" style="border-color: #00c0ef;">
+									<div class="panel-heading" style="background-color:#19BDC4; border-bottom-color: #00c0ef;">
+										<h1 id="curri_title" class="panel-title"></h1>
 										<c:if test="${isClassTeacher}">
-											<a id="question" class="btn" style="color: white;"><span class="glyphicon glyphicon-question-sign"></span></a>
+											<a id="question" class="btn"><span class="glyphicon glyphicon-question-sign"></span></a>
 										</c:if>
 									</div>
 									<div class="panel-body">
