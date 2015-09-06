@@ -26,10 +26,10 @@
 			<h3 class="box-title"><i class="fa fa-fw  fa-line-chart"></i>${domain} 배치도</h3>
 			<button id="save" type="button" class="btn btn-primary pull-right" >저장하기</button>
 		</div>
-		<div class="box-body">
+		<div class="box-body"><span style="font-size:20px; color: #18709C; font-family: 'Jeju Gothic', sans-serif;">배치도 영역</span>
 			<div id="seatContainer">
 				<div id="seatWrapper">
-					<div id="seat">
+					<div id="seat" style="background-color: #FF8878;">
 						<c:forEach items="${list }" var="vo">
 							<c:if test="${vo.seat_x != 0}">
 								<div class="chair" data-mem_id="${vo.mem_id}" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">
@@ -41,7 +41,7 @@
 						</c:forEach>
 					</div>
 				</div>
-				<div id="lobby">학생들을 배치도에 배치해 주세요
+				<div id="lobby" style="text-align: center;"><span style="font-size: 50px; color: #f2f2f2; font-family: 'Jeju Gothic', sans-serif;">학생들을 배치도에 배치해 주세요</span>
 					<c:forEach items="${list }" var="vo">
 						<c:if test="${vo.seat_x == 0}">
 							<div class="chair" data-mem_id="${vo.mem_id}" style="margin-left: ${vo.seat_x}px; margin-top: ${vo.seat_y}px;">

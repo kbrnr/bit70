@@ -167,7 +167,7 @@ html, body, .wrapper, .wrapper .content-wrapper, .content-wrapper *{
                   <!-- The user image in the navbar-->
                   <img src="/membership/profileImg" class="user-image" alt="User Image" onerror="imgError(this);"/>
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                  <span class="hidden-xs">[${user.name} ${grade}]</span>
+                  <span class="hidden-xs" style="font-weight: bold; font-size: medium; font-family: BMDOHYEON; color:#18709C">${user.name} ${grade}</span>
                 </a>
                 <ul class="dropdown-menu"  style="border: 1px solid #FFB89B;">
                   <!-- The user image in the menu -->
