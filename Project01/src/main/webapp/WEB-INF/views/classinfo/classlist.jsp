@@ -7,7 +7,7 @@
 th {
 		text-align: center;
 		vertical-align: middle;
-		background-color: #E0E0E0 ;
+		background-color: #F7D62D ;
 }
 	
 td {
@@ -65,7 +65,7 @@ td {
 		<div class="box">
 				<div class="box-header with-border">
                 	<span><h3 class="box-title"><i class="fa fa-fw fa-tasks"></i>수업리스트</h3></span>
-                  	<span class=" pull-right">
+                  	<span class="pull-right">
 	                  	<div class="col-sm-12">
 			                <a href="/membership/teacherlist" class=" pull-right ">선생님관리</a>
 			 					<p class=" pull-right">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</p>                 	
