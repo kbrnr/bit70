@@ -123,7 +123,7 @@ html, body, .wrapper, .wrapper .content-wrapper, .content-wrapper *{
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>이해했니</b></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg" style="font-family: BMDOHYEON;"><b>이해</b>했니</span>
+          <span class="logo-lg" style="font-family: BMDOHYEON;"><b>이해했니</b></span>
         </a>
 
         <!-- Header Navbar -->
