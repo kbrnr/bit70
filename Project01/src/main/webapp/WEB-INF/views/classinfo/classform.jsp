@@ -135,10 +135,9 @@ td {
                   
                   
                   <div class="box-footer text-center">
-                  	<div class="col-sm-8">
-                  	<a href="classlist" class="btn btn-default pull-right">취소</a>
-                    
-                    <button type="submit" class="btn btn-primary btn-lg ">등록</button>
+                  	<div class="col-sm-7">
+                  		<a href="classlist" class="btn btn-default pull-right">취소</a>
+                    	<button type="submit" class="btn btn-primary pull-right" style="margin-right: 5px;">등록</button>
                     </div>
                   </div><!-- /.box-footer -->
                   
