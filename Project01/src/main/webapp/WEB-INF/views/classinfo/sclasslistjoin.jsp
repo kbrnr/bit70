@@ -295,7 +295,7 @@ td {
 									</c:when>
 								</c:choose>
 							</td>
-							<td class="td-left"><a href="/${vo.clz_domain}">http://www.focus.com/<span class="td-domain">${vo.clz_domain}</span></a></td>
+							<td class="td-left"><a href="/${vo.clz_domain}"><span class="td-domain">${vo.clz_domain}</span></a></td>
 				
 						</tr>
 				 	</c:forEach>
