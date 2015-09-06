@@ -1,0 +1,22 @@
+#setBoxCss *{
+	font-family: NANUMGOTHIC;
+}
+
+#tree {
+	font-size: small;
+}
+
+#curri_title {
+	display: inline;
+	font-weight: bold;
+}
+
+#curriContent {
+	line-height: 150%;
+	font-size:medium;
+}
+
+#question {
+	color: white;
+}
+
