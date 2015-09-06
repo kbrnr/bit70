@@ -103,7 +103,7 @@
 						<p class=" pull-right margin-bottom">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</p>
 						<a href="/${domain}/course/joinmemberlist?searchType=mem_gb&keyword=member_student" class=" pull-right margin-bottom">학생</a>
 						<p class=" pull-right margin-bottom">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</p>
-						<a href="/${domain}/course/joinmemberlist?searchType=mem_gb" class=" pull-right margin-bottom">전체</a>
+						<a href="/${domain}/course/joinmemberlist" class=" pull-right margin-bottom">전체</a>
 					</div>
 
 
@@ -115,12 +115,12 @@
 							<!-- Add the bg color to the header using any of the bg-* classes -->
 							<div class="bg-userimg widget-user-header">
 								<div class="widget-user-image">
-									<img class="img-circle" src="/resources/dist/img/user7-128x128.jpg" alt="User Avatar">
-									<!--  <img class='img-circle' src='/${domain}/seat/seatImg?userId=${vo.mem_id}' onerror="javascript:this.src='/resources/nojo/images/noImage.png" alt='User Avatar'>-->
+									<!-- <img class="img-circle" src="/resources/dist/img/user7-128x128.jpg" alt="User Avatar">-->
+									<img class="img-circle" alt="" src="/${domain}/seat/seatImg?userId=${vo.mem_id}" onerror="javascript:this.src='/resources/nojo/images/noImage.png'" width="65" height="65" />
 								</div>
 								<!-- /.widget-user-image -->
 								<h3 class="widget-user-username">${vo.mem_name}</h3>
-								<h5 class="widget-user-desc">${vo.mem_id}</h5>
+								<h5 class="widget-user-desc">&nbsp;</h5>
 							</div>
 							<div class="box-footer no-padding">
 								<ul class="nav nav-stacked">
@@ -298,6 +298,15 @@
     $(".shake").on("click", function(){
         animate($(this).parents(":nth(3)"),"shake", true);
     });	
+    
+    
+	//seat 이미지 on 이벤트
+	function imgError(image) {
+	image.onerror = "";
+	image.src = "/resources/nojo/images/noImage.png";
+	return true;
+	}
+    
 </script>
 
 <%@include file="/WEB-INF/views/include/frameFooter.jsp"%>

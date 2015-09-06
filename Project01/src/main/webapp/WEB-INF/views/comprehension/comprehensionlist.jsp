@@ -454,6 +454,15 @@ parent.$("#sendScore").submit(function(e){
 	$(location).attr('href','/${domain}/comprehension'); 
 	return false;
 });
+
+
+
+//seat 이미지 on 이벤트
+function imgError(image) {
+image.onerror = "";
+image.src = "/resources/nojo/images/noImage.png";
+return true;
+}
 </script>
 
 <%@include file="/WEB-INF/views/include/frameFooter.jsp"%>
