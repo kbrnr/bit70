@@ -13,13 +13,13 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
-				Top Navigation <small>Example 2.0</small>
+				<small></small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#">
-						<i class="fa fa-dashboard"></i> Home
+						<i class="fa fa-fw fa-home"></i> Home
 					</a></li>
-				<li class="active">Dashboard</li>
+				<li class="active">수업관리</li>
 			</ol>
 		</section>
 
@@ -30,7 +30,7 @@
 		<!-- ----------------------------------------- -->
 			<div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">■수업신청</h3>
+                  <h3 class="box-title"><i class="fa fa-fw  fa-info-circle"></i>수업정보</h3>
                 </div><!-- /.box-header -->
                
 				<!-- form start -->
@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label" >도메인</label>
-                      <div class="col-sm-10 div-text-valign">http://www.focus.com/${clzinfo.clz_domain}</div>
+                      <div class="col-sm-10 div-text-valign">http://www.understand.com/${clzinfo.clz_domain}</div>
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label">선생님</label>

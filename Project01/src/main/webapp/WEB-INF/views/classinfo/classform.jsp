@@ -45,13 +45,13 @@ td {
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
-				Top Navigation <small>Example 2.0</small>
+				<small></small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#">
-						<i class="fa fa-dashboard"></i> Home
+						<i class="fa fa-fw fa-home"></i> Home
 					</a></li>
-				<li class="active">Dashboard</li>
+				<li class="active">수업관리</li>
 			</ol>
 		</section>
 
@@ -62,7 +62,7 @@ td {
 		<!-- ----------------------------------------- -->
 			<div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">■수업등록</h3>
+                  <h3 class="box-title"><i class="fa fa-fw fa-pencil-square-o"></i>수업등록</h3>
                 </div><!-- /.box-header -->
                
 				<!-- form start -->
@@ -77,7 +77,7 @@ td {
                     <div class="form-group">
 					  <label for="inputPassword3" class="col-sm-2 control-label" >도메인</label>
                       <div class="col-sm-7 form-inline">
-                      	<span class="url">http://www.focus.com/</span>
+                      	<span class="url">http://www.understand.com/</span>
                       	<input type="text" id="clz_domain" class="input-domain form-control" name='clz_domain' >
                       	<button id="btn_domaincheck" type="button" class="btn btn btn-default btn-sm">도메인검사</button>
                       	<span id="domainmsg" ></span>

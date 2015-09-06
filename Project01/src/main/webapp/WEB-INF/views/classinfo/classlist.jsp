@@ -24,11 +24,10 @@ td {
 }
 
 .teacherli { 
-	width:130px; 
+	width:80px; 
 	float:left; 
-	margin:5px; 
 	display:inline; 
-	margin: 0px 5px 0px 5px;
+	margin: 0px 5px 0px 0px;
 }
 
 .td-domain {
@@ -40,17 +39,19 @@ td {
 	height:50px; 
 }
 
-.smallmenu {}
+.v-middle {
+	vertical-align: middle;
+}
 
 </style>
 
 		<section class="content-header">
 			<h1>
-				수업관리 <small></small>
+				 <small></small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#">
-						<i class="fa fa-dashboard"></i> 홈
+						<i class="fa fa-fw fa-home"></i> Home
 					</a></li>
 				<li class="active">수업관리</li>
 			</ol>
@@ -63,12 +64,12 @@ td {
 		<!-- ----------------------------------------- -->
 		<div class="box">
 				<div class="box-header with-border">
-                	<span><h3 class="box-title">■수업리스트</h3></span>
+                	<span><h3 class="box-title"><i class="fa fa-fw fa-tasks"></i>수업리스트</h3></span>
                   	<span class=" pull-right">
 	                  	<div class="col-sm-12">
-			                <a href="/membership/teacherlist" class=" pull-right ">선생님리스트 </a>
+			                <a href="/membership/teacherlist" class=" pull-right ">선생님관리</a>
 			 					<p class=" pull-right">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</p>                 	
-				            <a href="/classinfo/classlist" class=" pull-right"><b>수업리스트</b> </a>
+				            <a href="/classinfo/classlist" class=" pull-right"><b>수업관리</b> </a>
 			            </div>
                   	</span>
                 </div><!-- /.box-header -->
@@ -85,13 +86,13 @@ td {
 		                  <table id="example1" class="table table-hover" role="grid" aria-describedby="example1_info">
 		                    <thead>
 		                      <tr role="row">
-		                      	  <th width="250px">강의명</th>
-			                      <th>선생님</th>
+		                      	  <th width="250px" class="td-left">강의명</th>
+			                      <th width="80px" class="td-left">선생님</th>
 			                      <th width="100px">강의실</th>
 			                      <th width="120px">시작일</th>
 			                      <th width="120px">종료일</th>			                   
 			                      <th width="100px">상태</th>
-			                      <th width="250px">주소</th>
+			                      <th width="100px">주소</th>
 		                      </tr>
 		                    </thead>
 		                    
@@ -102,7 +103,7 @@ td {
 			                      <td class="td-left">
 			                      	<ul class="teacherul">
 			                      	<c:forEach items="${vo.teacherlist}" var="teacherlist">
-			                      		<li class="teacherli">${teacherlist.mem_name}(${teacherlist.mem_id})</li>
+			                      		<li class="teacherli">${teacherlist.mem_name}</li>
 			                        </c:forEach>
 			                        </ul>
 			                      </td>
@@ -121,10 +122,10 @@ td {
 			                      			종료
 			                      		</c:when>
 			                      		<c:when test="${vo.clz_state=='4'}">
-			                      			일시정지
+			                      			정지
 			                      		</c:when>
 			                      	</c:choose>
-			                      <td class="td-left"><a href="/${vo.clz_domain}" target=_blank>http://www.focus.com/<span class="td-domain">${vo.clz_domain}</span></a></td>
+			                      <td class="td-left"><a href="/${vo.clz_domain}" target=_blank><span class="td-domain">${vo.clz_domain}</span></a></td>
 			                    </tr>
 		                      </c:forEach>
 		                    </tbody>

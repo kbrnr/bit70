@@ -5,15 +5,16 @@
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
-				Top Navigation <small>Example 2.0</small>
+				<small></small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#">
-						<i class="fa fa-dashboard"></i> Home
+						<i class="fa fa-fw fa-home"></i> Home
 					</a></li>
-				<li class="active">Dashboard</li>
+				<li class="active">수업관리</li>
 			</ol>
 		</section>
+
 
 
 
@@ -36,7 +37,7 @@
                     </div>
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label" >도메인</label>
-                      <label for="inputPassword3" class="col-sm-2 control-label" >http://www.XXX.com/</label>
+                      <label for="inputPassword3" class="col-sm-2 control-label" >http://www.understand.com/</label>
                       <div class="col-sm-2">
                       	${clzinfo.clz_domain}
                       </div>

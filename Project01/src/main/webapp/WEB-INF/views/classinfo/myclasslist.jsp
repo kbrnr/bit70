@@ -78,15 +78,16 @@ td {
 
 <section class="content-header">
 	<h1>
-		Top Navigation <small>Example 2.0</small>
+		<small></small>
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="#">
-				<i class="fa fa-dashboard"></i> Home
+				<i class="fa fa-fw fa-home"></i> Home
 			</a></li>
-		<li class="active">Dashboard</li>
+		<li class="active">마이페이지</li>
 	</ol>
 </section>
+
 
 
 
@@ -98,13 +99,13 @@ td {
 
 
 	<div class="box-header with-border">
-	  <h3 class="box-title">■나의수업리스트</h3>
+	  <h3 class="box-title"><i class="fa fa-fw fa-dashboard"></i>마이페이지</h3>
 	</div><!-- /.box-header -->
                 
 	<div class="box-body">
 		<div class="col-sm-3 padding_right">
 			<div class="col-sm-12 padding_zero">
-			<P>나의 프로필</p>
+			<P><b><i class="fa fa-fw fa-bookmark"></i>나의 프로필</b></p>
 				<div class="box box-widget widget-user-2 ">
 				
 				
@@ -138,7 +139,7 @@ td {
 	           	
 	           		<div class="col-sm-12">
 		           		<div class="padding_search" >
-			           	  	<span>전체수업</span>
+			           	  	<span><b><i class="fa fa-fw fa-list"></i>나의 수업리스트</b></span>
 			           	  	<span class=" pull-right">
 				           	  	<form name="searchFrom" action="/classinfo/myclasslist" method="get">
 										<div id="select_board" class="form-inline" >
