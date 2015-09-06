@@ -9,9 +9,7 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-	<h1>
-		　
-	</h1>
+	<h1>　</h1>
 	<ol class="breadcrumb">
 		<li><a href="#">
 				<i class="fa fa-fw fa-home"></i> Home

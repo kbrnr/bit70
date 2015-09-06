@@ -27,19 +27,23 @@
 
 
 <section class="content-header">
-    <h1>질문답변</h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-fw fa-home"></i>Home</a></li>
-        <li><a href="#">${domain }</a></li>
-        <li class="active">질문답변</li>
-    </ol>
+	<h1>
+		<small></small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#">
+				<i class="fa fa-fw fa-home"></i> Home
+			</a></li>
+		<li class="active">${domain}</li>
+		<li class="active">질문답변</li>
+	</ol>
 </section>
 		
 <section class="content">
 <div class="box">
 	<div class="box-header with-border">
 		<div style="float: left">
-			<h3 class="box-title">Q&A</h3>
+			<h3 class="box-title"><i class="fa fa-fw fa-mortar-board"></i>질문&답변</h3>
 		</div>
 		<div >
 			<a href="listpage">
@@ -110,7 +114,7 @@
 						<c:when test="${v == true || t == true || memId == userId || userId == qId}">
 							<div class="box-header ">
 								<h4 class="box-title" style="display: none;">${vo.question_no }</h4>
-								<div style="float: left;"><span class="glyphicon glyphicon-exclamation-sign" style="font-size: 40px;"></span></div>
+								<div style="float: left;"><span class="glyphicon glyphicon-text-background" style="font-size: 40px;"></span></div>
 								<div style="margin-left: 70px;">
 								<h4 id="answer_no" class="box-title" style="display: none;">${vo.answer_no }</h4>
 								<h5 class="box-title">

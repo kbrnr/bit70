@@ -24,18 +24,12 @@ label {
 .div-left{
 	padding: 0px 0px 0px 0px;
 }
-.align {
-	margin-left: 45%;
-	width: 110px;
-}
 
 
 </style> 
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
-			<h1>
-				　
-			</h1>
+			<h1>　</h1>
 			<ol class="breadcrumb">
 				<li><a href="#">
 						<i class="fa fa-fw fa-home"></i> Home
@@ -114,11 +108,11 @@ label {
                   <div class="box-footer text-center ">
                   <!-- 학원일때 -->
                   <c:if test="${isAdmin}">
-                  <div class="align">
-                  	<a href="/classinfo/classmodifyform?domain=${clzinfo.clz_domain}" class="btn btn-primary">수정</a>
-                  	<a href="/classinfo/classlist" class="btn btn-default pull-right">목록 </a>
+	                  <div class="col-sm-7">
+	                  	<a href="/classinfo/classlist" class="btn btn-default pull-right">목록 </a>
+	                  	<a href="/classinfo/classmodifyform?domain=${clzinfo.clz_domain}" class="btn btn-primary pull-right" style="margin-right: 5px;">수정</a>
+	                  </div>
                   </c:if>
-                  </div>
                   
                   
                   </div><!-- /.box-footer -->

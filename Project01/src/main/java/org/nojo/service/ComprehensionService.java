@@ -19,7 +19,6 @@ public interface ComprehensionService {
 
 	public int registComprehension(ComprehensionVO vo) throws Exception;
 
-
 	public List<TQuestionScoreListVO> getComprehension(String domain) throws Exception;
 
 	public List<ScoreVO> getComprehensionByID(String domain, String mem_id) throws Exception ;

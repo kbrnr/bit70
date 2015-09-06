@@ -73,36 +73,6 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 		return vo.getComprehension_no();
 	}
 	
-//	////tmp///////////////////////////
-//	@Override
-//	public HashMap<String, Object> getComprehension(String domain) throws Exception {
-//		HashMap<String, Object> comprehensionmap= new HashMap<String, Object>();
-//
-//		List<JoinMemberVO> namelist ;
-//		List<TeacherQuestionVO> tqlist ;
-//		List<ScoreVO> scorelist ;
-//		List<List<ScoreVO>> scorelistset = new ArrayList<List<ScoreVO>>();
-//
-//		namelist = mapper.selectName(domain);
-//		tqlist = mapper.selectQuestion(domain);
-//		
-//		for(int i=0; i<tqlist.size(); i++){
-//			scorelist = mapper.selectScore(domain, tqlist.get(i).getTeacherquestion_no());
-//			scorelistset.add(scorelist);
-//		}
-//		
-//		comprehensionmap.put("namelist", namelist);
-//		comprehensionmap.put("tqlist", tqlist);
-//		comprehensionmap.put("scorelistset", scorelistset);
-//
-//		System.out.println("이름갯수:" +namelist.get(0).getMem_name());
-//		System.out.println("질문갯수:" +tqlist.size());
-//		System.out.println("점수셋갯수:" +scorelistset.size());
-//		System.out.println("점수셋갯수:" +scorelistset.get(0).size());
-//		return comprehensionmap;
-//				
-//	}
-	
 	
 	////tmp///////////////////////////
 	@Override

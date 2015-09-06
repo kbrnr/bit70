@@ -119,7 +119,7 @@ html, body, .wrapper, .wrapper .content-wrapper, .content-wrapper *{
       <header class="main-header" style="box-shadow: 0px 3px 16px 0px rgba(50, 50, 50, 0.87);">
 
         <!-- Logo -->
-        <a href="#" class="logo">
+        <a href="/" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>이해했니</b></span>
           <!-- logo for regular state and mobile devices -->

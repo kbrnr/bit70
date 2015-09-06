@@ -47,13 +47,13 @@ td {
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
-				Top Navigation <small>Example 2.0</small>
+				<small></small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#">
-						<i class="fa fa-dashboard"></i> Home
+						<i class="fa fa-fw fa-home"></i> Home
 					</a></li>
-				<li class="active">Dashboard</li>
+				<li class="active">수업관리</li>
 			</ol>
 		</section>
 
@@ -64,7 +64,7 @@ td {
 		<!-- ----------------------------------------- -->
 			<div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">■수업수정</h3>
+                  <h3 class="box-title"><i class="fa fa-fw fa-edit"></i>수업정보수정</h3>
                 </div><!-- /.box-header -->
                
 				<!-- form start -->
@@ -79,8 +79,8 @@ td {
                     <div class="form-group">
                       <label for="inputPassword3" class="col-sm-2 control-label" >도메인</label>
                       <div class="col-sm-5">
-                      	<span class="url">http://www.focus.com/</span><span class="domain">${clzinfo.clz_domain}</span>
-                      	<input type='text' data-hname='${clzinfo.clz_domain}' name='clz_domain' value='${clzinfo.clz_domain}'>
+                      	<span class="url">http://www.understand.com/</span><span class="domain">${clzinfo.clz_domain}</span>
+                      	<input type='hidden' data-hname='${clzinfo.clz_domain}' name='clz_domain' value='${clzinfo.clz_domain}'>
                       </div>                      
                       <div class="col-sm-4">
                       	<div id="domainmsg"></div>
@@ -90,7 +90,7 @@ td {
                       <label for="inputPassword3" class="col-sm-2 control-label">선생님</label>
                 	  <div id="choiceteacher" class="choiceteacher col-sm-3">
                  		<c:forEach items="${clzinfo.teacherlist}" var="teacher">
-                 			<div data-vid='${teacher.mem_id}' class='tremove'>${teacher.mem_name}(${teacher.mem_id})<span class='badge ahand'>X</span> <input type='text' data-hid='${teacher.mem_id}' name='mem_id' value='${teacher.mem_id}' ></div>
+                 			<div data-vid='${teacher.mem_id}' class='tremove'>${teacher.mem_name}(${teacher.mem_id})<span class='badge ahand'>X</span> <input type='hidden' data-hid='${teacher.mem_id}' name='mem_id' value='${teacher.mem_id}' ></div>
                  		</c:forEach>                 		
                    	  </div>
                       <div class="col-sm-1">

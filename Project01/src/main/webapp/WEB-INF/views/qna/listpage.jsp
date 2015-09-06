@@ -48,17 +48,18 @@ td {
 
 <!-- Main content -->
 
-		<section class="content-header">
-			<h1>
-				질문 답변 <small></small>
-			</h1>
-			<ol class="breadcrumb">
-				<li><a href="#">
-						<i class="fa fa-dashboard"></i> 홈
-					</a></li>
-				<li class="active">수업관리</li>
-			</ol>
-		</section>
+<section class="content-header">
+	<h1>
+		<small></small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#">
+				<i class="fa fa-fw fa-home"></i> Home
+			</a></li>
+		<li class="active">${domain}</li>
+		<li class="active">질문답변</li>
+	</ol>
+</section>
 
 
 <section class="content">
@@ -66,7 +67,7 @@ td {
 	<div class="col-md-12">
 		<div class="box">
 			<div class="box-header with-border">
-				<h3 class="box-title">■질문리스트</h3>
+				<h3 class="box-title"><i class="fa fa-fw fa-list"></i>질문리스트</h3>
 			<!-- <a href="listpage">
 					<button type="button" class="btn btn-info" style="float: right;">Go List</button>
 				</a> -->

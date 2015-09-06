@@ -64,23 +64,30 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		Top Navigation <small>Example 2.0</small>
+		<small></small>
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="#"> <i class="fa fa-dashboard"></i> Home
-		</a></li>
-		<li class="active">Dashboard</li>
+		<li><a href="#">
+				<i class="fa fa-fw fa-home"></i> Home
+			</a></li>
+		<li class="active">${domain}</li>
+		<li class="active">우리반 식구들</li>
 	</ol>
 </section>
 
 
 
+
 <!-- Main content -->
 <section class="content">
+
+<div class="box">
 	<!-- ----------------------------------------- -->
 
-
-	<div class="box box-solid">
+		<div class="box-header with-border">
+		  <h3 class="box-title"><i class="fa fa-fw fa-users"></i>우리반식구들</h3>
+		</div><!-- /.box-header -->
+	
 
 		<div class="box-body">
 
@@ -95,6 +102,8 @@
 						<a href="/${domain}/course/joinmemberlist?searchType=mem_gb&keyword=member_teacher" class=" pull-right margin-bottom">선생님</a>
 						<p class=" pull-right margin-bottom">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</p>
 						<a href="/${domain}/course/joinmemberlist?searchType=mem_gb&keyword=member_student" class=" pull-right margin-bottom">학생</a>
+						<p class=" pull-right margin-bottom">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</p>
+						<a href="/${domain}/course/joinmemberlist?searchType=mem_gb" class=" pull-right margin-bottom">전체</a>
 					</div>
 
 
@@ -235,10 +244,12 @@
 				<!-- /.example1_wrapper -->
 			</div>
 			<!-- /.box-body -->
-		</div>
-		<!-- /.box -->
+		
 
 		<!-- ----------------------------------------- -->
+		</div>
+		<!-- /.box -->
+		
 </section>
 <!-- /.content -->
 

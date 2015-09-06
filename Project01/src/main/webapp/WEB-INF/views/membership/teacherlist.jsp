@@ -48,13 +48,13 @@ td {
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
 			<h1>
-				Top Navigation <small>Example 2.0</small>
+				<small></small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#">
-						<i class="fa fa-dashboard"></i> Home
+						<i class="fa fa-fw fa-home"></i> Home
 					</a></li>
-				<li class="active">Dashboard</li>
+				<li class="active">선생님관리</li>
 			</ol>
 		</section>
 
@@ -63,8 +63,17 @@ td {
 		<!-- ----------------------------------------- -->
 		<div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">■선생님리스트</h3>
+                	<span><h3 class="box-title"><i class="fa fa-fw  fa-users"></i>선생님리스트</h3></span>
+                  	<span class=" pull-right">
+	                  	<div class="col-sm-12">
+			                <a href="/membership/teacherlist" class=" pull-right "><b>선생님관리</b></a>
+			 					<p class=" pull-right">&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</p>                 	
+				            <a href="/classinfo/classlist" class=" pull-right">수업관리</a>
+			            </div>
+                  	</span>
                 </div><!-- /.box-header -->
+                
+                
                 <div class="box-body">
                   <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                   	
