@@ -82,13 +82,16 @@ td {
 
 <section class="content-header">
 	<h1>
-		&nbsp;<!-- Top Navigation <small>Example 2.0</small>  -->
+		<small></small>
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="/classinfo/sclasslistjoin" target="_self"><i class="fa fa-dashboard"></i>Home</a></li>
-		<li class="active">mypage</li>
+		<li><a href="#">
+				<i class="fa fa-fw fa-home"></i> Home
+			</a></li>
+		<li class="active">마이페이지</li>
 	</ol>
 </section>
+
 
 
 
@@ -100,14 +103,14 @@ td {
 
 
 	<div class="box-header with-border">
-	  <h3 class="box-title">■마이페이지 </h3>
+	  <h3 class="box-title"><i class="fa fa-fw fa-newspaper-o"></i>마이페이지</h3>
 	</div><!-- /.box-header -->
               
     <div class="box-body">
                 		
 		<div class="col-sm-3 padding_right">
    			<div class="col-sm-12 padding_zero">
-   			<P>나의 프로필</p>
+   			<P><b><i class="fa fa-fw fa-bookmark"></i>나의 프로필</b></p>
 				<div class="box box-widget widget-user-2 ">
 					
 					
@@ -138,7 +141,7 @@ td {
                 			
         <div class="col-sm-9 ">
    			<div class="col-sm-12">
-   			<P>나의 수업</p>
+   			<P><b><i class="fa fa-fw fa-check-square-o"></i>나의 수업</b></p>
    			<!-- - -->
 				<div class="row">
 					<c:forEach items="${mylist}" var="vo">
@@ -146,7 +149,7 @@ td {
 		            <div class="col-md-4">
 		              <div class="box box-widget">
 		                <div class="box-header with-border">
-		                  <i class="fa fa-text-width"></i>
+		                 
 		                  <h3 class="box-title">${vo.clz_name}</h3>
 		                </div><!-- /.box-header -->
 		                <div class="box-body no-padding">
@@ -220,7 +223,7 @@ td {
            		
        		<div class="col-sm-12 ">
 				<div class="padding_search" >
-					<span>전체수업</span>
+					<span><i class="fa fa-fw fa-list"></i><b>전체수업</b></span>
 					<span class=" pull-right">
 						<form name="searchFrom" action="/classinfo/sclasslistjoin" method="get">
 								<div id="select_board" class="form-inline" >

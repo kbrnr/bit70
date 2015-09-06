@@ -82,13 +82,14 @@ table {
 
 		<section class="content-header">
 			<h1>
-				Top Navigation <small>Example 2.0</small>
+				<small></small>
 			</h1>
 			<ol class="breadcrumb">
 				<li><a href="#">
-						<i class="fa fa-dashboard"></i> Home
+						<i class="fa fa-fw fa-home"></i> Home
 					</a></li>
-				<li class="active">Dashboard</li>
+				<li class="active">${domain}</li>
+				<li class="active">이해도통계</li>
 			</ol>
 		</section>
 
@@ -98,9 +99,9 @@ table {
 		<section class="content">
 		<!-- ----------------------------------------- -->
 		<div class="box ">
-				<div class="box-header ">
-                  <h3 class="box-title">■이해도</h3>
-                </div><!-- /.box-header -->
+				<div class="box-header with-border">
+				  <h3 class="box-title"><i class="fa fa-fw  fa-street-view"></i>이해도통계</h3>
+				</div><!-- /.box-header -->
                 
                 <div class="box-body">
                   <div id="example1_wrapper" >

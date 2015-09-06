@@ -17,15 +17,13 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<h1>
-		Top Navigation <small>Example 2.0</small>
+		<small></small>
 	</h1>
 	<ol class="breadcrumb">
-		<li>
-			<a href="#">
-			<i class="fa fa-dashboard"></i> Home
-			</a>
-		</li>
-		<li class="active">Dashboard</li>
+		<li><a href="#">
+				<i class="fa fa-fw fa-home"></i> Home
+			</a></li>
+		<li class="active">개인정보</li>
 	</ol>
 </section>
 
@@ -34,7 +32,7 @@
 <section class="content">
     <div class="box">
     	<div class="box-header with-border">
-    		<h3 class="box-title">■${user.id}님의 기본정보</h3>
+    		<h3 class="box-title"><i class="fa fa-fw  fa-user"></i>${user.id}님의 개인정보</h3>
     	</div><!-- /.box-header -->
   	
 		<!-- form start -->
@@ -94,11 +92,24 @@
                 
                </div><!-- /.box-body -->
                  <div class="box-footer text-center">
-                  	<div class="col-sm-8">
-                  	<a href="/membership/profile" class="btn btn-default pull-right">취소</a>
-                    
+                  	<c:if test="${isTeacher}">
+	                  	<div class="col-sm-8">
+	                  	<a href="/classinfo/myclasslist" class="btn btn-default pull-right">취소</a>
+					</c:if>  
+					<c:if test="${isStudent}">
+	                  	<div class="col-sm-8">
+	                  	<a href="/classinfo/sclasslistjoin" class="btn btn-default pull-right">취소</a>
+					</c:if>  
+					
+					
+					
+					                  
                     <button type="submit" class="btn btn-primary btn-lg ">등록</button>
                  </div>
+                 
+   
+                 
+                 
                  
                </div><!-- /.box-footer -->
              </form>

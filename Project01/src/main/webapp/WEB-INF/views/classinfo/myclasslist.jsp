@@ -99,7 +99,7 @@ td {
 
 
 	<div class="box-header with-border">
-	  <h3 class="box-title"><i class="fa fa-fw fa-dashboard"></i>마이페이지</h3>
+	  <h3 class="box-title"><i class="fa fa-fw fa-newspaper-o"></i>마이페이지</h3>
 	</div><!-- /.box-header -->
                 
 	<div class="box-body">

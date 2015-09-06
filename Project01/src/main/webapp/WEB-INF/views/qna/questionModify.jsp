@@ -11,25 +11,27 @@
 <link href="/resources/froala_editor/css/froala_editor.min.css" rel="stylesheet" type="text/css" />
 <link href="/resources/froala_editor/css/froala_style.min.css" rel="stylesheet" type="text/css" />
 	   
-	<section class="content-header">
-	    <h1>질문답변</h1>
-	    <ol class="breadcrumb">
-	        <li><a href="#"><i class="fa fa-fw fa-home"></i>Home</a></li>
-	        <li><a href="#">${domain }</a></li>
-	        <li class="active">질문답변</li>
-	    </ol>
-	</section>
+<section class="content-header">
+	<h1>
+		<small></small>
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="#">
+				<i class="fa fa-fw fa-home"></i> Home
+			</a></li>
+		<li class="active">${domain}</li>
+		<li class="active">질문답변</li>
+	</ol>
+</section>
 
 <!-- Main content -->
 	<section class="content">
 	<div class='row'>
 		<div class='col-md-12'>
 			<div class='box'>
-				<div class='box-header with-border'>
-					<h3 class='box-title'>
-						<h3 class="box-title">■질문수정</h3>
-					</h3>
-				</div>
+				<div class="box-header with-border">
+				  <h3 class="box-title"><i class="fa fa-fw fa-edit"></i>질문수정</h3>
+				</div><!-- /.box-header -->
 				<!-- /.box-header -->
 				
 				<div class='box-body pad'>
