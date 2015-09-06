@@ -26,7 +26,7 @@
 		<sec:logout logout-url="/member/logout" />
 		<sec:csrf disabled="true" />
 		<sec:headers>
-			<sec:frame-options policy="SAMEORIGIN" />
+			<sec:frame-options disabled="true"/>
 		</sec:headers>
 	</sec:http>
 
