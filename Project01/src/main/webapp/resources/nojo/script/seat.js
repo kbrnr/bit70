@@ -35,7 +35,8 @@ function imgError(image) {
 	});
 	parent.socket.on("offlineUser", function(user){
 		console.log("offlineUser: " + user);
-		$(".chair[data-mem_id='" + user + "']").children($(".realImg")).css( {"border" : "2px solid white", "border-radius" : "30px"});
+		$(".chair[data-mem_id='" + user + "']").children($(".img")).css( {"border" : "2px solid white", "border-radius" : "30px"});
+		$(".chair[data-mem_id='" + users + "']").children().children($(".img")).css( {"border" : "2px solid white", "border-radius" : "30px"});
 	});
 	
 	//Seat에서 이해도 점수 표시
