@@ -55,7 +55,7 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 		String summation = vo.getTeacherquestion_content();
 		for (String id : idList) {
 			NotificationVO nvo = new NotificationVO();
-			nvo.setNoti_service_name("이해도");
+			nvo.setNoti_service_name("이해했니");
 			nvo.setNoti_service_link(link);
 			nvo.setNoti_receiver_id(id);
 			nvo.setNoti_summation(summation);
