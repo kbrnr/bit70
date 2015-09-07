@@ -15,6 +15,8 @@
 
 <!-- 배치도 -->
 <link rel="stylesheet" type="text/css" href="/resources/nojo/css/seatStyle.css">
+<!-- 멤버 이미지 로드 -->
+ <script src="/resources/nojo/script/seat.js"></script>
 
 <style>
 .box {

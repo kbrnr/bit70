@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>AdminLTE 2 | Registration Page</title>
+    <title>이해했니</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.4 -->
     <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -46,6 +46,14 @@
           <div class="form-group has-feedback">
             <input type="password" class="form-control" placeholder="비밀번호 재입력" required/>
             <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="tel" class="form-control" placeholder="전화번호" name="mem_tel" required/>
+            <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+          </div>
+          <div class="form-group has-feedback">
+            <input type="email" class="form-control" placeholder="이메일" name="mem_email" required/>
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
             <input type="radio" class="form-control" name="mem_gb" value="member_teacher" required/>선생님 
