@@ -368,9 +368,9 @@ td {
 <script>
 	//seat 이미지 on 이벤트
 	function imgError(image) {
-	image.onerror = "";
-	image.src = "/resources/nojo/images/noImage.png";
-	return true;
+		image.onerror = "";
+		image.src = "/resources/nojo/images/noImage.png";
+		return true;
 	}
 </script>
 

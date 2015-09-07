@@ -42,6 +42,10 @@ td {
 	text-align: left;
 }
 
+.userid{
+	cursor: pointer;
+}
+
 </style>
   
 		<!-- Content Header (Page header) -->
@@ -230,7 +234,7 @@ function popteacherlist(){
 			var listStr = "";
 			$(map.poplist).each(
 					function() {
-						listStr += "<tr role='row' class='userinfo'><td class='userid'><a href='#'>"+this.mem_id+"</a></td><td class='username'>"+this.mem_name+"</td><td>"+this.mem_email+"</td><td>"+this.mem_tel+"</td></tr>";
+						listStr += "<tr role='row' class='userinfo'><td class='userid'>" + this.mem_id + "</td><td class='username'>"+this.mem_name+"</td><td>"+this.mem_email+"</td><td>"+this.mem_tel+"</td></tr>";
 					}
 			);
 			$("#teacherinfo").html(listStr);
@@ -282,7 +286,7 @@ $("#teacherinfo").on("click", ".userid", function(){
 	username = $(this).siblings('.username').text();
 	console.log(userid);
 	console.log(username);
-	$("#choiceteacher").append("<div data-vid='"+ userid +"' class='tremove'>"+ username + "(" + userid + ") <span class='badge ahand'>X</span> <input type='text' data-hid='mem_id' name='mem_id' value='"+userid+"' ></div>");
+	$("#choiceteacher").append("<div data-vid='"+ userid +"' class='tremove'>"+ username + "(" + userid + ") <span class='badge ahand'>X</span> <input type='hidden' data-hid='mem_id' name='mem_id' value='"+userid+"' ></div>");
 });
 
 

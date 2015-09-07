@@ -188,3 +188,11 @@ html, body, .wrapper, .wrapper .content-wrapper, .content-wrapper *{
           </div>
         </nav>
       </header>
+
+<script>
+      function imgError(image) {
+		image.onerror = "";
+		image.src = "/resources/nojo/images/noImage.png";
+		return true;
+	}
+</script>

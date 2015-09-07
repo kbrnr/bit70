@@ -39,6 +39,10 @@ td {
 	padding: 5px 15px 0px 15px;
 }
 
+.userid{
+	cursor: pointer;
+}
+
 </style>
 
   
@@ -135,9 +139,10 @@ td {
                   
                   
                   <div class="box-footer text-center">
-                  	<div class="col-sm-7">
-                  		<a href="classlist" class="btn btn-default pull-right">취소</a>
-                    	<button type="submit" class="btn btn-primary pull-right" style="margin-right: 5px;">등록</button>
+                  	<div class="col-sm-8">
+                  	<a href="classlist" class="btn btn-default pull-right">취소</a>
+                    
+                    <button type="submit" class="btn btn-primary btn-lg ">등록</button>
                     </div>
                   </div><!-- /.box-footer -->
                   
@@ -218,7 +223,7 @@ function popteacherlist(){
 			var listStr = "";
 			$(map.poplist).each(
 					function() {
-						listStr += "<tr role='row' class='userinfo'><td class='userid'><a href='#'>"+this.mem_id+"</a></td><td class='username'>"+this.mem_name+"</td><td>"+this.mem_email+"</td><td>"+this.mem_tel+"</td></tr>";
+						listStr += "<tr role='row' class='userinfo'><td class='userid'>" + this.mem_id + "</td><td class='username'>"+this.mem_name+"</td><td>"+this.mem_email+"</td><td>"+this.mem_tel+"</td></tr>";
 					}
 			);
 			$("#teacherinfo").html(listStr);
