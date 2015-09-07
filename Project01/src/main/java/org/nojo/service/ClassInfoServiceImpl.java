@@ -111,7 +111,10 @@ public class ClassInfoServiceImpl implements ClassInfoService {
 		List<MemberVO> teacherlist;
 		classlist = classinfoMapper.selectClassByID(mem_id, cri);
 		String domain;
-		for(int i=0; i<classlist.size(); i++){
+		
+		
+		//for(int i=0; i<classlist.size(); i++){
+		for(int i=0; i<3; i++){
 			domain=classlist.get(i).getClz_domain();
 			teacherlist=membershipMapper.selectTeacherByDomain(domain);
 			classlist.get(i).setTeacherlist(teacherlist);			

@@ -126,7 +126,7 @@ table {
   							  <c:forEach items="${tqscorelist}" var="tqlist" varStatus="status">
 							  <tr>
 							  	<td data-content="${tqlist.teacherquestion_content}" class="bg-mid01 td">
-							  		<div class="bg-gray disabled color-palette comquestion">${tqlist.teacherquestion_content}</div>
+							  		<div class="bg-gray disabled color-palette comquestion"><b>${tqlist.teacherquestion_content}</b></div>
                       		  	</td>
 							  	
 							  	<c:forEach items="${tqlist.scorelist}" var="scorelist">

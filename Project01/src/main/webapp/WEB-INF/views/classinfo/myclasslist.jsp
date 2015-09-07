@@ -13,11 +13,6 @@ td {
 	text-align: center;
 }
 
-
-.box * {
-	font-family: NANUMGOTHIC;"
-}
-
 .box {
 	background: white;
 	border-top: 3px solid #19BDC4;
@@ -126,7 +121,7 @@ td {
 						</div>
 					
 						<h3 class="widget-user-username">${user.name}</h3>
-						<h5 class="widget-user-desc">${user.id}</h5>
+						<h5 class="widget-user-desc">&nbsp;</h5>
 					</div>
 					<div class="box-footer no-padding">
 						<ul class="nav nav-stacked">
