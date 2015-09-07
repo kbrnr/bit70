@@ -60,7 +60,7 @@
 									<div class="panel-heading" style="background-color:#19BDC4; border-bottom-color: #00c0ef;">
 										<h1 id="curri_title" class="panel-title"></h1>
 										<c:if test="${isClassTeacher}">
-											<a id="question" class="btn"><span class="glyphicon glyphicon-question-sign"></span></a>
+											<span id="question" class="glyphicon glyphicon-question-sign" style="font-family: 'Glyphicons Halflings'; font-size: x-large; cursor: pointer;"></span>
 										</c:if>
 									</div>
 									<div class="panel-body">
