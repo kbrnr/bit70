@@ -61,7 +61,7 @@ public class ComprehensionServiceImpl implements ComprehensionService{
 			nvo.setNoti_summation(summation);
 			nvo.setNoti_sender_id(senderId);
 			nvo.setClz_domain(domain);
-			nvo.setScreen_gb(1);
+			nvo.setScreen_gb(0);
 			notiMapper.insert(nvo);
 		}
 		return vo.getTeacherquestion_no();

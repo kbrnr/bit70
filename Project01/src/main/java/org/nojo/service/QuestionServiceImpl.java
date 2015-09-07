@@ -42,17 +42,9 @@ public class QuestionServiceImpl implements QuestionService {
 				nvo.setNoti_service_link(link);
 				nvo.setNoti_sender_id(vo.getMem_id());
 				nvo.setNoti_receiver_id(t);
-			
-				String title = vo.getQuestion_title();
-				
-				if (title.length() > 30) {
-					nvo.setNoti_summation(vo.getQuestion_title().substring(0, 30));
-				}else {
-					nvo.setNoti_summation(title.substring(0, title.length()));
-				}
-				
+				nvo.setNoti_summation(vo.getQuestion_title());
 				nvo.setClz_domain(vo.getClz_domain());
-				
+				nvo.setScreen_gb(1);
 				notiMapper.insert(nvo);
 			}
 		}

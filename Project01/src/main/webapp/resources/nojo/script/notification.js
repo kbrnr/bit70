@@ -129,6 +129,6 @@
 	}
 	context.init();
 	getNoti();
-	setInterval(function(){ getNoti(); }, 30000);
+	setInterval(function(){ getNoti(); }, 5000);
 
 })(domain);
