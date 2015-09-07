@@ -46,7 +46,6 @@
 <link rel="stylesheet" type="text/css" href="/resources/nojo/fonts/BMDOHYEON.css">
 <link rel="stylesheet" type="text/css" href="/resources/nojo/fonts/BMHANNA.css">
 <link rel="stylesheet" type="text/css" href="/resources/nojo/fonts/BMJUA.css">
-<link rel="stylesheet" type="text/css" href="/resources/nojo/fonts/NANUMGOTHIC.css">
 <link rel="stylesheet" type="text/css" href="/resources/nojo/fonts/jejuGothic.css">
 <!-- Bootstrap 3.3.4 -->
 <link href="/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -78,15 +77,12 @@
 <!-- Font Awesome Icons -->
 <link href="/resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
 <!-- favicon -->
- <link href="/favicon.ico" rel="icon" type="image/x-icon" />
- <!-- 멤버 이미지 로드 -->
- <script src="/resources/nojo/script/seat.js"></script>
+<link href="/favicon.ico" rel="icon" type="image/x-icon" />
 
 
 <style>
 html, body, .wrapper, .wrapper .content-wrapper, .content-wrapper *{
 	height: 100%;
-	font-family: NANUMGOTHIC, sans-serif;
 } 
 </style>
 
@@ -167,7 +163,7 @@ html, body, .wrapper, .wrapper .content-wrapper, .content-wrapper *{
                   <!-- The user image in the navbar-->
                   <img src="/membership/profileImg" class="user-image" alt="User Image" onerror="imgError(this);"/>
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                  <span class="hidden-xs" style="font-weight: bold; font-size: medium; font-family: BMDOHYEON; color:#18709C">${user.name} ${grade}</span>
+                  <span class="hidden-xs" style="font-weight: bold; font-size: small; font-family: BMDOHYEON; color:#18709C">${user.name} ${grade}</span>
                 </a>
                 <ul class="dropdown-menu"  style="border: 1px solid #FFB89B;">
                   <!-- The user image in the menu -->

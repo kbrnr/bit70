@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/views/include/frameHeader.jsp"%>
 <style>
-label {
-	font-family: NANUMGOTHIC;
-}
-
-.box * {
-	font-family: NANUMGOTHIC;
-}
-
 .box {
 	background: white;
 	border-top: 3px solid #19BDC4;
@@ -44,7 +36,7 @@ label {
 	<div class="box">
 		<div class="box-header with-border">
 			<h3 class="box-title">
-				<i class="fa fa-fw  fa-user"></i>${user.id}님의 개인정보
+				<i class="fa fa-fw fa-user"></i>${user.id}님의 개인정보
 			</h3>
 		</div>
 		<!-- /.box-header -->
