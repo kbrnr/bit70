@@ -10,7 +10,7 @@
 		<bind name="search" value= "search" />
 		<bind name="cri" value="cri" />
 		<![CDATA[
-			select @rownum:=@rownum+1 as question_no, question_title, question_content, question_visible ,mem_id, question_reg_date, clz_domain
+			select @rownum:=@rownum+1 as rowNum, question_no, question_title, question_content, question_visible ,mem_id, question_reg_date, clz_domain
 			from tbl_question, (select @rownum:=0) tmp
 		]]>
 		<where>
@@ -19,8 +19,7 @@
 			</foreach>
 			AND	clz_domain = #{domain}
 		</where>
-
-		order by question_no desc limit #{cri.first}, #{cri.perPageNum}
+		order by rowNum desc limit #{cri.first}, #{cri.perPageNum}
 
 	</select>
 
@@ -41,7 +40,7 @@
 	<select id="listPage" parameterType="map" resultType="org.nojo.domain.QuestionVO">
 
 		<![CDATA[		
-			select @rownum:=@rownum+1 as rowNum, question_no, question_title, question_content, question_visible, mem_id , question_reg_date, question_visible, clz_domain
+			select @rownum:=@rownum+1 as rowNum, question_no, question_title, question_content, mem_id , question_reg_date, question_visible, clz_domain
 			from tbl_question, (select @rownum:=0) tmp
 			]]>
 		<where>
