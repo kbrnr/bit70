@@ -36,7 +36,7 @@ function imgError(image) {
 	parent.socket.on("offlineUser", function(user){
 		console.log("offlineUser: " + user);
 		$(".chair[data-mem_id='" + user + "']").children($(".img")).css( {"border" : "2px solid white", "border-radius" : "30px"});
-		$(".chair[data-mem_id='" + users + "']").children().children($(".img")).css( {"border" : "2px solid white", "border-radius" : "30px"});
+		$(".chair[data-mem_id='" + user + "']").children().children($(".img")).css( {"border" : "2px solid white", "border-radius" : "30px"});
 	});
 	
 	//Seat에서 이해도 점수 표시
@@ -53,10 +53,10 @@ function imgError(image) {
 	//Seat에 질문 표시
 	parent.socket.on("seatQuestion", function(no){
 		var qno = no.qno;
-		var href = "<a href='" + domain + "/qna/detail?no="+qno+"'><img class='marginImg' src='/resources/nojo/images/questionMark.png' /></a>";
+		var href = "<a class='alinkQna' href='" + domain + "/qna/detail?no="+qno+"'><img class='marginImg' src='/resources/nojo/images/questionMark.png' /></a>";
 		var qtarget = $(".chair[data-mem_id='"+no.userId+"']").append(href);
  		setTimeout(function(){
-			qtarget.children()[2].remove();
+			qtarget.find($(".alinkQna")).remove();
 		}, 60000);
 	});
 })(domain);
