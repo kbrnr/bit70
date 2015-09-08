@@ -82,8 +82,6 @@
 				
 				switch(state){
 				case 1: 
-					showNoti(tag, true);
-					break;
 				case 2: 
 					showNoti(tag, false);
 				}
