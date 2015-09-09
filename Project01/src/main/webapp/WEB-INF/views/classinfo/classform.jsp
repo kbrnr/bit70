@@ -298,7 +298,7 @@ $("#btn_domaincheck").on("click", function() {
 		dataType:'json',
 		success: function(data){
 			console.log(data);
-			var msg = data ? "<span style='color:blue'>사용가능한 도메인 입니다." : "<span style='color:red'>사용중인 도메인 입니다.";
+			var msg = data ? "<span style='color:blue'>사용가능 도메인 입니다." : "<span style='color:red'>사용중인 도메인 입니다.";
 			$("#domainmsg").html(msg)
 		}
 	});

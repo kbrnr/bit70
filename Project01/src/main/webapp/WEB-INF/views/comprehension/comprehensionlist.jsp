@@ -182,7 +182,7 @@ table {
 											<td class="bg-compre score_center" ><a class="ahand"><span data-qno="${tqlist.teacherquestion_no}" class="label label-default" >입력</span></a></td>
 										</c:if>
 										<c:if test="${scorelist.mem_id != user.id}">										
-											<td class="bg-mid01 score_center">&nbsp;</td>
+											<td class="bg-compre score_center">&nbsp;</td>
 										</c:if>
 									</c:otherwise>
 								</c:choose>
@@ -194,12 +194,10 @@ table {
 							  <tr>
 		                      	 <td class="bg-end01"></td>
 		                      	 <c:forEach items="${tqscorelist[0].scorelist}" var="namelist">
-			                      	 <c:if test="${namelist.mem_id == user.id}">										
+			                      	 									
     									<td class="bg-end02" height="36px"></td>
-									 </c:if>
-									 <c:if test="${scorelist.mem_id != user.id}">										
-										<td class="bg-end01" height="36px"></td>
-									 </c:if>	
+									 
+									 	
 		                      	 </c:forEach>
 			                  </tr>
 							
@@ -278,7 +276,7 @@ table {
 			                </tbody>  --%>  
 		                  </table>
 		                  
-		                  	<div class="space"></div>
+		                  
 		                  </div>
 	                  	</div><!-- /.grid -->
                   	</div><!-- /.row -->
