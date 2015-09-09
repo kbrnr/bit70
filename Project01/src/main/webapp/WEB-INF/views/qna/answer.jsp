@@ -75,7 +75,7 @@
 					</div>
 				</div>
 				<div class="box-header ">
-					<div class="froala-view" style="height: 200px;">${QuestionVO.question_content }</div>
+					<div class="froala-view" style="height: 600px;">${QuestionVO.question_content }</div>
 					<br/>
 				</div>
 				<ul id="fileAttach" class='list-group' >
